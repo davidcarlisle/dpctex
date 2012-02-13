@@ -1,0 +1,190 @@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% mathml2.xmt
+
+%% Copyright 2000 David Carlisle
+
+%% This file is distributed under the LaTeX Project Public License
+%% (LPPL) as found at http://www.latex-project.org/lppl.txt
+%% Either version 1.0, or at your option, any later version.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\DeclareNamespace{m}{http://www.w3.org/1998/Math/MathML}
+
+
+\XMLstring\att@BLOCK<>block</>
+\XMLstring\att@PREFIX<>prefix</>
+\XMLstring\att@EQUATION<>equation</>
+
+\XMLname{m:math}{\MATH}
+\XMLname{m:mlabeledtr}{\LABELEDTR}
+
+\XMLnamespaceattribute{m}{open}{\XML@fenceopen}{(}
+\XMLnamespaceattribute{m}{close}{\XML@fenceclose}{)}
+\XMLnamespaceattribute{m}{width}{\XML@mspacewidth}{0}
+
+\XMLelement{m:math}
+  {\XMLattribute{display}{\XML@mathmlmode}{foo}
+   }
+  {\def\GATHER{1}%
+     \ifx\XML@mathmlmode\att@BLOCK\[\else\(\fi
+   }
+  {
+     \ifx\XML@mathmlmode\att@BLOCK\]\else\)\fi
+  }
+
+
+\XMLelement{m:mi}
+  {}
+  {\xmlgrab}
+  {\def\a{#1}\mi@test#1\relax}
+
+\gdef\mi@test#1#2\relax{
+  \ifx\mi@test#2\mi@test
+   \expandafter#1
+  \else
+   \mathrm{#1#2}
+  \fi}
+
+\XMLelement{m:mn}
+  {}
+  {\xmlgrab}
+  {\mathrm{#1}}
+
+\XMLelement{m:mo}
+  {\XMLattribute{form}{\XML@mathmlform}{inline}}
+  {\xmlgrab}
+  {\ifx\XML@mathmlform\att@PREFIX
+    \mathop{{\operator@font #1}}%
+   \else
+     #1%
+   \fi
+   }
+
+\XMLelement{m:mrow}
+  {}
+  {}
+  {}
+
+
+\XMLelement{m:msub}
+  {}
+  {\xmlgrab}
+  {\xmltextwochildren\@firstofone\sb#1}
+
+\XMLelement{m:msup}
+  {}
+  {\xmlgrab}
+  {\xmltextwochildren\@firstofone\sp#1}
+
+
+\XMLelement{m:msubsup}
+  {}
+  {\xmlgrab}
+  {\xmltexthreechildren\@firstofone\sb\sp#1}
+
+\XMLelement{m:mroot}
+  {}
+  {\xmlgrab}
+  {\xmltextwochildren\mathmlroot{}#1}
+
+\gdef\mathmlroot#1#2{\root#2\of{#1}}
+
+
+\XMLelement{m:mfrac}
+  {}
+  {\xmlgrab}
+  {\xmltextwochildren\frac{}#1}
+
+
+\XMLelement{m:msqrt}
+  {}
+  {\xmlgrab}
+  {\sqrt{#1}}
+
+\XMLelement{m:mtext}
+  {}
+  {\xmlgrab}
+  {\hbox{#1}}
+
+
+% accent? stackrel?
+\XMLelement{m:mover}
+  {}
+  {}
+  {}
+
+% \DeclareMathDelimiter{{}{\mathopen} {operators}{"28}{largesymbols}{"00}
+\global\delcode`{"66308
+\global\delcode`}"67309
+
+\XMLelement{m:mfenced}
+  {   }
+  {\left\XML@fenceopen}
+  {\right\XML@fenceclose}
+
+\XMLelement{m:mtable}
+  {\XMLattribute{class}{\XML@mtableclass}{}}
+  {
+  \def\StartTable{1}%
+  \def\LABELED{0}%
+  \ifx\XML@mtableclass\att@EQUATION
+     \def\GATHER{1}%
+     \begin{gathered}
+  \else
+     \def\GATHER{0}%
+     \begin{array}{*{99}{c}}
+  \fi
+  }
+  {
+  \ifx\XML@mtableclass\att@EQUATION
+   \end{gathered}
+  \else
+    \end{array}
+  \fi
+  }
+
+
+\XMLelement{m:mtr}
+ {}
+ {\xmlgrab}
+ {\ifnum\StartTable=1
+    \gdef\temp{#1\def\StartTable{0}}%
+  \else
+    \gdef\temp{\\#1}%
+  \fi
+  \aftergroup\temp}
+
+\XMLelement{m:mlabeledtr}
+ {}
+ {\xmlgrab}
+ {\xmltextwochildren{\tag*}\@firstofone#1\gdef\temp{\\}\aftergroup\temp}
+ 
+\XMLelement{m:mtd}
+ {}
+ {\xmlgrab}
+ {\ifnum\GATHER=1
+   \gdef\temp{#1}%
+  \else
+   \gdef\temp{#1\tabcellsep}%
+  \fi
+  \aftergroup\temp
+ }
+
+\XMLelement{m:munderover}
+  {}
+  {}
+  {}
+
+\XMLelement{m:mover}
+  {}
+  {}
+  {}
+
+\XMLelement{m:mspace}
+  {}
+  {}
+  {\@defaultunits\dimen@\XML@mspacewidth pt\relax\@nnil
+   \ifnum\dimen@=\z@\else\kern\dimen@\fi}
+

@@ -1,0 +1,32 @@
+
+\XMLelement{langtest}
+{}
+  {\documentclass{article}
+    \usepackage[OT2,OT1]{fontenc}
+    \pagestyle{headings}
+   \begin{document}
+   \tableofcontents}
+  {\end{document}}
+
+
+\XMLelement{document}
+  {\XMLattribute{att}{\langatt}{}}{}{}
+
+\XMLelement{head}
+  {}{\xmlgrab}{\section{#1 (\langatt)}}
+
+
+\XMLelement{documento}
+  {\XMLattribute{att}{\langatt}{}}{}{}
+
+\XMLelement{cabeçalho}
+  {}{\xmlgrab}{\section{#1 (\langatt)}}
+
+
+\XMLelement{документ}
+  {\XMLattribute{атт}{\langatt}{}}{\fontencoding{OT2}\selectfont}{}
+
+\XMLelement{голова}
+  {}{\xmlgrab}{\section{\fontencoding{OT2}\selectfont#1 (\langatt)}}
+
+

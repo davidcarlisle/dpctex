@@ -1,0 +1,77 @@
+
+<!DOCTYPE doc [
+<!ENTITY xx "<p>some text some text some text.</p>" >
+<!ENTITY xxx "&xx;" >
+]>
+
+<doc xmlns="http://www.dcarlisle.demon.co.uk/sec">
+
+<tt>lll</tt>
+<sec>
+ <head>This+&amp;&lt;&gt; <tt>code 111 {\tt 222} 333</tt></head>
+<p>The first section.</p>
+</sec>
+
+<sec>
+ <head>This+<![CDATA[&<>]]> <tt>code 999 {\tt 222} 333</tt></head>
+<p>The second section.</p>
+</sec>
+
+
+
+<p>abc+xyz &#113; (1:&amp; 2:&#38;)</p>
+
+&xxx;&xxx;&xxx;&xxx;&xxx;
+&xxx;&xxx;&xxx;&xxx;&xxx;
+
+<sec>
+ <head>Some utf8 [áéíóú] and some ascii [^^c3^^a1^^c3^^a9^^c3^^ad^^c3^^b3^^c3^^ba]</head>
+<p>and some more áéíóú</p>
+</sec>
+
+
+&xxx;&xxx;&xxx;&xxx;&xxx;
+&xxx;&xxx;&xxx;&xxx;&xxx;
+
+<sec>
+ <head>The End</head>
+<p>The last section.</p>
+</sec>
+
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<msub><mrow><mi>a</mi> <mo>+</mo> <mi>b</mi></mrow> <mn>2</mn> </msub>
+</math>
+
+
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<mroot><mrow><mi>xxx</mi> <mo>-</mo> <mi>b</mi></mrow> <mn>3</mn> </mroot>
+</math>
+
+
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<msubsup>
+  <mi>xxx</mi>
+  <mrow><mi>j</mi><mo>,</mo><mi>k</mi></mrow>
+  <mn>4</mn>
+</msubsup>
+</math>
+
+
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<mfenced>
+<msup>
+  <mi>xxx</mi>
+  <mn>4</mn>
+</msup>
+</mfenced>
+
+<mfenced open="{" close="]" >
+<msup>
+  <mi>xxx</mi>
+  <mn>4</mn>
+</msup>
+</mfenced>
+
+</math>
+
+</doc>

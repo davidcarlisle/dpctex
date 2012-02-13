@@ -1,0 +1,8 @@
+The textcase package
+
+   \MakeTextUppercase and \MakeTextLowercase are similar to the standard
+   \MakeUppercase and \MakeLowercase, but they do not change the case of
+   any sections of mathematics within the argument.
+   Improvements from Donald Arseneau mean that \label, \ref and \cite
+   also work within the argument of these commands, without the symbolic
+   `key name' being incorrectly uppercased.

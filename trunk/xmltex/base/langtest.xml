@@ -1,0 +1,21 @@
+
+<!DOCTYPE langtest [
+
+<!ENTITY englishutf8 SYSTEM "englishutf8.xml">
+<!ENTITY portugeselatin1 SYSTEM "portugeselatin1.xml">
+<!ENTITY englishutf16 SYSTEM "englishutf16.xml">
+<!ENTITY russiankoi8 SYSTEM "russiankoi8.xml">
+<!ENTITY russianutf8 SYSTEM "russianutf8.xml">
+
+]>
+
+<langtest>
+
+&englishutf8;
+&englishutf16;
+&portugeselatin1;
+&russiankoi8;
+&russianutf8;
+
+
+</langtest>

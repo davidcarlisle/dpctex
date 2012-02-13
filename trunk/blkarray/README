@@ -1,0 +1,10 @@
+Blkarray -- extensions and modifications of tabular support
+
+This package is even less supported than any of David Carlisle's other
+packages. It was written a long time ago, and is still documented using
+the conventions of LaTeX2.09 (although it appears to work with current
+LaTeX releases).  It is unlikely that David will be able to work on
+this in the foreseeable future, which is why it is published in its
+current state.  It is not really a package for using in documents in
+its present state, but if you are interested in coding tables of
+various sorts in TeX, you may be interested to experiment with it...

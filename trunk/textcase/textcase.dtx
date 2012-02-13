@@ -1,0 +1,406 @@
+% \iffalse
+%% Source File: textcase.dtx
+%% Copyright 1997 1998 David Carlisle
+%%
+%% This file may be distributed under the terms of the LPPL.
+%% See 00readme.txt for details.
+%
+%<*dtx>
+          \ProvidesFile{textcase.dtx}
+%</dtx>
+%<package>\NeedsTeXFormat{LaTeX2e}
+%<package>\ProvidesPackage{textcase}
+%<driver> \ProvidesFile{textcase.drv}
+% \fi
+%         \ProvidesFile{textcase.dtx}
+       [2004/10/07 v0.07 Text only upper/lower case changing (DPC)]
+%
+% \iffalse
+%<*driver>
+\documentclass{ltxdoc}
+\usepackage{textcase}
+\begin{document}
+\DocInput{textcase.dtx}
+\end{document}
+%</driver>
+% \fi
+%
+% \GetFileInfo{textcase.dtx}
+% \CheckSum{110}
+%
+% \changes{v0.01}{1997/09/28}
+%    {Posted to c.t.t}
+% \changes{v0.02}{1997/09/28}
+%    {Support \cs{ensuremath}}
+% \changes{v0.03}{1997/12/12}
+%    {Donald Arseneau: support \cs{ref} \cs{cite} \cs{label}}
+% \changes{v0.04}{1997/12/14}
+%    {Convert to dtx form, add \cs{NoCaseChange}}
+% \changes{v0.04}{1997/12/14}
+%    {Support (most uses of) optional argument of \cs{cite}}
+% \changes{v0.05}{1997/12/16}
+%    {More comments from Donald,
+%     perhaps I should just give him this package for Christmas}
+% \changes{v0.06}{1998/11/12}
+%    {overload option}
+% \changes{v0.07}{2004/10/07}
+%    {missing percent added}
+%
+%
+% \title{The \textsf{textcase} package\thanks{This file
+%        has version number \fileversion, last
+%        revised \filedate.}}
+% \author{David Carlisle\thanks{%^^A
+%   Reorganisation to suppport skipping a wider class of
+%   things than just math done by Donald Arseneau}}
+%
+% \date{\filedate}
+%
+% \maketitle
+%
+% \section{Introduction}\label{intro}
+% |\MakeTextUppercase| and |\MakeTextLowercase| are versions of the
+% standard |\MakeUppercase| and |\MakeLowercase| that do not change
+% the case of any math sections in their arguments.
+%\begin{verbatim}
+% \MakeTextUppercase{abc\ae\ \( a = b \)  and $\alpha \neq a$ 
+%   or even \ensuremath{x=y} and $\ensuremath{x=y}$}
+%\end{verbatim}
+% Should produce:
+% \begin{quotation}
+%  ABC\AE\ \( a = b \)  AND $\alpha \neq a$ 
+%   OR EVEN \ensuremath{x=y} AND $\ensuremath{x=y}$
+% \end{quotation}
+%
+% Version 0.03 of this package incorporates some changes suggested by
+% Donald Arseneau so that as well as math mode, the arguments of
+% |\cite|, |\label| and |\ref| are also prevented from being uppercased.
+% So you can now go
+%\begin{verbatim}
+% \MakeTextUppercase{%
+%    Text in section~\ref{intro}, about \cite[pp 2--4]{bbb}}
+%\end{verbatim}
+% which produces
+% \begin{quotation}
+% \MakeTextUppercase{%
+%    Text in section~\ref{intro}, about \cite[pp 2--4]{bbb}}
+% \end{quotation}
+% If, instead, the standard |\MakeUppercase| were used here, the keys
+% `into' and `bbb' would be uppercased and generate errors about
+% undefined references to INTRO and BBB.
+%
+% Sometimes there may be a special section of text that should not be
+% uppercased. This can be marked with |\NoCaseChange|, as follows.
+%\begin{verbatim}
+% \MakeTextUppercase{%
+%    Text \NoCaseChange{More Text} yet more text}
+%\end{verbatim}
+% which produces
+% \begin{quotation}
+% \MakeTextUppercase{%
+%    Text \NoCaseChange{More Text} yet more text}
+% \end{quotation}
+%
+% |\NoCaseChange| has other uses. If for some reason you need a
+% tabular environment within an uppercased section, then you need
+% to ensure that the name `tabular' and the preamble (eg `ll')
+% does not get uppercased:
+%\begin{verbatim}
+% \MakeTextUppercase{%
+%    Text \NoCaseChange{\begin{tabular}{ll}}%
+%                        table&stuff\\goes&here
+%         \NoCaseChange{\end{tabular}}
+%    More text}
+%\end{verbatim}
+% which produces
+% \begin{quotation}
+% \MakeTextUppercase{%
+%    Text \NoCaseChange{\begin{tabular}{ll}}%^^A
+%                        table&stuff\\goes&here
+%         \NoCaseChange{\end{tabular}}
+%    More text}
+% \end{quotation}
+%
+% \section{Features and Foibles}
+%
+% \subsection{Nested text}
+% The commands defined here only skip math sections and |\ref| arguments
+% if they are not `hidden' inside a |{ }| brace group. All text inside
+% such a group will be made uppercase just as with the standard
+% |\MakeUppercase|.
+%\begin{verbatim}
+% \MakeTextUppercase{a b {c $d$} $e$}
+%\end{verbatim}
+% produces
+% \begin{quotation}
+%  \MakeTextUppercase{a b {c $d$} $e$}
+% \end{quotation}
+% Of course, this restriction does not apply to the arguments of the 
+% supported commands |\ensuremath|, |\label|, |\ref|, and |\cite|.
+%
+% If you cannot arrange for your
+% mathematics to be at the outer level of brace grouping, you should
+% use the following basic technique (which works even with the standard
+% |\MakeUppercase| command). Define a new command that expands to your
+% math expression, and then use that command, with |\protect|, in the
+% text to be uppercased. Note that if the text being uppercased is in a
+% section title or other moving argument you may need to make the
+% definition in the document preamble, rather than just before the
+% section command, so that the command is defined when the table of
+% contents file is read.
+%\begin{verbatim}
+% \MakeTextUppercase{%
+%        Text \fbox{$a=b$ and $x=y$}}%
+%
+% \newcommand{\mathexprone}{$a=b$}
+% \newcommand{\mathexprtwo}{$x=y$}
+% \MakeTextUppercase{%
+%        Text \fbox{\protect\mathexprone\ and \protect\mathexprtwo}}%
+%\end{verbatim}
+% which produces
+% \begin{quotation}
+% \MakeTextUppercase{%
+%        Text \fbox{$a=b$ and $x=y$}}%
+%
+% \newcommand{\mathexprone}{$a=b$}
+% \newcommand{\mathexprtwo}{$x=y$}
+% \MakeTextUppercase{%
+%        Text \fbox{\protect\mathexprone\ and \protect\mathexprtwo}}%
+% \end{quotation}
+%
+% \subsection{Citations}
+% As documented above, |\cite| and |\ref| commands are not uppercased by
+% |\MakeTextUppercase|. If you are using a non-numeric citation scheme
+% you may want the replacement text for |\cite| to be uppercased.
+%
+% It is difficult to arrange that |\MakeTextUppercase| uppercases such
+% text, not least because this would lead to interaction with the many
+% bibliography packages which redefine |\cite| one way or another. One
+% possibility to achieve this is to use Donald Arseneau's cite package
+% and to locally redefine |\citeform| to add |\MakeUppercase| around
+% the final text string produced by |\cite|.
+%\begin{verbatim}
+% \MakeTextUppercase{%
+%        Text \cite{bbb} and \cite{ccc}}
+%
+% {\renewcommand\citeform{\MakeUppercase}\MakeTextUppercase{%
+%        Text \cite{bbb} and \cite{ccc}}}
+%\end{verbatim}
+% which produces\footnote{This is faked, so this document does not
+%  rely on \texttt{cite.sty} being installed}
+% \begin{quotation}
+%  TEXT [1] AND [David Carlisle 1997]
+%
+%  TEXT [1] AND [DAVID CARLISLE 1997]
+% \end{quotation}
+%
+% \subsection{overload Option}
+% By default the package only defines new commands, |\MakeTextUppercase|
+% and |\MakeTextlowercase| as described above. You may wish to redefine
+% the standard |\MakeUppercase| and |\MakeLowercase| commands to be
+% the same as these new commands. So that for example headings in the
+% book class have this new feature without any further redefinition.
+% You may use the package option |[overload]| in which case these
+% new definitions will be overloaded on to the existing command names.
+%
+% \begin{thebibliography}{9}
+%
+% \bibitem{bbb} Something numeric
+% \bibitem[David Carlisle 1997]{ccc} Something textual
+% \end{thebibliography}
+%
+% \StopEventually{}
+%
+% \section{Implementation}
+%
+%    \begin{macrocode}
+%<*package>
+%    \end{macrocode}
+%
+% \begin{macro}{\@uclcnotmath}
+% This is the main macro of this package. It is basically
+% a copy of |\MakeTextUppercase| and |\MakeTextLowercase|
+% from the \LaTeX\ kernel, modified slightly so that they
+% can share code (that modification could be done to the
+% standard versions as well) and then further changed to
+% skip certain features like math mode and |\label| arguments.
+%
+% The arguments are:\\
+% |#1|: Extra commands to apply for case changing.
+%       Used to locally redefine |\i| and |\j| for uppercasing.\\
+% |#2|: Either |##1##2| or |##2##1| to control the order
+%       in which |\let| is applied to the pairs of control
+%       sequences in |\@uclclist|.\\
+% |#3|:  |\uppercase| or |\lowercase|.\\
+% |#4|: The text to be upper (or lower) cased.
+%    \begin{macrocode}
+\def\@uclcnotmath#1#2#3#4{\begingroup
+%    \end{macrocode}
+% Run extra commands (currently just to redefine |\i| and |\j|).
+%    \begin{macrocode}
+      #1%
+%    \end{macrocode}
+%
+% Locally set |\( \)| to be just |$ $|, so that the math skipping
+% code can be simplified, just to look for |$|.
+%    \begin{macrocode}
+      \def\({$}\let\)\(%
+%    \end{macrocode}
+%
+% Set up the `non-math' things that also have to be skipped.
+%    \begin{macrocode}
+      \def\NoCaseChange##1{\noexpand\NoCaseChange{\noexpand##1}}%
+      \@nonchangecase\label
+      \@nonchangecase\ref
+      \@nonchangecase\ensuremath
+%    \end{macrocode}
+%
+% |\cite| a bit trickier, as we want to uppercase any optional argument.
+% This will fail if the optional argument contains a brace group, but
+% should catch most cases.
+%
+% |text \cite[page 1]{foo} more text| ends up as
+%\begin{verbatim}
+% \uppercase{text \toks@{\cite[page1]}%
+% \the\toks@{foo}%
+% \uppercase{ more text}
+%\end{verbatim}
+%    \begin{macrocode}
+      \def\cite##1##{\toks@{\noexpand\cite##1}\@citex}%
+      \def\@citex##1{\NoCaseChange{\the\toks@{##1}}}%
+%    \end{macrocode}
+% (|\@citex| is a scratch macro here, not a redefinition of the existing
+% |\@citex|.)
+%
+% The following is essentially taken from |\MakeUppercase|.
+% Recursively execute |\reserved@a| to |\let| the pairs in |\@uclclist|.
+% The strange construction with |\@gobble| at the end just gobbles the
+% final recursive call.
+%
+% Incidentally, packages should not use the |\reserved@|\ldots\ scratch
+% macros, which are `reserved' for use within the \LaTeX\ kernel, but
+% (a) this code is essentially a copy from the kernel, and 
+% (b) I'm allowed to break the rules, so there.
+%    \begin{macrocode}
+      \def\reserved@a##1##2{\let#2\reserved@a}%
+      \expandafter\reserved@a\@uclclist\reserved@b{\reserved@b\@gobble}%
+%    \end{macrocode}
+%
+% Expand everything first so that the `skipping' code can see what to
+% skip and so that tokens are revealed to |\uppercase|.
+% This makes the argument `moving'.
+% The |$\valign$| is just a fake math expression used to terminate
+% the parsing done by |\@skipmath|.
+%    \begin{macrocode}
+      \protected@edef\reserved@a{\endgroup
+          \noexpand\@skipmath#3#4$\valign$}%
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+      \reserved@a}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\@nonchangecase}
+%    \begin{macrocode}
+\def\@nonchangecase#1{\def#1##1{\NoCaseChange{#1{##1}}}}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\NoCaseChange}
+% For hiding arbitrary text from |\uppercase|. This innocuous
+% definition is used for any occurrence of |\NoCaseChange|
+% in text that is not passed to |\MakeTextUppercase|. For example a 
+% section heading may be uppercased, but the toc entry may not.
+% It is also used for nested definitions of |\cite| etc, where the 
+% |\NoCaseChange| is inserted by expansion, but not removed as it is
+% hidden by the brace group.
+%    \begin{macrocode}
+\let\NoCaseChange\@firstofone
+%    \end{macrocode}
+% \end{macro}
+%
+%\begin{macro}{\@skipmath}
+% |#1|: operation |\uppercase| / |\lowercase|\\
+% |#2|: text up to first (next) |$|\\
+% |#3|: first math mode material (or |\valign| sentinel)
+%    \begin{macrocode}
+\def\@skipmath#1#2$#3${%
+  \@skip@nonchangecase#1#2\NoCaseChange\valign
+  \ifx\valign#3%
+  \else
+    $#3$%
+    \expandafter\@skipmath\expandafter#1%
+  \fi}
+%    \end{macrocode}
+% \end{macro}
+%
+%\begin{macro}{\@skip@nonchangecase}
+% |#1|: |\uppercase| or |\lowercase|\\
+% |#2|: Text up to the first command (such as |\cite|) made `safe'.
+%       or the first use of |\NoCaseChange|.
+%    \begin{macrocode}
+\def\@skip@nonchangecase#1#2\NoCaseChange#3{%
+  #1{#2}%
+  \ifx\valign#3%
+  \else
+    #3%
+    \expandafter\@skip@nonchangecase\expandafter#1%
+  \fi}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\MakeTextUppercase}
+% \changes{v0.06}{1998/11/12}
+%    {Add edef to make behaviour more like \cs{MakeUppercase}}
+% Put it all together. Arrange for \i\ and \j\ to uppercase, and
+% to read the pairs in the ucase list `forwards'.
+%    \begin{macrocode}
+\DeclareRobustCommand\MakeTextUppercase{%
+  \@uclcnotmath{\def\i{I}\def\j{J}}{##1##2}\uppercase}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\protected@edef\MakeTextUppercase#1{\MakeTextUppercase{#1}}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\MakeTextLowercase}
+% \changes{v0.06}{1998/11/12}
+%    {Add edef to make behaviour more like \cs{MakeLowercase}}
+% probably will never be used, but it is easy to implement.
+% Use |\lowercase| and read the pairs in the uppercase list `backwards'.
+%    \begin{macrocode}
+\DeclareRobustCommand\MakeTextLowercase{%
+  \@uclcnotmath{}{##2##1}\lowercase}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\protected@edef\MakeTextLowercase#1{\MakeTextLowercase{#1}}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\MakeUppercase}
+% \begin{macro}{\MakeLowercase}
+% \changes{v0.06}{1998/11/12}
+%    {Option to overload added.  latex/2906}
+%    \begin{macrocode}
+\DeclareOption{overload}{%
+  \expandafter\let\csname MakeUppercase \expandafter\endcsname
+                  \csname MakeTextUppercase \endcsname
+  \expandafter\let\csname MakeLowercase \expandafter\endcsname
+                  \csname MakeTextLowercase \endcsname}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\ProcessOptions
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+%    \begin{macrocode}
+%</package>
+%    \end{macrocode}
+%
+% \Finale
+%

@@ -1,0 +1,799 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE TEI.2 SYSTEM "http://www.oucs.ox.ac.uk/dtds/tei-oucs.dtd" [
+
+ <!NOTATION URL SYSTEM "" >
+ <!ENTITY lppl SYSTEM "http://www.latex-project.org/lppl.txt" NDATA URL>
+
+ <!ENTITY ldots "&#x2026;">
+
+ <!ENTITY TeX "TeX">
+ <!ENTITY LaTeX "LaTeX">
+
+]> 
+<TEI.2>
+  <teiHeader>
+    <fileDesc>
+      <titleStmt>
+        <title>xmltex</title>
+      </titleStmt>
+      <publicationStmt>
+        <availability>
+        <p>
+   This file is distributed under the LaTeX Project Public License
+   (LPPL) as found at <xptr doc="lppl"/>.
+   Either version 1.0, or at your option, any later version.
+      </p>
+      </availability>
+      </publicationStmt>
+      <sourceDesc>
+        <p></p>
+      </sourceDesc>
+    </fileDesc>
+    <profileDesc>
+    </profileDesc>
+    <revisionDesc>
+      <list>
+        <head></head>
+         <item><date>February 2nd 2000</date>
+               <name>David Carlisle</name>Updated)</item>
+         <item><date>January 24th 2000</date>
+               <name>David Carlisle</name>Updated)</item>
+         <item><date>January 19th 2000</date>
+               <name>David Carlisle</name>Updated)</item>
+         <item><date>January 18th 2000</date>
+               <name>David Carlisle</name>Updated)</item>
+         <item><date>January 15th 2000</date>
+               <name>David Carlisle</name>Updated)</item>
+         <item><date>January 10th 2000</date>
+               <name>Sebastian Rahtz</name>corrections</item>
+         <item><date>January 10th 2000</date>
+               <name>David Carlisle</name>Updated (in XML)</item>
+         <item><date>January 6th 2000</date>
+               <name>Sebastian Rahtz</name>Converted to TEI XML</item>
+         <item><date>January 6th 2000</date>
+               <name>David Carlisle</name>written in LaTeX</item>
+      </list>
+    </revisionDesc>
+  </teiHeader>
+  <text>
+<front>
+  <docTitle>
+   <titlePart type="main">xmltex: A non validating (and not 100%
+    conforming) namespace aware XML parser implemented in &TeX;</titlePart>
+  </docTitle>
+  <docDate>Date: 2000-02-02</docDate>
+  <docAuthor rend="email">davidc@nag.co.uk</docAuthor>
+  <docAuthor>David Carlisle</docAuthor>
+</front>
+<body>
+<div id="intro">
+<head>Introduction</head>
+<p>
+xmltex      implements
+a non     validating parser for documents matching the
+W3C XML Namespaces Recommendation.
+
+
+The system may just be used to parse the file (expanding entity
+references and normalising namespace declarations) in which case it
+records a trace of the parse on the terminal. Normally however the
+information from the parse is used to trigger &TeX; typesetting code.
+Declarations (in &TeX; syntax) are provided as part of xmltex to
+associate &TeX; code with the start and end of each XML element,
+attributes, processing instructions, and with unicode character data.
+</p>
+</div>
+
+<div>
+<head>Installation</head>
+<p>The xmltex parser itself does not require &LaTeX;. It may be loaded
+into initex to produce a format capable of parsing XML files. However
+such a format would have no convenient commands for typesetting, and
+so normally xmltex will be used on top of an existing format, normally
+&LaTeX;. In this section we assume that the document to be
+processed is called <code>document.xml</code>.
+</p>
+<div>
+<head>Using xmltex as an input to the &LaTeX; command</head>
+<p>&LaTeX; requires a document in &TeX; syntax, not XML. To process
+<code>document.xml</code>, first produce a two line file called
+<code>document.tex</code> of the following form:
+<eg>
+\def\xmlfile{document.xml}
+\input xmltex.tex
+</eg>
+
+Do <emph>not</emph> put any other commands in this file!</p>
+<p>You may then process the document with either of the commands:
+<code>latex document</code>  or <code>latex document.tex</code>
+or the equivalent procedure in your &TeX; environment.
+</p>
+</div>
+<div>
+<head>Using xmltex as a &TeX; format built on &LaTeX;</head>
+<p>
+You may prefer to set up xmltex as a format in its own right.
+This may speed things up slightly (as <code>xmltex.tex</code> does not
+have to be read each time) but more importantly perhaps it allows the
+XML file to be processed directly without needing to make the
+<code>.tex</code> wrapper.</p>
+<p>To make a format you will need a command such as the following,
+depending on your &TeX; system.
+<eg>
+initex &amp;latex xmltex
+initex \&amp;latex xmltex
+tex -ini &amp;latex xmltex
+tex -ini \&amp;latex xmltex
+</eg></p>
+<p>This will produce a format file <code>xmltex.fmt</code>. You should then
+be able to make a <code>xmltex</code> command by copying the way the
+<code>latex</code> command is defined in terms of
+<code>latex.fmt</code>. Depending on the &TeX; system, this might be a
+symbolic link, or a shell script, or batch file, or a configuration
+option in a setup menu.
+
+</p>
+</div>
+<div>
+<head> Making an xmltex format `from scratch'</head>
+<p>
+Whilst it may be convenient to build an xmltex format as above, starting
+from the &LaTeX; format. You may prefer to instead work with an initex
+with no existing format file. Even if you wish to use a standard &LaTeX;
+it may be preferable to make a &TeX; input file that first inputs 
+<code>latex.ltx</code> then <code>xmltex.tex</code>. In particular this
+will allow you to have a different hyphenation and language
+customisation for xmltex than for &LaTeX;. Many of the features of
+the language support in &LaTeX; are related to modifying the input
+syntax to be more convenient. Such changes are not needed in xmltex as
+the input syntax is always XML. Some language files may change the
+meaning of such characters as &lt; which would break the xmltex parser.
+Also, rather than using <code>latex.ltx</code> you could in principle
+use a modified <code>docstrip</code> install file and produce a
+`cut down' latex that did not have features that are not going to be
+used in xmltex.
+</p>
+<p>
+Unfortunately the support for this method of building xmltex (and access
+to non English hyphenation generally) is not fully designed and totally
+undocumented.</p>
+</div>
+</div>
+<div>
+<head>Using xmltex</head>
+<p>
+xmltex by default `knows' nothing about any particular type of XML
+file, and so needs to load external files containing specific
+information. This section describes how the information in the XML
+file determines which files will be loaded.
+
+<list type="ordered">
+<item> If the file begins with a Byte Order Mark, the default encoding
+  is set to utf-16. Otherwise the default encoding is utf-8.
+</item>
+<item> If (after an optional BOM) the document begins with an XML
+  declaration that specifies an encoding, this encoding will be used,
+  otherwise the default encoding will be used. A file with name of the
+  form <emph>encoding</emph><code>.xmt</code> will be loaded that maps the
+  requested encoding to Unicode positions. (It is an error if this
+  file does not exist for the requested encoding.)
+</item>
+<item> If the document has a <code>DOCTYPE</code> declaration that includes
+  a local subset then this will be parsed. If any external DTD entity
+  is referenced (by declaring and then referencing a parameter entity)
+  then the SYSTEM and PUBLIC identifiers of this entity will be looked
+  up in a catalogue (to be described below). If either identifier is
+  known in the catalogue the corresponding xmltex package (often with
+  <code>.xmt</code> extension) will be loaded.
+</item>
+<item> After any local subset has been processed, if the DOCTYPE
+  specifies an external entity, the PUBLIC and/or SYSTEM identifiers
+  of the external dtd file will be similarly looked up, and a
+  corresponding xmltex file loaded if known.
+</item>
+<item> As each element is processed, it may be `known' to xmltex by
+  virtue of one of the packages loaded, or it may be unknown. If it is
+  unknown then if it is in a declared namespace, the namespace URI
+  (not the prefix) is looked up in the xmltex catalogue. If the
+  catalogue specifies an xmltex package for this namespace it will be
+  loaded. If the element is not in a namespace, then the element name
+  will be looked up in the catalogue.
+</item>
+<item> If after all these steps the element is still unknown then
+  depending on the configuration setting either a warning or an error
+  will be displayed. (Currently only warning implemented.)
+</item>
+</list>
+</p>
+<div><head>The xmltex Catalogue</head>
+<p>As discussed above, xmltex requires a mapping between PUBLIC and
+SYSTEM identifiers, namespace URI, and element names, to files of
+&TeX; code. This mapping is implemented by the following commands:
+<eg>
+<code>\NAMESPACE</code>{<emph>URI</emph>}{<emph>xmt-file</emph>}
+<code>\PUBLIC</code>{<emph>FPI</emph>}{<emph>file</emph>}
+<code>\SYSTEM</code>{<emph>URI</emph>}{<emph>file</emph>}
+<code>\NAME</code>{<emph>element-name</emph>}{<emph>xmt-file</emph>}
+<code>\XMLNS</code>{<emph>element-name</emph>}{<emph>URI</emph>}
+</eg>
+As described above, if the first argument of one of these commands
+matches the string specified in the XML source file, the corresponding
+&TeX; commands in the file specified in the second argument are
+loaded. The PUBLIC and SYSTEM catalogue entries may also be used
+to control which XML files should be input in response to external
+entity references. The <code>\XMLNS</code> is rather different,
+if an element in the null namespace does not have any definition
+attatched to it, this declaration forces the default namespace to the
+given URI. The catalogue lookup is then repeated. This allows for
+example documents beginning <code>&lt;html&gt;</code> to be coerced into
+the xhtml namespace.</p>
+<p>These commands may be placed in a configuration file, either
+<code>xmltex.cfg</code>, in which case they apply to all documents,
+or in a configuration file `<code>\jobname.cfg</code>' (eg
+<code>document.cfg</code> in the example in the Introduction) in which
+case the commands just apply to the specified document.
+</p>
+</div>
+
+<div>
+<head>Configuring xmltex</head>
+<p>In addition to the `catalogue' commands described earlier there are
+other commands that may be placed in the configuration files.
+
+<list type="unordered">
+<item> <p><code>\xmltraceonly</code></p>
+<p>  This stops xml from trying to typeset the
+  document. The external files specified in the catalogue are still
+  loaded, so that the trace may report any elements for which no code
+  is defined, but no actual typesetting takes place. In the event of
+  unknown errors it is always worth using xmltex in this mode to
+  isolate any problems.</p>
+<p>It may be noted that if an xmltex format is built just using initex
+without any typesetting commands, the resulting format should still
+be able to parse any XML file if xmltex.cfg just specifies 
+<code>\xmltraceonly</code> and \jobname.cfg is empty.</p>
+</item>
+<item> <p><code>\xmltraceoff</code></p>
+<p>By default xmltex provides a trace of its XML parse, displaying
+   each element begin and end. This command used in xmltex.cfg or
+   `\jobname.cfg' will stop this trace being produced.</p>
+</item>
+
+<item><p> <code>\inputonce</code>{<emph>xmt-file</emph>}</p>
+<p>The catalogue entries specify that
+  certain files should be loaded if XML constructs are met.
+  Alternatively the files may just always be loaded. The system will
+  ignore any later requests to load. This is especially useful if an
+  xmltex format is being made.</p>
+</item>
+<item><p><code>\UnicodeCharacter</code>{<emph>hex-or-dec</emph>}{<emph>tex-code</emph>}</p>
+<p>The first argument specifies a unicode character number, in the same
+format as used for XML character entities, namely either a decimal
+number, or an upper case Hex number preceded by a lower case
+`<code>x</code>'.</p>
+<p>The second argument specifies arbitrary &TeX; code to be used when
+typesetting this character. Any code in the XML
+range may be specified (ie up to x10FFFF). Although codes in the
+`ASCII' range, below 128, may be specified, the definitions supplied
+for such characters will not be default be used. The definition will
+howeverbe stored and used if the character is activated using the
+command described below.</p>
+</item>
+<item> <p><code>\ActivateASCII</code>{<emph>hex-or-dec</emph>}</p>
+<p>The argument to this command should be a number less than 128.
+If a character us activated by this command in a configuration file
+then any special typesetting instructions specified for the character
+will be executed whenever the character appears as character data.</p>
+<p>Some ASCII characters are activated by default. The list is
+essentially those characters with special meanings to either &TeX; or
+XML.</p>
+</item>
+
+</list>
+</p>
+<p>
+If a format is being made, there are essentially two copies of
+<code>xmltex.cfg</code> that may play a role. The configuration file
+input when the format is made will control catalogue entries and
+packages built into the format. A possibly different
+<code>xmltex.cfg</code> may be used in the input path of `normal' &TeX;,
+this will then be used for additional information loaded each run.</p>
+<p>In either case, a separate configuration file specific to the given
+XML document may also be used (which is loaded immediately after
+<code>xmltex.cfg</code>).
+</p>
+</div>
+</div>
+
+<div  id="stopping">
+<head>Stopping xmltex</head>
+<p>xmltex  should stop after the end of the document
+element has been processed. If things go wrong and
+you end up at the interactive
+<code>*</code> prompt  you might want to exit with
+<code><![CDATA[<?xmltex \stop?>]]></code>).
+</p>
+</div>
+
+<div>
+<head>xmltex package files</head>
+<p>
+xmltex package files are the link between the XML markup and &TeX;
+typesetting code. They are written in &TeX; (rather than XML) syntax
+and may load directly or indirectly other files, including &LaTeX;
+class and package files. For example a file loaded for a particular
+document type may directly execute <code>\LoadClass{article}</code>, or
+alternatively it may cause some XML element in the document to
+execute <code>\documentclass{article}</code>. In either case the document will
+suffer the dubious benefit of being formatted based on the style
+implemented in <code>article.cls</code>. Beware though that the package
+files may be loaded at strange times, the first time a given namespace
+is declared in a document, and so the code should be written to work
+if loaded inside a local group.</p>
+<p>Characters in xmltex package files have their normal &LaTeX; meanings
+except that line endings are ignored so that you do not need to add
+a % to the end of lines in macro code. Unlike fd file conventions, other
+white space is <emph>not</emph> ignored.</p>
+<p>The available commands are:
+
+<list type="unordered">
+<item><p><code>\FileEncoding</code>{<emph>encoding</emph>}</p>
+<p>This is the analogue for &TeX; syntax files of the encoding specification
+in the XML or text declaration of XML files. If it is not specified the
+file will be assumed to be in UTF-8.</p>
+</item>
+
+<item><p><code>\DeclareNamespace</code>{<emph>prefix</emph>}{<emph>URI</emph>}</p>
+<p>This declares a prefix to be used <emph>in this file</emph> for referring to
+elements in the specified namespace. If the prefix is empty then this
+declares the default namespace (otherwise, unprefixed element names
+refer to elements that are not in a namespace).</p>
+<p>Note that the elements in the XML document instance may use a
+different prefix, or no prefix at all to access this namespace.
+In order to resolve these different prefixes for the same namespace,
+each time a namespace is encountered for the first time (either 
+by <code>\DeclareNamespace</code> in a preloaded package, or in a namespace
+declaration in the XML instance) then it is allocated a new number
+and any further namespace declaration for the same URI just locally
+associates a prefix with this number. It is these numbers that are
+displayed when the XML trace of the parse of the document is shown,
+and also if any element is written out to an external file it will
+have a normalised prefix of a number whichever prefix it had
+originally. (Numeric prefixes are not legal XML, but this is an
+advantage, it ensures these internal forms can not clash with any
+prefix actually used in the document.)</p>
+<p>Three namespaces are predeclared. The null namespace (0), the XML
+namespace (<code>http://www.w3.org/1998/xml</code>) (1) which is predeclaed
+with prefix <code>xml</code> as specified in the Namespace Recommendation,
+and the xmltex namespace
+(<code>http://www.dcarlisle.demon.co.uk/xmltex</code>) (2) which is not
+given a default prefix, but may be used to have XML syntax for some
+internal commands (eg to have .aux files fully in XML, currently they
+are a hybrid mixture of some &TeX; and some XML syntax).
+</p>
+</item>
+<item><p>
+  <code>\XMLelement</code>{<emph>element-qname</emph>}{<emph>attribute-spec</emph>}
+{<emph>begin-code</emph>}{<emph>end-code</emph>}</p>
+<p>  This is similar to a &LaTeX; <code>\newenvironment</code> command.</p>
+<p> Declare the code to execute at the start and end of each instance of
+this element type. This code will be executed in a local group (like a
+&LaTeX; environment). The second argument declares a list of attributes
+and their default values using the <code>\XMLattribute</code> command
+described below.
+</p>
+</item>
+<item><p> 
+  <code>\XMLelement</code>{<emph>element-qname</emph>}
+{<emph>attribute-spec</emph>}
+<code>{\xmlgrab}</code>{<emph>end-code</emph>}</p>
+<p>  A special case of the above command (which may be better made into a
+  separate declaration) is to make the <emph>start-code</emph> just be the command
+  <code>\xmlgrab</code>. In this case the <emph>end-code</emph> has access to the
+  element content (in XML syntax) as <code>#1</code>. This content isn't
+  literally the same as the original document, namespaces, white space
+  and attribute quote symbols will all have been normalised.
+</p>
+</item>
+<item> <p>
+  <code>\XMLattribute</code>{<emph>attribute-qname</emph>}
+{<emph>command-name</emph>}{<emph>default</emph>}</p>
+<p>This command may only be used in the argument to
+<code>\XMLelement</code>.
+ The first argument specifies the name of an attribute (using any
+ namespace prefixes current for this package file, which need not
+ be the same as the prefixes used in the document).
+ The second argument gives a &TeX; command name that will be used to
+ access the value of this attribute in the begin and end code for the
+ element. (Note using &TeX; syntax here provides a name independednt of
+ the namespace declarations that are in scope when this code is executed).
+ The third argument provides a default value that wil be used if the
+attribute is not used on an instance of this element.
+ </p>
+<p>The special token <code>\inherit</code> may be used which will cause
+the command to have a value set in an ancestor element if this element
+does not specify any value.</p>
+<p>If a &TeX; token such as <code>\relax</code> is used as the default
+the element code may distinguish the case that the attribute is not used
+in the document.</p>
+</item>
+<item> <p>
+  <code>\XMLnamespaceattribute</code>
+{<emph>prefix</emph>}{<emph>attribute-qname</emph>}
+{<emph>command-name</emph>}{<emph>default</emph>}</p>
+<p>This command is similar to <code>\XMLattribute</code>
+ but is used at the top level of the package file, not in the argument
+to <code>\XMLelement</code>. It is equivalent to specifying the
+attribute in <emph>every</emph> element in the namespace specified by
+the first argument. As usual the prefix (which may be {} to denote the
+default namespace) refers to the namespace declarations in the xmltex
+package: the prefixes used in the document may be different.</p>
+</item>
+
+<item><p><code>\XMLentity</code>{<emph>name</emph>}{<emph>code</emph>}</p>
+<p>Declare an (internal parsed) entity, this is equivalent to a
+<code><![CDATA[<!ENTITY]]></code> declaration, except that the
+replacement text is specified in &TeX; syntax.</p>
+</item>
+
+<item><p><code>\XMLname</code>{<emph>name</emph>}{<emph>command-name</emph>}</p>
+<p>Declare the &TeX; command to hold the (normalised, internal form) of
+the XML name given in the first argument. This allows the code specified in
+<code>\XMLelement</code> to refer to XML element names without knowing
+the encodings or namespace prefixes used in the document. Of particular
+use might be to compare such a name with <code>\ifx\XML@parent</code>
+which will allow element code to take different actions depending on
+the parent of the current element.</p>
+</item>
+
+
+<item><p><code>\XMLstring</code>{<emph>command-name</emph>}&lt;&gt;<emph>XML Data</emph>&lt;/&gt;</p>
+<p>This saves the XML fragment as the &TeX; command given in the first
+argument. It may be particularly useful for redefining `fixed strings'
+that are generated by &LaTeX; document classes to use any special
+typesetting rules specified for individual characters.</p>
+<p>It should also be used for defining any strings used to
+in comparison tests with strings occurring in the XML document.
+Using <code>\XMLstring</code> rather than <code>\def</code> ensures
+that the characters and encodings in the string are correctly normalised.</p>
+</item>
+
+
+</list>
+
+</p>
+</div>
+<div>
+<head>XML processing</head>
+<p>
+xmltex tries as far as possible to be a fully conforming non
+validating parser. It fails in the following respects.
+<list type="unordered">
+<item> Error reporting is virtually non existent. Names are not checked
+  against the list of allowed characters, and various other
+  constraints are not enforced.
+</item>
+<item><p> A non validating parser is not forced to read external dtd
+  entities (and this one does not) It is obliged to read the local
+  subset and process entity definitions and attribute declarations.
+  Entity declarations are reasonably well handled: External parameter
+  entities are handled as above, loading a corresponding xmltex file
+  if known. External entities are similarly processed, inputting
+  the XML file, a difference in this case is that if the entity is not
+  found in the catalogue, the SYSTEM identifier will be used directly
+  to <code>\input</code> as often this is a local file reference. Internal
+  parsed entities and parameter entities are essentially treated as
+  &TeX; macros, and nonparsed entities are saved along with their
+  NDATA type, for use presumably by <code>\includegraphics</code>.</p>
+<p>Attribute defaults are processed in the local subset of the dtd, however
+   note that this is `namespace unaware' defaulting and only applies to
+   elements using the same prefix and local name, unlike the defaulting
+   done by <code>\XMLattribute</code>. </p>  
+</item>
+<item><p> Support for encodings depends on having an encoding mapping
+  file. Any 8bit encoding that matches Unicode for the first 127 positions
+  may be used by making a trivial mapping file. (The one for latin1
+  looks over complicated as it programs a loop rather than having 127
+  declarations saying that latin1 and Unicode are identical in this
+  range).</p>
+<p>  UTF-8 is supported, but support for UTF-16 is minimal. Currently
+  only latin-1 values work: (In this range UTF-16 is just latin-1 with
+  a null byte inserted after (or before, depending on endedness)
+  each latin-1 byte. The UTF-16 implementation just ignores this null
+  byte then processes as for latin-1. Probably the first few 8bit
+  pages could be similarly supported by making the low ascii control
+  characters activate UTF-16 processing but this will never be
+  satisfactory using a standard &TeX;. Hopefully a setup for a 16bit
+  &TeX; such as Omega will correct this.</p>
+</item>
+</list>
+
+</p>
+</div>
+<div>
+<head>Accessing &TeX;</head>
+<p>In theory you should be able to control the document just be suitable
+code specified by <code>\XMLelement</code> and friends, but sometimes it may be
+necessary to `tweak' the output by placing commands directly in the
+source.</p>
+<p>Two mechanisms are availalable to do this.
+<list type="unordered">
+<item><p> Using the xmltex namespace. The xmltex namespace conatins a
+  small (currently empty) set of useful &TeX; constructs that are
+  accessed by XML syntax. For example if xmltex provides a mechanism
+  for having XML (rather than &LaTeX;) syntax toc files, it will need
+  an analogue of <code>\contentsline</code> which might be an element
+  accessed by <gi>xmltex:contentsline</gi>&ldots; where the xmltex
+  prefix is declared on this or a parent element to be
+ <code>xmlns:xmltex="http://www.dcarlisle.demon.co.uk/xmltex"</code>.</p>
+<p>  As the xmltex namespace is declared but currently empty, a more
+  useful variant of this might be:</p>
+</item>
+<item> Declare your own namespace for &TeX; tweaks, and load a suitable
+  package file that attatches &TeX; code to the elements in this
+  namespace (or at least specify the correspondence between the
+  namespace and the package using <code>\NAMESPACE</code>).
+  For instance if you put <gi>clearpage xmlns="/my/tex/tweak"/</gi>
+  in your document, this will force a page break if you have at
+  suitable points, <code>\NAMESPACE{/my/tex/tweak}{tweak.xmt}</code>
+  and
+<eg>
+\DeclareNamespace{tweak}{"/my/tex/tweak"}
+\XMLelement{tweak:clearpage}{\clearpage}
+</eg>
+</item>
+<item><p> A second different mechanism is available, to use XML processing
+  instructions. A Processing Instruction of the form:
+<gi>?xmltex</gi>  <emph>&TeX; commands</emph> <code>?></code>
+will execute the &TeX; commands.</p>
+</item>
+</list>
+
+</p>
+</div>
+
+<div>
+<head>Bugs</head>
+<p>None, of course.</p>
+</div>
+
+<div>
+<head>Don't Read Past This Point</head>
+<p>Thus section discusses some of the more experimental features of xmltex
+that may get a cleaner syntax (or be removed, as a bad idea) in later releases,
+and also describes some of the internal interfaces (which are also
+subject to change)</p>
+
+<div>
+<head>Input Encodings and States</head>
+<p>At any point while processing a document, xmltex is in one of two 
+<emph>states</emph>: <emph>tex</emph> or <emph>xml</emph>.</p>
+<div><head>States</head>
+<p>In the xml <emph>state</emph>,
+ &lt; and &amp; are the only two characters that
+trigger special markup codes. Other characters, such as !, &gt;, =,
+&ldots; may be used in certain XML constructs as markup but unless
+some code has been triggered by &lt; they are treated simply as
+character data. All characters above 127 are `active' to &TeX;
+and are used to translate the input encoding to UTF-8. All internal
+character handling is based on UTF-8, as described below. Some
+characters in the ASCII range, below 127 are also active by default
+(mainly punctuation characters used in XML constructs, such as
+the ones listed above). Some or all of the others may be activated
+using the <code>\ActivateASCII</code> command, which allows special
+typesetting rules to be activated for the characters, at some cost in
+processing speed.</p>
+<p>In the tex <emph>state</emph>,
+characters in the ASCII range have their usual
+&TeX; meanings, so letters are `catcode 11' and may be used in &TeX;
+control sequences, \ is the escape character, &amp; the table cell
+separator, etc. Characters above 127 have the meanings current for the
+current encoding just as for the xml state, probably this means that
+they are unusable in &TeX; code, except for the special case of
+referring to XML element names in the first argument to
+<code>\XMLelement</code> and releated commands.</p>
+</div>
+<div><head>Encodings</head>
+<p>Whenever a new (XML or &TeX;) file is input by the xmltex system the
+<emph>encoding</emph> is first switched to UTF-8. At the end of the
+input the encoding is returned to whatever was the current encoding.
+The encoding current while the file is read is determined by the
+encoding pseudo-attribute on the XML or text declaration in the case
+of XML files, or by the <code>\FileEncoding</code> command for &TeX;
+files. Note that the encoding mechanism <emph>only</emph> is triggered
+by xmltex file includes. Once an xmltex package file is loaded it may
+include other &TeX; files by <code>\input</code> or
+<code>\includepackage</code> these input command swill be transparent
+to the xmltex encoding system. The vast majority of &TeX; macro
+packages only use ASCII characters so this should not be a
+problem.</p>
+<p>Note that if the <code>\includepackage</code> occurs directly in
+the xmltex package file, the &TeX; code will be included with a known
+encoding, the one specified in the xmltex package, or UTF-8. If
+however the <code>\includepackage</code> is included in code specified
+by <code>\XMLelement</code>, then it will be executed with whatever
+encoding is current in the document at the point that element is
+reached. Before xmltex executes the code for that element it will
+switch to the tex state, thus normalising the ascii characters
+but characters above 127 will not have predefined definitions in this
+case.</p>
+<p>Internally eveything is stored as UTF-8. So `aux' and `toc' files
+will be in UTF-8 even if the document (or parts of the document) used
+different encodings.</p>
+<p>To specify a new encoding, if it is an 8 bit encoding that matches
+ASCII in the printable ASCII range, then one just needs to produce a
+file with name <emph>encoding</emph><code>.xmt</code> (in lowercase,
+on case sensitive systems) this should consist of a series of
+<code>\InputCharacter</code> commands, giving the input character slot
+and the equivalent Unicode. If an encoding is specified in this manner
+character data will be converted to UTF-8 by <emph>expansion</emph>
+and so ligatures and inter letter kerns will be preserved. (Conversely
+if characers are accessed by character references, &amp;#1234; then
+&TeX; arithmetic is used to decode the information and ligature
+information will be lost. For some large character sets, especially
+for Asian languages, these mechanisms will probably not prove to be
+sufficient, some mechanisms are being investigated, but in the short
+term it may be necessary to always use UTF-8 if the input encoding
+is not strictly a ine byte extension of the ASCII code page.
+</p></div>
+
+</div>
+
+<div>
+<head>xmltex Package Commands</head>
+<p>You can use arbitrary &TeX; commands in an xmltex package,
+althought you should be aware that the file may be input into a local
+group, at the point in a document that a particular namespace is first
+used, for example. There are however some specific commands designed
+to be used in the begin or end code of <code>\XMLElement</code>.
+<list type="unordered">
+
+<item><p><code>\ignorespaces</code></p>
+<p>This is actually a &TeX; primitive
+(for the moment!)</p>
+</item>
+
+<item><p><code>\obeyspaces</code></p>
+<p>Obey consecutive space characters,
+rather than treating consecutive runs as a single space.
+(A command of this name, but not this definition is in plain &TeX;.)</p>
+</item>
+
+<item><p><code>\obeylines</code></p>
+<p>Obey end of line characters,
+rather than treating then as a space, force a line break.
+(A command of this name, but not this definition is in plain &TeX;.)</p>
+</item>
+
+<item><p><code>\xmltexfirstchild#1\@</code></p>
+<p>If the <emph>start-code</emph> for an element is specified as
+<code>\xmlgrab</code> then the  <emph>end-code</emph> may use
+<code>#1</code> in order to execute the element content. Sometimes you
+do not want all of the content. The a construction (with currently
+unpleasant syntax) <code>\xmltexfirstchild#1\@</code> will just evaluate
+the first child element of the content, discarding the remaining
+elements.</p>
+</item>
+
+<item><p><code>\xmltextwochildren\csa\csb#1</code></p>
+<p>If you know that the content will be exactly two child elements (for
+examle a MathML frac or sub element) then this command may be used.
+It will execute the &TeX; code 
+<code>\csa{</code><emph>child-1</emph><code>}\csb{</code><emph>child-2</emph>
+So either two &TeX; command smay be supplied, one will be applied to
+each child, or the second argument may be <code>{}</code> in which case
+the first argument may be a &TeX; command that takes two arguments.
+For example the code for MathMl frac might be
+<eg>
+\XMLelement{m:mfrac}
+  {}
+  {\xmlgrab}
+  {\xmltextwochildren\frac{}#1}
+</eg>
+</p>
+</item>
+
+<item><p><code>\xmltexthreechildren\csa\csb\csc#1</code></p>
+<p>As above, but more so.</p></item>
+
+<item><p><code>\xmltexforall\csa{#1}</code></p>
+<p>The &TeX; command <code>\csa</code> is called repeatedly,
+taking each child element of the current element as argument
+on each iteration. As a convenience the command <code>\xml@name</code>
+is defined before each iteration to have the (internal, normalised)
+name of the element being processed.</p>
+</item>
+
+<item><p><code>\NDATAEntity\csa\csb\attvalue</code></p>
+<p>If the XML parser encounters an internalor external entity reference
+it expands it without executing any special hook that may be defined in
+an xmltex package. However NDATA entites are never directly encountered
+in an entity reference. They may only be used as an attribute value.
+If <code>\attvalue</code>. is a &TeX; command holding the value of an
+attribute, as declared in <code>\XMLattribute</code> then
+<code>\NDATAEntity\csa\csb\attvalue</code> applies the two &TeX;
+commands <code>\csa</code> and <code>\csb</code> to the notation type
+and the value, in a way exactly corresponding to
+<code>\xmltextwochildren</code> so for example the XML document for this
+manual specifies
+<eg><![CDATA[
+ <!NOTATION URL SYSTEM "" >
+ <!ENTITY lppl SYSTEM "http://www.latex-project.org/lppl.txt" NDATA URL>]]>
+</eg>
+and this is handled by the following xmltex code
+<eg><![CDATA[
+\XMLelement{xptr}
+ {\XMLattribute{doc}{\xptrdoc}{}}
+ {\NDATAEntity\xptrdoc\@gobble\url}
+ {}]]>
+</eg>
+which saves the attribute value in  <code>\xptrdoc</code> and then
+discards the notation name (URL) and applies the command
+<code>\url</code> to typeset the supplied URL.
+</p>
+</item>
+
+</list>
+</p>
+
+</div>
+
+<div>
+<head>Character Data Internals</head>
+<p>
+<table>
+<row>
+<cell/> <cell>int.</cell><cell>ext. xml</cell>
+<cell>ext. mixed</cell><cell>csn typeout</cell>
+<cell/>
+</row>
+<row>
+<cell>d</cell><cell>xabc</cell><cell>xabc</cell>
+<cell>xabc (12)</cell><cell>xabc (12)</cell><cell>xabc (12)</cell>
+<cell/>
+</row>
+<row>
+<cell>c</cell><cell>xab</cell><cell>xab</cell>
+<cell>xab  (12)</cell><cell>xab  (12)</cell><cell>xab  (12)</cell>
+<cell/>
+</row>
+<row>
+<cell>b</cell><cell>xa</cell><cell>xa</cell>
+<cell>xa   (12)</cell><cell>xa   (12)</cell><cell>xa   (12)</cell>
+<cell/>
+</row>
+<row>
+<cell>ax</cell><cell>x</cell><cell>x</cell>
+<cell>x</cell><cell>x</cell><cell>x    (12)</cell>
+<cell>(!)</cell>
+</row>
+<row>
+<cell>ay</cell><cell>x</cell><cell>x</cell>
+<cell>x</cell><cell>&amp;#123;</cell><cell>x    (12)</cell>
+<cell>(e)</cell>
+</row>
+<row>
+<cell>az</cell><cell>x</cell><cell>\az x</cell>
+<cell>&amp;#123;</cell><cell>&amp;#123;</cell><cell>x    (12)</cell>
+<cell>(&amp;lt;)</cell>
+</row>
+<row>
+<cell>&lt;</cell><cell>&lt;</cell><cell>&lt;</cell>
+<cell>&lt;</cell><cell>&lt;</cell><cell>&lt;    (12)</cell>
+<cell>(&lt;)</cell>
+</row>
+</table>
+
+</p>
+</div>
+
+
+</div>
+
+
+</body>
+</text>
+</TEI.2>
+
+

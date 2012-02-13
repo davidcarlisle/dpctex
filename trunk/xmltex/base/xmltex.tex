@@ -1,0 +1,2400 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% xmltex.tex
+
+%% Copyright 2000 David Carlisle, NAG Ltd.
+%% re-released by Sebastian Rahtz June 2002
+%% This file is distributed under the LaTeX Project Public License
+%% (LPPL) as found at http://www.latex-project.org/lppl.txt
+%% Either version 1.0, or at your option, any later version.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\catcode`\{=1 \catcode`\}=2 \catcode`\@=11 \catcode`\#=6
+
+\gdef\XML@tempa#1: #2.tex,v #3 #4 #5 #6 #7${
+  \def\xmltexversion{#4 v#3 (#6)}}
+
+\XML@tempa
+$Id: xmltex.tex,v 1.9 2002/06/25 rahtz Exp $
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% initial setup so that xmltex independent of any existing format
+% even if normally built on top of latex
+
+\endlinechar-1
+
+\catcode`\&=4
+\catcode`\^=7
+\catcode`\_13
+\catcode`\|=14 %
+\catcode`\~=13 %
+
+\ifx\count@\@undefined
+  \countdef\count@200 % fingers crossed
+  \countdef\XML@ns@count201\relax
+  \expandafter\def\csname newcount\endcsname#1{}
+  \expandafter\def\csname newtoks\endcsname#1{}
+  \toksdef\toks@200\relax
+  \toksdef\XML@catalogue201\relax
+  \toksdef\XML@attribute@toks202\relax
+  \def\maxdimen{16383.99999pt}
+  \def\space{ }
+  \chardef\active13 %
+  \countdef\z@0 %
+\fi
+\ifx\@tempcnta\@undefined
+  \countdef\@tempcnta202 % fingers crossed
+  \countdef\@tempcntb203 % fingers crossed
+  \edef\@spaces{\space\space\space\space}
+  \begingroup
+    \catcode`\>12
+    \gdef\strip@prefix#1>{}
+    \endgroup
+\fi
+
+
+% set up 7bit range
+\count@0
+\catcode0=13
+\gdef\XML@tempa{
+ \begingroup
+   \uccode0\count@
+  \uppercase{\endgroup
+    \edef^^@{
+      \ifnum\catcode\count@=11 %
+        \noexpand\utfeightay\else\noexpand\utfeightax\fi
+      \noexpand^^@}
+    \expandafter\edef\csname 8:\string^^@\endcsname{\string^^@}}
+ \ifnum\count@<127\advance\count@1 \expandafter\XML@tempa\fi}
+\XML@tempa
+\catcode0=9
+
+\begingroup
+\catcode`\^^M=\active\gdef^^M{\utfeightay^^M}
+\catcode`\^=\active\gdef^{\utfeightay^}
+\catcode`\_=\active\gdef_{\utfeightay_}
+\catcode`\~=\active\gdef~{\utfeightay~}
+\catcode`\%=\active\gdef%{\utfeightay%}
+\catcode`\$=\active\gdef${\utfeightay$}
+\catcode`\#=\active\gdef#{\utfeightay#}
+\catcode`\(=1
+\catcode`\)=2
+\catcode`\{=\active\gdef{(\utfeightay{)
+\catcode`\}=\active\gdef}(\utfeightay})
+\catcode`\/0 \catcode`\\=\active /gdef\(/utfeightay\)
+/endgroup
+
+
+
+\long\def\@gobble#1{}
+\def\@empty{}
+
+\ifx\@@end\@undefined
+  \let\@@end\end
+\fi
+
+\ifx\nfss@catcodes\@undefined
+ \def\nfss@catcodes{
+  \catcode`\\0
+  \catcode`\{1
+  \catcode`\}2
+  \catcode`\%14
+  \catcode`\@11
+  \catcode`\#6
+  \catcode`\"12
+  \catcode`\'12
+  \catcode`\<12
+  \catcode`\=12
+  \catcode`\>12
+  \catcode`\^7 %
+  }
+\fi
+
+% This is standard in LaTeX.
+\ifx\zap@space\@undefined
+\def\zap@space#1 {#1}
+\fi
+
+\newlinechar`\^^J
+
+\ifx\@@input\@undefined
+\let\@@input\input
+\def\input#1{\@@input#1 }
+\fi
+\chardef\active=13
+\chardef\@ne=1
+
+%
+\ifx\IfFileExists\@undefined
+  \def\IfFileExists#1#2#3{\def\@filef@und{#1 }#2}
+\fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\immediate\write20{xmltex version: \xmltexversion}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\let\tabcellsep&
+
+\def\afterfi#1\fi{\fi#1}
+
+
+% set catcodes of low chars to 12 and hight 10 13.
+\gdef\XML@tempa#1#2{
+  \catcode\count@#2\relax
+  \ifnum\count@<#1\relax
+     \advance\count@\@ne
+     \afterfi
+     \XML@tempa{#1}{#2}
+  \fi
+  }
+\count@0\relax
+\XML@tempa{`\^^K}{12}
+
+\count@127\relax
+\XML@tempa{255}{13}
+
+
+\def\XML@catcodes{
+% white
+  \catcode`\ \active
+  \catcode`\^^M\active
+  \catcode`\^^I\active
+% xml
+  \catcode`\<\active
+  \catcode`\>\active
+  \catcode`\:\active
+  \catcode`\[\active
+  \catcode`\]\active
+  \catcode`\%\active
+  \catcode`\&\active
+  \catcode`\"\active
+  \catcode`\'\active
+  \catcode`\=\active
+% tex
+  \catcode`\/\active
+  \catcode`\!\active
+  \catcode`\?\active
+  \catcode`\-\active
+  \catcode`\$\active
+  \catcode`\{\active
+  \catcode`\}\active
+  \catcode`\#\active
+  \catcode`\_\active
+  \catcode`\\\active
+  \catcode`\~\active\def~{\utfeightay~}
+% and these are not catcodes
+  \let\XML@ns@a@\XML@ns@a@xml
+  \let\XML@ns\XML@ns@xml
+}
+
+
+\catcode`\/\active
+\catcode`\!\active
+\catcode`\?\active
+\catcode`\"\active
+\catcode`\'\active
+\catcode`\<\active
+\catcode`\>\active
+\catcode`\&\active
+\catcode`\_\active
+\catcode`\ 10
+\catcode`\^^M\active
+
+
+
+%% half baked bom and utf-16 support
+\catcode`^^ff\active
+\catcode`^^fe\active
+\catcode0=9
+
+% do this also in everyjob incase a <?xmltex dump?> has turned it iff.
+\def^^ff^^fe{
+  \def\XML@thisencoding{utf-16}}
+\def^^fe^^ff{
+  \def\XML@thisencoding{utf-16}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%% warnings
+\def\XML@warnNI#1{
+  {\let\protect\string\utfeight@protect@typeout\message{^^J#1}}}
+\def\XML@warn#1{
+  {\let\protect\string\utfeight@protect@typeout\message{^^J\XML@w@#1}}}
+\let\XML@trace@warn\XML@warn
+\let\XML@trace@warnNI\XML@warnNI
+\let\XML@trace@warnE\message
+
+\let\XML@w@\@empty
+
+% quoted literals
+% " or '
+% #1 command to call, gets quoted string as #1
+% #2 " or '
+% " and ' assumed active
+\def\XML@quoted#1#2{
+   \ifx#2"\expandafter\XML@qq
+   \else\ifx#2'\expandafter\expandafter\expandafter\XML@q
+   \else
+     \ERROR#2
+   \fi
+   \fi
+   #1}
+
+
+\def\XML@qq#1#2"{#1{#2}}
+\def\XML@q#1#2'{#1{#2}}
+
+
+%%%%%%%%%%%%%%%%%
+
+% < handler
+
+% / ! ? assumed active
+\def\XML@lt@markup#1{
+  \catcode`\^^I=10 %
+  \catcode`\^^M=10 %
+  \catcode`\ =10 %
+  \ifx/#1\XML@getend
+  \else\ifx!#1\XML@getdecl
+  \else\ifx?#1\XML@getpi
+  \else\XML@getname#1\@}
+
+\def\XML@first@lt{
+  \let<\XML@lt@markup
+  \let^^ff\@undefined
+  \let^^fe\@undefined
+  \XML@lt@markup}
+
+
+%% reset catcodes
+\def\XML@reset{
+  \nfss@catcodes
+  \catcode`\$3
+  \catcode`\&4
+  \catcode`\^7
+  \catcode`\_8
+  \catcode`\:12
+  \catcode`\!12
+  \catcode`\=12
+  \catcode`\=12
+  \catcode`\|12
+  \catcode`\ =10 
+  \catcode`\~\active\def~{\nobreakspace{}}
+% catcodes?
+  \let\XML@ns@a@\XML@ns@a@tex
+  \let\XML@ns\XML@ns@tex}
+
+
+%% begin tag
+\begingroup
+  \catcode`\^^M\active
+  \catcode`\^^I\active
+  \catcode`\ \active
+%
+% #1 first char of name
+% grab the name into an xdef so that derminating string can
+% be any of whitespace / or >
+\gdef\XML@getname#1\@{
+\fi\fi\fi
+\begingroup
+\catcode`\^^M\active
+\catcode`\^^I\active
+\catcode`\ \active
+\def {\iffalse{\fi}\XML@getname@}
+\let^^M %
+\let^^I %
+\def/{\iffalse{\fi}\XML@getname@/}
+\def>{\iffalse{\fi}\XML@getname@>}
+\unrestored@protected@xdef\XML@tempa{\iffalse}\fi#1}
+
+\endgroup
+
+% finish the special group for the name xdef, start an XML@begingroup
+% for the element, and begin processing any attributes.
+\def\XML@getname@{
+  \endgroup
+  \XML@begingroup
+  \edef\XML@w@{ \XML@w@}
+  \let\begintag\XML@tempa
+  \let\XML@parent\XML@this@element
+  \XML@attribute@toks{}
+  \XML@getattrib}
+
+% elements put in an \XML@begingroup which is a not a group at the
+% outer level to save save stack, but turns itself into a group
+% for nexted elements.
+\def\XML@begingroup{
+ \def\XML@begingroup{
+   \begingroup
+   \let\XML@begingroup\begingroup
+   \let\XML@endgroup\endgroup}}
+
+\let\XML@endgroup\@@end
+
+
+
+%% attributes
+
+% #1 first letter of attribute name, or / or > to finish.
+\def\XML@getattrib#1{
+  \ifx#1/
+    \expandafter\XML@endempty
+  \else
+  \ifx#1>
+     \expandafter\expandafter\expandafter\XML@startelement
+  \else
+    \XML@getattrib@a#1
+  \fi
+  \fi}
+
+\let\XML@@getattrib\XML@getattrib
+
+\begingroup
+\catcode`\:\active
+\catcode`\<12
+\catcode`\>12
+
+% restore normal XML whitespace regime
+% namespace check element name (has to be done after attribute handling)
+% trace the element start then `do' the element which might be
+% noop, execute package code, or grab, depending.
+
+\gdef\XML@startelement{
+  \XML@default@attributes
+  \catcode`\^^M\active
+  \catcode`\^^I\active
+  \catcode`\ \active
+  \XML@ns\begintag
+  \edef\XML@this@element{
+    \csname XMLNS@\XML@this@prefix\expandafter\endcsname\noexpand:
+                          \XML@this@local}
+  \XML@trace@warn{<\XML@this@element}
+  \XML@checkknown
+  \XML@attrib@trace
+  \XML@doelement}
+
+\endgroup
+
+% This is a noop if tracing turned off, otherwise loop through
+% attlist with a typeout on each.
+\def\XML@attrib@trace{
+  \begingroup
+    \let\XML@doattribute\XML@doattribute@warn
+    \def\XMLNS@{0}
+    \utfeight@protect@typeout
+    \the\XML@attribute@toks
+    \XML@trace@warnE{ >}
+  \endgroup}
+
+% execute package code for an element start.
+\def\XML@doelement{
+  \csname
+    E:\XML@this@element
+  \endcsname
+}
+
+\begingroup
+\catcode`\:\active
+\uccode`\~`\^^I%
+
+% grab element content into a token register.
+% has to pass through xdef to normalise encodings.
+\uppercase{
+\gdef\XML@grabelement{
+\catcode`\ \active\catcode`\^^M\active\catcode`\^^I\active
+  \global\XMLgrabtoks\expandafter{
+    \the\expandafter\XMLgrabtoks
+      \expandafter<\XML@this@element~}
+% check if I can switch this just once, where grabelement switched.
+   \begingroup
+   \let\XML@doattribute\XML@grabattribute
+   \def\XMLNS@{0}
+   \expandafter\let\csname XMLNS@0\endcsname\XMLNS@
+   \the\XML@attribute@toks
+   \endgroup
+%
+\catcode`\ \active\catcode`\^^M\active\catcode`\^^I\active
+  \global\XMLgrabtoks\expandafter{
+    \the\XMLgrabtoks
+    >}
+   \XMLgrab@}
+}
+
+% #1  namespace
+% #2  local name
+% #3  value
+
+\catcode`\=\active
+\gdef\XML@grabattribute#1#2#3{
+  \protected@xdef\XML@tempa{\csname XMLNS@#1\endcsname:#2}
+  \global\XMLgrabtoks\expandafter{
+    \the\expandafter\XMLgrabtoks
+    \XML@tempa="#3" }}
+\endgroup
+
+% #1 should be empty, between the / and the >
+% probably should put some internal form here rather than literally adding
+% end tag to be reparsed, but this simplifies grab code.
+\def\XML@endempty#1>{
+  \expandafter\XML@startelement
+  \expandafter<\expandafter/\begintag>}
+
+
+%% check we know what to do with an element
+\def\XML@checkknown{
+  \expandafter\ifx
+% catcode :?    \csname E:\XML@this@element\endcsname
+    \csname E:\csname XMLNS@\XML@this@prefix\endcsname:\XML@this@local\endcsname
+    \relax
+   \let\XML@use\@empty
+   \ifnum0=\csname XMLNS@\XML@this@prefix\endcsname
+     \let\XML@NAME\XML@this@local
+% prerun catalogue in this case which might coerce element into a new namespace
+     \the\XML@catalogue
+   \else
+     \edef\XML@NAMESPACE{\csname XMLNS@\XML@this@prefix\endcsname}
+     \fi
+   \let\XML@NAME\relax
+   \the\XML@catalogue
+   \inputonce\XML@use
+   \expandafter\ifx\csname E:\csname
+       XMLNS@\XML@this@prefix\endcsname:\XML@this@local\endcsname\relax
+     \XML@trace@warnE{Undefined}
+   \fi
+ \fi}
+
+
+
+%% end tag
+
+\def\XML@getend#1\@#2>{
+  \fi
+\catcode`\ \active
+% removed by Peter Housel housel@acm.org 2000/09/06 
+% \catcode`\^^M\active\catcode`\^^I\active
+  \XML@getend@a#2 \@}
+
+\begingroup
+\catcode`\/=12
+\catcode`\<=12
+\catcode`\>=12
+\catcode`\:=12
+
+% namespace normalise element name in end tag.
+\gdef\XML@getend@a#1 #2\@{
+\catcode`\ \active\catcode`\^^M\active\catcode`\^^I\active
+  \def\endtag{#1}
+  \XML@ns\endtag
+  \XML@trace@warn{</\csname XMLNS@\XML@this@prefix\endcsname:\XML@this@local>}
+  \XML@doend
+}
+
+% execute package code for element end.
+\gdef\XML@doend{
+  \csname
+    E/:\csname XMLNS@\XML@this@prefix\endcsname:\XML@this@local
+  \endcsname
+  \XML@endgroup
+% added by Peter Housel housel@acm.org 2000/09/06 
+ \catcode`\^^M\active \catcode`\^^I\active \catcode`\ \active}
+\endgroup
+
+% flag children: put \@empty after every child element
+% used by \xmltextwochildren and friends
+
+% need active and non active : and / so...
+\begingroup
+\catcode`\:\active
+\uccode`\*=`\:
+\uccode`\.=`\/
+\uccode`\a\z@
+\uccode`\b\z@
+\uccode`\c\z@
+\uccode`\d\z@
+\uccode`\e\z@
+\uccode`\n\z@
+\uccode`\r\z@
+\uccode`\o\z@
+\uccode`\t\z@
+
+\uppercase{
+\gdef\XML@grabend{
+  \ifx\XML@this@level\XML@w@
+% end inner group to restore \XML@doelement and friends
+    \endgroup
+    \XML@trace@warn{Grabbed content}
+    \csname
+      E.*\csname XMLNS@\XML@this@prefix\endcsname
+        *\XML@this@local
+    \expandafter\endcsname\expandafter{
+      \the\XMLgrabtoks}
+    \XML@trace@warn{End grabbed content}
+    \XML@endgroup
+% \XMLstring usage means catcode restoring varies
+% must fix this one day, for now use ifnum avoidance
+\ifnum\catcode`\^^M=10
+\catcode`\ \active\catcode`\^^M\active\catcode`\^^I\active
+\fi
+  \else
+    \xdef\XML@tempa{\noexpand<\noexpand/
+      \csname XMLNS@\XML@this@prefix\expandafter\endcsname\noexpand:
+             \XML@this@local
+    \noexpand>
+    \ifx\XML@next@level\XML@w@\noexpand\@empty\fi}
+    \global\XMLgrabtoks\expandafter{
+      \the\expandafter\XMLgrabtoks
+      \XML@tempa}
+    \XML@endgroup
+  \expandafter
+    \XMLgrab@
+  \fi}}
+\endgroup
+%%%
+
+% syntax for these will probably change.
+\def\xmltexfirstchild#1\@empty#2\@{
+  #1}
+\def\xmltextwochildren#1#2#3\@empty#4\@empty{
+  #1{#3}#2{#4}}
+\def\xmltexthreechildren#1#2#3#4\@empty#5\@empty#6\@empty{
+  #1{#4}#2{#5}#3{#6}}
+\def\xmltexforall#1#2{
+  \xmltexf@rall#1#2< >\@empty}
+
+\def\xmltexf@rall#1#2<#3 #4>#5\@empty{
+  \ifx\relax#3\relax
+  \else
+  \def\xml@name{#3}#1{<#3 #4>#5}
+  \expandafter\xmltexf@rall\expandafter#1
+  \fi}
+
+% #1  entity name (or tex macro holding same, eg from an attrbute)
+% #2 #3 inserted before each compontent
+% so #2{GIF}#3{xxx/yyy.gif}
+\begingroup
+\catcode`\&12
+\catcode`\+12
+
+\gdef\NDATAEntity#1{
+  \expandafter\expandafter\expandafter
+  \XML@ndataentity\csname+&#1\endcsname}
+
+\gdef\XML@ndataentity#1#2#3#4{
+  #3{#1}#4{#2}}
+
+\endgroup  
+
+
+%%%%%%%
+
+% this relies on = being catcode 13.
+\begingroup
+\catcode`\=\active
+
+\gdef\XML@getattrib@a#1\fi\fi#2={
+  \fi\fi
+   \XML@set@this@attribute#1#2 \@
+   \XML@quoted\XML@attribval}
+
+\endgroup
+
+%% remove trailing space from `foo ='
+\def\XML@set@this@attribute#1 #2\@{
+% should probably do an edef at this point, and optimise
+% later code
+  \def\XML@this@attribute{#1}}
+
+% #1 = attribute value
+\def\XML@attribval#1{
+% allow for arbitrary catcodes.
+  \xdef\XML@tempa{\expandafter\strip@prefix\meaning\XML@this@attribute}
+  \ifx\XML@tempa\XML@ns@decl
+    \XML@ns@uri{}{#1}
+   \else
+     \XML@ns\XML@this@attribute
+% catcode avoidance
+     \edef\XML@this@prefix{\expandafter\strip@prefix\meaning\XML@this@prefix}
+     \ifx\XML@this@prefix\XML@ns@decl
+       \XML@ns@uri\XML@this@local{#1}
+     \else
+      \begingroup
+% check if this still needed with protect setting?
+%       \def"{\noexpand&quot;}
+      \utfeight@protect@internal
+       \xdef\XML@tempa{
+          \the\XML@attribute@toks
+          \noexpand\XML@doattribute{\XML@this@prefix}{\XML@this@local}{#1}}
+       \endgroup
+       \XML@attribute@toks\expandafter{\XML@tempa}
+      \fi
+    \fi
+  \XML@getattrib}
+
+
+%% activate attributes
+
+% this seems over complicated and perhaps I should re-implement.
+% currently tries to avoid making a csname for each attribute.
+% declaration of attributes provides a normal tex command name
+% to access the value in the element code, could  have instead
+% just had declaration of attribute name and default and used something
+% like \attributevalue{html:href} but would need to work out a way
+% of resolving prefixes at definition time if this was embedded in
+% the element code. (The prefix such as `html' used in the definition
+% file isn't known by the time the code is run.) 
+\def\XML@doattribute@warn#1#2#3{
+  \XML@trace@warn{\@spaces\csname XMLNS@#1\endcsname:#2 = \string"#3\string"}}
+
+% #1 element specific attribute defaults, first token is
+% macro for namespace-global attributes (hence \expandafter)
+\def\XML@setattributes#1{
+  \let\XMLNS@@\XMLNS@
+   \def\XMLNS@{0}
+   \the\expandafter\XML@attribute@toks#1\relax\relax
+   \let\XMLNS@\XMLNS@@}
+
+% #1 prefix
+% #2 local name
+% #3 value
+\def\XML@doattribute#1#2#3{
+  \xdef\XML@tempa##1{\noexpand##1{
+       \noexpand\XML@attrib\csname XMLNS@#1\endcsname:#2\relax}}
+  \XML@tempa\XML@attrib@x{#3}
+  \XML@tempa\XML@attrib@y}
+
+% #1 \XML@attrib qname\relax
+% #2 value given in document instance
+\def\XML@attrib@x#1#2{
+    \gdef\XML@tempb##1#1##2##3##4\relax\relax{
+    \def##2{#2}
+    ##1##4\relax\relax}}
+
+% #1 \XML@attrib qname\relax
+% #2 original attribute defaults
+\def\XML@attrib@y#1#2\relax\relax{
+  \XML@tempb#2#1\XML@temp@l{6}\relax\relax}
+
+
+% if default is inherit, set it to \relax the first time, otherwise
+% let whatever value it has drop through. Note this is inheritance of the
+% tex csname declared as the internal access, not of the xml attribute name. 
+% #1 = junk
+% #2 = tex csname
+% #3 = attribute default (should be encoding neutral: not normalised)
+\def\XML@attrib#1\relax#2#3{
+  \ifx\inherit#3\relax% #3 might be empty
+    \ifx#2\@undefined
+      \def#2{\relax}
+    \fi
+  \else
+    \def#2{#3}
+  \fi}
+
+% any distinguishing value would do...
+\let\inherit\XML@attrib
+
+
+\newtoks\XML@attribute@toks
+
+%%%%% namespace declarations
+
+\newcount\XML@ns@count
+
+% need to protect against active chars
+\def\XML@ns@decl{xmlns}
+\edef\XML@ns@decl{\expandafter\strip@prefix\meaning\XML@ns@decl}
+
+
+% #1 prefix (or empty)
+% #2 uri
+% globally allocate number to uri if new
+% locally alocate prefix to number
+% globally allocate number as a prefix (canonical form)
+\def\XML@ns@uri#1#2{
+  \utfeight@protect@chars
+  \XML@ns@alloc{#2}
+  \expandafter\edef\csname XMLNS@#1\endcsname
+                      {\csname XML:#2\endcsname}
+  \XML@trace@warn{xmlns:#1 = \csname XMLNS@#1\endcsname}
+  \unprotect@utfeight
+ }
+
+% and the same without any prefix
+% always use in scope of utfeight protect
+% #1 uri
+\def\XML@ns@alloc#1{
+  \expandafter\ifx\csname XML:#1\endcsname\relax
+    \global\advance\XML@ns@count\@ne
+    \expandafter\xdef\csname XML:#1\endcsname{\the\XML@ns@count}
+    \global\expandafter\let\csname A:\the\XML@ns@count\endcsname\@empty
+    \XML@trace@warnNI{URI: \csname XML:#1\endcsname\space = #1}
+    \expandafter\xdef\csname XMLNS@\the\XML@ns@count\endcsname
+                      {\the\XML@ns@count}
+  \fi}
+
+% and version for xmt files
+\let\DeclareNamespace\XML@ns@uri
+
+%% namespace support
+
+%% : is active in xml state but inactive in tex state, so need to do
+%% this twice, grrr...
+\begingroup
+\catcode`\:\active
+
+% #1 = qname to be split on :
+\gdef\XML@ns@xml#1{
+  \expandafter\XML@ns@a@xml#1:\@:\\}
+
+% #1 = prefix (or empty)
+% #2 = local name or \@ if no prefix
+\gdef\XML@ns@a@xml#1:#2:#3\\{
+  \ifx\@#2
+    \XML@ns@b{}{#1}
+  \else
+     \XML@ns@b{#1}{#2}
+  \fi}
+\endgroup
+
+% same with inactive :
+% #1 = qname to be split on :
+\def\XML@ns@tex#1{
+  \expandafter\XML@ns@a@tex#1:\@:\\}
+
+% #1 = prefix (or empty)
+% #2 = local name or \@ if no prefix
+\def\XML@ns@a@tex#1:#2:#3\\{
+  \ifx\@#2
+    \XML@ns@b{}{#1}
+  \else
+     \XML@ns@b{#1}{#2}
+  \fi}
+
+\let\XML@ns@a@\XML@ns@a@tex
+\let\XML@ns\XML@ns@tex
+
+%%%%%%%%%%%%%%%%%%%%
+
+% nullnamespace 
+\expandafter\def\csname XML:\endcsname{0}
+\expandafter\let\csname A:0\endcsname\@empty
+\def\XMLNS@{0}
+\expandafter\gdef\csname XMLNS@0\endcsname{0}
+
+% xml namespace 
+\let\utfeightax\string
+\expandafter\def\csname XML:http://www.w3.org/1998/xml\endcsname{1}
+\expandafter\let\csname A:1\endcsname\@empty
+\def\XMLNS@xml{1}
+\expandafter\gdef\csname XMLNS@1\endcsname{1}
+\XML@ns@count1
+
+% #1 = prefix or empty
+% #2 = local name
+\def\XML@ns@b#1#2{
+  \begingroup
+  \utfeight@protect@chars
+  \xdef\XML@tempa{#1}
+  \xdef\XML@tempb{#2}
+  \endgroup
+  \let\XML@this@prefix\XML@tempa
+  \let\XML@this@local\XML@tempb
+  }
+
+%%%%%
+% pi
+\begingroup
+\catcode`\?\active
+\catcode`\ \active
+\catcode`\^^M\active
+\catcode`\^^I\active
+
+\gdef\XML@getpi#1\@{
+\fi\fi\fi
+\begingroup
+\utfeight@protect@chars
+\catcode`\ \active
+\catcode`\^^M\active
+\catcode`\^^I\active
+\def?{\endcsname?}
+\let \endcsname
+\let^^M\endcsname
+\let^^I\endcsname
+\expandafter\XML@getpi@\csname
+Q:}
+
+\endgroup
+
+\def\XML@getpi@#1{
+  \endgroup
+  \catcode`\^^M\active
+  \catcode`\^^I\active
+  \catcode`\ \active
+  \ifx#1\@undefined
+    \expandafter\XML@getpi@x
+  \fi
+  #1}
+
+\def\XML@getpi@x#1#2?>{
+  \XML@dopi{Undefined}{}}
+
+% currently ? not reset by XML@reset
+\expandafter\def \csname Q:xmltex\endcsname{
+  \begingroup
+  \XML@reset
+  \catcode`\>\active
+  \XML@xmltexpi}
+
+
+\gdef\XML@xmltexpi#1?>{
+  \endgroup
+  \XML@dopi{xmltex}{#1}}
+
+
+
+% #1 = piname or `piname Undefined'
+\def\XML@dopi#1#2{
+  \XML@trace@warn{\string<?#1?>}
+  #2}
+
+\begingroup
+\catcode`\^^I\active
+
+\gdef\XML@grabpi#1#2{
+  \global\XMLgrabtoks\expandafter{
+  \the\XMLgrabtoks<?#1^^I#2?>}
+  \XMLgrab@}
+
+\endgroup
+
+ 
+
+%% XML and declarations
+% only care about encoding. Ignore version and standalone.
+
+% #1 content
+% #2 end of test code
+\begingroup
+\catcode`\=\active
+
+\expandafter\gdef \csname Q:xml\endcsname{
+  \catcode`\^^M10
+  \catcode`\^^I10
+  \catcode`\ 10 %
+  \XML@xmldecl}
+
+\gdef\XML@xmldecl#1?>{
+  \catcode`\^^M\active
+  \catcode`\^^I\active
+  \catcode`\ \active
+  \XML@encoding#1 e="utf-8"\relax}
+
+
+% actually encoding supposed to be after version if it comes at all
+% so I could simplify this and get rid of the loop.
+\gdef\XML@encoding#1 #2{
+  \if\noexpand#2e
+    \expandafter\XML@encoding@aux
+  \else
+    \expandafter\XML@encoding
+  \fi}
+
+\gdef\XML@encoding@aux#1={
+  \XML@quoted\XML@setenc}
+
+\endgroup
+
+% do nothing if newly specied encoding is same as old one
+% #1 is name of encoding (upper or lower case, and dubious catcodes
+% #2 is junk
+
+\def\XML@setenc#1#2\relax{
+  \lowercase{\gdef\XML@tempa{#1}}
+  \xdef\XML@tempa{\expandafter\strip@prefix\meaning\XML@tempa}
+  \ifx\XML@tempa\XML@thisencoding
+  \else
+    \ifx\XML@utfeight\XML@tempa
+      \XML@setutfeight
+    \else
+      \let\XML@thisencoding\XML@tempa
+      \XML@trace@warnNI{Encoding = \XML@thisencoding}
+      \begingroup
+      \XML@reset\input{\XML@thisencoding.xmt}
+      \endgroup
+    \fi
+  \fi}
+
+% public version of same
+\def\FileEncoding#1{
+  \XML@setenc{#1}\relax}
+
+% catcode neutral lowercase utf-8
+
+\def\XML@utfeight{utf-8}
+\edef\XML@utfeight{\expandafter\strip@prefix\meaning\XML@utfeight}
+
+%% internalise utf8 encoding as needed before every file include.
+\begingroup
+\catcode`\~13
+\catcode`\"12
+\catcode`\<12
+
+\gdef\utfeightloop{
+  \uccode`\~\count@
+  \expandafter\uppercase\XML@tempa
+  \advance\count@\@ne
+  \ifnum\count@<\@tempcnta
+  \expandafter\utfeightloop
+  \fi}
+
+\gdef\XML@setutfeight{
+  \ifx\XML@utfeight\XML@thisencoding
+  \else
+    \let\XML@thisencoding\XML@utfeight
+    \XML@trace@warnNI{Encoding = \XML@thisencoding}
+%
+    \begingroup
+%
+    \count@"C2
+    \@tempcnta"E0
+    \gdef\XML@tempa{{
+      \xdef~####1{\noexpand\utfeightb\string~####1}}}
+    \utfeightloop
+%
+    \count@"E0
+    \@tempcnta"F0
+    \gdef\XML@tempa{{
+      \xdef~####1####2{\noexpand\utfeightc\string~####1####2}}}
+    \utfeightloop
+%
+    \@tempcnta"F4
+    \gdef\XML@tempa{{
+      \xdef~####1####2####3{\noexpand\utfeightd\string~####1####2####3}}}
+    \utfeightloop
+%
+    \endgroup
+  \fi}
+
+\endgroup
+
+
+\def\xmlinput#1{
+ \IfFileExists{#1}
+  {\expandafter\XML@xmlinput\expandafter
+    \XML@setenc\expandafter{\XML@thisencoding}\relax
+  }{\XML@warn{No file: #1}}}
+
+\def\XML@xmlinput{
+  \def^^ff^^fe{\XML@setenc{utf-16}\relax}
+  \def^^fe^^ff{\XML@setenc{utf-16}\relax}
+% in principle a parsed entity might just be text with no markup
+% but the utf16 is so broken anyway don't worry about that.
+  \let<\XML@first@lt
+  \XML@setutfeight
+  \@@input\@filef@und\relax}
+
+%%%%%%%%%%%%%
+
+%% declarations
+% made safe against active chars.
+% #1 = rest of if test
+% #2#3 = first two characters after <!
+\def\XML@getdecl#1\@#2#3{
+\fi\fi
+  \if-\noexpand#2\XML@comment     %   --
+  \else\if N\noexpand#3\XML@entity%   EN TITY
+  \else\if L\noexpand#3\XML@dec@e%    EL EMENT
+  \else\if A\noexpand#2\XML@dec@a%    AT TLIST
+  \else\if D\noexpand#2\XML@doctype%  DO CTYPE
+  \else\if C\noexpand#3\XML@cdata%    [C DATA 
+  \else        \XML@dec@n%            NO TATION
+%                                      could also pick up [IGNORE/[INCLUDE
+%                                      but they not allowed in internal subset.
+@}
+
+%% Just skip element declarations
+% #1 = rest of \if
+% #2 ELEMENT declaration
+\def\XML@dec@e#1@#2>{
+  \fi\fi\fi
+  \XML@checkend@subset}
+
+
+% attribute declarations
+% #1 = rest of if test + TLIST
+% #2 = element name
+\def\XML@dec@a#1 #2 {
+  \fi\fi\fi\fi
+  \protected@xdef\XML@tempa{#2}
+  \XML@dec@a@x}
+
+\gdef\XML@dec@a@x#1 #2{
+  \protected@xdef\XML@tempb{#1}
+   \if(\noexpand#2
+     \begingroup
+     \catcode`\(\active
+     \expandafter\XML@dec@a@brack
+   \else
+      \expandafter\XML@dec@a@type
+   \fi}
+
+\begingroup
+\catcode`\(\active
+
+% #1 = enumerated attribute type tokens, up to )
+\gdef\XML@dec@a@brack#1){
+  \endgroup
+  \XML@dec@a@hash}
+
+\endgroup
+
+% #1 = junk up to next space token
+\def\XML@dec@a@type#1 {
+  \XML@dec@a@hash}
+
+\begingroup
+\catcode`\$=\catcode`\#
+\catcode`\#=12
+
+% #1 = nextchar after space, if it is # step to next space
+% otherwise look for possible " or ' or >
+\gdef\XML@dec@a@hash$1{
+  \if\noexpand$1#
+    \expandafter\XML@dec@a@type
+  \else
+    \ifx$1>
+      \let\ERROR\@undefined
+      \expandafter\expandafter\expandafter\XML@checkend@subset
+    \else
+      \let\ERROR\XML@dec@a@nodef
+      \XML@dec@a@def$1
+    \fi
+  \fi}
+
+
+\endgroup
+
+\gdef\XML@dec@a@nodef#1\fi\fi#2{
+  \fi\fi
+  \XML@dec@a@x#1}
+
+
+\def\XML@dec@a@def#1\fi\fi{
+ \fi\fi
+  \XML@quoted\XML@dec@a@default#1}
+
+\def\XML@dec@a@default#1#2{
+  \XML@warn{Default: \XML@tempa\space\XML@tempb="#1"}
+  \ifx\XML@default@attributes\relax
+    \let\XML@default@attributes\@empty
+  \fi
+  \toks@\expandafter{\XML@default@attributes}
+  \protected@xdef\XML@default@attributes{
+    \the\toks@\noexpand\XML@add@attrib{\XML@tempa}{\XML@tempb}{#1}}
+% reusing this wastes some tests but only done in local subset
+  \XML@dec@a@hash#2
+  }
+
+
+\let\XML@default@attributes\relax
+
+% this comparison is encoding normalised, but namespace unaware, grr.
+\def\XML@add@attrib#1#2#3{
+  \gdef\XML@tempa{#1}
+  \ifx\XML@tempa\begintag
+   \def\XML@this@attribute{#2}
+% stop  getattrib looking for nexted xml syntax attribute setting.
+    \let\XML@getattrib\relax
+    \XML@attribval{#3}
+    \let\XML@getattrib\XML@@getattrib
+  \fi}
+
+%% comment
+%  - is active
+% #1 = rest of if test
+% #2 = comment text
+\begingroup
+\catcode`\-\active
+\uppercase{\endgroup
+\def\XML@comment#1@#2-->}{
+  \fi
+  \catcode`\^^M\active
+  \catcode`\^^I\active
+  \catcode`\ \active
+  \XML@trace@warn{\string<!-- -->}
+  \XML@comment@}
+
+\def\XML@comment@{
+  \XML@checkend@subset}
+
+\def\XML@grabcomment@{
+  \XMLgrab@}
+
+%% entity defs
+
+% #1 = rest of \if test + TITY
+% #2 = % or entity name
+\begingroup
+\catcode`\&=12
+\catcode`\%=13
+
+\gdef\XML@entity#1 #2 {
+  \fi\fi
+  \ifx%#2
+  \def\XML@input{
+    \ifx\XML@use\XML@SYSTEM\expandafter\@gobble\else
+      \noexpand\inputonce\fi}
+  \expandafter\XML@p@ent
+  \else
+  \def\XML@input{\noexpand\xmlinput}
+  {\utfeight@protect@chars\xdef\XML@ename{&#2}}
+  \XML@trace@warn{\XML@ename; = }
+  \expandafter\XML@ent
+   \fi}
+
+\endgroup
+
+% input some file at most once (and ignore arguments that
+% expand to empty)
+% done in a local group
+\def\inputonce#1{
+  \expandafter\ifx\csname xmt:#1\endcsname\relax
+  \global\expandafter\let\csname xmt:#1\endcsname\@ne
+  \begingroup
+  \XML@reset
+% package files should have their own namespace declarations
+% don't want to inherit from some random point when file is loaded.
+% in principle should clear all prefix assignments in local scope
+% but I don't currently maintain a list of those, and not needed as long
+% as package files declare all prefixes used. But do set the default
+% namespace back to the null namespace.
+%
+% should force utf-8 as well.
+  \def\XMLNS@{0}
+  \input{#1}
+  \endgroup
+  \fi}
+
+% ignore include of empty filename
+\expandafter\let\csname xmt:\endcsname\@ne
+
+% \noexpand protect against active ascii
+\begingroup
+\catcode`\%12 
+\gdef\XML@p@ent#1 #2{
+  {\utfeight@protect@chars\xdef\XML@ename{%#1}}
+  \XML@trace@warn{\XML@ename; = }
+  \if\noexpand#2P\XML@E@public
+  \else\if\noexpand#2S\XML@E@system
+   \else\XML@E@internal#2}
+\endgroup
+
+% #1 = next char( P or S for external entities)
+\def\XML@ent#1{
+  \if\noexpand#1P\XML@E@public
+  \else\if\noexpand#1S\XML@E@system
+   \else\XML@E@internal#1}
+
+
+\begingroup
+\catcode`\:\active
+
+% special `prefix' that just removes following colon.
+\expandafter\gdef\csname XMLNS@*\endcsname#1{}
+
+\endgroup
+
+\begingroup
+\catcode`\:=12
+
+%#1 = " or '
+\gdef\XML@E@internal#1{
+  \fi\fi
+  \begingroup
+  \let\XML@trace@warn\@gobble
+  \let\XML@endgroup\endgroup
+  \let\XML@begingroup\begingroup
+% make " or ' close the grab `element'. the nameless close tag is completed
+% by the > coming from the ENTITY declaration syntax.
+% Using a mangled grab code is a bit complicated but it allows
+% catcode 10 simplification in the normal case of element handling
+% and allows characters to be correctly normalised to utf8.
+  \def#1{</}
+  \expandafter\def\csname
+      E\string/:\endcsname{
+    \afterassignment\XML@E@internal@x
+    \expandafter\gdef\csname+\XML@ename\endcsname}
+  \begingroup
+% stop xmlns `attribute' being recognised
+  \let\XML@ns@decl\relax
+  \let\XML@this@local\@empty
+% set up special prefix to gobble colon
+  \def\XML@this@prefix{*}
+% disable these as nothing will be known until namespaces reenabled
+  \let\XML@checkknown\relax
+  \let\XML@attrib@trace\relax
+% hobble namespace code to put all name in local part.
+  \def\XML@ns##1{
+    \protected@edef\XML@this@local{##1}
+    \def\XML@this@prefix{*}}
+  \xmlgrab}
+
+\endgroup
+
+% expandafter away an \else clause in grabelement then check for ]
+\def\XML@E@internal@x{
+   \endgroup
+    \aftergroup\XML@trace@warn
+    \expandafter\aftergroup\csname+\XML@ename\endcsname
+\aftergroup\fihack
+}
+
+% this hack has to undo the one above moarked by
+%   % \XMLstring usage means catcode restoring varies
+% must fix this as well one day
+\def\fihack#1\fi{\expandafter\XML@checkend@subset}
+
+% need to add (somewhere) a replacement of " to &quot; so that
+% xxx='a"b"c'  doesn't end up as xxx="a"b"c"
+% #1 replacement text
+% #2 white space and  >
+\begingroup
+\uccode`\~`\#
+\catcode`\~\active
+\uppercase{\endgroup
+\def\XML@E@internal@#1#2>{
+   \expandafter\protected@xdef\csname+\XML@ename\endcsname{#1}
+   \XML@trace@warn{\@spaces\string"#1\string"}
+  \XML@checkend@subset}}
+
+%% check for ]> that ends internal subset
+\begingroup
+\catcode`\]\active
+
+
+% #1 is next token in local subset (normally < or >)
+% after subset finishes % stops being markup, and the package
+% relating to any external entity in the doctype is loaded.
+\gdef\XML@checkend@subset{
+  \catcode`\^^M10
+  \catcode`\^^I10
+  \catcode`\ 10 %
+  \XML@checkend@subset@}
+
+% #1 = next character
+\catcode`\%\active
+\gdef\XML@checkend@subset@#1#2#3#4{
+  \ifx]#1
+  \let\XML@w@\@empty
+  \XML@trace@warn{]}
+  \gdef%{\utfeightay%}
+  \let\XML@checkend@subset\relax
+  \expandafter\XML@loaddoctype
+  \fi
+  #1#2#3#4}
+
+\endgroup
+
+%% #1#2 just gobble ]>
+\def\XML@loaddoctype#1#2{
+  \catcode`\^^M\active
+  \catcode`\^^I\active
+  \catcode`\ \active
+  \ifx\XML@D@dtd\relax\else 
+    \XML@trace@warn{Doctype Package: \XML@D@dtd}
+    \inputonce\XML@D@dtd
+  \fi}
+
+
+% #1 = rest of \if test + PUBLIC
+\def\XML@E@public#1 {
+   \fi
+   \XML@quoted\XML@E@pubid}
+
+% #1 = FPI
+\def\XML@E@pubid#1{
+  \def\XML@PUBLIC{#1}
+  \edef\XML@PUBLIC{\expandafter\strip@prefix\meaning\XML@PUBLIC}
+  \XML@quoted\XML@E@systemid}
+
+% #1 = rest of if test up to SYSTEM
+\def\XML@E@system#1 {
+   \fi\fi
+   \def\XML@PUBLIC{}
+   \XML@quoted\XML@E@systemid}
+
+
+% #1 URL
+% #2 next token, N or >
+\def\XML@E@systemid#1#2{
+  \def\XML@SYSTEM{#1}
+  \let\XML@use\XML@SYSTEM
+  \XML@trace@warn{\@spaces Public: \XML@PUBLIC}
+  \XML@trace@warn{\@spaces System: \XML@SYSTEM}
+  \the\XML@catalogue
+  \if\noexpand#2N
+   \expandafter\XML@E@ndata
+  \else
+    \afterfi
+    \XML@E@internal@{\XML@input{\XML@use}}#2
+  \fi}
+  
+
+% NDATA token terminated by > or white space
+% #1 = DATA
+% #2 ndata token with possible extra space
+\def\XML@E@ndata#1 #2>{\XML@ndata@#2 >}
+
+% #1 = ndata toke
+% #2 = junk
+\def\XML@ndata@#1 #2>{
+    \XML@E@internal@{{#1}{\XML@use}}>}
+
+
+%% DOCTYPE
+% #1 rest of \if test + OCTYPE
+% #2 document element name
+% #3 P or S or [ or >
+% noexpand for P and S, [ assumed active
+
+\begingroup
+\catcode`\[\active
+
+\gdef\XML@doctype#1 #2 #3{
+ \fi\fi\fi\fi\fi
+  \def\documentelement{#2}
+  \let\XML@D@dtd\relax
+  \XML@trace@warn{Document Element: \documentelement}
+  \if\noexpand#3P\XML@D@public
+  \else\if\noexpand#3S\XML@D@system
+  \else\ifx#3[\XML@D@internal
+  \else%must be > the end
+    \XML@D@empty
+  @}
+
+
+\gdef\XML@D@empty @{
+   \fi\fi\fi}
+
+% #1 = rest of \if test + UBLIC
+\gdef\XML@D@public#1 {
+   \fi
+   \XML@quoted\XML@pubid}
+
+% #1 = FPI
+\gdef\XML@pubid#1{
+  \def\XML@PUBLIC{#1}
+  \edef\XML@PUBLIC{\expandafter\strip@prefix\meaning\XML@PUBLIC}
+  \XML@quoted\XML@systemid}
+
+
+% #1 = rest of \if test + YSTEM
+\gdef\XML@D@system#1 {
+   \fi\fi
+   \def\XML@PUBLIC{}
+   \XML@quoted\XML@systemid}
+
+% #1 = URI
+\gdef\XML@systemid#1{
+  \protected@edef\XML@SYSTEM{#1}
+  \edef\XML@SYSTEM{\expandafter\strip@prefix\meaning\XML@SYSTEM}
+  \XML@trace@warn{Doctype Public: \XML@PUBLIC}
+  \XML@trace@warn{Doctype System: \XML@SYSTEM}
+  \let\XML@use\@empty
+  \the\XML@catalogue
+  \let\XML@D@dtd\XML@use
+  \XML@D@internal@}
+
+% #1 = rest of if test
+\gdef\XML@D@internal#1@{
+  \fi\fi\fi
+  \XML@D@internal@[}
+
+% #1 = [ for local subset or > for the end.
+\catcode`\%\active
+\gdef\XML@D@internal@#1{
+  \ifx[#1
+    \XML@trace@warn{Internal Subset[}
+    \let%\XML@pcent
+    \edef\XML@w@{ \XML@w@}
+     \expandafter\XML@checkend@subset
+  \else
+      | it had better be the closing >
+   \fi}
+
+\endgroup
+
+
+%%%%%%%%%%%%%%%
+%% catalogue support
+\newtoks\XML@catalogue
+
+%% should rationalise this code
+
+% #1 = FPI
+% #2 = xmltex package file
+\def\PUBLIC#1#2{
+ \xdef\XML@tempa{#1}
+ \xdef\XML@tempa{\noexpand\the\XML@catalogue\noexpand\XML@@PUBLIC
+             {\expandafter\strip@prefix\meaning\XML@tempa}}
+ \global\XML@catalogue\expandafter\expandafter\expandafter{
+   \XML@tempa{#2}}}
+
+
+% #1 = URI
+% #2 = xmltex package file
+\def\SYSTEM#1#2{
+ \xdef\XML@tempa{#1}
+ \xdef\XML@tempa{\noexpand\the\XML@catalogue\noexpand\XML@@SYSTEM
+             {\expandafter\strip@prefix\meaning\XML@tempa}}
+ \global\XML@catalogue\expandafter\expandafter\expandafter{
+   \XML@tempa{#2}}}
+
+% #1 = namespace URI
+% #2 = xmltex package file
+\def\NAMESPACE#1#2{
+  \utfeight@protect@chars
+  \XML@ns@alloc{#1}
+  \edef\@tempa{{\csname XML:#1\endcsname}}
+  \global\XML@catalogue\expandafter{\the\expandafter\XML@catalogue
+     \expandafter\XML@@NAMESPACE\@tempa{#2}}
+  \unprotect@utfeight}
+
+
+% #1 = unprefixed element name
+% #2 = xmltex package file
+\def\NAME#1#2{
+ \global\XML@catalogue\expandafter{\the\XML@catalogue\XML@@NAME{#1}{#2}}}
+
+% #1 = unprefixed element name
+% #2 = namespace URI
+\def\XMLNS#1#2{
+  \utfeight@protect@chars
+  \XML@ns@alloc{#2}
+  \edef\@tempa{{#1}{\csname XML:#2\endcsname}}
+  \global\XML@catalogue\expandafter{\the\expandafter\XML@catalogue
+     \expandafter\XML@@XMLNS\@tempa}
+  \unprotect@utfeight}
+
+
+
+\def\XML@@PUBLIC#1#2{
+ \gdef\XML@tempa{#1}
+  \ifx\XML@tempa\XML@PUBLIC
+    \def\XML@use{#2}
+  \fi}
+
+\def\XML@@SYSTEM#1#2{
+  \def\@tempa{#1}
+  \ifx\@tempa\XML@SYSTEM
+    \def\XML@use{#2}
+  \fi}
+
+\def\XML@@NAMESPACE#1#2{
+  \def\@tempa{#1}
+  \ifx\@tempa\XML@NAMESPACE
+    \def\XML@use{#2}
+  \fi}
+
+
+\def\XML@@NAME#1#2{
+  \def\@tempa{#1}
+  \ifx\@tempa\XML@NAME
+    \def\XML@use{#2}
+  \fi}
+
+
+
+\begingroup
+\catcode`\:\active
+
+\def\XML@@XMLNS#1#2{
+  \def\@tempa{#1}
+  \ifx\@tempa\XML@NAME
+    \edef\XMLNS@{#2}
+    \edef\XML@this@element{
+      \XMLNS@\noexpand:\XML@this@local}
+    \XML@trace@warn{ \XML@this@element}
+    \let\XML@NAMESPACE\XMLNS@
+  \fi}
+\endgroup
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% entity refs
+\begingroup
+\catcode`\$=\catcode`\#
+\catcode`\#=\active
+
+\gdef\XML@amp@markup$1$2;{
+  \ifx#$1\@empty
+   \XML@charref$2;
+   \XML@tempa
+  \else
+   \begingroup\utfeight@protect@chars
+   \expandafter\aftergroup
+   \csname+\string&$1$2\expandafter\endcsname
+   \endgroup
+  \fi}
+
+\endgroup
+
+\let&\XML@amp@markup
+
+\begingroup
+\catcode`\%=12
+\catcode`\&=12
+
+\gdef\XML@pcent#1;{
+  \csname+%#1\endcsname
+  \XML@checkend@subset}
+
+\gdef\XMLentity#1#2{
+  \expandafter\gdef\csname+&#1\endcsname{#2}}
+
+\endgroup
+
+% predefined definitions
+\begingroup
+\XMLentity{amp}{\utfeightaz&}
+\XMLentity{quot}{\utfeightax"}
+\XMLentity{apos}{\utfeightax'}
+\XMLentity{lt}{\utfeightaz<}
+\XMLentity{gt}{\utfeightax>}
+\endgroup
+
+%% character refs
+
+% longwinded way so can share code later, also need to do d case.
+% this does up to x1F FFFF which is higher than needed for XML
+% (x10 FFFF)
+\begingroup
+\catcode`\"=12
+\catcode`\<=12
+\catcode`\.=12
+\catcode`\,=12
+\catcode`\;=12
+\catcode`\!=12
+\catcode`\~=13
+
+% definition is of form 
+% \utfeightX <non active char>+
+% except for non active chars below 128 which are just def of catcode 12 version.
+\gdef\XML@charref#1#2;{
+  \begingroup
+  \uppercase{\count@\if x\noexpand#1"\else#1\fi#2}\relax
+  \ifnum\count@<"80\relax
+    \uccode`\~\count@
+    \uppercase{
+    \ifnum\catcode\count@=\active
+      \gdef\XML@tempa{\utfeightay~}
+    \else
+      \gdef\XML@tempa{~}
+    \fi}
+  \else\ifnum\count@<"800\relax
+     \XML@utfeight@a,
+     \XML@utfeight@b C\utfeightb.,
+  \else\ifnum\count@<"10000\relax
+     \XML@utfeight@a;
+     \XML@utfeight@a,
+     \XML@utfeight@b E\utfeightc.{,;}
+   \else
+     \XML@utfeight@a;
+     \XML@utfeight@a,
+     \XML@utfeight@a!
+     \XML@utfeight@b F\utfeightd.{!,;}
+    \fi
+    \fi
+  \fi
+  \endgroup}
+
+% while I support mixed tex/xml files I need to have a version
+% of &#123; that always fetches the definition even if
+% character is currently non active
+\global\let\XML@@charref\XML@charref
+
+
+\gdef\XML@charref@tex#1#2;{
+  \begingroup
+  \uppercase{\count@\if x\noexpand#1"\else#1\fi#2}\relax
+  \ifnum\count@<"80\relax
+    \uccode`\~\count@
+    \uppercase{
+      \gdef\XML@tempa{\utfeightay~}}
+  \else\ifnum\count@<"800\relax
+     \XML@utfeight@a,
+     \XML@utfeight@b C\utfeightb.,
+  \else\ifnum\count@<"10000\relax
+     \XML@utfeight@a;
+     \XML@utfeight@a,
+     \XML@utfeight@b E\utfeightc.{,;}
+   \else
+     \XML@utfeight@a;
+     \XML@utfeight@a,
+     \XML@utfeight@a!
+     \XML@utfeight@b F\utfeightd.{!,;}
+    \fi
+    \fi
+  \fi
+  \endgroup}
+
+\gdef\XML@utfeight@a#1{
+     \@tempcnta\count@
+     \divide\count@64
+     \@tempcntb\count@
+     \multiply\count@64
+     \advance\@tempcnta-\count@
+     \advance\@tempcnta"80
+     \uccode`#1\@tempcnta
+     \count@\@tempcntb}
+
+\gdef\XML@utfeight@b#1#2#3#4{
+     \advance\count@"#10\relax
+     \uccode`#3\count@
+     \uppercase{\gdef\XML@tempa{#2#3#4}}}
+
+
+%%%%%%%%%%%%%%%%
+
+% #1 unicode slot, either 123 decimal or xA23 hex
+% #2 tex definition of character when used as character data.
+% code for chars below 127 somewhat experimental
+\gdef\UnicodeCharacter#1#2{
+   \begingroup
+% suppress active test in charref
+   \def\active{\catcode\count@}
+   \XML@charref#1;
+   \expandafter\expandafter\expandafter
+   \expandafter\expandafter\expandafter
+   \expandafter
+    \gdef\XML@tempa{#2}
+  \endgroup}
+
+\endgroup
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newtoks\XMLgrabtoks
+
+\def\xmlgrab{
+  \begingroup
+  \global\XMLgrabtoks{}
+  \let\XML@this@level\XML@w@
+  \edef\XML@next@level{ \XML@w@}
+  \let\XML@doelement\XML@grabelement
+  \let\XML@doend\XML@grabend
+  \let\XML@docdata\XML@grabcdata
+  \let\XML@comment@\XML@grabcomment@
+  \let\XML@dopi\XML@grabpi
+  \XMLgrab@}
+
+\def\XMLgrab@{
+  \utfeight@protect@internal
+  \def<{\iffalse{\fi}\XMLgrab@@}
+  \xdef\XML@tempa{\iffalse}\fi}
+
+\def\XMLgrab@@{
+  \global\XMLgrabtoks\expandafter{\the\expandafter\XMLgrabtoks\XML@tempa}
+  \XML@lt@markup}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% cdata
+\begingroup
+\catcode`\[\active
+\catcode`\]\active
+
+% #1 = DATA
+\gdef\XML@cdata #1[{
+ \fi\fi\fi\fi\fi\fi
+  \catcode`\^^M\active
+  \catcode`\^^I\active
+  \catcode`\ \active
+  \XML@cdata@a}
+
+% #1 = CDADA section text
+\gdef\XML@cdata@a#1]]>{
+  \begingroup
+  \XML@trace@warn{CDATA}
+  \edef<{\noexpand\utfeightaz\string<}
+  \edef&{\noexpand\utfeightaz\string&}
+  \XML@docdata{#1}}
+
+\endgroup
+
+% #1 = CDADA section text
+\def\XML@docdata#1{#1\endgroup}
+
+% #1 = CDADA section text
+\def\XML@grabcdata#1{
+  \utfeight@protect@internal
+  \edef<{\noexpand\utfeightaz\string<}
+  \edef&{\noexpand\utfeightaz\string&}
+  \xdef\XML@tempa{#1}
+  \endgroup
+   \expandafter\XMLgrab@\XML@tempa}
+
+%%%%%%%%%%
+% notation
+
+% parse past the public and system ids
+% in case they contain a >.
+% unlike entities PUBLIC need not have a system id
+% #1 junk
+% #2 notation name
+% #3 PUBLIC or SYSTEM
+\def\XML@dec@n#1N #2 #3 {
+ \fi\fi\fi\fi\fi\fi
+  \XML@trace@warn{NOTATION #2}
+  \XML@quoted\XML@notation
+  }
+
+\def\XML@notation#1#2{
+  \ifx>#2
+   \expandafter\XML@checkend@subset
+  \else
+    \afterfi
+    \XML@quoted\XML@notation#2
+  \fi}
+
+%%%%%%%%
+%% xmt definitions
+
+%% #1 element, may use prefix : using prefixes in current scope
+%% #2 attlist
+%% #3 begin code
+%% #4 end code
+%% if #3 is \xmlgrab, #4 may access the content of the element as #1
+\long\def\XMLelement#1#2#3#4{
+  \XML@ns{#1}
+  \xdef\XML@tempc{:\csname
+    XMLNS@\XML@this@prefix\endcsname:\XML@this@local}
+% attlist
+  \toks@\expandafter{\csname A:\csname
+    XMLNS@\XML@this@prefix\endcsname\endcsname}
+  #2
+  \expandafter\gdef\csname E\XML@tempc\expandafter\endcsname
+  \expandafter{\expandafter\XML@setattributes\expandafter{\the\toks@}#3}
+  \gdef\XML@tempa{#3}
+  \ifx\XML@tempa\XML@xmlgrab
+    \expandafter\gdef\csname E\string/\XML@tempc\endcsname##1
+    {#4}
+  \else
+    \expandafter\gdef\csname E\string/\XML@tempc\endcsname
+    {#4}
+  \fi}
+
+\def\XML@xmlgrab{\xmlgrab}
+
+%% #1 attribute, may use prefix : using prefixes in current scope
+%% #2 macro to access attribute in begin or end code
+%% #3 default
+
+\long\def\XMLattribute#1#2#3{
+  {\def\XMLNS@{0}
+  \XML@ns{#1}
+  \xdef\XML@tempa{\noexpand\XML@attrib
+      \csname XMLNS@\XML@this@prefix\endcsname
+        :\XML@this@local\relax\noexpand#2}}
+  \toks@\expandafter{\the\expandafter\toks@\XML@tempa{#3}}}
+
+\long\def\XMLattributeX#1#2#3{
+  {\def\XMLNS@{0}
+  \XML@ns{#1}
+  \xdef\XML@tempa{\noexpand\XML@attrib
+      \csname XMLNS@\XML@this@prefix\endcsname
+        :\XML@this@local\relax\noexpand#2}}
+  \toks@\expandafter{\the\expandafter\toks@\XML@tempa{#3}\utfeight@chardef#2}}
+
+\def\utfeight@chardef#1{
+\begingroup
+\utfeight@protect@chars
+\xdef\x@temp{#1}
+\endgroup
+\let#1\x@temp}
+
+% version for namespace global attributes, used at top level.
+%% #1 prefix for namespace this is for.  using prefixes in current scope
+%% #2 attribute, may use prefix : using prefixes in current scope
+%% #3 macro to access attribute in begin or end code
+%% #4 default
+
+\long\def\XMLnamespaceattribute#1#2#3#4{
+   \toks@\expandafter\expandafter\expandafter{\csname A:\csname
+    XMLNS@#1\endcsname\endcsname}
+  \XMLattribute{#2}{#3}{#4}
+  \expandafter\xdef\csname A:\csname
+    XMLNS@#1\endcsname\endcsname{\the\toks@}}
+   
+\long\def\XMLnamespaceattributeX#1#2#3#4{
+   \toks@\expandafter\expandafter\expandafter{\csname A:\csname
+    XMLNS@#1\endcsname\endcsname}
+  \XMLattributeX{#2}{#3}{#4}
+  \expandafter\xdef\csname A:\csname
+    XMLNS@#1\endcsname\endcsname{\the\toks@}}
+   
+
+
+%% #1 QName, may use prefix : using prefixes in current scope
+%% #2 macro to access attribute in begin or end code
+\begingroup
+\catcode`\:\active
+
+\long\gdef\XMLname#1#2{{
+  \XML@ns{#1}
+  \xdef#2{
+      \csname XMLNS@\XML@this@prefix\endcsname
+        \noexpand:\XML@this@local}}}
+\endgroup
+
+\begingroup
+\catcode`\<=12
+\catcode`\>=12
+\catcode`\:=12
+\catcode`\/=12
+
+\gdef\XMLstring#1#2<>{
+  \begingroup
+  \let\XML@endgroup\endgroup
+  \let\XML@this@local\@empty
+  \let\XML@this@prefix\@empty
+  \expandafter\def\csname
+      E/:\XMLNS@:\endcsname{
+    \gdef#1}
+  \XML@catcodes
+  \xmlgrab}
+
+\gdef\XMLstringX#1#2<>{
+  \begingroup
+  \let\XML@endgroup\endgroup
+  \let\XML@this@local\@empty
+  \let\XML@this@prefix\@empty
+  \expandafter\def\csname
+      E/:\XMLNS@:\endcsname{
+    \xdef#1}
+  \XML@catcodes
+  \utfeight@protect@chars
+  \xmlgrab}
+
+\endgroup
+
+%% #1 name
+%% #2 code, gets data as #1
+\long\def\XMLProcessInstruction#1#2{
+  \expandafter\gdef\csname P:#1\endcsname##1{#2}}
+
+%%%%%%%%%%%
+%% xmltex format support
+\everyjob\expandafter{\the\everyjob
+  \immediate\write20{xmltex version: \xmltexversion:}
+\def^^ff^^fe{\XML@setenc{utf-16}\relax}
+\def^^fe^^ff{\XML@setenc{utf-16}\relax}
+\ActivateASCII{45}% -
+\UnicodeCharacter{45}{-\kern\z@}
+\let<\XML@first@lt
+  \IfFileExists{xmltex.cfg}
+  {\begingroup
+  \XML@reset
+  \@@input\@filef@und
+  \endgroup}{\XML@warn{No File: xmltex.cfg}}
+  \IfFileExists{\jobname.cfg}
+  {\begingroup
+  \XML@reset
+  \@@input\@filef@und
+  \endgroup}{\XML@warn{No File: \jobname.cfg}}
+}
+
+
+%%%%%%%%%%%
+%% not currently used
+%
+%\def\XML@setlatexcodes{
+%\ifnum\catcode`\&\active
+%  \let\XML@restore\XML@catcodes
+%  \let\XML@setlatexcodes\relax
+%\fi}
+%
+%\let\XML@restore\relax
+
+
+%% allow package and class loading with normal latex catcodes
+
+
+\def\@fileswith@pti@ns#1[#2]#3[#4]{
+  \XML@reset
+  \catcode`\^^M5 %
+  \let\@fileswith@pti@ns\@@fileswith@pti@ns
+  \@@fileswith@pti@ns{#1}[{#2}]{#3}[{#4}]
+  \XML@catcodes
+  \let\@fileswith@pti@ns\XML@@fileswith@pti@ns}
+
+\let\XML@@fileswith@pti@ns\@fileswith@pti@ns
+
+
+
+% and similar for input of aux files
+\def\@input#1{
+  \XML@reset
+  \catcode`\^^I\active
+  \catcode`\<\active
+  \catcode`\>\active
+  \catcode`\&\active
+  \catcode`\#\active
+  \catcode`\/\active
+  \catcode`\:\active
+  \catcode`\=\active
+  \let\XML@charref\XML@charref@tex
+  \IfFileExists{#1}{\@@input\@filef@und}{\typeout{No file #1.}}
+  \XML@catcodes
+  \let\XML@charref\XML@@charref
+}
+
+% and end doc
+\def\enddocument{
+   \@enddocumenthook
+   \@checkend{document}
+   \clearpage
+   \begingroup
+     \if@filesw
+       \immediate\closeout\@mainaux
+       \let\@setckpt\@gobbletwo
+       \let\@newl@bel\@testdef
+       \@tempswafalse
+\XML@reset
+  \catcode`\^^I\active
+  \catcode`\<\active
+  \catcode`\>\active
+  \catcode`\&\active
+  \catcode`\#\active
+  \catcode`\/\active
+  \catcode`\:\active
+  \catcode`\=\active
+  \let\XML@charref\XML@charref@tex
+       \makeatletter \input\jobname.aux
+     \fi
+     \@dofilelist
+     \ifdim \font@submax \string>\fontsubfuzz\relax
+       \@font@warning{Size substitutions with differences\MessageBreak
+                  up to \font@submax\space have occured.\@gobbletwo}
+     \fi
+     \@defaultsubs
+     \@refundefined
+     \if@filesw
+       \ifx \@multiplelabels \relax
+         \if@tempswa
+           \@latex@warning@no@line{Label(s) may have changed.
+               Rerun to get cross-references right}
+         \fi
+       \else
+         \@multiplelabels
+       \fi
+     \fi
+   \endgroup
+   \deadcycles\z@\@@end}
+
+
+%% protected write
+\long\def \protected@write#1#2#3{
+      \begingroup
+       \let\thepage\relax
+       #2
+       \utfeight@protect@external
+       \let\protect\@unexpandable@protect
+       \edef\reserved@a{\write#1{#3}}
+       \reserved@a
+      \endgroup
+      \if@nobreak\ifvmode\nobreak\fi\fi
+}
+
+
+%% typeout etc
+\def\set@display@protect{
+  \let\protect\string
+  \utfeight@protect@typeout}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% xmltex namespace 
+\expandafter\def\csname
+  XML:http://www.dcarlisle.demon.co.uk/xmltex\endcsname{2}
+\expandafter\let\csname A:2\endcsname\@empty
+\expandafter\gdef\csname XMLNS@2\endcsname{2}
+\XML@ns@count2
+
+\iffalse
+% this is some currently used code aiming at having an aux file
+% in xml syntax using commands from the xmltex namespace.
+% this would avoid some of the problems involved in having
+% mixed xml/tex aux files.
+\def\addcontentsline#1#2#3{
+  \addtocontents{#1}{
+  <2:contentsline level="#2">
+   <2:toctitle>#3</2:toctitle>
+   <2:page>\thepage</2:page>
+  </2:contentsline>}}
+
+\long\def\addtocontents#1#2{
+  \protected@write\@auxout
+      {\let\label\@gobble \let\index\@gobble \let\glossary\@gobble}
+      {<2:@writefile ext="#1">#2</2:@writefile>}}
+
+\def\numberline#1{<2:numberline>#1</2:numberline>}
+
+\fi
+% end of xml-aux code.
+
+%%%%%%%%%%%%%%%%%%
+% tracing
+\long\def\@gobble#1{}
+\long\def\@gobbletwo#1#2{}
+\long\def\@gobblethree#1#2#3{}
+
+\def\xmltraceonly{
+  \global\hfuzz\maxdimen
+  \global\nullfont
+  \global\everypar{}
+  \global\let\XML@doelement\relax
+  \global\let\wrong@fontshape\relax
+  \global\let\selectfont\relax
+  \expandafter\gdef\expandafter\XML@catcodes\expandafter{\XML@catcodes
+ \gdef\unprotect@utfeight{
+  \let<\XML@lt@markup
+  \let&\XML@amp@markup
+  \global\let\utfeightax\@gobble
+  \global\let\utfeightay\@gobble
+  \global\let\utfeightaz\@gobble
+  \global\let\utfeightb\@gobbletwo
+  \global\let\utfeightc\@gobblethree
+  \global\let\utfeightd\@gobblefour}
+  \unprotect@utfeight}
+  \gdef\XML@doend{\XML@endgroup}
+  \gdef\XML@docdata##1{\endgroup}
+  \global\let\XML@dopi\@gobbletwo
+}
+
+\def\xmltraceoff{
+  \global\let\XML@trace@warn\@gobble
+  \global\let\XML@trace@warnNI\@gobble
+  \global\let\XML@trace@warnE\@gobble
+  \global\let\XML@attrib@trace\relax}
+
+
+%%%%%
+%% xmltex PI
+%% <?xmltex tracingall ?>
+%% <?xmltex typeout {hello world!} ?>
+%% content of pi may be a latex command.
+%% Arguments may be given in {} as usual
+%% Do not use \ . First `word' (ignoring white space) taken as a tex
+%% command name. May be a standard latex command, as here,
+%% or some special command defined in a cfg file or package.
+\begingroup
+\catcode`[=1
+\catcode`]=2
+\catcode`\{\active
+\catcode`\}\active
+\XMLProcessInstruction[xmltex][
+  \XML@pi#1{\relax}]
+
+\gdef\XML@pi#1{#2}[
+  \ifx\relax#2
+   \csname\zap@space#1 \@empty\expandafter\endcsname
+  \else
+   \afterfi
+   \expandafter
+      \XML@pi@b\csname\zap@space#1 \@empty\endcsname[#2]
+  \fi]
+
+\gdef\XML@pi@b#1{#2}[
+  \ifx\relax#2
+   #1
+  \else
+   \afterfi
+   \XML@pi@b#1[#2]
+  \fi]
+
+\endgroup
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% unicode support
+
+% \utfeighta#1         1 byte utf8 char
+% \utfeightb#1#2       2 byte utf8 char
+% \utfeightc#1#2#3     3 byte utf8 char
+% \utfeightd#1#2#3#4   4 byte utf8 char
+
+\def\unprotect@utfeight{
+  \let<\XML@lt@markup
+  \let&\XML@amp@markup
+  \def\utfeightax##1{
+    \csname 8:\string##1\endcsname}
+  \let\utfeightay\utfeightax
+  \let\utfeightaz\utfeightax
+  \def\utfeightb##1##2{
+    \csname 8:##1\string##2\endcsname}
+  \def\utfeightc##1##2##3{
+    \csname 8:##1\string##2\string##3\endcsname}
+  \def\utfeightd##1##2##3##4{
+    \csname 8:##1\string##2\string##3\string##4\endcsname}}
+
+\unprotect@utfeight
+
+% do this also in everyjob
+\let<\XML@first@lt
+
+
+% for moving internal arguments  (not writes)
+\def\utfeight@protect@internal{
+  \let\utfeightax\noexpand
+  \let\utfeightay\noexpand
+  \def\utfeightaz{
+    \noexpand\utfeightaz\noexpand}
+  \let<\relax\let&\relax
+  \def\utfeightb##1##2{
+    \noexpand\utfeightb##1\string##2}
+  \def\utfeightc##1##2##3{
+    \noexpand\utfeightc##1\string##2\string##3}
+  \def\utfeightd##1##2##3##4{
+    \noexpand\utfeightd##1\string##2\string##3\string##4}}
+
+
+% for external files (expands one in an edef and once in a write
+\def\utfeight@protect@external{
+  \def\utfeightax{
+    \noexpand\noexpand\noexpand}
+  \let\utfeightay\utfeighta@ref
+  \let\utfeightaz\utfeighta@ref
+  \edef<{\string<}
+  \edef&{\string&}
+  \def\utfeightb##1##2{
+    ##1\string##2}
+  \def\utfeightc##1##2##3{
+    ##1\string##2\string##3}
+  \def\utfeightd##1##2##3##4{
+    ##1\string##2\string##3\string##4}}
+
+% for typeouts and immediate writes and messages
+%\def\utfeight@protect@typeout{
+%  \let\utfeightax\noexpand
+%  \let\utfeightay\noexpand
+%  \let\utfeightaz\utfeighta@ref
+%  \let<\relax\let&\relax
+%  \def\utfeightb##1##2{##1\string##2}
+%  \def\utfeightc##1##2##3{##1\string##2\string##3}
+%  \def\utfeightd##1##2##3##4{##1\string##2\string##3\string##4}}
+
+% plan b
+\def\utfeight@protect@typeout{
+  \utfeight@protect@chars
+  \let<\relax
+  \let&\relax}
+
+% for csname (will fall over < or & but they should not be there)
+\def\utfeight@protect@chars{
+  \let\utfeightax\string
+  \let\utfeightay\string
+  \let\utfeightaz\string
+  \def\utfeightb##1##2{
+    ##1\string##2}
+  \def\utfeightc##1##2##3{
+    ##1\string##2\string##3}
+  \def\utfeightd##1##2##3##4{
+    ##1\string##2\string##3\string##4}}
+
+
+\def\utfeighta@ref#1{
+  \string&\string##\number\expandafter`\string#1\string;}
+
+
+%%%%%%%%%%%%%%%%%%%%
+%% mapping input encodings to unicode.
+
+
+\begingroup
+\catcode`\"=12\relax
+\gdef\InputCharacter#1#2{
+  \begingroup
+   \XML@charref#2;
+   \count@"0\if\noexpand x#1\relax\else\count@#1\fi\relax
+   \uccode`\~\count@
+    \uppercase{
+     \global\let~\XML@tempa}
+  \endgroup}
+\endgroup
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+% default encoding
+
+%% need to change this default if hit BOM or xml or text decl,
+\XML@setutfeight
+
+%%%%%%%%%%%%%%%%%%%%%
+% adding xmltex style protection to standard latex commands.
+% if xmltex being used with other formats this does no harm
+% except take up a bit of space.
+
+\begingroup
+\catcode`\:\active
+\catcode`\/\active
+
+\gdef\markboth#1#2{\gdef\@themark{{#1}{#2}}{
+     \utfeight@protect@internal
+     \let\protect\@unexpandable@protect
+     \let\label\relax \let\index\relax \let\glossary\relax
+     \mark{\@themark}}\if@nobreak\ifvmode\nobreak\fi\fi}
+\gdef\markright#1{{\let\protect\@unexpandable@protect
+     \utfeight@protect@internal
+     \let\label\relax \let\index\relax \let\glossary\relax
+     \expandafter\@markright\@themark
+     {#1}\mark{\@themark}}\if@nobreak\ifvmode\nobreak\fi\fi}
+
+\endgroup
+
+% this one not safe, restore not complete
+\def\protected@edef{
+   \let\@@protect\protect
+   \let\protect\@unexpandable@protect
+   \utfeight@protect@internal
+   \afterassignment\restore@protect
+   \edef
+}
+\def\protected@xdef{
+   \begingroup
+   \utfeight@protect@internal
+   \let\protect\@unexpandable@protect
+   \afterassignment\endgroup
+   \xdef
+}
+\def\unrestored@protected@xdef{
+   \utfeight@protect@internal
+   \let\protect\@unexpandable@protect
+   \xdef
+}
+
+% should really save and restore, not always back to markup
+\def\restore@protect{\let\protect\@@protect
+   \unprotect@utfeight
+}
+
+%%%%% stop this doing damage, also stops it working
+\def\MakeUppercase#1{#1}
+
+
+%%%%%%%%%%%%%%%%%%%%%
+
+% support for making 7bit characters active
+
+\begingroup
+\catcode`\"=12\relax
+\gdef\ActivateASCII#1{
+  \uppercase{\count@"0\if x\noexpand#1\relax\else\count@#1\fi\relax}
+  \toks@\expandafter{\nfss@catcodes}
+       \xdef\nfss@catcodes{
+       \catcode\the\count@=\the\catcode\the\count@\relax\the\toks@}
+  \toks@\expandafter{\XML@catcodes}
+     \xdef\XML@catcodes{
+       \catcode\the\count@\active\the\toks@}
+  \expandafter\ifx\csname8:"\endcsname\relax
+    \expandafter\gdef\csname8:"\endcsname{"}
+  \fi}
+\endgroup
+
+
+% some of these should not be active by default, but OK for now.
+% could use \ActivateASCII for most if not all of these now.
+% should probably use \UnicodeCharacter for these now
+\expandafter\def\csname8:\string<\endcsname{\ifmmode\langle\else\textless\fi}
+\expandafter\def\csname8:\string>\endcsname{\ifmmode\rangle\else\textgreater\fi}
+\expandafter\def\csname8:\string{\endcsname{\{}
+\expandafter\def\csname8:\string}\endcsname{\}}
+
+% activateacii would use ax code, want ay code so ^ not written to aux files
+% and clash with tex usage. so locally lie and make it a letter
+\ActivateASCII{94}% ^ for tex ^^ notation in aux files
+\UnicodeCharacter{94}{\textasciicircum}
+
+
+\ActivateASCII{x5C}% \
+\UnicodeCharacter{x5C}{\textbackslash}
+\ActivateASCII{x5F}% \
+\UnicodeCharacter{x5F}{\textunderscore}
+\ActivateASCII{123}% {
+\ActivateASCII{125}% {
+
+%%%%%%%%%%%%%%%%
+% white space
+
+\UnicodeCharacter{13}{ \ignorespaces}
+\UnicodeCharacter{32}{ \ignorespaces}
+\UnicodeCharacter{9}{ \ignorespaces}
+
+
+\expandafter\def\expandafter\obeylines\expandafter{
+\expandafter\def\csname 8:\string^^M\endcsname{\leavevmode\hfil \break\null}}
+
+\expandafter\def\expandafter\xmlnewlineaction\expandafter{
+\expandafter\def\csname 8:\string^^M\endcsname}
+
+\expandafter\def\expandafter\obeyspaces\expandafter{
+\expandafter\def\csname 8: \endcsname{\nobreakspace}}
+
+% tabs just do whatver the current space does.
+\catcode`\^^I\active
+\expandafter\def\csname 8:\string^^I\expandafter\endcsname
+       \expandafter{\csname 8: \endcsname}
+
+
+% tex conventions
+\XML@reset
+\IfFileExists{xmltex.cfg}
+  {
+  \@@input\expandafter\@filef@und\expandafter\relax
+   \expandafter\XML@setenc\expandafter{\XML@thisencoding}\relax
+  }{\XML@warn{No File: xmltex.cfg}}
+
+
+% get xmltex in catcode 12, for comparing with \jobname
+\gdef\XML@tempa#1>{}
+\gdef\XML@tempb{xmltex}
+\xdef\XML@tempb{\expandafter\XML@tempa\meaning\XML@tempb}
+%
+\gdef\XML@tempc{pdfxmltex}
+\xdef\XML@tempc{\expandafter\XML@tempa\meaning\XML@tempc}
+%
+\xdef\XML@tempa{\lowercase{\gdef\noexpand\XML@tempa{\jobname}}}
+\XML@tempa
+
+
+% if jobname is xmltex or pdfxmltex dump the format, otherwise
+% try to load \jobname.cfg  and input \xmlfile
+% put white space back so the filename can be read off the command line
+\ifx\XML@tempa\XML@tempc
+  \let\XML@tempb\XML@tempc
+\fi
+\ifx\XML@tempa\XML@tempb
+  \def\XML@tempa{
+\catcode`\ =10\relax
+\catcode`\^^M=10\relax
+\catcode`\^^I=10\relax
+\dump}
+\else
+\IfFileExists{\jobname.cfg}
+  {
+  \@@input\expandafter\@filef@und\expandafter\relax
+   \expandafter\XML@setenc\expandafter{\XML@thisencoding}\relax
+  }{\XML@warn{No File: \jobname.cfg}}
+
+
+\ifx\xmlfile\@undefined
+ \def\XML@tempa{\catcode`\-12\relax}
+\else
+  \def\XML@tempa{\catcode`\-12\relax\input\xmlfile\relax}
+\fi
+\fi
+
+\endlinechar`\^^M \expandafter\XML@catcodes\XML@tempa

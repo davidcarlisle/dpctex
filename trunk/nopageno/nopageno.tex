@@ -1,0 +1,42 @@
+\documentclass[pagesize=auto, parskip=full, fontsize=14pt, DIV=9]{scrartcl}
+
+\usepackage{fixltx2e}
+\usepackage{etex}
+\usepackage{xspace}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage{microtype}
+\usepackage{hyperref}
+
+\newcommand*{\mail}[1]{\href{mailto:#1}{\texttt{#1}}}
+\newcommand*{\pkg}[1]{\textsf{#1}}
+\newcommand*{\cs}[1]{\texttt{\textbackslash#1}}
+\makeatletter
+\newcommand*{\cmd}[1]{\cs{\expandafter\@gobble\string#1}}
+\makeatother
+
+\addtokomafont{title}{\rmfamily}
+\deffootnote{1em}{1em}{\textsuperscript{\thefootnotemark}}
+
+\title{The \pkg{nopageno} package}
+\author{David Carlisle}
+\date{1989/01/01\thanks{Actually the above date is probably wrong, I can not remember how long I have had this lying around\ldots}}
+
+
+\begin{document}
+
+\maketitle
+
+\LaTeX's standard styles use two page styles, one on normal
+pages and one on `opening' pages with \cmd{\maketitle} or \cmd{\chapter} etc\@.
+Unfortunately there is only easy access to changing one of these
+two so if you want something other than `\texttt{plain}' on the opening
+pages you must use \verb+\thispagestyle{...}+ on \emph{each} such page.
+
+The \pkg{fancyheadings} package does provide a more flexible interface,
+but if you just want an empty page style on all pages then\\[0.6ex]
+\verb+   \usepackage{nopageno}+\\[0.6ex]
+will do the job.
+
+\end{document}

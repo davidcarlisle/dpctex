@@ -1,0 +1,882 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html xmlns:lxslt="http://xml.apache.org/xslt" xmlns:saxon="http://icl.com/saxon" xmlns:xalan="org.apache.xalan.xslt.extensions.Xalan">
+<head>
+<title>
+   xmltex: A non validating (and not 100%
+    conforming) namespace aware XML parser implemented in TeX
+  </title>
+<link rel="stylesheet" type="text/css" href="http://www.oucs.ox.ac.uk/stylesheets/tei-oucs.css">
+</head>
+<body>
+<table width="100%">
+<tr>
+<td rowspan="2"></td><td align="left">
+<h2>Numerical Algorithms Group: NAG</h2>
+</td>
+</tr>
+<tr>
+<td align="left">
+<h1>
+   xmltex: A non validating (and not 100%
+    conforming) namespace aware XML parser implemented in TeX
+  </h1>
+</td>
+</tr>
+</table>
+<hr>
+  <h2>
+   xmltex: A non validating (and not 100%
+    conforming) namespace aware XML parser implemented in TeX
+  </h2>
+  Date: 2000-02-02
+  <h2>
+<it>davidc@nag.co.uk</it>
+</h2>
+  <h2>
+<it>David Carlisle</it>
+</h2>
+<h2>Contents</h2>
+<p>
+<div class="subtoc">
+<ul>
+<li>
+<a class="subtoc" href="#intro">Introduction</a>
+</li>
+<li>
+<a class="subtoc" href="#manualN211">Installation</a>
+</li>
+<li>
+<a class="subtoc" href="#manualN343">Using xmltex</a>
+</li>
+<li>
+<a class="subtoc" href="#stopping">Stopping xmltex</a>
+</li>
+<li>
+<a class="subtoc" href="#manualN651">xmltex package files</a>
+</li>
+<li>
+<a class="subtoc" href="#manualN1004">XML processing</a>
+</li>
+<li>
+<a class="subtoc" href="#manualN1059">Accessing TeX</a>
+</li>
+<li>
+<a class="subtoc" href="#manualN1146">Bugs</a>
+</li>
+<li>
+<a class="subtoc" href="#manualN1161">Don't Read Past This Point</a>
+</li>
+</ul>
+</div>
+</p>
+<h2>
+<a name="intro"></a>Introduction</h2>
+
+<p>
+xmltex      implements
+a non     validating parser for documents matching the
+W3C XML Namespaces Recommendation.
+
+
+The system may just be used to parse the file (expanding entity
+references and normalising namespace declarations) in which case it
+records a trace of the parse on the terminal. Normally however the
+information from the parse is used to trigger TeX typesetting code.
+Declarations (in TeX syntax) are provided as part of xmltex to
+associate TeX code with the start and end of each XML element,
+attributes, processing instructions, and with unicode character data.
+</p>
+
+
+<h2>
+<a name="manualN211"></a>Installation</h2>
+
+<p>The xmltex parser itself does not require LaTeX. It may be loaded
+into initex to produce a format capable of parsing XML files. However
+such a format would have no convenient commands for typesetting, and
+so normally xmltex will be used on top of an existing format, normally
+LaTeX. In this section we assume that the document to be
+processed is called <tt>document.xml</tt>.
+</p>
+<h3>
+<a name="manualN228"></a>Using xmltex as an input to the LaTeX command</h3>
+
+<p>LaTeX requires a document in TeX syntax, not XML. To process
+<tt>document.xml</tt>, first produce a two line file called
+<tt>document.tex</tt> of the following form:
+<pre>
+\def\xmlfile{document.xml}
+\input xmltex.tex
+</pre>
+
+Do <em>not</em> put any other commands in this file!</p>
+<p>You may then process the document with either of the commands:
+<tt>latex document</tt>  or <tt>latex document.tex</tt>
+or the equivalent procedure in your TeX environment.
+</p>
+
+<h3>
+<a name="manualN267"></a>Using xmltex as a TeX format built on LaTeX</h3>
+
+<p>
+You may prefer to set up xmltex as a format in its own right.
+This may speed things up slightly (as <tt>xmltex.tex</tt> does not
+have to be read each time) but more importantly perhaps it allows the
+XML file to be processed directly without needing to make the
+<tt>.tex</tt> wrapper.</p>
+<p>To make a format you will need a command such as the following,
+depending on your TeX system.
+<pre>
+initex &amp;latex xmltex
+initex \&amp;latex xmltex
+tex -ini &amp;latex xmltex
+tex -ini \&amp;latex xmltex
+</pre>
+</p>
+<p>This will produce a format file <tt>xmltex.fmt</tt>. You should then
+be able to make a <tt>xmltex</tt> command by copying the way the
+<tt>latex</tt> command is defined in terms of
+<tt>latex.fmt</tt>. Depending on the TeX system, this might be a
+symbolic link, or a shell script, or batch file, or a configuration
+option in a setup menu.
+
+</p>
+
+<h3>
+<a name="manualN311"></a> Making an xmltex format `from scratch'</h3>
+
+<p>
+Whilst it may be convenient to build an xmltex format as above, starting
+from the LaTeX format. You may prefer to instead work with an initex
+with no existing format file. Even if you wish to use a standard LaTeX
+it may be preferable to make a TeX input file that first inputs 
+<tt>latex.ltx</tt> then <tt>xmltex.tex</tt>. In particular this
+will allow you to have a different hyphenation and language
+customisation for xmltex than for LaTeX. Many of the features of
+the language support in LaTeX are related to modifying the input
+syntax to be more convenient. Such changes are not needed in xmltex as
+the input syntax is always XML. Some language files may change the
+meaning of such characters as &lt; which would break the xmltex parser.
+Also, rather than using <tt>latex.ltx</tt> you could in principle
+use a modified <tt>docstrip</tt> install file and produce a
+`cut down' latex that did not have features that are not going to be
+used in xmltex.
+</p>
+<p>
+Unfortunately the support for this method of building xmltex (and access
+to non English hyphenation generally) is not fully designed and totally
+undocumented.</p>
+
+
+<h2>
+<a name="manualN343"></a>Using xmltex</h2>
+
+<p>
+xmltex by default `knows' nothing about any particular type of XML
+file, and so needs to load external files containing specific
+information. This section describes how the information in the XML
+file determines which files will be loaded.
+
+<ol>
+<li> If the file begins with a Byte Order Mark, the default encoding
+  is set to utf-16. Otherwise the default encoding is utf-8.
+</li>
+<li> If (after an optional BOM) the document begins with an XML
+  declaration that specifies an encoding, this encoding will be used,
+  otherwise the default encoding will be used. A file with name of the
+  form <em>encoding</em><tt>.xmt</tt> will be loaded that maps the
+  requested encoding to Unicode positions. (It is an error if this
+  file does not exist for the requested encoding.)
+</li>
+<li> If the document has a <tt>DOCTYPE</tt> declaration that includes
+  a local subset then this will be parsed. If any external DTD entity
+  is referenced (by declaring and then referencing a parameter entity)
+  then the SYSTEM and PUBLIC identifiers of this entity will be looked
+  up in a catalogue (to be described below). If either identifier is
+  known in the catalogue the corresponding xmltex package (often with
+  <tt>.xmt</tt> extension) will be loaded.
+</li>
+<li> After any local subset has been processed, if the DOCTYPE
+  specifies an external entity, the PUBLIC and/or SYSTEM identifiers
+  of the external dtd file will be similarly looked up, and a
+  corresponding xmltex file loaded if known.
+</li>
+<li> As each element is processed, it may be `known' to xmltex by
+  virtue of one of the packages loaded, or it may be unknown. If it is
+  unknown then if it is in a declared namespace, the namespace URI
+  (not the prefix) is looked up in the xmltex catalogue. If the
+  catalogue specifies an xmltex package for this namespace it will be
+  loaded. If the element is not in a namespace, then the element name
+  will be looked up in the catalogue.
+</li>
+<li> If after all these steps the element is still unknown then
+  depending on the configuration setting either a warning or an error
+  will be displayed. (Currently only warning implemented.)
+</li>
+</ol>
+</p>
+<h3>
+<a name="manualN398"></a>The xmltex Catalogue</h3>
+<p>As discussed above, xmltex requires a mapping between PUBLIC and
+SYSTEM identifiers, namespace URI, and element names, to files of
+TeX code. This mapping is implemented by the following commands:
+<pre>
+<tt>\NAMESPACE</tt>{<em>URI</em>}{<em>xmt-file</em>}
+<tt>\PUBLIC</tt>{<em>FPI</em>}{<em>file</em>}
+<tt>\SYSTEM</tt>{<em>URI</em>}{<em>file</em>}
+<tt>\NAME</tt>{<em>element-name</em>}{<em>xmt-file</em>}
+<tt>\XMLNS</tt>{<em>element-name</em>}{<em>URI</em>}
+</pre>
+As described above, if the first argument of one of these commands
+matches the string specified in the XML source file, the corresponding
+TeX commands in the file specified in the second argument are
+loaded. The PUBLIC and SYSTEM catalogue entries may also be used
+to control which XML files should be input in response to external
+entity references. The <tt>\XMLNS</tt> is rather different,
+if an element in the null namespace does not have any definition
+attatched to it, this declaration forces the default namespace to the
+given URI. The catalogue lookup is then repeated. This allows for
+example documents beginning <tt>&lt;html&gt;</tt> to be coerced into
+the xhtml namespace.</p>
+<p>These commands may be placed in a configuration file, either
+<tt>xmltex.cfg</tt>, in which case they apply to all documents,
+or in a configuration file `<tt>\jobname.cfg</tt>' (eg
+<tt>document.cfg</tt> in the example in the Introduction) in which
+case the commands just apply to the specified document.
+</p>
+
+
+<h3>
+<a name="manualN490"></a>Configuring xmltex</h3>
+
+<p>In addition to the `catalogue' commands described earlier there are
+other commands that may be placed in the configuration files.
+
+<ul>
+<li> <p>
+<tt>\xmltraceonly</tt>
+</p>
+<p>  This stops xml from trying to typeset the
+  document. The external files specified in the catalogue are still
+  loaded, so that the trace may report any elements for which no code
+  is defined, but no actual typesetting takes place. In the event of
+  unknown errors it is always worth using xmltex in this mode to
+  isolate any problems.</p>
+<p>It may be noted that if an xmltex format is built just using initex
+without any typesetting commands, the resulting format should still
+be able to parse any XML file if xmltex.cfg just specifies 
+<tt>\xmltraceonly</tt> and \jobname.cfg is empty.</p>
+</li>
+<li> <p>
+<tt>\xmltraceoff</tt>
+</p>
+<p>By default xmltex provides a trace of its XML parse, displaying
+   each element begin and end. This command used in xmltex.cfg or
+   `\jobname.cfg' will stop this trace being produced.</p>
+</li>
+
+<li>
+<p> <tt>\inputonce</tt>{<em>xmt-file</em>}</p>
+<p>The catalogue entries specify that
+  certain files should be loaded if XML constructs are met.
+  Alternatively the files may just always be loaded. The system will
+  ignore any later requests to load. This is especially useful if an
+  xmltex format is being made.</p>
+</li>
+<li>
+<p>
+<tt>\UnicodeCharacter</tt>{<em>hex-or-dec</em>}{<em>tex-code</em>}</p>
+<p>The first argument specifies a unicode character number, in the same
+format as used for XML character entities, namely either a decimal
+number, or an upper case Hex number preceded by a lower case
+`<tt>x</tt>'.</p>
+<p>The second argument specifies arbitrary TeX code to be used when
+typesetting this character. Any code in the XML
+range may be specified (ie up to x10FFFF). Although codes in the
+`ASCII' range, below 128, may be specified, the definitions supplied
+for such characters will not be default be used. The definition will
+howeverbe stored and used if the character is activated using the
+command described below.</p>
+</li>
+<li> <p>
+<tt>\ActivateASCII</tt>{<em>hex-or-dec</em>}</p>
+<p>The argument to this command should be a number less than 128.
+If a character us activated by this command in a configuration file
+then any special typesetting instructions specified for the character
+will be executed whenever the character appears as character data.</p>
+<p>Some ASCII characters are activated by default. The list is
+essentially those characters with special meanings to either TeX or
+XML.</p>
+</li>
+
+</ul>
+</p>
+<p>
+If a format is being made, there are essentially two copies of
+<tt>xmltex.cfg</tt> that may play a role. The configuration file
+input when the format is made will control catalogue entries and
+packages built into the format. A possibly different
+<tt>xmltex.cfg</tt> may be used in the input path of `normal' TeX,
+this will then be used for additional information loaded each run.</p>
+<p>In either case, a separate configuration file specific to the given
+XML document may also be used (which is loaded immediately after
+<tt>xmltex.cfg</tt>).
+</p>
+
+
+
+<h2>
+<a name="stopping"></a>Stopping xmltex</h2>
+
+<p>xmltex  should stop after the end of the document
+element has been processed. If things go wrong and
+you end up at the interactive
+<tt>*</tt> prompt  you might want to exit with
+<tt>&lt;?xmltex \stop?&gt;</tt>).
+</p>
+
+
+<h2>
+<a name="manualN651"></a>xmltex package files</h2>
+
+<p>
+xmltex package files are the link between the XML markup and TeX
+typesetting code. They are written in TeX (rather than XML) syntax
+and may load directly or indirectly other files, including LaTeX
+class and package files. For example a file loaded for a particular
+document type may directly execute <tt>\LoadClass{article}</tt>, or
+alternatively it may cause some XML element in the document to
+execute <tt>\documentclass{article}</tt>. In either case the document will
+suffer the dubious benefit of being formatted based on the style
+implemented in <tt>article.cls</tt>. Beware though that the package
+files may be loaded at strange times, the first time a given namespace
+is declared in a document, and so the code should be written to work
+if loaded inside a local group.</p>
+<p>Characters in xmltex package files have their normal LaTeX meanings
+except that line endings are ignored so that you do not need to add
+a % to the end of lines in macro code. Unlike fd file conventions, other
+white space is <em>not</em> ignored.</p>
+<p>The available commands are:
+
+<ul>
+<li>
+<p>
+<tt>\FileEncoding</tt>{<em>encoding</em>}</p>
+<p>This is the analogue for TeX syntax files of the encoding specification
+in the XML or text declaration of XML files. If it is not specified the
+file will be assumed to be in UTF-8.</p>
+</li>
+
+<li>
+<p>
+<tt>\DeclareNamespace</tt>{<em>prefix</em>}{<em>URI</em>}</p>
+<p>This declares a prefix to be used <em>in this file</em> for referring to
+elements in the specified namespace. If the prefix is empty then this
+declares the default namespace (otherwise, unprefixed element names
+refer to elements that are not in a namespace).</p>
+<p>Note that the elements in the XML document instance may use a
+different prefix, or no prefix at all to access this namespace.
+In order to resolve these different prefixes for the same namespace,
+each time a namespace is encountered for the first time (either 
+by <tt>\DeclareNamespace</tt> in a preloaded package, or in a namespace
+declaration in the XML instance) then it is allocated a new number
+and any further namespace declaration for the same URI just locally
+associates a prefix with this number. It is these numbers that are
+displayed when the XML trace of the parse of the document is shown,
+and also if any element is written out to an external file it will
+have a normalised prefix of a number whichever prefix it had
+originally. (Numeric prefixes are not legal XML, but this is an
+advantage, it ensures these internal forms can not clash with any
+prefix actually used in the document.)</p>
+<p>Three namespaces are predeclared. The null namespace (0), the XML
+namespace (<tt>http://www.w3.org/1998/xml</tt>) (1) which is predeclaed
+with prefix <tt>xml</tt> as specified in the Namespace Recommendation,
+and the xmltex namespace
+(<tt>http://www.dcarlisle.demon.co.uk/xmltex</tt>) (2) which is not
+given a default prefix, but may be used to have XML syntax for some
+internal commands (eg to have .aux files fully in XML, currently they
+are a hybrid mixture of some TeX and some XML syntax).
+</p>
+</li>
+<li>
+<p>
+  <tt>\XMLelement</tt>{<em>element-qname</em>}{<em>attribute-spec</em>}
+{<em>begin-code</em>}{<em>end-code</em>}</p>
+<p>  This is similar to a LaTeX <tt>\newenvironment</tt> command.</p>
+<p> Declare the code to execute at the start and end of each instance of
+this element type. This code will be executed in a local group (like a
+LaTeX environment). The second argument declares a list of attributes
+and their default values using the <tt>\XMLattribute</tt> command
+described below.
+</p>
+</li>
+<li>
+<p> 
+  <tt>\XMLelement</tt>{<em>element-qname</em>}
+{<em>attribute-spec</em>}
+<tt>{\xmlgrab}</tt>{<em>end-code</em>}</p>
+<p>  A special case of the above command (which may be better made into a
+  separate declaration) is to make the <em>start-code</em> just be the command
+  <tt>\xmlgrab</tt>. In this case the <em>end-code</em> has access to the
+  element content (in XML syntax) as <tt>#1</tt>. This content isn't
+  literally the same as the original document, namespaces, white space
+  and attribute quote symbols will all have been normalised.
+</p>
+</li>
+<li> <p>
+  <tt>\XMLattribute</tt>{<em>attribute-qname</em>}
+{<em>command-name</em>}{<em>default</em>}</p>
+<p>This command may only be used in the argument to
+<tt>\XMLelement</tt>.
+ The first argument specifies the name of an attribute (using any
+ namespace prefixes current for this package file, which need not
+ be the same as the prefixes used in the document).
+ The second argument gives a TeX command name that will be used to
+ access the value of this attribute in the begin and end code for the
+ element. (Note using TeX syntax here provides a name independednt of
+ the namespace declarations that are in scope when this code is executed).
+ The third argument provides a default value that wil be used if the
+attribute is not used on an instance of this element.
+ </p>
+<p>The special token <tt>\inherit</tt> may be used which will cause
+the command to have a value set in an ancestor element if this element
+does not specify any value.</p>
+<p>If a TeX token such as <tt>\relax</tt> is used as the default
+the element code may distinguish the case that the attribute is not used
+in the document.</p>
+</li>
+<li> <p>
+  <tt>\XMLnamespaceattribute</tt>
+{<em>prefix</em>}{<em>attribute-qname</em>}
+{<em>command-name</em>}{<em>default</em>}</p>
+<p>This command is similar to <tt>\XMLattribute</tt>
+ but is used at the top level of the package file, not in the argument
+to <tt>\XMLelement</tt>. It is equivalent to specifying the
+attribute in <em>every</em> element in the namespace specified by
+the first argument. As usual the prefix (which may be {} to denote the
+default namespace) refers to the namespace declarations in the xmltex
+package: the prefixes used in the document may be different.</p>
+</li>
+
+<li>
+<p>
+<tt>\XMLentity</tt>{<em>name</em>}{<em>code</em>}</p>
+<p>Declare an (internal parsed) entity, this is equivalent to a
+<tt>&lt;!ENTITY</tt> declaration, except that the
+replacement text is specified in TeX syntax.</p>
+</li>
+
+<li>
+<p>
+<tt>\XMLname</tt>{<em>name</em>}{<em>command-name</em>}</p>
+<p>Declare the TeX command to hold the (normalised, internal form) of
+the XML name given in the first argument. This allows the code specified in
+<tt>\XMLelement</tt> to refer to XML element names without knowing
+the encodings or namespace prefixes used in the document. Of particular
+use might be to compare such a name with <tt>\ifx\XML@parent</tt>
+which will allow element code to take different actions depending on
+the parent of the current element.</p>
+</li>
+
+
+<li>
+<p>
+<tt>\XMLstring</tt>{<em>command-name</em>}&lt;&gt;<em>XML Data</em>&lt;/&gt;</p>
+<p>This saves the XML fragment as the TeX command given in the first
+argument. It may be particularly useful for redefining `fixed strings'
+that are generated by LaTeX document classes to use any special
+typesetting rules specified for individual characters.</p>
+<p>It should also be used for defining any strings used to
+in comparison tests with strings occurring in the XML document.
+Using <tt>\XMLstring</tt> rather than <tt>\def</tt> ensures
+that the characters and encodings in the string are correctly normalised.</p>
+</li>
+
+
+</ul>
+
+</p>
+
+<h2>
+<a name="manualN1004"></a>XML processing</h2>
+
+<p>
+xmltex tries as far as possible to be a fully conforming non
+validating parser. It fails in the following respects.
+<ul>
+<li> Error reporting is virtually non existent. Names are not checked
+  against the list of allowed characters, and various other
+  constraints are not enforced.
+</li>
+<li>
+<p> A non validating parser is not forced to read external dtd
+  entities (and this one does not) It is obliged to read the local
+  subset and process entity definitions and attribute declarations.
+  Entity declarations are reasonably well handled: External parameter
+  entities are handled as above, loading a corresponding xmltex file
+  if known. External entities are similarly processed, inputting
+  the XML file, a difference in this case is that if the entity is not
+  found in the catalogue, the SYSTEM identifier will be used directly
+  to <tt>\input</tt> as often this is a local file reference. Internal
+  parsed entities and parameter entities are essentially treated as
+  TeX macros, and nonparsed entities are saved along with their
+  NDATA type, for use presumably by <tt>\includegraphics</tt>.</p>
+<p>Attribute defaults are processed in the local subset of the dtd, however
+   note that this is `namespace unaware' defaulting and only applies to
+   elements using the same prefix and local name, unlike the defaulting
+   done by <tt>\XMLattribute</tt>. </p>  
+</li>
+<li>
+<p> Support for encodings depends on having an encoding mapping
+  file. Any 8bit encoding that matches Unicode for the first 127 positions
+  may be used by making a trivial mapping file. (The one for latin1
+  looks over complicated as it programs a loop rather than having 127
+  declarations saying that latin1 and Unicode are identical in this
+  range).</p>
+<p>  UTF-8 is supported, but support for UTF-16 is minimal. Currently
+  only latin-1 values work: (In this range UTF-16 is just latin-1 with
+  a null byte inserted after (or before, depending on endedness)
+  each latin-1 byte. The UTF-16 implementation just ignores this null
+  byte then processes as for latin-1. Probably the first few 8bit
+  pages could be similarly supported by making the low ascii control
+  characters activate UTF-16 processing but this will never be
+  satisfactory using a standard TeX. Hopefully a setup for a 16bit
+  TeX such as Omega will correct this.</p>
+</li>
+</ul>
+
+</p>
+
+<h2>
+<a name="manualN1059"></a>Accessing TeX</h2>
+
+<p>In theory you should be able to control the document just be suitable
+code specified by <tt>\XMLelement</tt> and friends, but sometimes it may be
+necessary to `tweak' the output by placing commands directly in the
+source.</p>
+<p>Two mechanisms are availalable to do this.
+<ul>
+<li>
+<p> Using the xmltex namespace. The xmltex namespace conatins a
+  small (currently empty) set of useful TeX constructs that are
+  accessed by XML syntax. For example if xmltex provides a mechanism
+  for having XML (rather than LaTeX) syntax toc files, it will need
+  an analogue of <tt>\contentsline</tt> which might be an element
+  accessed by <tt>&lt;xmltex:contentsline&gt;</tt>&hellip; where the xmltex
+  prefix is declared on this or a parent element to be
+ <tt>xmlns:xmltex="http://www.dcarlisle.demon.co.uk/xmltex"</tt>.</p>
+<p>  As the xmltex namespace is declared but currently empty, a more
+  useful variant of this might be:</p>
+</li>
+<li> Declare your own namespace for TeX tweaks, and load a suitable
+  package file that attatches TeX code to the elements in this
+  namespace (or at least specify the correspondence between the
+  namespace and the package using <tt>\NAMESPACE</tt>).
+  For instance if you put <tt>&lt;clearpage xmlns="/my/tex/tweak"/&gt;</tt>
+  in your document, this will force a page break if you have at
+  suitable points, <tt>\NAMESPACE{/my/tex/tweak}{tweak.xmt}</tt>
+  and
+<pre>
+\DeclareNamespace{tweak}{"/my/tex/tweak"}
+\XMLelement{tweak:clearpage}{\clearpage}
+</pre>
+</li>
+<li>
+<p> A second different mechanism is available, to use XML processing
+  instructions. A Processing Instruction of the form:
+<tt>&lt;?xmltex&gt;</tt>  <em>TeX commands</em> <tt>?&gt;</tt>
+will execute the TeX commands.</p>
+</li>
+</ul>
+
+</p>
+
+
+<h2>
+<a name="manualN1146"></a>Bugs</h2>
+
+<p>None, of course.</p>
+
+
+<h2>
+<a name="manualN1161"></a>Don't Read Past This Point</h2>
+
+<p>Thus section discusses some of the more experimental features of xmltex
+that may get a cleaner syntax (or be removed, as a bad idea) in later releases,
+and also describes some of the internal interfaces (which are also
+subject to change)</p>
+
+<h3>
+<a name="manualN1175"></a>Input Encodings and States</h3>
+
+<p>At any point while processing a document, xmltex is in one of two 
+<em>states</em>: <em>tex</em> or <em>xml</em>.</p>
+<h4>
+<a name="manualN1201"></a>States</h4>
+<p>In the xml <em>state</em>,
+ &lt; and &amp; are the only two characters that
+trigger special markup codes. Other characters, such as !, &gt;, =,
+&hellip; may be used in certain XML constructs as markup but unless
+some code has been triggered by &lt; they are treated simply as
+character data. All characters above 127 are `active' to TeX
+and are used to translate the input encoding to UTF-8. All internal
+character handling is based on UTF-8, as described below. Some
+characters in the ASCII range, below 127 are also active by default
+(mainly punctuation characters used in XML constructs, such as
+the ones listed above). Some or all of the others may be activated
+using the <tt>\ActivateASCII</tt> command, which allows special
+typesetting rules to be activated for the characters, at some cost in
+processing speed.</p>
+<p>In the tex <em>state</em>,
+characters in the ASCII range have their usual
+TeX meanings, so letters are `catcode 11' and may be used in TeX
+control sequences, \ is the escape character, &amp; the table cell
+separator, etc. Characters above 127 have the meanings current for the
+current encoding just as for the xml state, probably this means that
+they are unusable in TeX code, except for the special case of
+referring to XML element names in the first argument to
+<tt>\XMLelement</tt> and releated commands.</p>
+
+<h4>
+<a name="manualN1233"></a>Encodings</h4>
+<p>Whenever a new (XML or TeX) file is input by the xmltex system the
+<em>encoding</em> is first switched to UTF-8. At the end of the
+input the encoding is returned to whatever was the current encoding.
+The encoding current while the file is read is determined by the
+encoding pseudo-attribute on the XML or text declaration in the case
+of XML files, or by the <tt>\FileEncoding</tt> command for TeX
+files. Note that the encoding mechanism <em>only</em> is triggered
+by xmltex file includes. Once an xmltex package file is loaded it may
+include other TeX files by <tt>\input</tt> or
+<tt>\includepackage</tt> these input command swill be transparent
+to the xmltex encoding system. The vast majority of TeX macro
+packages only use ASCII characters so this should not be a
+problem.</p>
+<p>Note that if the <tt>\includepackage</tt> occurs directly in
+the xmltex package file, the TeX code will be included with a known
+encoding, the one specified in the xmltex package, or UTF-8. If
+however the <tt>\includepackage</tt> is included in code specified
+by <tt>\XMLelement</tt>, then it will be executed with whatever
+encoding is current in the document at the point that element is
+reached. Before xmltex executes the code for that element it will
+switch to the tex state, thus normalising the ascii characters
+but characters above 127 will not have predefined definitions in this
+case.</p>
+<p>Internally eveything is stored as UTF-8. So `aux' and `toc' files
+will be in UTF-8 even if the document (or parts of the document) used
+different encodings.</p>
+<p>To specify a new encoding, if it is an 8 bit encoding that matches
+ASCII in the printable ASCII range, then one just needs to produce a
+file with name <em>encoding</em><tt>.xmt</tt> (in lowercase,
+on case sensitive systems) this should consist of a series of
+<tt>\InputCharacter</tt> commands, giving the input character slot
+and the equivalent Unicode. If an encoding is specified in this manner
+character data will be converted to UTF-8 by <em>expansion</em>
+and so ligatures and inter letter kerns will be preserved. (Conversely
+if characers are accessed by character references, &amp;#1234; then
+TeX arithmetic is used to decode the information and ligature
+information will be lost. For some large character sets, especially
+for Asian languages, these mechanisms will probably not prove to be
+sufficient, some mechanisms are being investigated, but in the short
+term it may be necessary to always use UTF-8 if the input encoding
+is not strictly a ine byte extension of the ASCII code page.
+</p>
+
+
+
+<h3>
+<a name="manualN1298"></a>xmltex Package Commands</h3>
+
+<p>You can use arbitrary TeX commands in an xmltex package,
+althought you should be aware that the file may be input into a local
+group, at the point in a document that a particular namespace is first
+used, for example. There are however some specific commands designed
+to be used in the begin or end code of <tt>\XMLElement</tt>.
+<ul>
+
+<li>
+<p>
+<tt>\ignorespaces</tt>
+</p>
+<p>This is actually a TeX primitive
+(for the moment!)</p>
+</li>
+
+<li>
+<p>
+<tt>\obeyspaces</tt>
+</p>
+<p>Obey consecutive space characters,
+rather than treating consecutive runs as a single space.
+(A command of this name, but not this definition is in plain TeX.)</p>
+</li>
+
+<li>
+<p>
+<tt>\obeylines</tt>
+</p>
+<p>Obey end of line characters,
+rather than treating then as a space, force a line break.
+(A command of this name, but not this definition is in plain TeX.)</p>
+</li>
+
+<li>
+<p>
+<tt>\xmltexfirstchild#1\@</tt>
+</p>
+<p>If the <em>start-code</em> for an element is specified as
+<tt>\xmlgrab</tt> then the  <em>end-code</em> may use
+<tt>#1</tt> in order to execute the element content. Sometimes you
+do not want all of the content. The a construction (with currently
+unpleasant syntax) <tt>\xmltexfirstchild#1\@</tt> will just evaluate
+the first child element of the content, discarding the remaining
+elements.</p>
+</li>
+
+<li>
+<p>
+<tt>\xmltextwochildren\csa\csb#1</tt>
+</p>
+<p>If you know that the content will be exactly two child elements (for
+examle a MathML frac or sub element) then this command may be used.
+It will execute the TeX code 
+<tt>\csa{</tt><em>child-1</em><tt>}\csb{</tt><em>child-2</em>
+So either two TeX command smay be supplied, one will be applied to
+each child, or the second argument may be <tt>{}</tt> in which case
+the first argument may be a TeX command that takes two arguments.
+For example the code for MathMl frac might be
+<pre>
+\XMLelement{m:mfrac}
+  {}
+  {\xmlgrab}
+  {\xmltextwochildren\frac{}#1}
+</pre>
+</p>
+</li>
+
+<li>
+<p>
+<tt>\xmltexthreechildren\csa\csb\csc#1</tt>
+</p>
+<p>As above, but more so.</p>
+</li>
+
+<li>
+<p>
+<tt>\xmltexforall\csa{#1}</tt>
+</p>
+<p>The TeX command <tt>\csa</tt> is called repeatedly,
+taking each child element of the current element as argument
+on each iteration. As a convenience the command <tt>\xml@name</tt>
+is defined before each iteration to have the (internal, normalised)
+name of the element being processed.</p>
+</li>
+
+<li>
+<p>
+<tt>\NDATAEntity\csa\csb\attvalue</tt>
+</p>
+<p>If the XML parser encounters an internalor external entity reference
+it expands it without executing any special hook that may be defined in
+an xmltex package. However NDATA entites are never directly encountered
+in an entity reference. They may only be used as an attribute value.
+If <tt>\attvalue</tt>. is a TeX command holding the value of an
+attribute, as declared in <tt>\XMLattribute</tt> then
+<tt>\NDATAEntity\csa\csb\attvalue</tt> applies the two TeX
+commands <tt>\csa</tt> and <tt>\csb</tt> to the notation type
+and the value, in a way exactly corresponding to
+<tt>\xmltextwochildren</tt> so for example the XML document for this
+manual specifies
+<pre>
+ &lt;!NOTATION URL SYSTEM "" &gt;
+ &lt;!ENTITY lppl SYSTEM "http://www.latex-project.org/lppl.txt" NDATA URL&gt;
+</pre>
+and this is handled by the following xmltex code
+<pre>
+\XMLelement{xptr}
+ {\XMLattribute{doc}{\xptrdoc}{}}
+ {\NDATAEntity\xptrdoc\@gobble\url}
+ {}
+</pre>
+which saves the attribute value in  <tt>\xptrdoc</tt> and then
+discards the notation name (URL) and applies the command
+<tt>\url</tt> to typeset the supplied URL.
+</p>
+</li>
+
+</ul>
+</p>
+
+
+
+<h3>
+<a name="manualN1489"></a>Character Data Internals</h3>
+
+<p>
+<div align="center">
+<table>
+<tr>
+<td></td> <td>int.</td><td>ext. xml</td>
+<td>ext. mixed</td><td>csn typeout</td>
+<td></td>
+</tr>
+<tr>
+<td>d</td><td>xabc</td><td>xabc</td>
+<td>xabc (12)</td><td>xabc (12)</td><td>xabc (12)</td>
+<td></td>
+</tr>
+<tr>
+<td>c</td><td>xab</td><td>xab</td>
+<td>xab  (12)</td><td>xab  (12)</td><td>xab  (12)</td>
+<td></td>
+</tr>
+<tr>
+<td>b</td><td>xa</td><td>xa</td>
+<td>xa   (12)</td><td>xa   (12)</td><td>xa   (12)</td>
+<td></td>
+</tr>
+<tr>
+<td>ax</td><td>x</td><td>x</td>
+<td>x</td><td>x</td><td>x    (12)</td>
+<td>(!)</td>
+</tr>
+<tr>
+<td>ay</td><td>x</td><td>x</td>
+<td>x</td><td>&amp;#123;</td><td>x    (12)</td>
+<td>(e)</td>
+</tr>
+<tr>
+<td>az</td><td>x</td><td>\az x</td>
+<td>&amp;#123;</td><td>&amp;#123;</td><td>x    (12)</td>
+<td>(&amp;lt;)</td>
+</tr>
+<tr>
+<td>&lt;</td><td>&lt;</td><td>&lt;</td>
+<td>&lt;</td><td>&lt;</td><td>&lt;    (12)</td>
+<td>(&lt;)</td>
+</tr>
+</table>
+</div>
+
+</p>
+
+
+
+
+
+
+<hr>
+<div align="center">
+[<a href="http://www.tei-c.org/">NAG</a>
+| <a href="http://www.nag.co.uk/">NAG</a>
+]
+ </div>
+<hr>
+<address>
+ Last updated: Date: 2000-02-02.
+ <br> Copyright 2000 David Carlisle, NAG
+
+<!--Created by a version 1
+ XSLT stylesheet by  James Clark--></address>
+</body>
+</html>
