@@ -1,0 +1,26 @@
+% reported by Frank Mittelbach (possibly a long time ago:-)
+% \multicolumn should not mask \rowcolor
+% fix suggested by Frank
+%
+% \def\multicolumn#1#2#3{%
+% .....
+% preserve rowcolor
+% %  \let\CT@row@color\relax
+
+\documentclass{article}
+
+\usepackage{colortbl}
+
+\begin{document}
+
+\begin{tabular}{rrrr}
+\rowcolor{yellow}
+a&b&c&d\\
+xxx&\multicolumn{2}{r}{aaaa}&yyy\\
+\rowcolor{yellow}
+xxx&\multicolumn{2}{r}{aaaa}&yyy\\
+\rowcolor{yellow}
+xxx&\multicolumn{2}{r}{aaaa}&yyy\\
+xxx&\multicolumn{2}{r}{aaaa}&yyy
+\end{tabular}
+\end{document}
