@@ -1,10 +1,10 @@
 % \iffalse
 %%
 %% Source File: `colortbl.dtx'.
-%% Copyright 1996 1998 1999 David Carlisle
+%% Copyright 1996 1998 1999 2012 David Carlisle
 %%
 %% This file may be distributed under the terms of the LPPL.
-%% See 00readme.txt for details.
+%% See readme for details.
 %%
 %
 %<*dtx>
@@ -15,7 +15,7 @@
 %<driver>\ProvidesFile{colortbl.drv}
 % \fi
 %         \ProvidesFile{colortbl.dtx}
-          [2001/02/13 v0.1j Color table columns (DPC)]
+          [2012/02/13 v1.0a Color table columns (DPC)]
 %
 % \iffalse
 %<*driver>
@@ -42,7 +42,7 @@
 %
 %  \maketitle
 % 
-% \CheckSum{941}
+% \CheckSum{966}
 %
 %
 % \begin{abstract}
@@ -646,6 +646,10 @@
 %    \begin{macrocode}
    \@addtopreamble{%
     \setbox\z@\hbox\bgroup\bgroup
+%    \end{macrocode}
+% \changes{v1.0a}{2012/02/13}{reset everycr for nested uses (see test ct2)}
+%    \begin{macrocode}
+      \CT@everycr{}%
       \ifcase \@chnum
 %    \end{macrocode}
 % "c" code: This used to use twice as much glue as "l" and "r" (1fil
@@ -901,8 +905,9 @@
 %
 % \begin{macro}{\multicolumn}
 % "\multicolumn"
+% \changes{v1.0a}{2012/02/13}{make multicolumn long (see test ct1)}
 %    \begin{macrocode}
-\def\multicolumn#1#2#3{%
+\long\def\multicolumn#1#2#3{%
    \multispan{#1}\begingroup
    \def\@addamp{\if@firstamp \@firstampfalse \else
                 \@preamerr 5\fi}%
@@ -910,7 +915,10 @@
    \endgroup
    \def\@sharp{#3}%
    \let\CT@cell@color\relax
-   \let\CT@row@color\relax
+%    \end{macrocode}
+% \changes{v1.0a}{2012/02/13}{don't reset CT@row@color (see test ct3)}
+%   \let\CT@row@color\relax
+%    \begin{macrocode}
    \let\CT@column@color\relax
    \let\CT@do@color\relax
    \@arstrut \@preamble
@@ -1178,14 +1186,18 @@
 % \end{macro}
 %
 % hhline support (almost the whole package, repeated, sigh).
+% \changes{v1.0a}{2012/02/13}{Several improvements (see test ct4)}
 %    \begin{macrocode}
 \AtBeginDocument{%
   \ifx\hhline\@undefined\else
 \def\HH@box#1#2{\vbox{{%
-  {\CT@drsc@\dimen@\tw@\arrayrulewidth
-   \advance\dimen@\doublerulesep
-   \hrule \@height\dimen@
-   \vskip-\dimen@}%
+  \ifx\CT@drsc@\relax\else
+    \global\dimen\thr@@\tw@\arrayrulewidth
+    \global\advance\dimen\thr@@\doublerulesep
+    {\CT@drsc@
+     \hrule \@height\dimen\thr@@
+     \vskip-\dimen\thr@@}%
+  \fi
   \CT@arc@
   \hrule \@height \arrayrulewidth \@width #1
   \vskip\doublerulesep
@@ -1218,15 +1230,17 @@
               \ifx\CT@drsc@\relax
                 \HH@add{\hfil}\else
                  \HH@add{{%
-\CT@drsc@\leaders\hrule\@height\doublerulesep\hfil}}%
+                   \CT@drsc@\leaders\hrule\@height\HH@height\hfil}}%
                \fi
                  \else
   \ifx\@tempb-\@tempswafalse
+           \gdef\HH@height{\arrayrulewidth}%
            \if@firstamp\@firstampfalse\else\HH@add{&\omit}\fi
               \HH@add{{%
                 \CT@arc@\leaders\hrule\@height\arrayrulewidth\hfil}}%
                            \else
   \ifx\@tempb=\@tempswafalse
+       \gdef\HH@height{\dimen\thr@@}%
        \if@firstamp\@firstampfalse\else\HH@add{&\omit}\fi
        \HH@add
           {\rlap{\copy\@ne}\leaders\copy\@ne\hfil\llap{\copy\@ne}}\else
@@ -1236,8 +1250,12 @@
 % Stop the backspacing for "t" and "b", it messes up the underlying
 % colour.
 %    \begin{macrocode}
-  \ifx\@tempb t\HH@add{\HH@box\doublerulesep\z@}\@tempswafalse\else
-  \ifx\@tempb b\HH@add{\HH@box\z@\doublerulesep}\@tempswafalse\else
+  \ifx\@tempb t\HH@add{%
+    \def\HH@height{\dimen\thr@@}%
+    \HH@box\doublerulesep\z@}\@tempswafalse\else
+  \ifx\@tempb b\HH@add{%
+    \def\HH@height{\dimen\thr@@}%
+    \HH@box\z@\doublerulesep}\@tempswafalse\else
   \ifx\@tempb>\def\next##1##2{%
      \HH@add{%
       {\baselineskip\p@\relax
