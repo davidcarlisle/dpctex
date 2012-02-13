@@ -1,10 +1,19 @@
 % reported by Frank Mittelbach (possibly a long time ago:-)
 % \hhline should use arrayrulewidth rather than doublerulesep
 % for ~
-% fix suggested by Frank
-%
-%%FMi \CT@drsc@\leaders\hrule\@height\doublerulesep\hfil}}%
-%\CT@drsc@\leaders\hrule\@height\arrayrulewidth\hfil}}%
+
+
+% The problem initially reported was that ~ would always force =
+% spacing even if all the other column entries were only single rule.
+% while fixing that, noticed some other problems with hhline support.
+
+% if \doublerulesepcolor was not set, = still used a rule for the
+% separation resulting in a blak line rather than space.
+% Now the original definition 9more or less) is used in that case
+
+% if  \doublerulesepcolor was set, the colour band should be 
+% \doublerulesep+2\arrayrulewidth, to match the band that HH@box
+% puts under the rules.
 
 \documentclass{article}
 
@@ -13,11 +22,35 @@
 
 \begin{document}
 
+Space for rule sep:
+
 \begin{tabular}{rrrr}
 a&b&c&d\\
 \hhline{==~=}
 a&b&c&d\\
+\hhline{~=~=}
+a&b&c&d\\
 \hhline{--~-}
 a&b&c&d\\
+\hhline{~---}
+a&b&c&d
 \end{tabular}
+
+
+Coloured rule sep:
+
+\doublerulesepcolor{red}
+
+\begin{tabular}{rrrr}
+a&b&c&d\\
+\hhline{==~=}
+a&b&c&d\\
+\hhline{~=~=}
+a&b&c&d\\
+\hhline{--~-}
+a&b&c&d\\
+\hhline{~---}
+a&b&c&d
+\end{tabular}
+
 \end{document}
