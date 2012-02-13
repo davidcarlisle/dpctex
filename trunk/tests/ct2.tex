@@ -1,0 +1,67 @@
+% Andrew McFarland
+% email 2008/10/26
+
+% my reply at the time:
+
+% haven't time to really fix now, but I see the problem. The problem
+% with \c and I assume the others is that internally it uses an \halign
+% table construct to align the accent and at the end of the row of that
+% inner table, colortable decides a table row has finished and so stops
+% the rowcolor....   
+% 
+% workaround is
+% 
+% \makeatletter
+% 
+% \begin{tabular}[c]{c|c|>{\CT@everycr{}}c}
+% 
+% 
+% which means that locally within the scope of a table cell this
+% mechanism is turned off. You need makeatletter to use the internal
+% \CT@.. command. 
+% 
+
+
+
+\documentclass[11pt,a4paper]{article}
+
+\usepackage{colortbl}
+
+\begin{document}
+
+\begin{center}
+What's happening with ``$\,$ \c{} $\,$'' and rowcolor in \texttt{colortbl}?\\
+\vspace{1cm}
+{\large Some Examples:}
+\end{center}
+
+\begin{tabular}[c]{c|c|c}
+    
+    \rowcolor[gray]{.90} &Without &With\\
+		\rowcolor[gray]{.90} Lower-case&a, c, e&\c{a}, \c{c}, \c{e}\\
+		\rowcolor[gray]{.90} Upper-case&A, C, E&\c{A}, \c{C}, \c{E}\\
+	  \rowcolor[gray]{.90} \textsc{Small Caps}& \textsc{a, c, e}&\textsc{\c{a}, \c{a}, \c{e}}	 	  
+	 	  
+\end{tabular}
+
+\vspace{2cm}
+
+\begin{tabular}[c]{c}
+    \rowcolor[gray]{.90} e\\
+    \rowcolor[gray]{.90} E\\
+    \rowcolor[gray]{.90} \c{e}\\
+    \rowcolor[gray]{.90} \c{E}\\
+    \rowcolor[gray]{.90} \textsc{e}\\
+    \rowcolor[gray]{.90} \textsc{E}\\
+    \rowcolor[gray]{.90} \textsc{\c{e}}\\
+    \rowcolor[gray]{.90} \textsc{\c{E}}
+
+\end{tabular}
+
+\vspace{2cm}
+
+\begin{center}
+Why doesn't the rowcolor command work for capital letters with the $\:$ \c{} $\:$ character?
+\end{center}
+
+\end{document}
