@@ -1,0 +1,22 @@
+
+<doc xmlns="http://www.dcarlisle.demon.co.uk/sec">
+
+<sec><head>Heading <it>iii</it> example (123) </head>
+<p>
+This is an example of an experimental mode in which some
+of the characters in the standard `ascii' range are given special
+definitions. Vowels are made red, and digits (0123456789) are typeset in
+oldstyle form. Note that you may still use the sepcial letters as part
+of XML names, for example the follwoin word is set using the element `it':
+<it>italic</it>.
+</p>
+<p>
+While the special definitions apply to any text originating in the XML
+document they do not apply to texts coming from the TeX code and in
+particular from LaTeX packages. Note in this example that the
+section numbers are not old style and the vowels in the word `contents'
+are not coloured.
+</p>
+</sec>
+
+</doc>

@@ -1,0 +1,6 @@
+comma.sty:
+   Adds a new possibility for printing counter values in addition
+   to \arabic, \roman, etc.
+   \commaform inserts a comma every three digits, as in 12,345.
+   It may be easily customised to insert any other TeX command
+   (such as a thin space `\,') instead of a comma.

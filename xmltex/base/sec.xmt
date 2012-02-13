@@ -1,0 +1,42 @@
+
+\DeclareNamespace{dpcsec}{http://www.dcarlisle.demon.co.uk/sec}
+
+
+\XMLelement{dpcsec:doc}
+{}
+  {\documentclass{article}
+    \usepackage[TS1,T1]{fontenc}
+    \usepackage{color,textcomp}
+    \textheight15\baselineskip
+    \parskip1\baselineskip plus \baselineskip
+    \pagestyle{headings}
+   \begin{document}
+   \tableofcontents}
+  {\end{document}}
+
+\XMLelement{dpcsec:sec}
+{}
+  {}
+  {}
+
+\XMLelement{dpcsec:head}
+{}
+  {\xmlgrab}
+  {\section{{\tt aaa} #1}}
+
+\XMLelement{dpcsec:p}
+{}
+{\par}
+  {\par}
+
+
+\XMLelement{dpcsec:tt}
+{}
+{\ttfamily}
+{}
+
+\XMLelement{dpcsec:it}
+{}
+{\itshape}
+{\/}
+

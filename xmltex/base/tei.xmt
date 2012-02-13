@@ -1,0 +1,142 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% tei.xmt
+
+%% Copyright 2000 Sebastian Rahtz, David Carlisle
+
+%% This file is distributed under the LaTeX Project Public License
+%% (LPPL) as found at http://www.latex-project.org/lppl.txt
+%% Either version 1.0, or at your option, any later version.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\XMLelement{TEI.2}{}
+  { \documentclass{article}
+    \usepackage{ifthen,url}
+    \begin{document}  }
+  {\end{document}}
+
+\XMLelement{p}{}
+ {\par}
+ {}
+
+\newcount\SCOUNT
+\global\SCOUNT-1\relax
+
+
+
+
+\XMLelement{div}{
+ \XMLattribute{id}{\idval}{\@nil}}
+ {\advance\SCOUNT\@ne}
+ {}
+
+\XMLelement{head}{  }
+  {\xmlgrab}
+  {\protected@xdef\temp{
+     \expandafter\noexpand\ifcase\SCOUNT
+     \section\or\subsection\or\subsubsection\fi
+     {#1}\ifx\idval\@nnil\else\noexpand\label{\idval}
+   \fi}
+   \aftergroup\temp
+}
+
+
+\XMLelement{emph}{}
+ {\itshape}
+ {}
+
+\XMLelement{code}{}
+ {\ttfamily}
+ {}
+
+\XMLelement{gi}{}
+ {\ttfamily\textless}
+ {\textgreater}
+
+\XMLelement{eg}{}
+ {\begin{quote}\ttfamily\obeylines}
+ {\end{quote}}
+
+\XMLelement{teiHeader}{}
+ {\xmlgrab}
+ {\xmltexfirstchild#1\@empty\@}
+
+\XMLelement{fileDesc}{}
+ {}
+ {}
+
+\XMLelement{titleStmt}{}
+ {\xmlgrab}
+ {}
+
+\XMLelement{availability}{}
+ {\xmlgrab}
+ {\gdef\header@availability{#1}}
+
+\XMLelement{docTitle}{}
+ {\xmlgrab}
+ {\gdef\nopar{\let\par\relax}
+  \title{#1\unskip\thanks{\protect\nopar\ignorespaces\header@availability}}}
+
+\XMLelement{xptr}
+ {\XMLattribute{doc}{\xptrdoc}{}}
+ {\NDATAEntity\xptrdoc\@gobble\url}
+ {}
+
+\XMLelement{docDate}{}
+ {\xmlgrab}
+ {\date{#1}}
+
+\XMLelement{docAuthor}{}
+ {\xmlgrab}
+ {\author{#1}}
+
+\XMLelement{front}{}
+ {}
+ {\maketitle\tableofcontents}
+
+\XMLelement{item}{}
+ {\item}
+ {}
+
+\XMLelement{list}{
+ \XMLattribute{type}{\listtype}{itemize}}
+ {\ifthenelse{\equal{\listtype}{ordered}}
+        {\begin{enumerate}}{\begin{itemize}}}
+ {\ifthenelse{\equal{\listtype}{ordered}}
+        {\end{enumerate}}{\end{itemize}}}
+
+
+\XMLelement{q}{
+ \XMLattribute{rend}{\qrend}{}}
+ {\begin{quote}
+   \ifthenelse{\equal{\qrend}{eg}}{\ttfamily\obeylines}{}}
+ {\end{quote}}
+
+\XMLelement{ptr}{
+ \XMLattribute{target}{\ptrtarget}{}}
+ {\ref{\ptrtarget}}{}
+
+\XMLelement{ref}{
+ \XMLattribute{target}{\ptrtarget}{}}
+ {\ref{\ptrtarget}}{}
+
+
+
+
+\XMLelement{table}{}
+ {\begin{tabular}{*{20}{l}}}
+ {\end{tabular}}
+
+\XMLelement{row}{}
+ {\xmlgrab}
+ {\gdef\temp{#1\\}\aftergroup\temp}
+
+\XMLelement{cell}{}
+ {\xmlgrab}
+ {\gdef\temp{#1\tabcellsep}\aftergroup\temp}
+
+
+% cheating, a bit
+\XMLentity{TeX}{\TeX}
+\XMLentity{LaTeX}{\LaTeX}

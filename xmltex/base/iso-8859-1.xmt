@@ -1,0 +1,29 @@
+
+
+  \count@128\relax
+
+  \loop
+    \bgroup
+      \uccode`\~\count@
+      \uppercase{
+    \egroup
+         \xdef~{\noexpand\utfeightb\string^^c2\string~}
+      }
+  \ifnum\count@<191\relax
+     \advance\count@\@ne
+  \repeat
+
+  \count@192\relax
+  \loop
+    \bgroup
+      \uccode`\~\count@
+      \advance\count@-64
+      \uccode`\!\count@
+      \uppercase{
+    \egroup
+         \xdef~{\noexpand\utfeightb\string^^c3\string!}
+      }
+  \ifnum\count@<255\relax
+     \advance\count@\@ne
+  \repeat
+

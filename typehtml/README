@@ -1,0 +1,7 @@
+typehtml.dtx
+typehtml.ins
+   Typeset HTML (ie World Wide web documents) directly from LaTeX.
+   Process the file html.ins to produce the html.sty package file.
+   Process the file html.dtx to produce examples, documentation and
+   code listings. Currently this package can handle almost all of
+   HTML2, and most of the math fragment of the draft HTML3.
