@@ -1,0 +1,23 @@
+% reported by Frank Mittelbach (possibly a long time ago:-)
+% \hhline should use arrayrulewidth rather than doublerulesep
+% for ~
+% fix suggested by Frank
+%
+%%FMi \CT@drsc@\leaders\hrule\@height\doublerulesep\hfil}}%
+%\CT@drsc@\leaders\hrule\@height\arrayrulewidth\hfil}}%
+
+\documentclass{article}
+
+\usepackage{hhline}
+\usepackage{colortbl}
+
+\begin{document}
+
+\begin{tabular}{rrrr}
+a&b&c&d\\
+\hhline{==~=}
+a&b&c&d\\
+\hhline{--~-}
+a&b&c&d\\
+\end{tabular}
+\end{document}
