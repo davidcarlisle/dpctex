@@ -1,0 +1,394 @@
+\documentclass[numbers=noenddot, pagesize=auto]{scrartcl}
+
+\usepackage{fixltx2e}
+\usepackage{etex}
+\usepackage{etoolbox}
+\usepackage{xspace}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage[svgnames]{xcolor}
+\usepackage{listings}
+\usepackage{microtype}
+\usepackage[unicode=true]{hyperref}
+
+\newcommand*{\pkg}[1]{\textsf{#1}}
+\newcommand*{\cs}[1]{\texttt{\textbackslash#1}}
+\makeatletter
+\newcommand*{\cmd}[1]{\cs{\expandafter\@gobble\string#1}}
+\makeatother
+\newcommand*{\opt}[1]{\texttt{#1}}
+\newcommand*{\meta}[1]{\textlangle\textsl{#1}\textrangle}
+\newcommand*{\marg}[1]{\texttt{\{}\meta{#1}\texttt{\}}}
+
+\renewcommand*{\thesubsection}{\thesection\,\alph{subsection}}
+\renewcommand*{\theenumi}{\alph{enumi}}
+\renewcommand*{\labelenumi}{\theenumi)}
+\addtokomafont{title}{\rmfamily}
+
+% fix bug in listings package, see http://groups.google.de/group/comp.text.tex/browse_thread/thread/b004ec97fd72613a
+\makeatletter
+\preto\lstlisting{\global\@noskipsectrue}
+\makeatother
+
+\lstset{%
+  language=[LaTeX]TeX,%
+  columns=fullflexible,%
+  upquote=true,%
+  numbers=left,%
+  basicstyle=\small\ttfamily,%
+  keywordstyle=\color{Navy},%
+  commentstyle=\color{DimGray},%
+  stringstyle=\color{SeaGreen},%
+  numberstyle=\scriptsize\color{SlateGray}%
+}
+
+
+\title{The \pkg{grfpaste} package\thanks{This manual corresponds to \pkg{grfpaste}~v0.2, dated~1997/07/18.}}
+\subtitle{\LaTeX\ support for \TeX plorators / M. Spivak \texttt{dvipaste} program}
+\author{David Carlisle}
+\date{1997/07/18}
+
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\begin{quote}
+  \footnotesize
+  This package can redistributed and/or modified under the terms
+  of the \LaTeX\ Project Public License Distributed from CTAN
+  archives in directory \texttt{macros/latex/base/lppl.txt}; either
+  version~1 of the License, or (at your option) any later version.
+\end{quote}
+
+\noindent
+\texttt{Dvipaste} comes with a plain~\TeX\ based set of macros in a file
+\texttt{dvipaste.tex} that provide an interface to the \texttt{dvipaste} program. That
+file works perfectly well in \LaTeX\ with only minor modifications
+(specifically using \cmd{\@@line} instead of \cmd{\line}, and \cmd{\c@page} instead of
+\cmd{\pageno}). A \texttt{dvipaste.sty} constructed by just such modifications may be
+found distributed with Jean-Pierre Drucbert's `\pkg{export'} package on \textsc{ctan}.
+However I thought that it would be more in the `\LaTeX\ spirit'
+to provide an interface via the existing \LaTeX\ graphics package.
+
+The files produced by this \pkg{grfpaste} package should be fully compatible
+with \texttt{dvi\-paste.tex} or \texttt{dvipaste.sty}. That is, if \textsc{dvi} fragments are
+created using the plain~\TeX\ interface they may be included using
+\cmd{\includegraphics} via this package, and conversely if this package is
+used with the \opt{[write]} or \opt{[writepages]} options to produce a file of \textsc{dvi}
+fragments for including in another file, then the \textsc{dvi} file (and it's
+accompanying `\texttt{.dat}' file of size information) may be included either
+with this package, or via the original \texttt{dvipaste.tex} interface.
+
+Currently the \LaTeX\ interface uses the \pkg{graphicx} package, it would be
+possible to also provide an interface to the more basic \pkg{graphics}
+package, but that is not done here.
+
+The package is used in one of two forms.
+
+
+
+\section{Producing DVI Fragments}
+
+\subsection{Writing out boxes.}
+
+\begin{lstlisting}
+\documentclass{article}
+
+\usepackage[write]{grfpaste}
+
+\begin{document}
+
+\sendout{\parbox[b]{2cm}{one \sf two three \tt four \it five}}
+
+\sendout[abc]{hello}
+
+\sendout{\parbox[t]{2cm}{one \sf two three \tt four \it five}}
+
+\end{document}
+\end{lstlisting}
+%
+If the package is used with the \opt{[write]} option then the document should
+just consist of \cmd{\sendout} commands, the argument of each will be marked
+as a `fragment' that may be pasted into another DVI file by the \texttt{dvipaste}
+program. An auxiliary file with extension \texttt{.dat} will be created which
+contains the size of each of these fragments. Normally the fragments
+will be accessed by their number, starting from~1, but you may
+optionally supply a label, as in `\texttt{abc}' above which allows fragments to
+be referenced more easily. The above example forms the example
+document \texttt{grfp1.tex} in this distribution.
+
+
+\subsection{Writing out whole pages.}
+
+\begin{lstlisting}
+\documentclass{article}
+
+\usepackage[writepages]{grfpaste}
+
+\begin{document}
+...
+\end{document}
+\end{lstlisting}
+%
+If the package is used with the \opt{[writepages]} option then each
+indivdual page will be marked as a `fragment' for later processing by
+\texttt{dvipaste}. The fragments will be numbered consecutively, starting from~%
+1, whatever the value of the page counter.  See the example document
+\texttt{grfp2.tex}.
+
+
+
+\section{Using DVI Fragments}
+
+\begin{lstlisting}
+\documentclass{article}
+
+\usepackage{grfpaste}
+
+\begin{document}
+
+aaa\fbox{\includegraphics
+        [num=1,natheight=19,natdepth=2pt,natwidth=57]{grfp1.dvi}}bbb
+
+xxx\fbox{\includegraphics[num=2]{grfp1.dvi}}yyy
+
+xxx\fbox{\includegraphics[ref=abc]{grfp1.dvi}}yyy
+
+Page 3 of grfp2.dvi:
+aaa\fbox{\includegraphics[num=3]{grfp2}}bbb
+
+\end{document}
+\end{lstlisting}
+%
+To use the fragments then load the package with no option (or
+equivalently with the \opt{[include]} option). You may also use any options
+understood by the \pkg{graphicx} package, these will be passed on to \pkg{graphicx}
+which is loaded by this package.
+
+To load the first fragment of a given \textsc{dvi} file you just need
+\cmd{\include\-graphics}\marg{file\-name} or \cmd{\include\-graphics}\texttt{\{}\meta{file\-name}\texttt{.dvi\}}
+(\texttt{.dvi} is added as one of the default extensions by this package)
+
+To access later fragments then you use the new \texttt{num=}\meta{??} key to specify
+the fragment number, as demonstrated above. If there are a lot of
+fragments maintaining the correct number may be inconvenient so you
+may instead use the \texttt{ref=} key to refer to a label previously supplied
+by the \cmd{\sendout} command. Note this label information is added to the
+\texttt{.dat} file in the form of a comment (after \texttt{\%}) and so the \texttt{.dat} file is
+still compatible with  \texttt{dvipaste.tex}, but if that is used, then the
+numeric form must be used. Thus the two examples above with \texttt{num=2}
+and \texttt{ref=abc} include the same fragment from the file \texttt{grfp1.dvi}.
+
+Normally the size of the graphic is read from the `\texttt{.dat}' file which is
+the `read file' for the \textsc{dvi} graphic type, in the terminoligy of the
+\pkg{graphics} package documentation.  If you have lost the \texttt{.dat} file, or
+wish to override it with altered sizes, you may specify the natural
+size using the \texttt{natheight}, \texttt{natwidth} and \texttt{natdepth} keys. As usual these
+take a dimension but the units may be omitted in which case \texttt{bp} are
+assumed.  \texttt{natheight} and \texttt{natwidth} are standard \pkg{graphicx} keys, but
+\texttt{natdepth} is new, as these fragments are \TeX\ boxes, so have height and
+depth, unlike most other graphic formats that may be included, which
+always have zero depth.
+
+The \cmd{\sendout} command defined by the \opt{[write]} option matches that used
+in the plain~\TeX\ support, but the plain~\TeX\ version does not use
+\cmd{\includegraphics} to include the fragment. It defines a command \cmd{\paste}
+to achieve this. In order to help move documents between the two
+versions, a \opt{[defpaste]} option is provided for this package which
+specifies that a compatible \cmd{\paste} command should be defined. It is
+defined to be the equivalent call to \cmd{\includegraphics},
+\verb+\includegraphics[num=#2]{#1}+.
+
+See the example file \texttt{grfp3.tex} to see examples of including \textsc{dvi}
+fragments.
+
+
+
+\section{Putting it all together}
+
+\begin{enumerate}
+\item Produce one or more files of fragments using
+  \LaTeX\ and this package with the \opt{[write]} or \opt{[writepages]} options.
+  (or plain~\TeX\ using \texttt{dvipaste.tex}).
+  
+\item \LaTeX\ your master document, including this package and using
+  \cmd{\includegraphics} to include the fragments at the appropriate points.
+  
+  At this stage the file will have blank spaces (but if the correct
+  size) at the points where the \textsc{dvi} fragments should appear
+  
+\item  Run \texttt{dvipaste} on the master \textsc{dvi} file. It will incorporate the
+  fragments and re-write the file.
+  
+\item  Preview or print the modified \textsc{dvi} file in your usual manner.
+\end{enumerate}
+
+
+
+\section{Running the examples}
+
+\lstset{language=bash}
+
+\begin{itemize}
+\item \texttt{grfp1.tex} is an example of using the \opt{[write]} option
+\item \texttt{grfp2.tex} is an example of using the \opt{[writepages]} option
+\item \texttt{grfp3.tex} is an example of using the \opt{[include]} option
+\end{itemize}
+%
+To process the final document (\texttt{grfp3.dvi}) the following steps need be
+taken.
+%
+\begin{lstlisting}
+latex grfp1
+latex grfp2
+latex grfp2
+latex grfp3
+dvipaste grfp3
+\end{lstlisting}
+%
+Note that \texttt{grfp2} needs to be processed twice to generate a full table of
+contents. After \texttt{grfp3.tex} is processed by \LaTeX\ the \textsc{dvi} file will show
+blank spaces at the points that the fragments are to be included. These
+will be filled in by running \texttt{dvipaste}, after which the \texttt{grfp3.dvi} may be
+processed by your driver in the normal way.
+
+
+
+\section{Compiling \texttt{dvipaste.c}}
+
+\lstset{language=C}
+
+\begin{lstlisting}
+/* config.h for LINUX machines for dvipaste.c (DPC) */
+
+
+#define ANSI
+#undef MICROSOFTC
+#define LITTLENDIAN
+
+/* I guess this is what was meant. */
+/* (dvipaste.c defines strcmp to itself */
+/* leaving stricmp undefined) .*/
+#ifndef MICROSOFTC
+#define strnicmp strncmp
+#define stricmp strcmp
+#endif
+
+#ifdef ANSI
+/* Other things in ANSI C are good, but this is a crock */
+#define READ_BINARY "rb"
+#define WRITE_BINARY "wb"
+#else
+/* The good old simple and logical K&R I/O */
+#define READ_BINARY "r"
+#define WRITE_BINARY "w"
+#endif
+\end{lstlisting}
+%
+When I tried compiling \texttt{dvipaste.c} I got error due to the function
+\texttt{stricmp} being undefined. The file has a circular definition of \texttt{strcmp}
+to itself which looks like a typo, so I corrected that by making 
+\texttt{stricmp} an alias for \texttt{strcmp} by altering \texttt{config.h} as above (which also
+sets \texttt{LITTLENDIAN} for Linux. It seems to work for me, but no promises.
+
+The above suggested \texttt{config.h} leaves \texttt{stricmp} meaning the same thing as
+\texttt{strcmp} (string comparison). Jean-Pierre Drucbert points out that
+\texttt{stricmp} is (on systems that it is defined) a case-insensitive
+comparison function, and that rather than the crude substitution above
+one may define it as follows.
+%
+\begin{quote}
+  \texttt{str\{n\}icmp} is not available on all systems. So I got the
+  following code in \texttt{ci.c}~:
+  %
+\begin{lstlisting}
+#include <ctype.h>
+#include "config.h"
+/*
+* str{n}icmp - case-insensitive flavors of strcmp(), strncmp()
+*/
+#ifdef PROTOS
+int stricmp(register char *s1,
+register char *s2)
+#else
+int stricmp(s1, s2)
+register char *s1, *s2;
+#endif
+{
+  register char c1, c2;
+  
+  for ( ; (c1 = TOLOWER(*s1)) == (c2 = TOLOWER(*s2)); s1++, s2++)
+  if (c1 == '\0')
+  return 0;
+  
+  return c1 - c2;
+}
+
+
+#ifdef PROTOS
+int strnicmp(register char *s1,
+register char *s2,
+int n)
+#else
+int strnicmp(s1, s2, n)
+register char *s1, *s2;
+int n;
+#endif
+{
+  register char c1, c2;
+  
+  for ( ; --n >= 0 &&
+  (c1 = TOLOWER(*s1)) == (c2 = TOLOWER(*s2)); s1++, s2++)
+  if (c1 == '\0')
+  return 0;
+  
+  return n < 0 ? 0 : c1 - c2;
+}
+\end{lstlisting}
+\end{quote}
+
+By default \texttt{dvipaste.c} has
+%
+\begin{lstlisting}
+#define STRINGSIZE (5124)       /* maximum string size */
+\end{lstlisting}
+%
+Jean-Pierre Drucbert commented:
+%
+\begin{quote}
+  it is necessary to increase \texttt{STRINGSIZE} if you paste a lot of \textsc{dvi}
+  pieces (I~increased it from 40592 to 2597888)\@. In practice, do
+  not export more than~\textasciitilde 100 pieces from one file. You can import a
+  lot more into one file. So it is preferable to import from
+  several files if you have more than 100 pieces to import.
+\end{quote}
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

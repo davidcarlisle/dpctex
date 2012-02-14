@@ -1,0 +1,42 @@
+\documentclass{article}
+
+\setlength\textheight{5cm}
+\setlength\textwidth{5cm}
+\setlength\oddsidemargin{0cm}
+
+\usepackage[writepages]{grfpaste}
+
+\pagestyle{headings}
+
+\def\xa{aa bb cc dd ee }
+\def\xb{\xa\xa\xa\xa\xa\xa\par\xa\xa\xa}
+\begin{document}
+
+\tableofcontents
+
+\section{Intro}
+\xb
+
+\section{More}
+\xb
+
+\begin{table}
+  \begin{tabular}{|ll|}
+aaa&bbb\\
+aaa&bbb\\
+aaa&bbb\\
+  \end{tabular}
+  \caption{test one}
+\end{table}
+\begin{table}
+  \begin{tabular}{|ll|}
+1&2\\
+3&4\\
+5&6\\
+  \end{tabular}
+  \caption{test two}
+\end{table}
+
+\section{Yet more}
+\xb\xb
+\end{document}

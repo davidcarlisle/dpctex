@@ -1,0 +1,23 @@
+\documentclass{article}
+
+\usepackage{grfpaste}
+\setlength\lineskip{12pt}
+\addtolength\textheight{1in}
+
+\begin{document}
+
+
+First two fragments from \texttt{grfp1.dvi} 
+\begin{center}
+  Paste fragment `abc': \fbox{\includegraphics[ref=abc]{grfp1}}\\
+  Paste fragment `1': \fbox{\includegraphics[num=1]{grfp1}}
+\end{center}
+and now four pages lifted from \texttt{grfp2.dvi}
+\begin{center}
+\fbox{\includegraphics[num=1]{grfp2}}
+\fbox{\includegraphics[num=2]{grfp2}}
+\fbox{\includegraphics[num=3]{grfp2}}
+\fbox{\includegraphics[num=4]{grfp2}}
+\end{center}
+
+\end{document}
