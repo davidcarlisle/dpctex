@@ -1,0 +1,76 @@
+
+%% type1cm package Copyright 1997 2002 David Carlisle
+%% This file may be distributed under the terms of the LPPL.
+%% See type1cm.txt for details.
+%%
+%% Please see type1cm.txt for instructions.
+%%
+
+% Assume AMS fontset by default
+\def\ams{ams}
+
+% IF you have not got the AMS FONT SET 
+% remove the % on the next line.
+%\def\ams{}
+
+% Conversely IF you have the `AMS Extra' font set available
+% that is you have msam6 as well as msam5 msam7 and msam10
+% then remove the % on the next line.
+%\def\ams{ams,extra}
+
+
+% Assume you do not want to make fd files.
+\newif\ifmakefd
+\makefdfalse
+
+% IF you want to make fd files replacing the standard LaTeX and AMS
+% ones, remove the % on the next line.
+%\makefdtrue
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% DO NOT EDIT BELOW THIS POINT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\def\batchfile{type1cm.ins}
+
+\input docstrip
+\keepsilent
+
+\preamble
+\endpreamble
+
+\generate{
+ \file{type1cm.sty}{\from{type1cm.fdd}{package,\ams}}}
+
+{\ifmakefd
+
+\generate{
+  \file{ot1cmr.fd}{\from{type1cm.fdd}{OT1,cmr,\ams}}
+  \file{ot1cmss.fd}{\from{type1cm.fdd}{OT1,cmss,\ams}}
+  \file{ot1cmtt.fd}{\from{type1cm.fdd}{OT1,cmtt,\ams}}
+  \file{ot1cmfr.fd}{\from{type1cm.fdd}{OT1,cmfr,\ams}}
+  \file{ot1cmdh.fd}{\from{type1cm.fdd}{OT1,cmdh,\ams}}
+  \file{omlcmm.fd}{\from{type1cm.fdd}{OML,cmm,\ams}}
+  \file{omlcmr.fd}{\from{type1cm.fdd}{OML,cmr,\ams}}
+  \file{omscmsy.fd}{\from{type1cm.fdd}{OMS,cmsy,\ams}}
+  \file{omscmr.fd}{\from{type1cm.fdd}{OMS,cmr,\ams}}
+  \file{omxcmex.fd}{\from{type1cm.fdd}{OMX,cmex,\ams}}
+  \file{ulasy.fd}{\from{type1cm.fdd}{U,lasy,\ams}}
+  }
+
+
+
+\ifx\ams\empty\else
+
+\generate{
+  \file{ueuex.fd}{\from{type1cm.fdd}{U,euex,ams}}
+  \file{ueuf.fd}{\from{type1cm.fdd}{U,euf,ams}}
+  \file{ueur.fd}{\from{type1cm.fdd}{U,eur,ams}}
+  \file{ueus.fd}{\from{type1cm.fdd}{U,eus,ams}}
+  }
+
+\fi
+\fi
+}
