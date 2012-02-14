@@ -1,0 +1,496 @@
+%%%
+%%%
+%%% Parts of LaTeX: Slightly changed/simplified in places.
+%%% Changes 
+%%%    Copyright 1996 David Carlisle
+%%% Original Code
+%%%    Copyright 1993-1996 LaTeX3 Project and original authors
+%%%
+%%%  Under no circumstances should any problems relating to this file
+%%%  be sent to the LaTeX bugs address, or any other LaTeX related
+%%%  support address.
+%%%
+%%% Problems can be sent to me directly at david@dcarlisle.demon.co.uk
+%%% (but I don't promise to fix them).
+%%%
+%%% This file may be distributed under the terms of the LPPL, see
+%%% 00readme.txt for details.
+
+%  1996/01/29 initial version
+%  1996/05/09 a few missing commands added
+%  1996/11/21 fixed @ catcode handling
+%  2010/01/02 import LaTeX's current \filename@parse [KB/DC]
+% (http://sourceforge.net/projects/asymptote/forums/forum/409349/topic/3405573)
+%  2010/01/07 import was incomplete [KB]
+%  2010/02/03 accept *-form of \ProcessOptions [KB/DL]
+
+\edef\resetatcatcode{\catcode`\noexpand\@\the\catcode`\@\relax}
+\ifx\miniltx\undefined\else\endinput\fi
+\let\miniltx\box
+
+\def\makeatletter{\catcode`\@11\relax}
+\def\makeatother{\catcode`\@12\relax}
+\makeatletter
+
+\def\@makeother#1{\catcode`#1=12\relax}
+
+
+\def\@ifnextchar#1#2#3{%
+  \let\reserved@d=#1%
+  \def\reserved@a{#2}\def\reserved@b{#3}%
+  \futurelet\@let@token\@ifnch}
+\def\@ifnch{%
+  \ifx\@let@token\@sptoken
+    \let\reserved@c\@xifnch
+  \else
+    \ifx\@let@token\reserved@d
+      \let\reserved@c\reserved@a
+    \else
+      \let\reserved@c\reserved@b
+    \fi
+  \fi
+  \reserved@c}
+\begingroup
+\def\:{\global\let\@sptoken= } \:  % this makes \@sptoken a space token
+\def\:{\@xifnch} \expandafter\gdef\: {\futurelet\@let@token\@ifnch}
+\endgroup
+
+
+
+\def\@ifstar#1{\@ifnextchar *{\@firstoftwo{#1}}}
+\long\def\@dblarg#1{\@ifnextchar[{#1}{\@xdblarg{#1}}}
+\long\def\@xdblarg#1#2{#1[{#2}]{#2}}
+
+\long\def \@gobble #1{}
+\long\def \@gobbletwo #1#2{}
+\long\def \@gobblefour #1#2#3#4{}
+\long\def\@firstofone#1{#1}
+\long\def\@firstoftwo#1#2{#1}
+\long\def\@secondoftwo#1#2{#2}
+
+\def\NeedsTeXFormat#1{\@ifnextchar[\@needsf@rmat\relax}
+\def\@needsf@rmat[#1]{}
+\def\ProvidesPackage#1{\@ifnextchar[%
+    {\@pr@videpackage{#1}}{\@pr@videpackage#1[]}}
+\def\@pr@videpackage#1[#2]{\wlog{#1: #2}}
+\let\ProvidesFile\ProvidesPackage
+\def\PackageInfo#1#2{\wlog{#1: #2}}
+
+\let\DeclareOption\@gobbletwo
+\def\ProcessOptions{\@ifstar\relax\relax}
+
+\def\RequirePackage{%
+  \@fileswithoptions\@pkgextension}
+\def\@fileswithoptions#1{%
+  \@ifnextchar[%]
+    {\@fileswith@ptions#1}%
+    {\@fileswith@ptions#1[]}}
+\def\@fileswith@ptions#1[#2]#3{%
+  \@ifnextchar[%]
+  {\@fileswith@pti@ns#1[#2]#3}%
+  {\@fileswith@pti@ns#1[#2]#3[]}}
+
+\def\@fileswith@pti@ns#1[#2]#3[#4]{%
+    \def\reserved@b##1,{%
+      \ifx\@nil##1\relax\else
+        \ifx\relax##1\relax\else
+         \noexpand\@onefilewithoptions##1[#2][#4]\noexpand\@pkgextension
+        \fi
+        \expandafter\reserved@b
+      \fi}%
+      \edef\reserved@a{\zap@space#3 \@empty}%
+      \edef\reserved@a{\expandafter\reserved@b\reserved@a,\@nil,}%
+  \reserved@a}
+
+\def\zap@space#1 #2{%
+  #1%
+  \ifx#2\@empty\else\expandafter\zap@space\fi
+  #2}
+
+\let\@empty\empty
+\def\@pkgextension{sty}
+
+\def\@onefilewithoptions#1[#2][#3]#4{%
+  \input #1.#4 }
+
+
+
+\def\typein{%
+  \let\@typein\relax
+  \@testopt\@xtypein\@typein}
+\def\@xtypein[#1]#2{%
+  \message{#2}%
+  \advance\endlinechar\@M
+  \read\@inputcheck to#1%
+  \advance\endlinechar-\@M
+  \@typein}
+\def\@namedef#1{\expandafter\def\csname #1\endcsname}
+\def\@nameuse#1{\csname #1\endcsname}
+\def\@cons#1#2{\begingroup\let\@elt\relax\xdef#1{#1\@elt #2}\endgroup}
+\def\@car#1#2\@nil{#1}
+\def\@cdr#1#2\@nil{#2}
+\def\@carcube#1#2#3#4\@nil{#1#2#3}
+\def\@preamblecmds{}
+
+\def\@star@or@long#1{%
+  \@ifstar
+   {\let\l@ngrel@x\relax#1}%
+   {\let\l@ngrel@x\long#1}}
+
+\let\l@ngrel@x\relax
+\def\newcommand{\@star@or@long\new@command}
+\def\new@command#1{%
+  \@testopt{\@newcommand#1}0}
+\def\@newcommand#1[#2]{%
+  \@ifnextchar [{\@xargdef#1[#2]}%
+                {\@argdef#1[#2]}}
+\long\def\@argdef#1[#2]#3{%
+   \@ifdefinable #1{\@yargdef#1\@ne{#2}{#3}}}
+\long\def\@xargdef#1[#2][#3]#4{%
+  \@ifdefinable#1{%
+     \expandafter\def\expandafter#1\expandafter{%
+          \expandafter
+          \@protected@testopt
+          \expandafter
+          #1%
+          \csname\string#1\expandafter\endcsname
+          {#3}}%
+       \expandafter\@yargdef
+          \csname\string#1\endcsname
+           \tw@
+           {#2}%
+           {#4}}}
+\def\@testopt#1#2{%
+  \@ifnextchar[{#1}{#1[#2]}}
+\def\@protected@testopt#1{%%
+  \ifx\protect\@typeset@protect
+    \expandafter\@testopt
+  \else
+    \@x@protect#1%
+  \fi}
+\long\def\@yargdef#1#2#3{%
+  \@tempcnta#3\relax
+  \advance \@tempcnta \@ne
+  \let\@hash@\relax
+  \edef\reserved@a{\ifx#2\tw@ [\@hash@1]\fi}%
+  \@tempcntb #2%
+  \@whilenum\@tempcntb <\@tempcnta
+     \do{%
+         \edef\reserved@a{\reserved@a\@hash@\the\@tempcntb}%
+         \advance\@tempcntb \@ne}%
+  \let\@hash@##%
+  \l@ngrel@x\expandafter\def\expandafter#1\reserved@a}
+\long\def\@reargdef#1[#2]#3{%
+  \@yargdef#1\@ne{#2}{#3}}
+\def\renewcommand{\@star@or@long\renew@command}
+\def\renew@command#1{%
+  {\escapechar\m@ne\xdef\@gtempa{{\string#1}}}%
+  \expandafter\@ifundefined\@gtempa
+     {\@latex@error{\string#1 undefined}\@ehc}%
+     {}%
+  \let\@ifdefinable\@rc@ifdefinable
+  \new@command#1}
+\long\def\@ifdefinable #1#2{%
+      \edef\reserved@a{\expandafter\@gobble\string #1}%
+     \@ifundefined\reserved@a
+         {\edef\reserved@b{\expandafter\@carcube \reserved@a xxx\@nil}%
+          \ifx \reserved@b\@qend \@notdefinable\else
+            \ifx \reserved@a\@qrelax \@notdefinable\else
+              #2%
+            \fi
+          \fi}%
+         \@notdefinable}
+\let\@@ifdefinable\@ifdefinable
+\long\def\@rc@ifdefinable#1#2{%
+  \let\@ifdefinable\@@ifdefinable
+  #2}
+\def\newenvironment{\@star@or@long\new@environment}
+\def\new@environment#1{%
+  \@testopt{\@newenva#1}0}
+\def\@newenva#1[#2]{%
+   \@ifnextchar [{\@newenvb#1[#2]}{\@newenv{#1}{[#2]}}}
+\def\@newenvb#1[#2][#3]{\@newenv{#1}{[#2][#3]}}
+\def\renewenvironment{\@star@or@long\renew@environment}
+\def\renew@environment#1{%
+  \@ifundefined{#1}%
+     {\@latex@error{Environment #1 undefined}\@ehc
+     }{}%
+  \expandafter\let\csname#1\endcsname\relax
+  \expandafter\let\csname end#1\endcsname\relax
+  \new@environment{#1}}
+\long\def\@newenv#1#2#3#4{%
+  \@ifundefined{#1}%
+    {\expandafter\let\csname#1\expandafter\endcsname
+                         \csname end#1\endcsname}%
+    \relax
+  \expandafter\new@command
+     \csname #1\endcsname#2{#3}%
+     \l@ngrel@x\expandafter\def\csname end#1\endcsname{#4}}
+
+\def\providecommand{\@star@or@long\provide@command}
+\def\provide@command#1{%
+  {\escapechar\m@ne\xdef\@gtempa{{\string#1}}}%
+  \expandafter\@ifundefined\@gtempa
+    {\def\reserved@a{\new@command#1}}%
+    {\def\reserved@a{\renew@command\reserved@a}}%
+   \reserved@a}%
+
+\def\@ifundefined#1{%
+  \expandafter\ifx\csname#1\endcsname\relax
+    \expandafter\@firstoftwo
+  \else
+    \expandafter\@secondoftwo
+  \fi}
+
+\chardef\@xxxii=32
+\mathchardef\@Mi=10001
+\mathchardef\@Mii=10002
+\mathchardef\@Miii=10003
+\mathchardef\@Miv=10004
+
+\newcount\@tempcnta
+\newcount\@tempcntb
+\newif\if@tempswa\@tempswatrue
+\newdimen\@tempdima
+\newdimen\@tempdimb
+\newdimen\@tempdimc
+\newbox\@tempboxa
+\newskip\@tempskipa
+\newskip\@tempskipb
+\newtoks\@temptokena
+
+\long\def\@whilenum#1\do #2{\ifnum #1\relax #2\relax\@iwhilenum{#1\relax
+     #2\relax}\fi}
+\long\def\@iwhilenum#1{\ifnum #1\expandafter\@iwhilenum
+         \else\expandafter\@gobble\fi{#1}}
+\long\def\@whiledim#1\do #2{\ifdim #1\relax#2\@iwhiledim{#1\relax#2}\fi}
+\long\def\@iwhiledim#1{\ifdim #1\expandafter\@iwhiledim
+        \else\expandafter\@gobble\fi{#1}}
+\long\def\@whilesw#1\fi#2{#1#2\@iwhilesw{#1#2}\fi\fi}
+\long\def\@iwhilesw#1\fi{#1\expandafter\@iwhilesw
+         \else\@gobbletwo\fi{#1}\fi}
+\def\@nnil{\@nil}
+\def\@empty{}
+\def\@fornoop#1\@@#2#3{}
+\long\def\@for#1:=#2\do#3{%
+  \expandafter\def\expandafter\@fortmp\expandafter{#2}%
+  \ifx\@fortmp\@empty \else
+    \expandafter\@forloop#2,\@nil,\@nil\@@#1{#3}\fi}
+\long\def\@forloop#1,#2,#3\@@#4#5{\def#4{#1}\ifx #4\@nnil \else
+       #5\def#4{#2}\ifx #4\@nnil \else#5\@iforloop #3\@@#4{#5}\fi\fi}
+\long\def\@iforloop#1,#2\@@#3#4{\def#3{#1}\ifx #3\@nnil
+       \expandafter\@fornoop \else
+      #4\relax\expandafter\@iforloop\fi#2\@@#3{#4}}
+\def\@tfor#1:={\@tf@r#1 }
+\long\def\@tf@r#1#2\do#3{\def\@fortmp{#2}\ifx\@fortmp\space\else
+    \@tforloop#2\@nil\@nil\@@#1{#3}\fi}
+\long\def\@tforloop#1#2\@@#3#4{\def#3{#1}\ifx #3\@nnil
+       \expandafter\@fornoop \else
+      #4\relax\expandafter\@tforloop\fi#2\@@#3{#4}}
+\long\def\@break@tfor#1\@@#2#3{\fi\fi}
+\def\@removeelement#1#2#3{%
+  \def\reserved@a##1,#1,##2\reserved@a{##1,##2\reserved@b}%
+  \def\reserved@b##1,\reserved@b##2\reserved@b{%
+    \ifx,##1\@empty\else##1\fi}%
+  \edef#3{%
+    \expandafter\reserved@b\reserved@a,#2,\reserved@b,#1,\reserved@a}}
+
+\let\ExecuteOptions\@gobble
+
+\def\PackageError#1#2#3{%
+  \errhelp{#3}\errmessage{#1: #2}}
+\def\@latex@error#1#2{%
+  \errhelp{#2}\errmessage{#1}}
+
+\bgroup\uccode`\!`\%\uppercase{\egroup
+\def\@percentchar{!}}
+
+% protect against loops in formats other than plain. 1999/04/27
+\ifx\@@input\@undefined
+ \let\@@input\input
+\fi
+
+\def\input{\@ifnextchar\bgroup\@iinput\@@input}
+\def\@iinput#1{\@@input#1 }
+
+\ifx\filename@parse\@undefined
+  \def\reserved@a{./}\ifx\@currdir\reserved@a
+    \wlog{^^JDefining UNIX/DOS style filename parser.^^J}
+    \def\filename@parse#1{%
+      \let\filename@area\@empty
+      \expandafter\filename@path#1/\\}
+    \def\filename@path#1/#2\\{%
+      \ifx\\#2\\%
+         \def\reserved@a{\filename@simple#1.\\}%
+      \else
+         \edef\filename@area{\filename@area#1/}%
+         \def\reserved@a{\filename@path#2\\}%
+      \fi
+      \reserved@a}
+  \else\def\reserved@a{[]}\ifx\@currdir\reserved@a
+    \wlog{^^JDefining VMS style filename parser.^^J}
+    \def\filename@parse#1{%
+      \let\filename@area\@empty
+      \expandafter\filename@path#1]\\}
+    \def\filename@path#1]#2\\{%
+      \ifx\\#2\\%
+         \def\reserved@a{\filename@simple#1.\\}%
+      \else
+         \edef\filename@area{\filename@area#1]}%
+         \def\reserved@a{\filename@path#2\\}%
+      \fi
+      \reserved@a}
+  \else\def\reserved@a{:}\ifx\@currdir\reserved@a
+    \wlog{^^JDefining Mac style filename parser.^^J}
+    \def\filename@parse#1{%
+      \let\filename@area\@empty
+      \expandafter\filename@path#1:\\}
+    \def\filename@path#1:#2\\{%
+      \ifx\\#2\\%
+         \def\reserved@a{\filename@simple#1.\\}%
+      \else
+         \edef\filename@area{\filename@area#1:}%
+         \def\reserved@a{\filename@path#2\\}%
+      \fi
+      \reserved@a}
+  \else
+    \wlog{^^JDefining generic filename parser.^^J}
+    \def\filename@parse#1{%
+      \let\filename@area\@empty
+      \expandafter\filename@simple#1.\\}
+  \fi\fi\fi
+  \def\filename@simple#1.#2\\{%
+    \ifx\\#2\\%
+       \let\filename@ext\relax
+    \else
+       \edef\filename@ext{\filename@dot#2\\}%
+    \fi
+    \edef\filename@base{#1}}
+  \def\filename@dot#1.\\{#1}
+\else
+  \wlog{^^J^^J%
+    \noexpand\filename@parse was defined in texsys.cfg:^^J%
+    \expandafter\strip@prefix\meaning\filename@parse.^^J%
+    }
+\fi
+
+\long\def \IfFileExists#1#2#3{%
+  \openin\@inputcheck#1 %
+  \ifeof\@inputcheck
+    \ifx\input@path\@undefined
+      \def\reserved@a{#3}%
+    \else
+      \def\reserved@a{\@iffileonpath{#1}{#2}{#3}}%
+    \fi
+  \else
+    \closein\@inputcheck
+    \edef\@filef@und{#1 }%
+    \def\reserved@a{#2}%
+  \fi
+  \reserved@a}
+\long\def\@iffileonpath#1{%
+  \let\reserved@a\@secondoftwo
+  \expandafter\@tfor\expandafter\reserved@b\expandafter
+             :\expandafter=\input@path\do{%
+    \openin\@inputcheck\reserved@b#1 %
+    \ifeof\@inputcheck\else
+      \edef\@filef@und{\reserved@b#1 }%
+      \let\reserved@a\@firstoftwo%
+      \closein\@inputcheck
+      \@break@tfor
+    \fi}%
+  \reserved@a}
+\long\def \InputIfFileExists#1#2{%
+  \IfFileExists{#1}%
+    {#2\@addtofilelist{#1}\@@input \@filef@und}}
+
+\chardef\@inputcheck0
+
+\let\@addtofilelist \@gobble
+
+
+\def\@defaultunits{\afterassignment\remove@to@nnil}
+\def\remove@to@nnil#1\@nnil{}
+
+\newdimen\leftmarginv
+\newdimen\leftmarginvi
+
+\newdimen\@ovxx
+\newdimen\@ovyy
+\newdimen\@ovdx
+\newdimen\@ovdy
+\newdimen\@ovro
+\newdimen\@ovri
+\newdimen\@xdim
+\newdimen\@ydim
+\newdimen\@linelen
+\newdimen\@dashdim
+
+
+\long\def\mbox#1{\leavevmode\hbox{#1}}
+
+
+\let\DeclareRobustCommand\newcommand
+\let\@onlypreamble\@gobble
+
+
+\def\AtBeginDocument#1{#1}
+\let\protect\relax
+
+
+\newdimen\fboxsep
+\newdimen\fboxrule
+
+\fboxsep = 3pt
+\fboxrule = .4pt
+
+\def\@height{height} \def\@depth{depth} \def\@width{width}
+\def\@minus{minus}
+\def\@plus{plus}
+\def\hb@xt@{\hbox to}
+
+
+\long\def\@begin@tempboxa#1#2{%
+   \begingroup
+     \setbox\@tempboxa#1{\color@begingroup#2\color@endgroup}%
+     \def\width{\wd\@tempboxa}%
+     \def\height{\ht\@tempboxa}%
+     \def\depth{\dp\@tempboxa}%
+     \let\totalheight\@ovri
+     \totalheight\height
+     \advance\totalheight\depth}
+\let\@end@tempboxa\endgroup
+
+\let\set@color\relax
+\let\color@begingroup\relax
+\let\color@endgroup\relax
+\let\color@setgroup\relax
+\let\normalcolor\relax
+\let\color@hbox\relax
+\let\color@vbox\relax
+\let\color@endbox\relax
+
+%  1996/05/09  \setlength and \strip@pt needed for some 
+%              \includegraphics options (Thierry Bouche)
+
+\def\setlength#1#2{#1#2\relax}
+
+\begingroup
+  \catcode`P=12
+  \catcode`T=12
+  \lowercase{
+    \def\x{\def\rem@pt##1.##2PT{##1\ifnum##2>\z@.##2\fi}}}
+  \expandafter\endgroup\x
+\def\strip@pt{\expandafter\rem@pt\the}
+
+% 1996/11/13 \AtBeginDvi used in driver files for including headers.
+%              \@input added.
+
+
+\def\AtBeginDvi#1{#1}
+
+\def\@input#1{%
+  \IfFileExists{#1}{\@@input\@filef@und}{\message{No file #1.}}}
+
+% 1996/11/21
+\def\@warning{\immediate\write16}
