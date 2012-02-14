@@ -1,0 +1,17 @@
+
+\input psfrag
+
+First without psfrag:
+
+        \includegraphics[width=3.5in]{example.eps}
+
+and now with:
+
+        \psfragscanon
+        \psfrag{p1}[][l]{$\ast$}
+        \psfrag{p2}[][l]{$\ast$}
+        \psfrag{p3}{$\cos(t)$}
+        \includegraphics[width=3.5in]{example.eps}
+
+
+\bye

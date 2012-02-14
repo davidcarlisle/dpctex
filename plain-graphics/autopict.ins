@@ -1,0 +1,102 @@
+%%
+%% docstrip install file for autopict.sty (only)
+%% based on autoload.ins in the LaTeX distribution.
+
+%%
+\def\batchfile{autopict.ins}
+\input docstrip
+
+\let\interactive\relax
+
+{\ifx\generate\undefined
+\Msg{**********************************************}
+\Msg{*}
+\Msg{* This installation requires docstrip}
+\Msg{* version 2.3c or later.}
+\Msg{*}
+\Msg{* An older version of docstrip has been input}
+\Msg{*}
+\Msg{**********************************************}
+\errhelp{Move or rename old docstrip.tex.}
+\errmessage{Old docstrip in input path}
+\batchmode
+\csname @@end\endcsname
+\fi}
+
+\keepsilent
+\declarepreamble\mainpreamble
+
+This is a generated file.
+
+Copyright 1993 1994 1995 1996
+The LaTeX3 Project and any individual authors listed elsewhere
+in this file. 
+
+For further copyright information, and conditions for modification
+and distribution, see the file legal.txt, and any other copyright
+notices in this file.
+
+This file is part of the LaTeX2e system.
+----------------------------------------
+  This system is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+  For error reports concerning UNCHANGED versions of this file no
+  more than one year old, see bugs.txt.
+
+  Please do not request updates from us directly.  Primary
+  distribution is through the CTAN archives.
+
+
+IMPORTANT COPYRIGHT NOTICE:
+
+You are NOT ALLOWED to distribute this file alone.
+
+You are allowed to distribute this file under the condition that it
+is distributed together with all the files listed in manifest.txt.
+
+If you receive only some of these files from someone, complain!
+
+
+Permission is granted to copy this file to another file with a
+clearly different name and to customize the declarations in that
+copy to serve the needs of your installation, provided that you
+comply with the conditions in the file legal.txt.
+
+However, NO PERMISSION is granted to generate or to distribute a
+modified version of this file under its original name.
+ 
+You are NOT ALLOWED to change this file.
+
+
+MODIFICATION ADVICE:
+
+If you want to customize this file, it is best to make a copy of
+the source file(s) from which it was produced.  Use a different
+name for your copy(ies) and modify the copy(ies); this will ensure
+that your modifications do not get overwritten when you install a
+new release of the standard system.  You should also ensure that
+your modified source file does not generate any modified file with
+the same name as a standard file.
+
+You can then easily distribute your modifications by distributing
+the modified and renamed copy of the source file, taking care to
+observe the conditions in legal.txt; this will ensure that other
+users can safely use your modifications.
+
+You will also need to produce your own, suitably named, .ins file to
+control the generation of files from your source file; this file
+should contain your own preambles for the files it generates, not
+those in the standard .ins files.
+
+The names of the source files used are shown above.
+
+
+
+\endpreamble
+\usepreamble\mainpreamble
+
+\generate{\file{autopict.sty}{\from{ltpictur.dtx}{def}}}
+
+

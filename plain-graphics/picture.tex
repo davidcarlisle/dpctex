@@ -1,0 +1,51 @@
+% Plain TeX interface to picture mode.
+% David Carlisle
+
+\input miniltx
+
+\makeatletter
+\let\@@line\line
+\input autopict.sty
+\let\LaTeX@line\line
+\let\line\@@line
+
+
+\newdimen\@wholewidth
+\newdimen\@halfwidth
+\newdimen\unitlength \unitlength =1pt
+\newbox\@picbox
+\newdimen\@picht
+\newcount\@xarg
+\newcount\@yarg
+\newcount\@yyarg
+
+\font\tenln  =line10   \font\tenlnw  =linew10\relax
+\font\tencirc=lcircle10 \font\tencircw=lcirclew10\relax
+\newcount\@multicnt
+\newdimen\@xdim
+\newdimen\@ydim
+\newbox\@linechar
+\newdimen\@linelen
+\newdimen\@clnwd
+\newdimen\@clnht
+\newdimen\@dashdim
+\newbox\@dashbox
+\newcount\@dashcnt
+\let\@linefnt\tenln
+\let\@circlefnt\tencirc
+\@wholewidth\fontdimen8\tenln
+\@halfwidth .5\@wholewidth
+
+\def\picture#1{%
+  \begingroup
+  \let\line\LaTeX@line
+  \def\end##1{\csname end##1\endcsname}%
+  \pictur@#1}
+
+\let\@@endpicture\endpicture
+\def\endpicture{\@@endpicture\endgroup}
+
+\def\LaTeXbegin{\def\begin##1{\csname##1\endcsname}}
+
+
+\resetatcatcode

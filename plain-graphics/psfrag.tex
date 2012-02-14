@@ -1,0 +1,49 @@
+% Plain TeX interface to psfrag.
+% David Carlisle
+
+\input miniltx
+
+\makeatletter
+
+\ifx\@compatibilitytrue\@undefined
+  \csname newif\expandafter\endcsname
+       \csname if@compatibility\endcsname
+\fi
+
+
+\ifx\raisebox\@undefined
+\def\raisebox#1#2{{%
+  \setbox0=\hbox{#2}\def\depth{\dp0}\leavevmode\raise#1\box\z@}}
+\fi
+
+\ifx\@@underline\@undefined
+\let\@@underline\underline
+\def\underline{%
+  \ifmmode\expandafter\@@underline\else\expandafter\underbar\fi}
+\fi
+
+\ifx\sbox\@undefined
+\def\sbox#1{\setbox#1\hbox}
+\fi
+
+
+% psfrag loads the core graphics package, but only the extended
+% graphicx interface is available from plain TeX so just intercept
+% the call and ask for graphicx.
+\let\savedRP\RequirePackage
+\def\RequirePackage#1{%
+  \let\RequirePackage\savedRP
+  \ifx\includegraphics\@undefined
+  \input graphicx\fi\relax}
+\input psfrag.sty
+
+
+
+\ifx\pfg@dp\@undefined
+\csname newdimen\endcsname\pfg@dp
+\csname newdimen\endcsname\pfg@wd
+\csname newdimen\endcsname\pfg@dx
+\csname newdimen\endcsname\pfg@dy
+\fi
+
+\resetatcatcode
