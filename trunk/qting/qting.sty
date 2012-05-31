@@ -1,0 +1,41 @@
+%% May be distributed under LPPL
+%% http://tex.stackexchange.com/questions/57223/automating-quoting-across-latex-documents
+
+
+\def\q#1{}
+
+\newread\q@in
+
+% optional argument like xr allows to prefix quotes to avoid name clashes
+
+\newcommand\quotefrom[2][]{%
+\def\q@prefix{#1}%
+\openin\q@in#2\relax
+\loop
+\read\q@in to \q@temp
+\expandafter\q@test\q@temp\q@test\q\@nil\relax\q@test\quotefrom
+\ifeof\q@in
+\else
+\repeat
+}
+
+
+\long\def\q@test#1\q#2#3#4\q@test#5\quotefrom{%
+\def\@tempa{#2}%
+\ifx\@tempa\@nnil
+\else
+\expandafter\ifx\csname q-\q@prefix#2\endcsname\relax
+\@namedef{q-\q@prefix#2}{#3}%
+\else
+\PackageWarning{qting}{Duplicated quoatation [q-\q@prefix#2]}%
+\fi
+\fi}
+
+\def\qting#1{%
+\expandafter\ifx\csname q-#1\endcsname\relax
+[Missing quote \texttt{#1}]%
+\PackageError{qting}{Unknown quote [#1]}\@ehc
+\else
+\csname q-#1\expandafter\endcsname
+\fi}
+
