@@ -15,7 +15,7 @@
 %<driver>\ProvidesFile{colortbl.drv}
 % \fi
 %         \ProvidesFile{colortbl.dtx}
-          [2012/02/13 v1.0a Color table columns (DPC)]
+          [2012/06/21 v1.0b Color table columns (DPC)]
 %
 % \iffalse
 %<*driver>
@@ -42,7 +42,7 @@
 %
 %  \maketitle
 % 
-% \CheckSum{966}
+% \CheckSum{967}
 %
 %
 % \begin{abstract}
@@ -647,7 +647,7 @@
    \@addtopreamble{%
     \setbox\z@\hbox\bgroup\bgroup
 %    \end{macrocode}
-% \changes{v1.0a}{2012/02/13}{reset everycr for nested uses (see test ct2)}
+% \changes{v1.0a}{2012/02/13}{reset \cs{everycr} for nested uses (see test ct2)}
 %    \begin{macrocode}
       \CT@everycr{}%
       \ifcase \@chnum
@@ -898,14 +898,16 @@
 % \end{macro}
 %
 % \begin{macro}{\endarray}
+% \changes{v1.0b}{2012/21/06}{re-insert \cs{@arrayright} to match \textsf{array} definition, for \textsf{delarray}}
 %    \begin{macrocode}
-\def\endarray{\crcr \egroup \egroup \gdef\@preamble{}\CT@end}
+\def\endarray{%
+  \crcr \egroup \egroup \@arrayright\gdef\@preamble{}\CT@end}
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{\multicolumn}
 % "\multicolumn"
-% \changes{v1.0a}{2012/02/13}{make multicolumn long (see test ct1)}
+% \changes{v1.0a}{2012/02/13}{make \cs{multicolumn} long (see test ct1)}
 %    \begin{macrocode}
 \long\def\multicolumn#1#2#3{%
    \multispan{#1}\begingroup
@@ -916,7 +918,7 @@
    \def\@sharp{#3}%
    \let\CT@cell@color\relax
 %    \end{macrocode}
-% \changes{v1.0a}{2012/02/13}{don't reset CT@row@color (see test ct3)}
+% \changes{v1.0a}{2012/02/13}{don't reset \cs{CT@row@color} (see test ct3)}
 %   \let\CT@row@color\relax
 %    \begin{macrocode}
    \let\CT@column@color\relax
