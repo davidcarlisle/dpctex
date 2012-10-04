@@ -1,0 +1,103 @@
+
+
+% derived from an answer to the question
+% http://tex.stackexchange.com/questions/75019/is-there-any-resolution-for-highlighting-text-in-cjk
+
+
+% May be distributed under MIT or LPPL licences.
+
+% David Carlisle 
+
+\ProvidesPackage{cjkhl}[2012/08/04 v0.01 Highlighting in CJK documents (DPC)]
+
+\newcommand*{\cjkhl}[2]{{\def\xcjklhcolorbox{\colorbox{#1}}\xcjkhl#2\relax}}
+
+\makeatletter
+
+%look ahhead for the next character
+\def\xcjkhl{\futurelet\tmp\xxcjkhl}
+
+%helper macro to make leaders with a highlight box.
+\def\xcjkhlleaders{\leavevmode\leaders\hbox{%
+  \fboxsep\z@\xcjklhcolorbox{\strut\kern.1pt%
+  \ifx\cjkhlbleed\@empty\else\kern\cjkhlbleed\fi\relax}%
+\ifx\cjkhlbleed\@empty\else\kern-\cjkhlbleed\fi\relax}}
+
+% leaders with a 1pt of stretch/shrink to put before or after punctuation
+\def\@@yhlstretch{\leavevmode\xcjkhlleaders\hskip\z@\@plus.1em \@minus.1em }
+
+\def\@chkhlpar#1\fi\fi#2{\par\noindent\xcjkhl}
+
+\def\@cjkhl@beforeafter#1{%
+  \ifx\tmp#1%
+    \@@yhlstretch
+    \let\@chkhlstretch\@@yhlstretch
+    \let\cjkhlpenalty\@highpenalty
+  \fi}
+
+\def\@cjkhl@after#1{%
+  \ifx\tmp#1%
+    \let\@chkhlstretch\@@yhlstretch
+    \let\cjkhlpenalty\@highpenalty
+  \fi}
+
+\def\@cjkhl@before#1{%
+  \ifx\tmp#1%
+    \@@yhlstretch
+    \let\cjkhlpenalty\@highpenalty
+  \fi}
+
+\def\xxcjkhl{%
+%look for a \par (from \obeylines)
+\ifx\tmp\par\expandafter\@chkhlpar\fi
+%look for a \relax to finish
+\ifx\tmp\relax
+\else
+%by default do no stretch leaders after the character
+\let\@chkhlstretch\relax
+\let\cjkhlpenalty\z@
+%these stretch before and after
+\@cjkhl@beforeafter？%
+\@cjkhl@beforeafter；%
+% these stretch after
+\@cjkhl@after，%
+\@cjkhl@after。%
+\@cjkhl@after）%
+\@cjkhl@after》%
+\@cjkhl@after”%
+%these stretch before
+\@cjkhl@before（%
+\@cjkhl@before《%
+\@cjkhl@before“%
+% look for a space
+\ifx\tmp\@sptoken
+\xxxcjkhlsp
+\else
+%default case stick the current character in a box
+\xxxcjkhl
+\fi\fi}
+
+%make a highlight leaders stretch/shrink as much as a normal word space.
+\def\xxxcjkhlsp#1\fi\fi#2{%
+\fi\fi
+\xcjkhlleaders\hskip \fontdimen2\font  plus \fontdimen3\font minus \fontdimen4\font\relax
+\xcjkhl#2}
+
+%get out of a double \if test
+\def\xxxcjkhl\fi\fi{%
+\fi\fi
+\@chkhl}
+
+%The simple case box the current character and start looking for the next.
+% bleed slightly on the right to avoid gaps showing
+\let\cjkhlbleed\@empty
+
+\def\@chkhl#1{{%
+\fboxsep\z@
+\leavevmode\penalty\cjkhlpenalty
+  \xcjklhcolorbox{%
+   \strut#1\ifx\cjkhlbleed\@empty\else\kern\cjkhlbleed\fi}}%
+\ifx\cjkhlbleed\@empty\else\kern-\cjkhlbleed\fi\relax
+\@chkhlstretch
+\xcjkhl}%
+
