@@ -1,0 +1,126 @@
+\ProvidesPackage{mpnote}[2012/11/21 v0.00001 Marginal notes (DPC)]
+
+% see
+% http://tex.stackexchange.com/questions/78193/
+
+
+\newcounter{mpcnt}
+
+\makeatletter
+
+
+\gdef \@makecol {%
+   \ifvoid\footins
+     \setbox\@outputbox \box\@cclv
+   \else
+     \setbox\@outputbox \vbox {%
+       \boxmaxdepth \@maxdepth
+       \unvbox \@cclv
+       \vskip \skip\footins
+       \color@begingroup
+         \normalcolor
+         \footnoterule
+         \unvbox \footins
+       \color@endgroup
+       }%
+   \fi
+%
+   \let\@elt\relax
+   \xdef\@freelist{\@freelist\@midlist}%
+   \global \let \@midlist \@empty
+   \@combinefloats
+   \ifvbox\@kludgeins
+     \@makespecialcolbox
+   \else
+\ifvoid\mpins
+     \setbox\@outputbox \vbox to\@colht {%
+       \@texttop
+       \dimen@ \dp\@outputbox
+       \unvbox \@outputbox
+       \vskip -\dimen@
+       \@textbottom
+       }%
+\else
+     \setbox\@outputbox \hbox{\vbox to\@colht {%
+       \@texttop
+       \dimen@ \dp\@outputbox
+       \unvbox \@outputbox
+       \vskip -\dimen@
+       \@textbottom
+       }%
+\vrule
+\kern\marginparsep
+%\showboxdepth1
+%\tracingonline3\tracingoutput\@ne
+%\showboxbreadth20
+%\showbox\mpins
+\ifx\mpins@@\@undefined
+\@tempdima\@colht
+\else
+\@tempdima\expandafter\@gobble\mpins@@
+\fi
+%\showthe\@colht
+\vbox to \dimexpr\@colht\relax{%2
+\pdfsavepos
+\edef\tmp{\write\noexpand\@auxout{%
+\string\mpardata{@}{\noexpand\thepage}{\noexpand\the\noexpand\pdflastypos}}}\tmp
+\hrule
+\vbadness\maxdimen
+\loop
+\setbox0=\vsplit\mpins to \maxdimen
+\setbox0\vbox{\unvbox\z@\global\setbox\@ne\lastbox}%
+\@tempdimb=\dimexpr\@tempdima-\wd\@ne-(\ht\z@+\dp\z@)/2\relax
+\ifdim\@tempdimb<\z@\@tempdimb\z@\fi
+\vskip\@tempdimb \@minus\@tempdimb
+\@tempdima=\dimexpr\@tempdima-\@tempdimb-\ht\z@-\dp\z@\relax
+\box\z@
+\ifvoid\mpins\else
+\repeat
+\vskip\z@\@plus\@colht
+\hrule
+}%
+}
+\fi
+   \fi
+   \global \maxdepth \@maxdepth
+}
+
+
+\def\mpardata#1#2#3{%
+\expandafter\gdef\csname mpins@#1\endcsname{\kern#3sp}%
+}
+
+
+\long\def\mynote#1{%
+\refstepcounter{mpcnt}%
+\strut
+\pdfsavepos
+\edef\tmp{\write\noexpand\@auxout{%
+\string\mpardata{\the\c@mpcnt}{\noexpand\thepage}{\noexpand\the\noexpand\pdflastypos}}}\tmp
+\vadjust{%
+\hbox to \linewidth{%
+\hfill\smash{\raise\dp\strutbox\hbox to \z@{$\leftarrow$\hss}}}}
+\@savemarbox\@ne{\raggedright\footnotesize#1\par}%
+\@ifnextchar\par{%
+\expandafter\ifx\csname mpins@\the\c@mpcnt\endcsname\relax
+\@insertmpins{}%
+\else
+\edef\@tmp{\kern\the\dimexpr (\ht\@ne+\dp\@ne)/2\relax}%
+\@insertmpins{%
+\csname mpins@\the\c@mpcnt\endcsname\relax
+\@tmp
+}%
+\fi}{%
+\@insertmpins{\csname mpins@\the\c@mpcnt\endcsname}}}
+
+\def\@insertmpins#1{%
+\insert\mpins{%
+\box\@ne
+\nointerlineskip
+\hbox{#1}%
+\penalty-\@M}}
+
+\newinsert\mpins
+\skip\mpins\z@
+\count\mpins\z@
+\dimen\mpins\textheight
