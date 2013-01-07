@@ -284,7 +284,8 @@
   \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi
   \bm@next}
 \edef\bm@xetex@qns{\detokenize{the letter ???}}
-\def\bm@getcharcode#1 #2 {`} 
+%\def\bm@getcharcode#1 #2 {`} 
+\def\bm@getcharcode#1 #2 #3#4{\if u#4\expandafter\@gobblefour\else`#3#4\fi} 
 \def\bm@define#1{%
   \begingroup
 %\show\6
