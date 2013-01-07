@@ -1,38 +1,21 @@
 \documentclass{article}
-\usepackage{unicode-math}
+\usepackage[bold-style=literal]{unicode-math}
 \setmathfont{xits-math.otf}
+\setmathfont[version=bold]{xits-mathbold.otf}
+
 \usepackage{bmx}
+
 \begin{document}
 
+1 $a+\alpha + \sum_0^1 x_i$
+
+2 $𝒂+𝜶 + \sum_𝟎^𝟏 𝒙_𝒊$
+
+3 {\boldmath $a+\alpha + \sum_0^1 x_i$}
+
+4 $\bm{a+\alpha + \sum_0^1 x_i}$
 
 
+$\bm{\alpha α}$
 
-% $a+a$ $\bm{a+a}$
-
-% ${a}{+}{a}$ $\bm{{a}{+}{a}}$
-
-% $\azz\pzz\azz$ $\bm{\azz\pzz\azz}$
-
-$\sum$
-
-{xx \boldmath $\sum$}
-
-{\tracingall
-
-$a 𝒂 \bm{a}$
-}
-
-{
-%\tracingall
-%$∑$ $\bm{∑}$
-
-}
 \end{document}
-
-
-202211 2105873
-
-202611  2106897
-
-202611    2106897
-242211    2368017
