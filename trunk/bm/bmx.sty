@@ -180,7 +180,7 @@
       \protect\use@mathgroup##1{##2}{##3}}}%
     \bm@expand#5\bm@end
   \endgroup
-%\show#4%
+\show#4%
   #4}
 }
 \DeclareRobustCommand\bm{%
@@ -317,49 +317,53 @@
 \def\bm@mathchar{%
   \@tempcntb\count@
   \let\@tempa\bm@group
-%\showthe\count@
-%\showthe\@tempcnta
+\showthe\count@
+\showthe\@tempcnta
 \ifnum\@tempcnta<48  % digit 0
-  \bm@changefam{}%
+  \@tempcntb\count@%  \bm@changefam{}%
 \else\ifnum\@tempcnta<58 % digit 9 +1
   \divide\count@"100000
   \multiply\count@"100000
   \advance\count@\@tempcnta
   \advance\count@120734\relax
 \else\ifnum\@tempcnta<65 % capital a
-  \bm@changefam{}%
+  \@tempcntb\count@%  \bm@changefam{}%
 \else\ifnum\@tempcnta<91 % capital z + 1
   \divide\count@"100000
   \multiply\count@"100000
   \advance\count@\@tempcnta
   \advance\count@119847\relax
 \else\ifnum\@tempcnta<97 % small a
-  \bm@changefam{}%
+  \@tempcntb\count@%  \bm@changefam{}%
 \else\ifnum\@tempcnta<123 % small z + 1
   \divide\count@"100000
   \multiply\count@"100000
   \advance\count@\@tempcnta
   \advance\count@119841\relax
 \else\ifnum\@tempcnta<913 % capital Alpha
-  \bm@changefam{}%
+  \@tempcntb\count@%  \bm@changefam{}%
 \else\ifnum\@tempcnta<938 % capital omega +1 + 1
   \divide\count@"100000
   \multiply\count@"100000
   \advance\count@\@tempcnta
   \advance\count@119575\relax
 \else
-  \bm@changefam{}%
+  \@tempcntb\count@%  \bm@changefam{}%
 \fi\fi
 \fi\fi
 \fi\fi
 \fi\fi
-%\show\9
+\show\9
+\showthe\count@
+\showthe\@tempcntb
   \ifnum\count@>\@tempcntb
+\show\m
     \ifx\bm@command\@empty
       \xdef\@gtempa{\XeTeXmathcharnum\the\count@\space}%
     \fi
     \bm@xadd{\XeTeXmathcharnum\the\count@\space}%
   \else
+\show\b
     \begingroup
       \divide\count@"1000
       \let\bm@expand\relax
@@ -493,11 +497,13 @@
    \fi}
 \def\bm@changefam#1{%
   \@tempcnta\count@
+\showthe\@tempcnta
   \divide\@tempcnta"1000#1 %
   \multiply\@tempcnta"1000#1 %
   \advance\@tempcnta-\count@
   \divide\@tempcnta-"100#1 %
   \@tempcnta\bm@table
+\showthe\@tempcnta
   \ifnum\@tempcnta=\m@ne
     \let\@tempa\bm@pmb
   \else
