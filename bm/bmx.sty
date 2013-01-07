@@ -258,6 +258,11 @@
 \ifcat.\ifcat a\noexpand#1.\else\noexpand#1\fi
     \xdef\meaning@{\meaning#1}%
 %\show\meaning@
+%\show\bm@xetex@qns
+\ifx\meaning@\bm@xetex@qns
+\def\bm@next{\bm@expand\unvcopy{{\bm@gr@@p \boldmath {#1}}}}%
+\else
+%\show\y
     \@tempcnta\expandafter\bm@getcharcode\meaning@\relax
     \count@\XeTeXmathcodenum\expandafter\bm@getcharcode\meaning@\relax
     \ifnum\count@=\mathcode`\'%
@@ -271,10 +276,12 @@
         \bm@mathchar
       \fi
     \fi
+\fi
   \else
     \bm@add{#1}%
   \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi
   \bm@next}
+\edef\bm@xetex@qns{\detokenize{the letter ???}}
 \def\bm@getcharcode#1 #2 {`} 
 \def\bm@define#1{%
   \begingroup
