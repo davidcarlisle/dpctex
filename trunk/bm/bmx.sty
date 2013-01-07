@@ -343,13 +343,21 @@
   \advance\count@119841\relax
 \else\ifnum\@tempcnta<913 % capital Alpha
   \@tempcntb\count@%  \bm@changefam{}%
-\else\ifnum\@tempcnta<938 % capital omega +1 + 1
+\else\ifnum\@tempcnta<938 % capital omega +1 
   \divide\count@"100000
   \multiply\count@"100000
   \advance\count@\@tempcnta
   \advance\count@119575\relax
+\else\ifnum\@tempcnta<945 % small Alpha
+  \@tempcntb\count@%  \bm@changefam{}%
+\else\ifnum\@tempcnta<970 % small omega +1 
+  \divide\count@"100000
+  \multiply\count@"100000
+  \advance\count@\@tempcnta
+  \advance\count@119685\relax
 \else
   \@tempcntb\count@%  \bm@changefam{}%
+\fi\fi
 \fi\fi
 \fi\fi
 \fi\fi
