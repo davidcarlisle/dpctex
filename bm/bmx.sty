@@ -226,7 +226,7 @@
   \fi}
 \def\bm@test@token#1{%
   \let\bm@next\@empty
-%\show a%\show#1%
+%\show a\show#1%
   \ifx#1\@@end
   \else\ifx#1\mathchoice
     \let\bm@next\bm@mathchoice
@@ -264,7 +264,9 @@
 \else
 %\show\y
     \@tempcnta\expandafter\bm@getcharcode\meaning@\relax
+%\show\meaning@
     \count@\XeTeXmathcodenum\expandafter\bm@getcharcode\meaning@\relax
+%\showthe\count@
     \ifnum\count@=\mathcode`\'%
       \begingroup\uccode`\~\expandafter\bm@getcharcode\meaning@\uppercase{\endgroup
         \def\bm@next{\bm@expand~}}%
@@ -317,23 +319,40 @@
   \let\@tempa\bm@group
 %\showthe\count@
 %\showthe\@tempcnta
-\ifnum\@tempcnta>64
-  \ifnum\@tempcnta<91
-    \count@\numexpr\@count@+119860-64\relax
-  \else
-    \ifnum\@tempcnta>96
-      \ifnum\@tempcnta<123
-        \count@\numexpr\count@+119860-64\relax
-      \else
-        \bm@changefam{}%
-      \fi
-    \else
-      \bm@changefam{}%
-    \fi
-  \fi
+\ifnum\@tempcnta<48  % digit 0
+  \bm@changefam{}%
+\else\ifnum\@tempcnta<58 % digit 9 +1
+  \divide\count@"100000
+  \multiply\count@"100000
+  \advance\count@\@tempcnta
+  \advance\count@120734\relax
+\else\ifnum\@tempcnta<65 % capital a
+  \bm@changefam{}%
+\else\ifnum\@tempcnta<91 % capital z + 1
+  \divide\count@"100000
+  \multiply\count@"100000
+  \advance\count@\@tempcnta
+  \advance\count@119847\relax
+\else\ifnum\@tempcnta<97 % small a
+  \bm@changefam{}%
+\else\ifnum\@tempcnta<123 % small z + 1
+  \divide\count@"100000
+  \multiply\count@"100000
+  \advance\count@\@tempcnta
+  \advance\count@119841\relax
+\else\ifnum\@tempcnta<913 % capital Alpha
+  \bm@changefam{}%
+\else\ifnum\@tempcnta<938 % capital omega +1 + 1
+  \divide\count@"100000
+  \multiply\count@"100000
+  \advance\count@\@tempcnta
+  \advance\count@119575\relax
 \else
   \bm@changefam{}%
-\fi
+\fi\fi
+\fi\fi
+\fi\fi
+\fi\fi
 %\show\9
   \ifnum\count@>\@tempcntb
     \ifx\bm@command\@empty
