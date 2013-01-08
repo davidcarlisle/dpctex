@@ -193,7 +193,7 @@
       \protect\use@mathgroup##1{##2}{##3}}}%
     \bm@expand#5\bm@end
   \endgroup
-%\show#4%
+\show#4%
   #4}
 }
 \DeclareRobustCommand\bm{%
@@ -239,7 +239,8 @@
   \fi}
 \def\bm@test@token#1{%
   \let\bm@next\@empty
-%\show a%\show#1%
+\show \begin
+\show#1%
   \ifx#1\@@end
   \else\ifx#1\mathchoice
     \let\bm@next\bm@mathchoice
@@ -251,6 +252,8 @@
     \afterassignment\bm@delimiter\count@
   \else\ifx#1\radical
     \afterassignment\bm@radical\count@
+  \else\ifx#1\XeTeXradical
+    \afterassignment\bm@xeradical\count@
   \else\ifx#1\mkern
     \bm@register#1{\muskip\z@}%
   \else\ifx#1\kern
@@ -264,7 +267,7 @@
 \ifcat\noexpand#1\relax
 %\show5%
     \xdef\meaning@{\meaning#1}%
-%\show\meaning@
+\show\meaning@
     \expandafter\bm@mchar@test\meaning@""\@nil#1%
   \else
 %\show6%
@@ -277,16 +280,17 @@
 \else
 %\show\y
     \@tempcnta\expandafter\bm@getcharcode\meaning@\relax
-%\showthe\@tempcnta
-%\show\meaning@
+\showthe\@tempcnta
+\show\meaning@
     \count@\XeTeXmathcodenum\@tempcnta
-%\showthe\count@
+\showthe\count@
     \ifnum\count@=\XeTeXmathcodenum`\'%
       \begingroup\uccode`\~\expandafter\bm@getcharcode\meaning@\uppercase{\endgroup
         \def\bm@next{\bm@expand~}}%
     \else
       \ifx\bm@previous\left
-        \count@\delcode\expandafter\bm@getcharcode\meaning@\relax
+\show\meaning@
+        \count@\XeTeXdelcodenum\expandafter\bm@getcharcode\meaning@\relax
         \bm@delimiter
       \else
         \bm@mathchar
@@ -295,7 +299,7 @@
 \fi
   \else
     \bm@add{#1}%
-  \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi
+  \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi
   \bm@next}
 \edef\bm@xetex@qns{\detokenize{the letter ???}}
 %\def\bm@getcharcode#1 #2 {`} 
@@ -388,7 +392,7 @@
   \else
 %\show\b
     \begingroup
-      \divide\count@"1000
+      \divide\count@"1000o
       \let\bm@expand\relax
       \bm@xadd\bm@class
     \endgroup
@@ -464,21 +468,49 @@
  \let\relax\@empty
  \bm@xadd{\mathaccent\the\count@\space}}
 \def\bm@delimiter{%
-  \ifnum\count@>\z@
-    \bm@changefam{}%
-    \bm@changefam{000}%
-  \fi
-  \bm@xadd{\delimiter\the\count@\space}}%
+\show\D
+\showthe\count@
+\@tempcnta\count@
+\divide\@tempcnta"100000
+\multiply\@tempcnta"100000
+\advance\count@-\@tempcnta
+\showthe\@tempcnta
+\showthe\count@
+\ifnum\count@>\z@
+% first 4 here should come from \@tempcnta
+% second 4 should be bold offset from bm@table
+  \bm@xadd{\XeTeXdelimiter 4 4 \the\count@\space}%
+\else
+  \bm@xadd{\delimiter 0 }%
+\fi}
 \def\bm@radical{%
  \bm@changefam{}%
  \bm@changefam{000}%
  \bm@xadd{\radical\the\count@\space}}%
-\edef\bm@mchar@{\meaning\mathchar}
-\edef\bm@xe@mchar@{\meaning\XeTeXmathchar}
+
+\def\bm@xeradical{%
+    \afterassignment\bm@xe@radical\@tempcnta}
+
+\def\bm@xeradical{%
+    \afterassignment\bm@xe@radical\@tempcnta}
+
+% need to do it this way rather thanmacro arg as brace may be implicit and 
+% there may be \relax from end of the radical number.
+\def\bm@xe@radical{%
+    \afterassignment\bm@xe@@radical\toks@}
+
+\def\bm@xe@@radical{%
+\show\R
+\showthe\toks@
+   \bm@xadd{\XeTeXradical4 \the\@tempcnta\space\bgroup}\the\toks@\egroup}
+
+\edef\bm@mchar@{\string\mathchar}
+\edef\bm@xe@mchar@{\string\XeTeXmathchar}
+\edef\bm@u@mchar@{\string\Umathchar}
 \def\bm@mchar@test#1"#2"#3\@nil#4{%
   \xdef\meaning@{#1}%
-%\show8%
-%\show\meaning@
+\show8%
+\show\meaning@
   \ifx\meaning@\bm@mchar@
     \count@"#2\relax
     \bm@mathchar
@@ -488,6 +520,14 @@
 %\showthe\count@
     \bm@mathchar
   \else
+   \ifx\meaning@\bm@u@mchar@
+    \count@"#2\relax
+    \multiply\count@"10
+\showthe\count@
+    \bm@umathchar#3\relax
+\showthe\count@
+    \bm@mathchar
+  \else
     \ifx\bm@previous\@empty
       \ifx\relax#4%
         \gdef\bm@first{#4}%
@@ -495,7 +535,13 @@
     \fi
     \bm@add{#4}%
   \fi
+  \fi
    \fi}
+\def\bm@umathchar#1"#2"#3\relax{%
+\advance\count@"#1\relax
+\multiply\count@"10000\relax
+\advance\count@"#2\relax}
+
 \def\bm@changefam#1{%
   \@tempcnta\count@
 %\showthe\@tempcnta
