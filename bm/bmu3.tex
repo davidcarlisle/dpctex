@@ -1,0 +1,28 @@
+\documentclass{article}
+\usepackage[bold-style=literal]{unicode-math}
+\setmathfont{Cambria Math}
+
+
+\usepackage{bmx}
+
+\begin{document}
+
+\everypar{\hangindent1cm}
+
+1 normal\\
+ $aA1αΑ+\alpha + \sum_0^1 x_i$
+
+2 mathbf\\
+ $\mathbf{aA1αΑ+\alpha + \sum_0^1 x_i}$
+
+3 Unicode math alphabets\\
+ $𝒂𝑨𝟏𝜶𝚨+𝜶 + \sum_𝟎^𝟏 𝒙_𝒊$
+
+4 boldmath\\
+ {\boldmath $aA1αΑ+\alpha + \sum_0^1 x_i$}
+
+5 bm\\
+ $\bm{aA1αΑ+\alpha + \sum_0^1 x_i}$
+
+
+\end{document}
