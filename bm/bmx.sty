@@ -17,6 +17,19 @@
 %% Leave ProvidesPackage as bm so package loading gives warning
 \ProvidesPackage{bm}
           [2013/01/06 v2.0 Bold Symbol Support (DPC/FMi)]
+
+% luaex
+\ifx\XeTeXmathcodenum\@undefined
+  \let\XeTeXmathcodenum\Umathcodenum
+\fi
+\ifx\XeTeXmathcharnum\@undefined
+  \let\XeTeXmathcharnum\Umathcharnum
+\fi
+% need to sort out luatex version of this
+%\ifx\XeTeXmathchar\@undefined
+%  \let\XeTeXmathcharnum\Umathchar
+%\fi
+
 \def\bm#1#2{%
   \let\bm@pmb\install@mathalphabet
   \let\bm@pmb@\getanddefine@fonts
@@ -180,7 +193,7 @@
       \protect\use@mathgroup##1{##2}{##3}}}%
     \bm@expand#5\bm@end
   \endgroup
-\show#4%
+%\show#4%
   #4}
 }
 \DeclareRobustCommand\bm{%
@@ -226,7 +239,7 @@
   \fi}
 \def\bm@test@token#1{%
   \let\bm@next\@empty
-%\show a\show#1%
+%\show a%\show#1%
   \ifx#1\@@end
   \else\ifx#1\mathchoice
     \let\bm@next\bm@mathchoice
@@ -264,10 +277,11 @@
 \else
 %\show\y
     \@tempcnta\expandafter\bm@getcharcode\meaning@\relax
+%\showthe\@tempcnta
 %\show\meaning@
-    \count@\XeTeXmathcodenum\expandafter\bm@getcharcode\meaning@\relax
+    \count@\XeTeXmathcodenum\@tempcnta
 %\showthe\count@
-    \ifnum\count@=\mathcode`\'%
+    \ifnum\count@=\XeTeXmathcodenum`\'%
       \begingroup\uccode`\~\expandafter\bm@getcharcode\meaning@\uppercase{\endgroup
         \def\bm@next{\bm@expand~}}%
     \else
@@ -318,8 +332,8 @@
 \def\bm@mathchar{%
   \@tempcntb\count@
   \let\@tempa\bm@group
-\showthe\count@
-\showthe\@tempcnta
+%\showthe\count@
+%\showthe\@tempcnta
 \ifnum\@tempcnta<48  % digit 0
   \@tempcntb\count@%  \bm@changefam{}%
 \else\ifnum\@tempcnta<58 % digit 9 +1
@@ -362,17 +376,17 @@
 \fi\fi
 \fi\fi
 \fi\fi
-\show\9
-\showthe\count@
-\showthe\@tempcntb
+%\show\9
+%\showthe\count@
+%\showthe\@tempcntb
   \ifnum\count@>\@tempcntb
-\show\m
+%\show\m
     \ifx\bm@command\@empty
       \xdef\@gtempa{\XeTeXmathcharnum\the\count@\space}%
     \fi
     \bm@xadd{\XeTeXmathcharnum\the\count@\space}%
   \else
-\show\b
+%\show\b
     \begingroup
       \divide\count@"1000
       \let\bm@expand\relax
@@ -383,29 +397,6 @@
     \@tempb
   \fi}
 
-
-
-\def\bm@xe@mathchar{%
-%\show\8%
-  \@tempcntb\count@
-%\showthe\@tempcntb
-  \let\@tempa\bm@group
-  \bm@xe@changefam{}%
-  \ifnum\count@>\@tempcntb
-    \ifx\bm@command\@empty
-      \xdef\@gtempa{\XeTeXmathcharnum\the\count@\space}%
-    \fi
-    \bm@xadd{\XeTeXmathcharnum\the\count@\space}%
-  \else
-    \begingroup
-      \divide\count@"100000
-      \let\bm@expand\relax
-      \bm@xadd\bm@class
-    \endgroup
-    \edef\@tempb{%
-      \noexpand\@tempa{\XeTeXmathcharnum\the\count@\space}}%
-    \@tempb
-  \fi}
 
 
 \def\bm@xe@changefam#1{%
@@ -494,7 +485,8 @@
   \else
   \ifx\meaning@\bm@xe@mchar@
     \count@"#2\relax
-    \bm@xe@mathchar
+%\showthe\count@
+    \bm@mathchar
   \else
     \ifx\bm@previous\@empty
       \ifx\relax#4%
@@ -506,13 +498,13 @@
    \fi}
 \def\bm@changefam#1{%
   \@tempcnta\count@
-\showthe\@tempcnta
+%\showthe\@tempcnta
   \divide\@tempcnta"1000#1 %
   \multiply\@tempcnta"1000#1 %
   \advance\@tempcnta-\count@
   \divide\@tempcnta-"100#1 %
   \@tempcnta\bm@table
-\showthe\@tempcnta
+%\showthe\@tempcnta
   \ifnum\@tempcnta=\m@ne
     \let\@tempa\bm@pmb
   \else
