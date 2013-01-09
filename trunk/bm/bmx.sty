@@ -163,6 +163,7 @@
         \expandafter\@secondoftwo
       \fi
       {##2##4}{##3{##4}}}%
+    \def\frac##1##2{\unvcopy\bgroup\begingroup##1\endgroup\over##2\egroup}%
     \def\GenericWarning##1##2{%
       \unvcopy{\GenericWarning{##1}{##2}}}%
     \def\GenericError##1##2##3##4{%
@@ -193,7 +194,7 @@
       \protect\use@mathgroup##1{##2}{##3}}}%
     \bm@expand#5\bm@end
   \endgroup
-\show#4%
+%\show#4%
   #4}
 }
 \DeclareRobustCommand\bm{%
@@ -239,8 +240,8 @@
   \fi}
 \def\bm@test@token#1{%
   \let\bm@next\@empty
-\show \begin
-\show#1%
+%\show \begin
+%\show#1%
   \ifx#1\@@end
   \else\ifx#1\mathchoice
     \let\bm@next\bm@mathchoice
@@ -265,33 +266,33 @@
   \else\ifx#1\unvcopy
     \let\bm@next\bm@add
   \else
-\show4%
+%\show4%
 \ifcat\noexpand#1\relax
-\show5%
+%\show5%
     \xdef\meaning@{\meaning#1}%
-\show\meaning@
+%\show\meaning@
     \expandafter\bm@mchar@test\meaning@""\@nil#1%
   \else
-\show6%
+%\show6%
 \ifcat.\ifcat a\noexpand#1.\else\noexpand#1\fi
     \xdef\meaning@{\meaning#1}%
-\show\meaning@
-\show\bm@xetex@qns
+%\show\meaning@
+%\show\bm@xetex@qns
 \ifx\meaning@\bm@xetex@qns
 \def\bm@next{\bm@expand\unvcopy{{\bm@gr@@p \boldmath {#1}}}}%
 \else
-\show\y
+%\show\y
     \@tempcnta\expandafter\bm@getcharcode\meaning@\relax
-\showthe\@tempcnta
-\show\meaning@
+%\showthe\@tempcnta
+%\show\meaning@
     \count@\XeTeXmathcodenum\@tempcnta
-\showthe\count@
+%\showthe\count@
     \ifnum\count@=\XeTeXmathcodenum`\'%
       \begingroup\uccode`\~\expandafter\bm@getcharcode\meaning@\uppercase{\endgroup
         \def\bm@next{\bm@expand~}}%
     \else
       \ifx\bm@previous\left
-\show\meaning@
+%\show\meaning@
         \count@\XeTeXdelcodenum\expandafter\bm@getcharcode\meaning@\relax
         \bm@delimiter
       \else
@@ -308,7 +309,7 @@
 \def\bm@getcharcode#1 #2 #3#4{\if u#4\expandafter\@gobblefour\else`#3#4\fi} 
 \def\bm@define#1{%
   \begingroup
-\show\6
+%\show\6
     \ifx\bm@command\@gtempa
       \def\mathchar{\global\mathchardef#1}%
       \bm@command
@@ -338,8 +339,8 @@
 \def\bm@mathchar{%
   \@tempcntb\count@
   \let\@tempa\bm@group
-\showthe\count@
-\showthe\@tempcnta
+%\showthe\count@
+%\showthe\@tempcnta
 \ifnum\@tempcnta<48  % digit 0
   \@tempcntb\count@%  \bm@changefam{}%
 \else\ifnum\@tempcnta<58 % digit 9 +1
@@ -382,11 +383,11 @@
 \fi\fi
 \fi\fi
 \fi\fi
-\show\9
-\showthe\count@
-\showthe\@tempcntb
+%\show\9
+%\showthe\count@
+%\showthe\@tempcntb
 \ifnum\count@>\@tempcntb
-\show\m
+%\show\m
     \ifx\bm@command\@empty
       \xdef\@gtempa{\XeTeXmathcharnum\the\count@\space}%
     \fi
@@ -394,9 +395,9 @@
   \else
 % fam 2 to 4 (should be from bm@table)
 \advance\count@"200000
-\showthe\count@
+%\showthe\count@
     \bm@xadd{\XeTeXmathcharnum\the\count@\space}%
-\show\b
+%\show\b
 % boldmath version
 %     \begingroup
 %       \divide\count@"1000
@@ -411,21 +412,21 @@
 
 
 \def\bm@xe@changefam#1{%
-\showthe\count@
+%\showthe\count@
   \@tempcnta\count@
   \divide\@tempcnta"100000#1 %
   \multiply\@tempcnta"100000#1 %
   \advance\@tempcnta-\count@
   \divide\@tempcnta-"10000#1 %
   \@tempcnta\bm@table
-\showthe\@tempcnta
+%\showthe\@tempcnta
   \ifnum\@tempcnta=\m@ne
     \let\@tempa\bm@pmb
   \else
     \multiply\@tempcnta"10000#1 %
     \advance\count@\@tempcnta
   \fi
-\showthe\count@
+%\showthe\count@
 }
 
 \def\bm@pmb#1{%
@@ -475,14 +476,14 @@
  \let\relax\@empty
  \bm@xadd{\mathaccent\the\count@\space}}
 \def\bm@delimiter{%
-\show\D
-\showthe\count@
+%\show\D
+%\showthe\count@
 \@tempcnta\count@
 \divide\@tempcnta"100000
 \multiply\@tempcnta"100000
 \advance\count@-\@tempcnta
-\showthe\@tempcnta
-\showthe\count@
+%\showthe\@tempcnta
+%\showthe\count@
 \ifnum\count@>\z@
 % first 4 here should come from \@tempcnta
 % second 4 should be bold offset from bm@table
@@ -507,23 +508,23 @@
     \afterassignment\bm@xe@@radical\toks@}
 
 \def\bm@xe@@radical{%
-\show\R
-\showthe\toks@
+%\show\R
+%\showthe\toks@
    \bm@xadd{\XeTeXradical4 \the\@tempcnta\space\bgroup}\the\toks@\egroup}
 
 \def\bm@xedelimiter{%
-\show\1
+%\show\1
     \afterassignment\bm@xe@delimiter\@tempcnta}
 
 \def\bm@xe@delimiter{%
-\show\3
-\showthe\count@
+%\show\3
+%\showthe\count@
     \afterassignment\bm@xe@@delimiter\@tempcntb}
 
 % 4 should be from bm@table
 \def\bm@xe@@delimiter{%
-\show\d
-\showthe\@tempcntb
+%\show\d
+%\showthe\@tempcntb
         \bm@xadd{\XeTeXdelimiter\the\count@\space 4 \the\@tempcntb\space}}
 
 
@@ -532,23 +533,23 @@
 \edef\bm@u@mchar@{\string\Umathchar}
 \def\bm@mchar@test#1"#2"#3\@nil#4{%
   \xdef\meaning@{#1}%
-\show8%
-\show\meaning@
+%\show8%
+%\show\meaning@
   \ifx\meaning@\bm@mchar@
     \count@"#2\relax
     \bm@mathchar
   \else
   \ifx\meaning@\bm@xe@mchar@
     \count@"#2\relax
-\showthe\count@
+%\showthe\count@
     \bm@mathchar
   \else
    \ifx\meaning@\bm@u@mchar@
     \count@"#2\relax
     \multiply\count@"10
-\showthe\count@
+%\showthe\count@
     \bm@umathchar#3\relax
-\showthe\count@
+%\showthe\count@
     \bm@mathchar
   \else
     \ifx\bm@previous\@empty
@@ -567,13 +568,13 @@
 
 \def\bm@changefam#1{%
   \@tempcnta\count@
-\showthe\@tempcnta
+%\showthe\@tempcnta
   \divide\@tempcnta"1000#1 %
   \multiply\@tempcnta"1000#1 %
   \advance\@tempcnta-\count@
   \divide\@tempcnta-"100#1 %
   \@tempcnta\bm@table
-\showthe\@tempcnta
+%\showthe\@tempcnta
   \ifnum\@tempcnta=\m@ne
     \let\@tempa\bm@pmb
   \else
