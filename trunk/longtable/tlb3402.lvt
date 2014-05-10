@@ -1,0 +1,6 @@
+\documentclass [a4paper]{article}
+\usepackage{ltxtable}
+
+\begin{document}
+\LTXtable{\textwidth}{tlb3402-table.tex}
+\end{document}
