@@ -1,0 +1,24 @@
+\documentclass{article}
+\usepackage{longtable}
+\begin{document}
+\noindent\rule{\textwidth}{1pt}% show textwidth
+
+\begin{longtable}[l]{l}
+\caption{Left aligned longtable left aligned longtable left aligned
+  longtable}\\
+This is only a test\\
+\end{longtable}
+
+\begin{longtable}[r]{l}
+\caption{Right aligned longtable right aligned longtable right aligned
+  longtable}\\
+This is only a test\\
+\end{longtable}
+
+\begin{longtable}[c]{l}
+\caption{Centered longtable centered longtable centered longtable
+  centered longtable}\\
+This is only a test\\
+\end{longtable}
+
+\end{document}
