@@ -1,0 +1,18 @@
+\documentclass{article}
+\usepackage{longtable}
+
+\begin{document}
+
+\footnote{Here is a footnote. Watch this space on the next page!}
+
+\LTpost=1in\relax
+\begin{longtable}{l}
+    Line\\ Line\\ Line\\ Line\\ Line\\ Line\\ Line\\ Line\\ Line\\ Line\\ Line\\
+    Line\\ Line\\ Line\\ Line\\ Line\\ Line\\ Line\\ Line\\ Line\\ Line\\ Line\\
+    Line\\ Line\\ Line\\ Line\\ Line\\ Line\\ Line\\ Line\\ Line\\ Line\\
+    Line\\ Line\\ Line\\ Line\\ Line\\ Line\\ Line\\ Line\\
+\end{longtable}
+
+Break
+
+\end{document}
