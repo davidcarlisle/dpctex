@@ -51,20 +51,24 @@ Fixed if you comment out vbox.
 
 <li><a href="http://www.latex-project.org/cgi-bin/ltxbugs2html?pr=tools/3450">
 tools/3450 (2002-08-07): Problem with nearly empty pages and longtable.sty</a>
-<li><a href="http://www.latex-project.org/cgi-bin/ltxbugs2html?pr=tools/3422">
-tools/3422 (2002-03-09): Wrong left margin in enumerate package</a>
-<li><a href="http://www.latex-project.org/cgi-bin/ltxbugs2html?pr=tools/3407">
+
+
+<li class="bad"><a href="http://www.latex-project.org/cgi-bin/ltxbugs2html?pr=tools/3407">
 tools/3407 (2002-02-04): Longtable after \section overrules \nopagebreak</a>
-<li><a href="http://www.latex-project.org/cgi-bin/ltxbugs2html?pr=tools/3402">
+LT can leave a section head at end of page. No testcase in PR so I made one here.
+
+
+<li class="bad"><a href="http://www.latex-project.org/cgi-bin/ltxbugs2html?pr=tools/3402">
 tools/3402 (2002-01-21): tabularx cannot be used inside longtable</a>
 really an ltxtable bug so not really tools, but it's pretty broken here, and ltxtable is mine and
 possibly should be incorporated into v5 so adding this.
 
-<li><a href="http://www.latex-project.org/cgi-bin/ltxbugs2html?pr=tools/3396">
+<li class="analyzed"><a href="http://www.latex-project.org/cgi-bin/ltxbugs2html?pr=tools/3396">
 tools/3396 (2001-12-11): Bad page break forced by longtable</a>
+Analysis and suggested fix from Lars in the PR.
 
 
-<li class="analyzed"><a href="http://www.latex-project.org/cgi-bin/ltxbugs2html?pr=tools/3387">
+<li class="analyzed"`><a href="http://www.latex-project.org/cgi-bin/ltxbugs2html?pr=tools/3387">
 tools/3387 (2001-11-18): captions at left or right aligned longtables</a>
 this is fixed with Axel's ltcaption package, but should probably be fixed here.
 
