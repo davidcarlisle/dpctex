@@ -59,8 +59,59 @@ tools/3396 (2001-12-11): Bad page break forced by longtable</a>
 tools/3387 (2001-11-18): captions at left or right aligned longtables</a>
 <li><a href="http://www.latex-project.org/cgi-bin/ltxbugs2html?pr=tools/3180">
 tools/3180 (2000-03-05): longtable leaves spurious blank line at end</a>
-<li><a href="http://www.latex-project.org/cgi-bin/ltxbugs2html?pr=tools/2914">
+<li  class="analyzed"><a href="http://www.latex-project.org/cgi-bin/ltxbugs2html?pr=tools/2914">
 tools/2914 (1998-11-26): longtable global box usage</a>
+Longtabke uses global scratch registers that can be trashed in the output routine (eg page head code)
+text not in public view (as its from me)
+<pre>
+ 	
+Just to remind me to look if I can avoid wasting a box register on this
+(derived from a msg from Axel Reichert)
+
+*** longtable.sty~     Thu Nov 26 13:37:05 1998
+--- longtable.sty      Thu Nov 26 13:38:49 1998
+***************
+*** 237,243 ****
+    \LT@bchunk}
+  \def\LT@echunk{%
+    \crcr\LT@save@row\cr\egroup
+!   \global\setbox\@ne\lastbox
+      \unskip
+    \egroup}
+  \def\LT@entry#1#2{%
+--- 237,243 ----
+    \LT@bchunk}
+  \def\LT@echunk{%
+    \crcr\LT@save@row\cr\egroup
+!   \global\setbox\LT@gbox\lastbox
+      \unskip
+    \egroup}
+  \def\LT@entry#1#2{%
+***************
+*** 293,301 ****
+       \fi}%
+    \fi}
+  \let\setlongtables\relax
+  \def\LT@get@widths{%
+    \setbox\tw@\hbox{%
+!     \unhbox\@ne
+      \let\LT@old@row\LT@save@row
+      \global\let\LT@save@row\@empty
+      \count@\LT@cols
+--- 293,304 ----
+       \fi}%
+    \fi}
+  \let\setlongtables\relax
++
++ \newbox\LT@gbox
++
+  \def\LT@get@widths{%
+    \setbox\tw@\hbox{%
+!     \unhbox\LT@gbox
+      \let\LT@old@row\LT@save@row
+      \global\let\LT@save@row\@empty
+      \count@\LT@cols
+</pre>
 
 <li class="analyzed"><a href="http://www.latex-project.org/cgi-bin/ltxbugs2html?pr=tools/2666">
 tools/2666 (1997-11-15): page break in longtable after \\*\hline</a>
