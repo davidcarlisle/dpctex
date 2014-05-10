@@ -1,0 +1,172 @@
+\documentclass[titlepage,twoside]{report}
+\usepackage{array}
+\usepackage{longtable}
+\setlongtables
+\pagestyle{headings}
+\hyphenation{coordinate}
+\begin{document}
+\setlength{\oddsidemargin}{0cm}
+\setlength{\evensidemargin}{0cm}
+\setlength{\textwidth}{16.5cm}
+\chapter{Computer Programs and Miscellaneous Files}
+\pagenumbering{arabic}
+\begin{tiny}
+\section{NONST1TP}
+\begin{longtable}{|l|p{2.35in}|p{2.15in}|c|}
+\hline
+\multicolumn{1}{|c}{\rule[-2mm]{0mm}{6mm}\small\bf ID}
+  & \multicolumn{1}{|c}{\small\bf MOLECULE}
+  & \multicolumn{1}{|c}{\small\bf DEPOSITOR(S)}
+  & \multicolumn{1}{|c|}{\small\bf DATE} \\
+\hline
+\endfirsthead
+\multicolumn{4}{c}{\rule[-2mm]{0mm}{6mm}\small\bf NONST1TP (continued)}\\
+\hline
+\multicolumn{1}{|c}{\rule[-2mm]{0mm}{6mm}\small\bf ID}
+  & \multicolumn{1}{|c}{\small\bf MOLECULE}
+  & \multicolumn{1}{|c}{\small\bf DEPOSITOR(S)}
+  & \multicolumn{1}{|c|}{\small\bf DATE} \\
+\hline
+\endhead
+\hline
+\multicolumn{2}{l}{\rule[-2mm]{0mm}{6mm}\small\sl \S marks new entries}
+ & \multicolumn{2}{r}{\small\sl continued on next page}
+\endfoot
+\hline
+\multicolumn{4}{l}{\rule[-2mm]{0mm}{6mm}\small\sl \S marks new entries}
+\endlastfoot
+R1ACTSF   & \raggedright ACTINIDIN & \raggedright E.BAKER &  7/77\\
+\hline
+CHYMOF    & \raggedright ALPHA-CHYMOTRYPSIN (TOSYL)\- & \raggedright D.BLOW &
+ 4/73\\
+\hline
+RCARP04   & \raggedright CA-BINDING PARVALBUMIN(CARP)\- & \raggedright
+R.KRETSINGER &  2/74\\
+\hline
+RCARP05   & \raggedright CA-BINDING PARVALBUMIN(CARP)\- & \raggedright
+R.KRETSINGER &  2/74\\
+\hline
+R2B5CSF   & \raggedright CYTOCHROME B5 & \raggedright F.S.MATHEWS & 12/77\\
+\hline
+R3CYTSF   & \raggedright CYTOCHROME C(ALBACORE,OXIDIZED)\- & \raggedright
+T.TAKANO &  7/80\\
+\hline
+RCYC5501  & \raggedright CYTOCHROME C550 & \raggedright R.TIMKOVICH &  4/76\\
+\hline
+R1ZNASF   & \raggedright DNA(Z',CGCG,HIGH-SALT,SYNTHETIC)\- & \raggedright
+H.R.DREW, R.E.DICKERSON &  1/81\\
+\hline
+R1BNASF   & \raggedright DNA(B,CGCGAATTCGCG,SYNTHETIC,290 K)\- & \raggedright
+H.R.DREW, R.E.DICKERSON &  1/81\\
+\hline
+RGPD04    & \raggedright GLYCERALDEHYDE-3-P-DEHYDROGENASE(LOBSTR)\- &
+\raggedright M.ROSSMANN &  8/75\\
+\hline
+R2GPDSF   & \raggedright APO-GLYCERALDEHYDE-3-P-DEHYDROGENASE & \raggedright
+M.ROSSMANN & 12/79\\
+\hline
+R2MHBSF   & \raggedright HEMOGLOBIN(HORSE,AQUO MET)\- & \raggedright
+R.C.LADNER, E.G.HEIDNER, M.F.PERUTZ &  6/80\\
+\hline
+R1FDHSF   & \raggedright HEMOGLOBIN(HUMAN,FETAL,DEOXY)\- & \raggedright
+J.A.FRIER JUNIOR &  6/80\\
+\hline
+RHUMDEH0  & \raggedright HEMOGLOBIN (HUMAN,DEOXY)\- & \raggedright M.PERUTZ,
+G.FERMI &  5/75\\
+\hline
+LAMPRY1   & \raggedright HEMOGLOBIN (LAMPREY)\- & \raggedright HENDRICKSON,
+LOVE, KARLE &  5/73\\
+\hline
+RLDH06    & \raggedright APO-M4-LACTATE DEHYDROGENASE(DOGFISH)\- & \raggedright
+M.ROSSMANN &  8/75\\
+\hline
+RLDH07    & \raggedright LACTATE DEHYDROGENASE/\-NAD/\-PYRUVATE & \raggedright
+M.ROSSMANN &  8/75\\
+\hline
+R5LDHSF   & \raggedright LACTATE DEHYDROGENASE/\-S-LAC/\-NAD(PIG)\- &
+\raggedright U.M.GRAU, M.G.ROSSMANN & 10/80\\
+\hline
+R1LZHSF   & \raggedright LYSOZYME(HEN EGG-WHITE,MONOCLINIC)\- & \raggedright
+P.J.ARTYMIUK, C.C.F.BLAKE, D.W.RICE, K.S.WILSON &  6/81\\
+\hline
+R2LZHSF   & \raggedright LYSOZYME(HEN EGG-WHITE,ORTHORHOMBIC)\- & \raggedright
+P.J.ARTYMIUK, C.C.F.BLAKE, D.W.RICE, K.S.WILSON &  6/81\\
+\hline
+RMETMYSF  & \raggedright MYOGLOBIN (SPERM WHALE, MET)\- & \raggedright T.TAKANO
+&  6/76\\
+\hline
+RDEMYSF1  & \raggedright MYOGLOBIN (SPERM WHALE, DEOXY)\- & \raggedright
+T.TAKANO &  6/76\\
+\hline
+R4TNASF   & \raggedright TRANSFER RNA(YEAST,PHE)\- & \raggedright A.JACK,
+J.E.LADNER, A.KLUG &  6/80\\
+\hline
+R4TNASF   & \raggedright TRANSFER RNA(YEAST,PHE)\- & \raggedright A.JACK,
+J.E.LADNER, A.KLUG &  6/80\\
+\hline
+R4TNASF   & \raggedright TRANSFER RNA(YEAST,PHE)\- & \raggedright A.JACK,
+J.E.LADNER, A.KLUG &  6/80\\
+\hline
+R4TNASF   & \raggedright TRANSFER RNA(YEAST,PHE)\- & \raggedright A.JACK,
+J.E.LADNER, A.KLUG &  6/80\\
+\hline
+R4TNASF   & \raggedright TRANSFER RNA(YEAST,PHE)\- & \raggedright A.JACK,
+J.E.LADNER, A.KLUG &  6/80\\
+\hline
+\end{longtable}
+\end{tiny}
+\begin{tiny}
+\section{NONST2TP}
+\begin{longtable}{|l|p{2.35in}|p{2.15in}|c|}
+\hline
+\multicolumn{1}{|c}{\rule[-2mm]{0mm}{6mm}\small\bf ID}
+  & \multicolumn{1}{|c}{\small\bf MOLECULE}
+  & \multicolumn{1}{|c}{\small\bf DEPOSITOR(S)}
+  & \multicolumn{1}{|c|}{\small\bf DATE} \\
+\hline
+\endfirsthead
+\multicolumn{4}{c}{\rule[-2mm]{0mm}{6mm}\small\bf NONST2TP (continued)}\\
+\hline
+\multicolumn{1}{|c}{\rule[-2mm]{0mm}{6mm}\small\bf ID}
+  & \multicolumn{1}{|c}{\small\bf MOLECULE}
+  & \multicolumn{1}{|c}{\small\bf DEPOSITOR(S)}
+  & \multicolumn{1}{|c|}{\small\bf DATE} \\
+\hline
+\endhead
+\hline
+\multicolumn{2}{l}{\rule[-2mm]{0mm}{6mm}\small\sl \S marks new entries}
+ & \multicolumn{2}{r}{\small\sl continued on next page}
+\endfoot
+\hline
+\multicolumn{4}{l}{\rule[-2mm]{0mm}{6mm}\small\sl \S marks new entries}
+\endlastfoot
+R1CCRSF   & \raggedright CYTOCHROME C & \raggedright H.OCHI, Y.HATA, N.TANAKA,
+M.KAKUDO, T.SAKURAI, S.AIHARA, Y.MORITA &  3/83\\
+\hline
+R351CSF   & \raggedright CYTOCHROME C551(OXIDIZED)\- & \raggedright Y.MATSUURA,
+T.TAKANO, R.E.DICKERSON &  9/81\\
+\hline
+R451CSF   & \raggedright CYTOCHROME C551(REDUCED)\- & \raggedright Y.MATSUURA,
+T.TAKANO, R.E.DICKERSON &  9/81\\
+\hline
+R1ANASF   & \raggedright DNA(D-IODO-CCGG)\- & \raggedright B.N.CONNER,
+R.E.DICKERSON &  6/82\\
+\hline
+R1ANAP2   & \raggedright DNA(A,D-IODO-CCGG)\-SPACE GROUP P 21 & \raggedright
+B.CONNER, R.DICKERSON &  6/82\\
+\hline
+R2BNASF   & \raggedright DNA(B,CGCGAATTCGCG,SYNTHETIC,16 K)\- & \raggedright
+H.R.DREW, R.E.DICKERSON & 11/81\\
+\hline
+R3BNASF   & \raggedright DNA(B,9-BR-CGCGAATTCGCG,SYNTHETIC,20 C)\- &
+\raggedright M.L.KOPKA, A.V.FRATINI, R.E.DICKERSON &  2/82\\
+\hline
+R4BNASF   & \raggedright DNA(B,9-BR-CGCGAATTCGCG,SYNTHETIC,7 C)\- &
+\raggedright M.L.KOPKA, A.V.FRATINI, R.E.DICKERSON &  2/82\\
+\hline
+R1TGSSF   & \raggedright TRYPSINOGEN/\-PSTI & \raggedright M.BOLOGNESI,
+G.GATTI, E.MENEGATTI, M.GUARNERI, M.MARQUART, E.PAPAMOKOS, R.HUBER &  9/82\\
+\hline
+\end{longtable}
+\end{tiny}
+\end{document}
