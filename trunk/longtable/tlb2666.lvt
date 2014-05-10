@@ -1,0 +1,27 @@
+\documentclass{article}
+\usepackage{longtable}
+\textheight=3.5cm
+
+\begin{document}
+
+\def\tworows{1&2\\* \hline 3&4\\ \hline}
+
+\begin{longtable}{c|c}
+\tworows\tworows\tworows\tworows\tworows
+\end{longtable}
+
+\clearpage
+
+\makeatletter
+\def\nobreakhline{%
+\multispan\LT@cols\unskip\leaders\hrule\@height\arrayrulewidth\hfill\cr
+\noalign{\penalty10000}}
+\makeatother
+
+\def\tworows{1&2\\* \nobreakhline 3&4\\ \hline}
+
+\begin{longtable}{c|c}
+\tworows\tworows\tworows\tworows\tworows
+\end{longtable}
+
+\end{document}
