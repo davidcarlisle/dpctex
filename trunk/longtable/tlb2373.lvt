@@ -1,0 +1,22 @@
+\documentclass{article}
+\usepackage{longtable}
+\makeatletter
+\def\@oddhead{\rightmark~--~\leftmark\hfill\thepage}
+\makeatother
+
+\renewcommand{\textheight}{6cm}
+
+\newcommand{\doit}[1]{\markboth{#1}{#1}#1 (\rightmark)(\leftmark)}
+\begin{document}
+
+\begin{longtable}{l}
+First Head\\  \\ \endfirsthead
+Not First Head\\  \\ \endhead
+\doit{Abe}\\\doit{Ant}\\\doit{A00}\\\doit{A01}\\\doit{A02}\\\doit{A03}\\
+\doit{A04}\\\doit{A05}\\\doit{A06}\\\doit{A07}\\\doit{A08}\\\doit{A09}\\
+\doit{A10}\\\doit{A11}\\\doit{A12}\\\doit{A13}\\\doit{A14}\\\doit{A15}\\
+\doit{A16}\\\doit{A17}\\\doit{Bab}\\\doit{Cae}\\
+\end{longtable}
+
+Text after long table.
+\end{document}
