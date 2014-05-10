@@ -21,7 +21,7 @@
 %
 % \fi
 % \iffalse
-%% File: longtable.dtx Copyright (C) 1990-2001 David Carlisle
+%% File: longtable.dtx Copyright (C) 1990-2014 David Carlisle
 %
 %<*dtx>
           \ProvidesFile{longtable.dtx}
@@ -31,7 +31,7 @@
 %<driver> \ProvidesFile{longtable.drv}
 % \fi
 %         \ProvidesFile{longtable.dtx}
-          [2004/02/01 v4.11 Multi-page Table package (DPC)]
+          [2014/05/10 v5.01 Multi-page Table package (DPC)]
 %
 % \iffalse
 %<*driver>
@@ -49,8 +49,7 @@
 %        revised \filedate.}}
 % \author{David Carlisle\thanks{The new algorithm for aligning `chunks'
 % of a table used in version 4 of this package was devised coded
-% and documented by David Kastrup,
-% \texttt{dak@neuroinformatik.ruhr-uni-bochum.de}.}}
+% and documented by David Kastrup}}
 % \date{\filedate}
 %
 % \let\package\textsf
@@ -143,7 +142,7 @@
 % \changes{v4.06}{1997/06/28}
 %      {(DK) new email address}
 %
-% \CheckSum{1045}
+% ^^A\CheckSum{1045}
 %
 %
 % \makeatletter
@@ -849,6 +848,21 @@
 %  \end{macro}
 %  \end{macro}
 %
+%  \begin{macro}{v4}
+%  Version 4 compatibility
+% \changes{v5.01}{2014/05/14}
+%      {v4 option}
+%    \begin{macrocode}
+\newif\ifLT@ivcompat
+\LT@ivcompatfalse
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\DeclareOption{v4}{%
+  \LT@warn{longtable version 4 compatibility mode}%
+  \LT@ivcompattrue}
+%    \end{macrocode}
+%  \end{macro}
 %
 %    \begin{macrocode}
 \ProcessOptions
@@ -878,9 +892,12 @@
 % \end{macro}
 %
 % \begin{macro}{\LTchunksize}
+% \changes{v5.01}{2014/05/14}
+%      {increase default chunksize}
 % Chunk size (The number of rows taken per "\halign"). Default 20.
 %    \begin{macrocode}
-\newcount\LTchunksize \LTchunksize=20
+\newcount\LTchunksize
+\LTchunksize=\ifLT@ivcompat 20 \else 200 \fi
 %    \end{macrocode}
 % \end{macro}
 %
