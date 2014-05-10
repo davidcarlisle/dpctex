@@ -1,0 +1,12 @@
+\documentclass{article}
+\usepackage{longtable}
+\begin{document}
+This is a line before the longtable.
+\vfill
+\begin{longtable}{rl}
+    This & longtable \\
+    has & two rows.
+\end{longtable}
+\vfill
+This is a line after the longtable.
+\end{document}
