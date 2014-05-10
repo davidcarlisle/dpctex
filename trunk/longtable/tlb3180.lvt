@@ -1,0 +1,16 @@
+\documentclass{article}
+\usepackage{longtable}
+\LTpre0pt
+\parindent0em
+\LTpost0pt
+\LTleft0pt
+\begin{document}
+The cat sat on the mat
+\par
+\begin{longtable}{ll}
+A & B\\
+C & D
+\end{longtable}
+\par
+The cat sat on the mat
+\end{document}
