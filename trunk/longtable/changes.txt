@@ -1,0 +1,5 @@
+2014-05-10  David Carlisle  <latex-bugs@latex-project.org>
+
+	* longtable.dtx: Increase default chunksize to 200
+	
+
