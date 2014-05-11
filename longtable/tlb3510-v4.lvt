@@ -1,16 +1,12 @@
 \documentclass{article}
 \input{test2e}
-\usepackage{longtable}
+\usepackage[v4]{longtable}
 \begin{document}
 \showoutput
 \START
 \begin{longtable}[l]{@{}l@{}}
-    table\\\noalign{\vfill}
-    \begin{tabular}[t]{@{}ll@{}}
-        table & first line in embedded tabular \\
-        table\vrule width0pt height0pt depth\maxdepth \relax
-              & second line in embedded tabular \\
-    \end{tabular}\\\pagebreak
+    table\\\noalign{\vfil}
+    table\\\pagebreak
     table\\
 \end{longtable}
 \vfill

@@ -1,7 +1,7 @@
 
 \documentclass[a4paper,12pt]{article}
 \input{test2e}
-\usepackage{longtable}
+\usepackage[v4]{longtable}
 % Viel Text erzeugen
 \newcommand{\baz}{foo foo foo foo foo foo foo foo}
 \newcommand{\qux}{\baz\baz\baz\baz\baz\baz\baz\baz}

@@ -1,6 +1,6 @@
 \documentclass{article}
 \input{test2e}
-\usepackage{longtable}
+\usepackage[v4]{longtable}
 
 \makeatletter
 \renewcommand\section{\@startsection{section}{1}{\parindent}{25mm}{25mm}{\Large\bfseries}}

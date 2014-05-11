@@ -1,7 +1,7 @@
 \documentclass{article}
 \input{test2e}
 
-\usepackage{longtable}
+\usepackage[v4]{longtable}
 
 % Trick taken from www.texnik.de
 \makeatletter

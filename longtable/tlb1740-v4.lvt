@@ -1,7 +1,7 @@
 \documentclass[titlepage,twoside]{report}
 \input{test2e}
 \usepackage{array}
-\usepackage{longtable}
+\usepackage[v4]{longtable}
 \setlongtables
 \pagestyle{headings}
 \hyphenation{coordinate}
