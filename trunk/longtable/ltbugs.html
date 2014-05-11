@@ -37,13 +37,16 @@ tools/3619 (2004-02-18): longtable leaves single rule on page break</a><br/>
 tools/3512 (2003-03-09): single-page longtable below float clobbers \pagegoal</a><br/>
 <li><a href="http://www.latex-project.org/cgi-bin/ltxbugs2html?pr=tools/3511">
 tools/3511 (2003-03-09): longtable does not respect maxdepth</a><br/>
+
 <li><a href="http://www.latex-project.org/cgi-bin/ltxbugs2html?pr=tools/3510">
 tools/3510 (2003-03-09): longtable baselines do not line up at page bottoms</a><br/>
+Not a bug, latex tables designed not to have a strech glue, but taken as a possible
+feature request for an option to avoid the glue being added.
 
 <li class="analyzed"><a href="http://www.latex-project.org/cgi-bin/ltxbugs2html?pr=tools/3509">
 tools/3509 (2003-03-09): longtable starting at page boundary adds extra glue</a><br/>
 I'm not sure this is a bug, adding the forced page break pads with fil glue, so
-it only interfears with glue on the page if there is fil glue on the page as in the
+it only interferes with glue on the page if there is fil glue on the page as in the
 supplied test, not sure \vfil is really supported in that way, fill glue would
 have won. Adding test file in any case.
 
