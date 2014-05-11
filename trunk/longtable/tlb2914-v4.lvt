@@ -1,6 +1,6 @@
 \documentclass{article}
 \input{test2e}
-\usepackage{longtable}
+\usepackage[v4]{longtable}
 \pagestyle{headings}
 \setcounter{LTchunksize}{2}
 \begin{document}

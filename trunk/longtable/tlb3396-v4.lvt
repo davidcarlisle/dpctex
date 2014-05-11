@@ -2,7 +2,7 @@
 \input{test2e}
 
 \usepackage{array}
-\usepackage{longtable}
+\usepackage[v4]{longtable}
 
 
 \tracingpages=2\tracingoutput=1\showboxdepth=3\showboxbreadth=999

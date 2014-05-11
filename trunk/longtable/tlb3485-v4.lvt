@@ -3,7 +3,7 @@
 %% Cf. Sebastian Rahtz, tools/3180, 2000/03/05.
 \documentclass{article}
 \input{test2e}
-\usepackage{longtable}
+\usepackage[v4]{longtable}
 \nofiles
 \begin{document}
 \showoutput\batchmode

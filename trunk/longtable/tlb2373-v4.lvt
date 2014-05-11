@@ -1,6 +1,6 @@
 \documentclass{article}
 \input{test2e}
-\usepackage{longtable}
+\usepackage[v4]{longtable}
 \makeatletter
 \def\@oddhead{\rightmark~--~\leftmark\hfill\thepage}
 \makeatother

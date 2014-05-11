@@ -1,6 +1,9 @@
 \documentclass{article}
+\input{test2e}
 \usepackage{longtable}
 \begin{document}
+\showoutput
+\START
 \begin{longtable}[l]{@{}l@{}}
     table\\\noalign{\vfil}
     table\\\pagebreak

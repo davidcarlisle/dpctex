@@ -1,0 +1,9 @@
+
+
+for i in ${1}*lvt
+do
+echo $i
+pdflatex --interaction=nonstopmode --translate-file ./ascii.tcx $i > /dev/null
+pdflatex --interaction=nonstopmode --translate-file ./ascii.tcx $i > /dev/null
+perl log2tlg ${i/.lvt} < ${i/.lvt/.log} > ${i/.lvt/.tlg}
+done
