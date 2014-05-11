@@ -1,0 +1,66 @@
+\documentclass{article}
+\usepackage{longtable}
+\begin{document}
+
+Text goes here. Text goes here. Text goes here. Text goes here. Text
+goes here. Text goes here. Text goes here. Text goes here. Text goes
+here. Text goes here. Text goes here. Text goes here. Text goes here.
+Text goes here. Text goes here. Text goes here. Text goes here. Text
+goes here. Text goes here. Text goes here. Text goes here. Text goes
+here. Text goes here. Text goes here. Text goes here. Text goes here.
+Text goes here. Text goes here. Text goes here. Text goes here. Text
+goes here. Text goes here. Text goes here. Text goes here. Text goes
+here. Text goes here. Text goes here. Text goes here. Text goes here.
+Text goes here. Text goes here. Text goes here. Text goes here. Text
+goes here. Text goes here. Text goes here.
+
+Text goes here. Text goes here. Text goes here. Text goes here. Text
+goes here. Text goes here. Text goes here. Text goes here. Text goes
+here. Text goes here. Text goes here. Text goes here. Text goes here.
+Text goes here. Text goes here. Text goes here. Text goes here. Text
+goes here. Text goes here. Text goes here. Text goes here. Text goes
+here. Text goes here. Text goes here. Text goes here. Text goes here.
+Text goes here. Text goes here. Text goes here. Text goes here. Text
+goes here. Text goes here. Text goes here. Text goes here. Text goes
+here. Text goes here. Text goes here. Text goes here. Text goes here.
+Text goes here. Text goes here. Text goes here. Text goes here. Text
+goes here. Text goes here. Text goes here.
+
+Text goes here. Text goes here. Text goes here. Text goes here. Text
+goes here. Text goes here. Text goes here. Text goes here. Text goes
+here. Text goes here. Text goes here. Text goes here. Text goes here.
+Text goes here. Text goes here. Text goes here. Text goes here. Text
+goes here. Text goes here. Text goes here. Text goes here. Text goes
+here. Text goes here. Text goes here. Text goes here. Text goes here.
+Text goes here. Text goes here. Text goes here. Text goes here. Text
+goes here. Text goes here. Text goes here. Text goes here. Text goes
+here. Text goes here. Text goes here. Text goes here. Text goes here.
+Text goes here. Text goes here. Text goes here. Text goes here. Text
+goes here. Text goes here. Text goes here.
+
+Text goes here. Text goes here. Text goes here. Text goes here. Text
+goes here. Text goes here. Text goes here. Text goes here. Text goes
+here. Text goes here. Text goes here. Text goes here. Text goes here.
+Text goes here. Text goes here. Text goes here. Text goes here. Text
+goes here. Text goes here. Text goes here. Text goes here. Text goes
+here. Text goes here. Text goes here. Text goes here. Text goes here.
+Text goes here. Text goes here. Text goes here. Text goes here. Text
+goes here. Text goes here. Text goes here. Text goes here. Text goes
+here. Text goes here. Text goes here. Text goes here. Text goes here.
+Text goes here. Text goes here. Text goes here. Text goes here. Text
+goes here. Text goes here. Text goes here.
+
+Text goes here. Text goes here. Text goes here. Text goes here. Text
+goes here. Text goes here. Text goes here. Text goes here. Text goes
+here. Text goes here. Text goes here. Text goes here. Text goes here.
+Text goes here. Text goes here. Text goes here. Text goes here. Text
+goes here. Text goes here. Text goes here. Text goes here. Text goes
+here. Text goes here. Text goes here.
+
+
+\begin{longtable}{|p{5cm}|p{6cm}|}
+  \hline
+  one & two \\\hline
+\end{longtable}
+
+\end{document}

@@ -36,8 +36,9 @@ I think this was by design, the ltcaption package, part of caption bundle adds t
 and lost of other caption formatting features, some of which could possibly be
 incorprated into v5.
 
-<li><a href="http://www.latex-project.org/cgi-bin/ltxbugs2html?pr=tools/3619">
+<li  class="analyzed"><a href="http://www.latex-project.org/cgi-bin/ltxbugs2html?pr=tools/3619">
 tools/3619 (2004-02-18): longtable leaves single rule on page break</a><br/>
+Bad break on initial hline.
 
 <li class="analyzed"><a href="http://www.latex-project.org/cgi-bin/ltxbugs2html?pr=tools/3512">
 tools/3512 (2003-03-09): single-page longtable below float clobbers \pagegoal</a><br/>
@@ -78,12 +79,12 @@ Fixed if you comment out vbox.
 tools/3450 (2002-08-07): Problem with nearly empty pages and longtable.sty</a><br/>
 Sounds like the other ones with a problem with the initial page break, no test file supplied.
 
-<li class="bad"><a href="http://www.latex-project.org/cgi-bin/ltxbugs2html?pr=tools/3407">
+<li class="analyzed"><a href="http://www.latex-project.org/cgi-bin/ltxbugs2html?pr=tools/3407">
 tools/3407 (2002-02-04): Longtable after \section overrules \nopagebreak</a><br/>
 LT can leave a section head at end of page. No testcase in PR so I made one here.
 
 
-<li class="bad"><a href="http://www.latex-project.org/cgi-bin/ltxbugs2html?pr=tools/3402">
+<li class="analyzed"><a href="http://www.latex-project.org/cgi-bin/ltxbugs2html?pr=tools/3402">
 tools/3402 (2002-01-21): tabularx cannot be used inside longtable</a><br/>
 really an ltxtable bug so not really tools, but it's pretty broken here, and ltxtable is mine and
 possibly should be incorporated into v5 so adding this.
