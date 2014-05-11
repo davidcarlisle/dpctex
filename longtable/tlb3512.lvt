@@ -1,0 +1,17 @@
+
+\documentclass[a4paper,12pt]{article}
+\usepackage{longtable}
+% Viel Text erzeugen
+\newcommand{\baz}{foo foo foo foo foo foo foo foo}
+\newcommand{\qux}{\baz\baz\baz\baz\baz\baz\baz\baz}
+\begin{document}
+
+\begin{figure}\vspace{10cm}\end{figure}
+
+\begin{longtable}{llll}
+bar & bar & bar & bar
+\end{longtable}
+
+\qux\qux\qux\qux\qux\qux\qux\qux
+\qux\qux\qux\qux\qux\qux\qux\qux
+\end{document}
