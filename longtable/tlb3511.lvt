@@ -1,0 +1,17 @@
+\documentclass{article}
+\usepackage{longtable}
+\begin{document}
+\begin{longtable}[l]{@{}l@{}}
+    table\\\noalign{\vfill}
+    \begin{tabular}[t]{@{}ll@{}}
+        table & first line in embedded tabular \\
+        table\vrule width0pt height0pt depth\maxdepth \relax
+              & second line in embedded tabular \\
+    \end{tabular}\\\pagebreak
+    table\\
+\end{longtable}
+\vfill
+\noindent table ---This is where the last line of all pages should be.\par
+\pagebreak
+\noindent table ---This is where the first line of all pages should be.\par
+\end{document}
