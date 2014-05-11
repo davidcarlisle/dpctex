@@ -1,0 +1,30 @@
+%% LtabTest.tex---Uwe L"uck---spacing error in longtable.sty,
+%% 2002/12/08.
+%% Cf. Sebastian Rahtz, tools/3180, 2000/03/05.
+\documentclass{article}
+\usepackage{longtable}
+\nofiles
+\begin{document}
+
+A
+% Test test test test test test test test test test
+% test test test test test test test test test test
+% test test test test test test test test test test.
+\par
+\begin{longtable}{c}
+% \begin{center}\begin{tabular}{c}
+T
+\end{longtable}
+% \end{tabular}\end{center}
+\par
+B
+% Test test test test test test test test test test
+% test test test test test test test test test test
+% test test test test test test test test test test.
+
+% \tracingonline=1
+\showboxbreadth=20
+\showboxdepth=5
+\showlists
+
+\end{document}
