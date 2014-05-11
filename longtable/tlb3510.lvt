@@ -1,0 +1,13 @@
+\documentclass{article}
+\usepackage{longtable}
+\begin{document}
+\begin{longtable}[l]{@{}l@{}}
+    table\\\noalign{\vfil}
+    table\\\pagebreak
+    table\\
+\end{longtable}
+\vfill
+\noindent table ---This is where the last line of all pages should be.\par
+\pagebreak
+\noindent table ---This is where the first line of all pages should be.\par
+\end{document}
