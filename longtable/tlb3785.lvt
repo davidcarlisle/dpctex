@@ -1,0 +1,48 @@
+\documentclass{article}
+
+\usepackage{longtable}
+
+% Trick taken from www.texnik.de
+\makeatletter
+\def\noVSpace{\@minipagetrue}
+\makeatother
+
+\begin{document}
+
+\begin{tabular}{p{10cm}}
+  \hline
+  Line 1 \\
+  \begin{itemize}
+  \item Vertical space at the top and bottom of the itemize
+  \end{itemize} \\
+  Line 3 \\
+  \hline
+\end{tabular}
+
+\vspace*{2cm}
+
+\begin{tabular}{p{10cm}}
+  \hline
+  Line 1 \\
+  \noVSpace
+  \begin{itemize}
+  \item No vertical space at the top (hmm, but space at the bottom)
+  \end{itemize} \\
+  Line 3 \\
+  \hline
+\end{tabular}
+
+\vspace*{2cm}
+
+\begin{longtable}{p{10cm}}
+  \hline
+  Line 1 \\
+  \noVSpace
+  \begin{itemize}
+  \item Vertical space at the and bottom of the itemize - fix me!
+  \end{itemize} \\
+  Line 3 \\
+  \hline
+\end{longtable}
+
+\end{document}
