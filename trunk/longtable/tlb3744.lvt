@@ -1,0 +1,136 @@
+\documentclass{article}
+
+\usepackage{longtable}
+
+\begin{document}
+
+\section{Longtable}
+
+Example that \verb!\abovecaptionskip! does not have any effect in the 
+\texttt{longtable} environment.
+
+The value of \verb!\abovecaptionskip! is \the\abovecaptionskip.
+
+\begin{longtable}{ccp{11.5cm}}
+\hline
+AggrID & SNI92 & {\hspace{1.5in} Activity \hfill}\\ \hline\hline
+\endhead
+\caption{Aggregation key to industries used in the estimations 
+(\textit{cont. next page}).\label{aggrkey}}
+\endfoot
+\caption{(\textit{cont.}) Aggregation key to industries used in the 
+estimations.}%
+\endlastfoot
+0 & \footnotesize{1} & \footnotesize{Agriculture, hunting and related 
+service activities} \\ \hline
+& \footnotesize{2} & \footnotesize{Forestry, logging and related service 
+activities} \\
+& \footnotesize{5} & \footnotesize{Fishing, operation of fish hatcheries 
+and fish farms;
+service activities incidental to fishing} \\
+& \footnotesize{10} & \footnotesize{Mining of coal and lignite; extraction 
+of peat} \\
+& \footnotesize{11} & \footnotesize{Extraction of crude petroleum and 
+natural gas; service
+activities incidental to oil and gas extraction, excluding surveying} \\
+& \footnotesize{12} & \footnotesize{Mining of uranium and thorium ores} \\
+1 & \footnotesize{13} & \footnotesize{Mining of metal ores} \\
+& \footnotesize{14} & \footnotesize{Other mining and quarrying} \\
+& \footnotesize{40} & \footnotesize{Electricity, gas, steam and hot water 
+supply} \\
+& \footnotesize{41} & \footnotesize{Collection, purification and 
+distribution of water} \\
+& \footnotesize{201} & \footnotesize{Sawmilling and planing of wood} \\
+& \footnotesize{209} & \footnotesize{Manufacture of products of wood, cork, 
+straw and
+plaiting materials} \\
+& \footnotesize{211} & \footnotesize{Manufacture of pulp} \\
+& \footnotesize{219} & \footnotesize{Manufacture of paper and paper 
+products} \\ \hline
+2 & \footnotesize{15} & \footnotesize{Manufacture of food products and 
+beverages} \\
+& \footnotesize{16} & \footnotesize{Manufacture of tobacco products} \\ \hline
+& \footnotesize{17} & \footnotesize{Manufacture of textiles} \\
+3 & \footnotesize{18} & \footnotesize{Manufacture of wearing apparel; 
+dressing and dyeing
+of fur} \\
+& \footnotesize{19} & \footnotesize{Tanning and dressing of leather; 
+manufacture of
+luggage, handbags, saddlery, harness and footwear} \\ \hline
+4 & \footnotesize{22} & \footnotesize{Publishing, printing and reproduction 
+of recorded
+media} \\ \hline
+& \footnotesize{23} & \footnotesize{Manufacture of coke, refined petroleum 
+products and
+nuclear fuel} \\
+5 & \footnotesize{24} & \footnotesize{Manufacture of chemicals and chemical 
+products} \\
+& \footnotesize{25} & \footnotesize{Manufacture of rubber and plastic 
+products} \\
+& \footnotesize{26} & \footnotesize{Manufacture of other non-metallic 
+mineral products} \\
+\hline
+& \footnotesize{27} & \footnotesize{Manufacture of basic metals} \\
+6 & \footnotesize{28} & \footnotesize{Manufacture of fabricated metal 
+products, except
+machinery and equipment} \\ \hline
+& \footnotesize{29} & \footnotesize{Manufacture of machinery and equipment 
+n.e.c.\footnote{n.e.c. = not elsewhere classified.}} \\
+& \footnotesize{34} & \footnotesize{Manufacture of motor vehicles, trailers and
+semi-trailers} \\
+7 & \footnotesize{35} & \footnotesize{Manufacture of other transport 
+equipment} \\
+& \footnotesize{36} & \footnotesize{Manufacture of furniture; manufacturing 
+n.e.c.} \\
+& \footnotesize{37} & \footnotesize{Recycling} \\ \hline
+\pagebreak
+& \footnotesize{30} & \footnotesize{Manufacture of office machinery and 
+computers} \\
+& \footnotesize{31} & \footnotesize{Manufacture of electrical machinery and 
+apparatus
+n.e.c.} \\
+8 & \footnotesize{32} & \footnotesize{Manufacture of radio, television and 
+communication
+equipment and apparatus} \\
+& \footnotesize{33} & \footnotesize{Manufacture of medical, precision and 
+optical
+instruments, watches and clocks} \\ \hline
+9 & \footnotesize{45} & \footnotesize{Construction} \\ \hline
+10 & \footnotesize{50} & \footnotesize{Sale, maintenance and repair of 
+motor vehicles and motorcycles;
+retail sale of automotive fuel} \\ \hline
+11 & \footnotesize{51} & \footnotesize{Wholesale trade and commission 
+trade, except of motor vehicles and
+motorcycles} \\ \hline
+12 & \footnotesize{52} & \footnotesize{Retail trade, except of motor 
+vehicles and motorcycles; repair of
+personal and household goods} \\ \hline
+13 & \footnotesize{55} & \footnotesize{Hotels and restaurants} \\ \hline
+& \footnotesize{60} & \footnotesize{Land transport; transport via pipelines} \\
+14 & \footnotesize{61} & \footnotesize{Water transport} \\
+& \footnotesize{62} & \footnotesize{Air transport} \\ \hline
+15 & \footnotesize{63} & \footnotesize{Supporting and auxiliary transport 
+activities; activities of
+travel agencies} \\
+& \footnotesize{64} & \footnotesize{Post and telecommunications} \\ \hline
+16 & \footnotesize{702} & \footnotesize{Real estate activities with own 
+property} \\ \hline
+17 & \footnotesize{709} & \footnotesize{Other real estate activities} \\ \hline
+& \footnotesize{71} & \footnotesize{Renting of machinery and equipment 
+without operator and of personal
+and household goods} \\
+18 & \footnotesize{72} & \footnotesize{Computer and related activities} \\
+& \footnotesize{73} & \footnotesize{Research and development} \\ \hline
+19 & \footnotesize{74} & \footnotesize{Other business activities} \\ \hline
+20 & \footnotesize{80} & \footnotesize{Education} \\ \hline
+21 & \footnotesize{85} & \footnotesize{Health and social work} \\ \hline
+& \footnotesize{90} & \footnotesize{Sewage and refuse disposal, sanitation 
+and similar activities} \\
+22 & \footnotesize{91} & \footnotesize{Activities of membership 
+organizations n.e.c.} \\
+& \footnotesize{93} & \footnotesize{Other service activities} \\ \hline
+23 & \footnotesize{92} & \footnotesize{Recreational, cultural and sporting 
+activities} \\ \hline
+\end{longtable}
+
+\end{document}
