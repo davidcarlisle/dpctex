@@ -1,0 +1,120 @@
+This is a generated file for the LaTeX2e validation system.
+Don't change this file in any respect.
+%% \CharacterTable
+%%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%%   Digits        \0\1\2\3\4\5\6\7\8\9
+%%   Exclamation   \!     Double quote  \"     Hash (number) \#
+%%   Dollar        \$     Percent       \%     Ampersand     \&
+%%   Acute accent  \'     Left paren    \(     Right paren   \)
+%%   Asterisk      \*     Plus          \+     Comma         \,
+%%   Minus         \-     Point         \.     Solidus       \/
+%%   Colon         \:     Semicolon     \;     Less than     \<
+%%   Equals        \=     Greater than  \>     Question mark \?
+%%   Commercial at \@     Left bracket  \[     Backslash     \\
+%%   Right bracket \]     Circumflex    \^     Underscore    \_
+%%   Grave accent  \`     Left brace    \{     Vertical bar  \|
+%%   Right brace   \}     Tilde         \~}
+%%
+Completed box being shipped out [1]
+\vbox(633.0+0.0)x407.0
+.\glue 16.0
+.\vbox(617.0+0.0)x345.0, shifted 62.0
+..\vbox(12.0+0.0)x345.0, glue set 5.55556fil
+...\glue 0.0 plus 1.0fil
+...\hbox(6.44444+0.0)x345.0, glue set 339.99998fil
+....\glue 0.0 plus 1.0fil
+....\OT1/cmr/m/n/10 1
+..\glue 25.0
+..\glue(\lineskip) 0.0
+..\vbox(550.0+0.0)x345.0, glue set 524.34396fil
+...\write-{}
+...\mark{{}{\global \setbox 1\hbox {}}}
+...\glue(\topskip) 1.60004
+...\hbox(8.39996+3.60004)x345.0, glue set 159.8333fill
+....\glue(\tabskip) 0.0 plus 1.0fill
+....\hbox(8.39996+3.60004)x25.3334
+.....\rule(8.39996+3.60004)x0.0
+.....\glue 6.0
+.....\glue 0.00002
+.....\OT1/cmr/m/n/10 f
+.....\OT1/cmr/m/n/10 o
+.....\kern0.27779
+.....\OT1/cmr/m/n/10 o
+.....\glue 0.0 plus 1.0fil
+.....\glue 6.0
+....\glue(\tabskip) 0.0 plus 1.0fill
+...\glue(\lineskip) 0.0
+...\hbox(8.39996+3.60004)x345.0, glue set 159.8333fill
+....\glue(\tabskip) 0.0 plus 1.0fill
+....\hbox(8.39996+3.60004)x25.3334
+.....\rule(8.39996+3.60004)x0.0
+.....\glue 6.0
+.....\glue 0.00002
+.....\OT1/cmr/m/n/10 f
+.....\OT1/cmr/m/n/10 o
+.....\kern0.27779
+.....\OT1/cmr/m/n/10 o
+.....\glue 0.0 plus 1.0fil
+.....\glue 6.0
+....\glue(\tabskip) 0.0 plus 1.0fill
+...\glue 0.0 plus 1.0fil minus 1.0fil
+...\glue 0.0
+...\glue 0.0 plus 0.0001fil
+..\glue(\baselineskip) 30.0
+..\hbox(0.0+0.0)x345.0
+{/usr/local/texlive/2014/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
+Package longtable Warning: Column widths have changed
+(longtable)                in table 1 on input line 17.
+Package longtable Warning: Table widths have changed. Rerun LaTeX.
+Completed box being shipped out [2]
+\vbox(633.0+0.0)x407.0
+.\glue 16.0
+.\vbox(617.0+0.0)x345.0, shifted 62.0
+..\vbox(12.0+0.0)x345.0, glue set 5.55556fil
+...\glue 0.0 plus 1.0fil
+...\hbox(6.44444+0.0)x345.0, glue set 339.99998fil
+....\glue 0.0 plus 1.0fil
+....\OT1/cmr/m/n/10 2
+..\glue 25.0
+..\glue(\lineskip) 0.0
+..\vbox(550.0+0.0)x345.0, glue set 512.34525fil
+...\glue(\topskip) 0.0
+...\vbox(22.0+3.60004)x345.0
+....\glue(\topskip) 1.60004
+....\hbox(8.39996+3.60004)x345.0, glue set 159.8333fill
+.....\glue(\tabskip) 0.0 plus 1.0fill
+.....\hbox(8.39996+3.60004)x25.3334
+......\rule(8.39996+3.60004)x0.0
+......\glue 6.0
+......\glue 0.00002
+......\OT1/cmr/m/n/10 f
+......\OT1/cmr/m/n/10 o
+......\kern0.27779
+......\OT1/cmr/m/n/10 o
+......\glue 0.0 plus 1.0fil
+......\glue 6.0
+.....\glue(\tabskip) 0.0 plus 1.0fill
+....\glue(\lineskip) 0.0
+....\hbox(8.39996+3.60004)x345.0, glue set 159.8333fill
+.....\glue(\tabskip) 0.0 plus 1.0fill
+.....\hbox(8.39996+3.60004)x25.3334
+......\rule(8.39996+3.60004)x0.0
+......\glue 6.0
+......\glue 0.00002
+......\OT1/cmr/m/n/10 f
+......\OT1/cmr/m/n/10 o
+......\kern0.27779
+......\OT1/cmr/m/n/10 o
+......\glue 0.0 plus 1.0fil
+......\glue 6.0
+.....\glue(\tabskip) 0.0 plus 1.0fill
+...\penalty 10000
+...\penalty 0
+...\glue 12.0 plus 4.0 minus 4.0
+...\glue 0.0 plus 1.0fil
+...\glue 0.0
+...\glue 0.0 plus 0.0001fil
+..\glue(\baselineskip) 30.0
+..\hbox(0.0+0.0)x345.0
+(.aux)
