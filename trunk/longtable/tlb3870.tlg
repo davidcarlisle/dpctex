@@ -1,0 +1,240 @@
+This is a generated file for the LaTeX2e validation system.
+Don't change this file in any respect.
+%% \CharacterTable
+%%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%%   Digits        \0\1\2\3\4\5\6\7\8\9
+%%   Exclamation   \!     Double quote  \"     Hash (number) \#
+%%   Dollar        \$     Percent       \%     Ampersand     \&
+%%   Acute accent  \'     Left paren    \(     Right paren   \)
+%%   Asterisk      \*     Plus          \+     Comma         \,
+%%   Minus         \-     Point         \.     Solidus       \/
+%%   Colon         \:     Semicolon     \;     Less than     \<
+%%   Equals        \=     Greater than  \>     Question mark \?
+%%   Commercial at \@     Left bracket  \[     Backslash     \\
+%%   Right bracket \]     Circumflex    \^     Underscore    \_
+%%   Grave accent  \`     Left brace    \{     Vertical bar  \|
+%%   Right brace   \}     Tilde         \~}
+%%
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 42.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 42.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 42.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 42.
+\footnote ->\@ifnextchar [\@xfootnote {\stepcounter \@mpfn \protected@xdef \@th
+efnmark {\thempfn }\@footnotemark \@footnotetext }
+\@ifnextchar #1#2#3->\let \reserved@d =#1\def \reserved@a {#2}\def \reserved@b 
+{#3}\futurelet \@let@token \@ifnch 
+#1<-[
+#2<-\@xfootnote 
+#3<-\stepcounter \@mpfn \protected@xdef \@thefnmark {\thempfn }\@footnotemark \
+@footnotetext 
+\@ifnch ->\ifx \@let@token \@sptoken \let \reserved@c \@xifnch \else \ifx \@let
+@token \reserved@d \let \reserved@c \reserved@a \else \let \reserved@c \reserve
+d@b \fi \fi \reserved@c 
+\reserved@c ->\@xfootnote 
+\@xfootnote [#1]->\begingroup \csname c@\@mpfn \endcsname #1\relax \unrestored@
+protected@xdef \@thefnmark {\thempfn }\endgroup \@footnotemark \@footnotetext 
+#1<-3
+\@mpfn ->footnote
+\unrestored@protected@xdef ->\let \protect \@unexpandable@protect \xdef 
+\thempfn ->\thefootnote 
+\thefootnote ->\@arabic \c@footnote 
+\@arabic #1->\number #1
+#1<-\c@footnote 
+\@footnotemark ->\leavevmode \ifhmode \edef \@x@sf {\the \spacefactor }\nobreak
+ \fi \@makefnmark \ifhmode \spacefactor \@x@sf \fi \relax 
+\leavevmode ->\unhbox \voidb@x 
+\nobreak ->\penalty \@M 
+\@makefnmark ->\hbox {\@textsuperscript {\normalfont \@thefnmark }}
+\@textsuperscript #1->{\m@th \ensuremath {^{\mbox {\fontsize \sf@size \z@ #1}}}
+}
+#1<-\normalfont \@thefnmark 
+\m@th ->\mathsurround \z@ 
+\ensuremath ->\protect \ensuremath  
+\ensuremath  ->\ifmmode \expandafter \@firstofone \else \expandafter \@ensuredm
+ath \fi 
+\@ensuredmath #1->$\relax #1$
+#1<-^{\mbox {\fontsize \sf@size \z@ \normalfont \@thefnmark }}
+\conditionally@traceoff ->\tracingassigns \z@ \tracingrestores \z@ \tracingcomm
+ands \z@ \tracingpages \z@ \tracingmacros \z@ \tracingoutput \z@ \showboxbreadt
+h \m@ne \showboxdepth \m@ne \tracingstats \@ne \tracingparagraphs \z@ \tracingg
+roups \z@ 
+\@x@sf ->1000
+\@footnotetext #1->\edef \@tempa {\the \LT@p@ftn \noexpand \footnotetext [\the 
+\c@footnote ]}\global \LT@p@ftn \expandafter {\@tempa {#1}}
+#1<-YZ
+\@tempa ->\footnotetext [1]
+Completed box being shipped out [1]
+\vbox(633.0+0.0)x407.0
+.\glue 16.0
+.\vbox(617.0+0.0)x345.0, shifted 62.0
+..\vbox(12.0+0.0)x345.0, glue set 12.0fil
+...\glue 0.0 plus 1.0fil
+...\hbox(0.0+0.0)x345.0
+..\glue 25.0
+..\glue(\lineskip) 0.0
+..\vbox(550.0+0.0)x345.0, glue set 463.1205fil
+...\glue(\topskip) 0.0
+...\vbox(46.0+3.60004)x345.0
+....\write-{}
+....\glue(\topskip) 1.60004
+....\hbox(8.39996+3.60004)x345.0, glue set 156.49998fill
+.....\glue(\tabskip) 0.0 plus 1.0fill
+.....\hbox(8.39996+3.60004)x32.00003
+......\rule(8.39996+3.60004)x0.0
+......\glue 6.0
+......\vbox(8.39996+3.60004)x20.00003
+.......\hbox(8.39996+3.60004)x20.00003, glue set 3.52776fil
+........\hbox(0.0+0.0)x0.0
+........\rule(8.39996+*)x0.0
+........\OT1/cmr/m/n/10 X
+........\mathon
+........\hbox(4.51111+0.0)x4.48613, shifted 1.49998
+.........\OT1/cmr/m/n/7 1
+........\mathoff
+........\penalty 10000
+........\hbox(8.14003+0.0)x4.48613
+.........\mathon
+.........\hbox(4.51111+0.0)x4.48613, shifted -3.62892
+..........\OT1/cmr/m/n/7 1
+.........\mathoff
+........\penalty 10000
+........\rule(0.0+3.60004)x0.0
+........\penalty 10000
+........\glue(\parfillskip) 0.0 plus 1.0fil
+........\glue(\rightskip) 0.0
+......\glue 0.0 plus 1.0fil
+......\glue 6.0
+.....\glue(\tabskip) 0.0 plus 1.0fill
+....\glue(\lineskip) 0.0
+....\hbox(8.39996+3.60004)x345.0, glue set 156.49998fill
+.....\glue(\tabskip) 0.0 plus 1.0fill
+.....\hbox(8.39996+3.60004)x32.00003
+......\rule(8.39996+3.60004)x0.0
+......\glue 6.0
+......\vbox(8.39996+3.60004)x20.00003
+.......\hbox(8.39996+3.60004)x20.00003, glue set 8.01389fil
+........\hbox(0.0+0.0)x0.0
+........\rule(8.39996+*)x0.0
+........\OT1/cmr/m/n/10 X
+........\mathon
+........\hbox(4.51111+0.0)x4.48613, shifted 1.49998
+.........\OT1/cmr/m/n/7 2
+........\mathoff
+........\penalty 10000
+........\rule(0.0+3.60004)x0.0
+........\penalty 10000
+........\glue(\parfillskip) 0.0 plus 1.0fil
+........\glue(\rightskip) 0.0
+......\glue 0.0 plus 1.0fil
+......\glue 6.0
+.....\glue(\tabskip) 0.0 plus 1.0fill
+....\glue(\lineskip) 0.0
+....\hbox(8.39996+3.60004)x345.0, glue set 156.49998fill
+.....\glue(\tabskip) 0.0 plus 1.0fill
+.....\hbox(8.39996+3.60004)x32.00003
+......\rule(8.39996+3.60004)x0.0
+......\glue 6.0
+......\vbox(8.39996+3.60004)x20.00003
+.......\hbox(8.39996+3.60004)x20.00003, glue set 3.52776fil
+........\hbox(0.0+0.0)x0.0
+........\rule(8.39996+*)x0.0
+........\OT1/cmr/m/n/10 X
+........\mathon
+........\hbox(4.51111+0.0)x4.48613, shifted 1.49998
+.........\OT1/cmr/m/n/7 3
+........\mathoff
+........\penalty 10000
+........\hbox(8.14003+0.0)x4.48613
+.........\mathon
+.........\hbox(4.51111+0.0)x4.48613, shifted -3.62892
+..........\OT1/cmr/m/n/7 3
+.........\mathoff
+........\penalty 10000
+........\rule(0.0+3.60004)x0.0
+........\penalty 10000
+........\glue(\parfillskip) 0.0 plus 1.0fil
+........\glue(\rightskip) 0.0
+......\glue 0.0 plus 1.0fil
+......\glue 6.0
+.....\glue(\tabskip) 0.0 plus 1.0fill
+....\glue(\lineskip) 0.0
+....\hbox(8.39996+3.60004)x345.0, glue set 156.49998fill
+.....\glue(\tabskip) 0.0 plus 1.0fill
+.....\hbox(8.39996+3.60004)x32.00003
+......\rule(8.39996+3.60004)x0.0
+......\glue 6.0
+......\vbox(8.39996+3.60004)x20.00003
+.......\hbox(8.39996+3.60004)x20.00003, glue set 8.01389fil
+........\hbox(0.0+0.0)x0.0
+........\rule(8.39996+*)x0.0
+........\OT1/cmr/m/n/10 X
+........\mathon
+........\hbox(4.51111+0.0)x4.48613, shifted 1.49998
+.........\OT1/cmr/m/n/7 4
+........\mathoff
+........\penalty 10000
+........\rule(0.0+3.60004)x0.0
+........\penalty 10000
+........\glue(\parfillskip) 0.0 plus 1.0fil
+........\glue(\rightskip) 0.0
+......\glue 0.0 plus 1.0fil
+......\glue 6.0
+.....\glue(\tabskip) 0.0 plus 1.0fill
+...\penalty 10000
+...\penalty 0
+...\glue 12.0 plus 4.0 minus 4.0
+...\glue 0.0 plus 1.0fil
+...\glue 9.0 plus 4.0 minus 2.0
+...\kern -3.0
+...\rule(0.4+0.0)x137.9979
+...\kern 2.6
+...\hbox(6.68999+2.85002)x345.0, glue set 316.24124fil
+....\hbox(6.68999+0.0)x15.30023, glue set 11.13362fil
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+.....\hbox(6.68999+0.0)x4.16661
+......\mathon
+......\hbox(3.86665+0.0)x4.16661, shifted -2.82333
+.......\OT1/cmr/m/n/6 1
+......\mathoff
+....\hbox(6.65+0.0)x0.0
+.....\rule(6.65+0.0)x0.0
+....\OT1/cmr/m/n/8 C
+....\OT1/cmr/m/n/8 f
+....\OT1/cmr/m/n/8 .
+....\OT1/cmr/m/n/8 :
+....\penalty 10000
+....\rule(0.0+2.85002)x0.0
+....\penalty 10000
+....\glue(\parfillskip) 0.0 plus 1.0fil
+....\glue(\rightskip) 0.0
+...\hbox(6.68999+2.85002)x345.0, glue set 318.13849fil
+....\hbox(6.68999+0.0)x15.30023, glue set 11.13362fil
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+.....\hbox(6.68999+0.0)x4.16661
+......\mathon
+......\hbox(3.86665+0.0)x4.16661, shifted -2.82333
+.......\OT1/cmr/m/n/6 1
+......\mathoff
+....\hbox(6.65+0.0)x0.0
+.....\rule(6.65+0.0)x0.0
+....\OT1/cmr/m/n/8 Y
+....\OT1/cmr/m/n/8 Z
+....\penalty 10000
+....\rule(0.0+2.85002)x0.0
+....\penalty 10000
+....\glue(\parfillskip) 0.0 plus 1.0fil
+....\glue(\rightskip) 0.0
+...\glue -2.85002
+...\glue 0.0 plus 0.0001fil
+..\glue(\baselineskip) 23.55556
+..\hbox(6.44444+0.0)x345.0, glue set 170.0fil
+...\glue 0.0 plus 1.0fil
+...\OT1/cmr/m/n/10 1
+...\glue 0.0 plus 1.0fil
+{/usr/local/texlive/2014/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
+(.aux)
