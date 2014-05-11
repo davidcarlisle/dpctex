@@ -1,0 +1,27 @@
+\documentclass{book}
+
+\usepackage{array,longtable}
+
+
+\tracingpages=2\tracingoutput=1\showboxdepth=3\showboxbreadth=999
+
+\begin{document}
+
+\vspace*{508.6556pt plus 22.0pt minus 23.0pt}
+
+Med de ovan uppr\"aknade operationerna bildar man allts\r{a} det
+sammansatta uttrycket genom att s\"atta operationssymbolen mellan de
+tv\r{a} deluttrycken. Det finns \"aven ett antal operationer som
+noteras p\r{a} mer speciella s\"att. I n\r{a}gra fall r\"or det sig
+om alternativa skrivs\"att f\"or operationer som redan har n\"amnts
+ovan.
+
+\begin{longtable}{>{$\displaystyle}c<{$}
+  >{\raggedright}p{0.4\linewidth} >{\raggedright}p{0.35\linewidth}}
+  \textbf{Uttrycket}& \textbf{utl\"ases}&
+    \textbf{kommentar}\endhead
+  ab& $a$ g\r{a}nger $b$;\\ $a$ $b$&
+    Detta \"ar att f\"oredra framf\"or $a \cdot b$
+\end{longtable}
+
+\end{document}
