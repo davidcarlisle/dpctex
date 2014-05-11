@@ -1,0 +1,20 @@
+\documentclass{article}
+\usepackage{longtable}
+\begin{document}
+foo\par foo\par foo\par foo\par foo\par foo\par foo\par foo\par foo\par foo\par
+\vspace*{3pt}
+foo\par foo\par foo\par foo\par foo\par foo\par foo\par foo\par foo\par foo\par
+\vfil
+foo\par foo\par foo\par foo\par foo\par foo\par foo\par foo\par foo\par foo\par
+foo\par foo\par foo\par foo\par foo\par foo\par foo\par foo\par foo\par foo\par
+foo\par foo\par foo\par foo\par foo\par
+\begin{longtable}{l}
+    table\\
+    table\\
+    table\\
+    table\\
+\end{longtable}
+\vfil
+foo ---This is where the last line of the previous page should be.
+\pagebreak
+\end{document}
