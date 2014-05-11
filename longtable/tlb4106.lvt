@@ -1,0 +1,21 @@
+\documentclass{article}
+\usepackage{longtable}
+
+\makeatletter
+\renewcommand\section{\@startsection{section}{1}{\parindent}{25mm}{25mm}{\Large\bfseries}}
+
+\begin{document}
+
+\section{section}
+% uncomment this line to see the differences
+
+\begin{longtable}{|c|c|c|}
+    \endfirsthead
+    \endhead
+    \endfoot
+    \endlastfoot
+    text&text&text\\
+\end{longtable}
+
+\section{next section}
+\end{document}
