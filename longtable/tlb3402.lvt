@@ -4,5 +4,9 @@
 
 \begin{document}
 \START
+\OMIT
 \LTXtable{\textwidth}{tlb3402-table.tex}
+\TIMO
+% does not get to here in V4
+\typeout{Got to here}
 \end{document}
