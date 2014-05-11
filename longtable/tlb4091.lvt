@@ -1,0 +1,40 @@
+\documentclass{article}
+\usepackage{longtable}
+\begin{document}
+\vspace*{9cm}
+Table starts here:
+\LTchunksize=20 % bug doesn't show if chunksize is larger
+\begin{longtable}{l}
+HEAD \endhead
+FIRSTHEAD \endfirsthead
+line 1 \\ \nopagebreak
+line 2 \\ \nopagebreak
+line 3 \\ \nopagebreak
+line 4 \\ \nopagebreak
+line 5 \\ \nopagebreak
+line 6 \\ \nopagebreak
+line 7 \\ \nopagebreak
+line 8 \\ \nopagebreak
+line 9 \\ \nopagebreak
+line 10 \\ \nopagebreak
+line 11 \\ \nopagebreak
+line 12 \\ \nopagebreak
+line 13 \\ \nopagebreak
+line 14 \\ \nopagebreak
+line 15 \\ \nopagebreak
+line 16 \\ \nopagebreak
+line 17 \\ \nopagebreak
+line 18 \\ \nopagebreak
+line 19 \\ \nopagebreak
+line 20 \\ \nopagebreak
+line 21 \\ \nopagebreak
+line 22 \\ \nopagebreak
+line 23 \\ \nopagebreak
+line 24 \\ \nopagebreak
+line 25 \\ \nopagebreak
+line 26 \\ \nopagebreak
+line 27 \\ \nopagebreak
+line 28 \\ \nopagebreak
+line 29 \\ \nopagebreak
+\end{longtable}
+\end{document}
