@@ -1,0 +1,41 @@
+\ProvidesFile{LTabFoot.tex}[2006/06/04         ^^J --
+  demonstrating drawback of longtable v4.11's
+  version of \string \footnote                 ^^J --
+    Uwe Lueck    ]
+
+\documentclass{article}
+\usepackage{longtable,trace}
+
+\iffalse % -- longtable problem --
+% \iftrue \typeout{-- longtable improved --}
+\makeatletter
+  % (a) v4.11 macros modified:
+  \def\LT@startpbox#1{%
+    \bgroup
+      \let\@footnotetext\LT@p@ftntext
+      \let\footnote\LT@p@footnote     % added by UL
+      \setlength\hsize{#1}%
+      \@arrayparboxrestore
+      \vrule \@height \ht\@arstrutbox \@width \z@}
+  \def\LT@p@ftntext#1#2{%
+  % generalizes longtable v4.11's version:
+    \edef\@tempa{\the\LT@p@ftn\noexpand\footnotetext[#1]}%
+    \global\LT@p@ftn\expandafter{\@tempa{#2}}}
+  % (b) new macros (not in v4.11; UL):
+  \let\LT@p@recfn\footnote
+  \def\LT@p@footnote{%
+    \@ifnextchar[\LT@p@xftn{\LT@p@recfn{%
+      \expandafter\the\csname c@\@mpfn \endcsname}}}
+  \def\LT@p@xftn[#1]{\@xfootnote[#1]{#1}}
+\makeatother
+\else
+\typeout{-- longtable problem --}
+\fi
+
+\begin{document}
+\begin{longtable}{p{2em}}
+  X$_1$\footnote{Cf.:}\\X$_2$\\
+  X$_3$\tracingmacros=1 \footnote[3]{YZ}\tracingmacros=0 \\
+  X$_4$\\
+\end{longtable}
+\end{document}
