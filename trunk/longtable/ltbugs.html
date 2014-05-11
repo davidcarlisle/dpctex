@@ -6,6 +6,8 @@
 .good {background-color:#55FF55;}
 .bad {background-color:#FF5555;}
 .analyzed {background-color:yellow;}
+li {margin-top:.5em;}
+body{max-width:65em;margin-right:auto;}
 </style>
 </head>
 <body>
@@ -14,81 +16,81 @@
 <ul>
 
 <li><a href="http://www.latex-project.org/cgi-bin/ltxbugs2html?pr=tools/4189">
-tools/4189 (2012-05-15): Footnotes missing depending on alignment of first column of longtable</a>
+tools/4189 (2012-05-15): Footnotes missing depending on alignment of first column of longtable</a><br/>
 <li><a href="http://www.latex-project.org/cgi-bin/ltxbugs2html?pr=tools/4106">
-tools/4106 (2010-04-29): Wrong vertical spacing after longtable</a>
+tools/4106 (2010-04-29): Wrong vertical spacing after longtable</a><br/>
 <li><a href="http://www.latex-project.org/cgi-bin/ltxbugs2html?pr=tools/4091">
-tools/4091 (2009-12-11): longtable: page break results in two table headings</a>
+tools/4091 (2009-12-11): longtable: page break results in two table headings</a><br/>
 <li><a href="http://www.latex-project.org/cgi-bin/ltxbugs2html?pr=tools/4049">
-tools/4049 (latex-user): strange spacing, \multicolumn replacing several</a>
+tools/4049 (latex-user): strange spacing, \multicolumn replacing several</a><br/>
 <li><a href="http://www.latex-project.org/cgi-bin/ltxbugs2html?pr=tools/4021">
-tools/4021 (2008-05-03): longtable ignores depth of \endfoot at pagebreaks</a>
+tools/4021 (2008-05-03): longtable ignores depth of \endfoot at pagebreaks</a><br/>
 <li><a href="http://www.latex-project.org/cgi-bin/ltxbugs2html?pr=tools/3870">
-tools/3870 (2006-06-04): longtable: \footnote[<integer>] makes wrong footnote tag</a>
+tools/3870 (2006-06-04): longtable: \footnote[<integer>] makes wrong footnote tag</a><br/>
 <li><a href="http://www.latex-project.org/cgi-bin/ltxbugs2html?pr=tools/3785">
-tools/3785 (2005-05-18): itemize in longtable</a>
+tools/3785 (2005-05-18): itemize in longtable</a><br/>
 <li><a href="http://www.latex-project.org/cgi-bin/ltxbugs2html?pr=tools/3744">
-tools/3744 (2004-11-22): The longtable environment does not respect \abovecaptionskip.</a>
+tools/3744 (2004-11-22): The longtable environment does not respect \abovecaptionskip.</a><br/>
 <li><a href="http://www.latex-project.org/cgi-bin/ltxbugs2html?pr=tools/3619">
-tools/3619 (2004-02-18): longtable leaves single rule on page break</a>
+tools/3619 (2004-02-18): longtable leaves single rule on page break</a><br/>
 <li><a href="http://www.latex-project.org/cgi-bin/ltxbugs2html?pr=tools/3512">
-tools/3512 (2003-03-09): single-page longtable below float clobbers \pagegoal</a>
+tools/3512 (2003-03-09): single-page longtable below float clobbers \pagegoal</a><br/>
 <li><a href="http://www.latex-project.org/cgi-bin/ltxbugs2html?pr=tools/3511">
-tools/3511 (2003-03-09): longtable does not respect maxdepth</a>
+tools/3511 (2003-03-09): longtable does not respect maxdepth</a><br/>
 <li><a href="http://www.latex-project.org/cgi-bin/ltxbugs2html?pr=tools/3510">
-tools/3510 (2003-03-09): longtable baselines do not line up at page bottoms</a>
+tools/3510 (2003-03-09): longtable baselines do not line up at page bottoms</a><br/>
 
 <li class="analyzed"><a href="http://www.latex-project.org/cgi-bin/ltxbugs2html?pr=tools/3509">
-tools/3509 (2003-03-09): longtable starting at page boundary adds extra glue</a>
+tools/3509 (2003-03-09): longtable starting at page boundary adds extra glue</a><br/>
 I'm not sure this is a bug, adding the forced page break pads with fil glue, so
 it only interfears with glue on the page if there is fil glue on the page as in the
 supplied test, not sure \vfil is really supported in that way, fill glue would
 have won. Adding test file in any case.
 
 <li class="analyzed"><a href="http://www.latex-project.org/cgi-bin/ltxbugs2html?pr=tools/3488">
-tools/3488 (2002-12-17): Empty footnote after page ending with longtable</a>
+tools/3488 (2002-12-17): Empty footnote after page ending with longtable</a><br/>
 Analysis and fix by Chung-chieh Shan looks right.
 
 
 <li class="analyzed"><a href="http://www.latex-project.org/cgi-bin/ltxbugs2html?pr=tools/3485">
-tools/3485 (2002-12-10): longtable: more space below than above</a>
+tools/3485 (2002-12-10): longtable: more space below than above</a><br/>
 Dup of tools/3180 but with analysis and code fix from Uwe L"uck
 
 <li class="analyzed"><a href="http://www.latex-project.org/cgi-bin/ltxbugs2html?pr=tools/3479">
-tools/3479 (2002-11-23): Last page of longtable does not stretch</a>
+tools/3479 (2002-11-23): Last page of longtable does not stretch</a><br/>
 Fixed if you comment out vbox.
 
 
 <li  class="analyzed"><a href="http://www.latex-project.org/cgi-bin/ltxbugs2html?pr=tools/3450">
-tools/3450 (2002-08-07): Problem with nearly empty pages and longtable.sty</a>
+tools/3450 (2002-08-07): Problem with nearly empty pages and longtable.sty</a><br/>
 Sounds like the other ones with a problem with the initial page break, no test file supplied.
 
 <li class="bad"><a href="http://www.latex-project.org/cgi-bin/ltxbugs2html?pr=tools/3407">
-tools/3407 (2002-02-04): Longtable after \section overrules \nopagebreak</a>
+tools/3407 (2002-02-04): Longtable after \section overrules \nopagebreak</a><br/>
 LT can leave a section head at end of page. No testcase in PR so I made one here.
 
 
 <li class="bad"><a href="http://www.latex-project.org/cgi-bin/ltxbugs2html?pr=tools/3402">
-tools/3402 (2002-01-21): tabularx cannot be used inside longtable</a>
+tools/3402 (2002-01-21): tabularx cannot be used inside longtable</a><br/>
 really an ltxtable bug so not really tools, but it's pretty broken here, and ltxtable is mine and
 possibly should be incorporated into v5 so adding this.
 
 <li class="analyzed"><a href="http://www.latex-project.org/cgi-bin/ltxbugs2html?pr=tools/3396">
-tools/3396 (2001-12-11): Bad page break forced by longtable</a>
+tools/3396 (2001-12-11): Bad page break forced by longtable</a><br/>
 Analysis and suggested fix from Lars in the PR.
 
 
 <li class="analyzed"><a href="http://www.latex-project.org/cgi-bin/ltxbugs2html?pr=tools/3387">
-tools/3387 (2001-11-18): captions at left or right aligned longtables</a>
+tools/3387 (2001-11-18): captions at left or right aligned longtables</a><br/>
 this is fixed with Axel's ltcaption package, but should probably be fixed here.
 
 <li class="analyzed"><a href="http://www.latex-project.org/cgi-bin/ltxbugs2html?pr=tools/3180">
-tools/3180 (2000-03-05): longtable leaves spurious blank line at end</a>
+tools/3180 (2000-03-05): longtable leaves spurious blank line at end</a><br/>
 Analysis from Uwe Lueck in the PR seems about right.
 
 
 <li  class="analyzed"><a href="http://www.latex-project.org/cgi-bin/ltxbugs2html?pr=tools/2914">
-tools/2914 (1998-11-26): longtable global box usage</a>
+tools/2914 (1998-11-26): longtable global box usage</a><br/>
 Longtable uses global scratch registers that can be trashed in the output routine (eg page head code)
 text not in public view (as its from me)
 <pre>
@@ -142,29 +144,31 @@ Just to remind me to look if I can avoid wasting a box register on this
 </pre>
 
 <li class="analyzed"><a href="http://www.latex-project.org/cgi-bin/ltxbugs2html?pr=tools/2666">
-tools/2666 (1997-11-15): page break in longtable after \\*\hline</a>
+tools/2666 (1997-11-15): page break in longtable after \\*\hline</a><br/>
 \hline introduces a break point, even after \\*
 
 <li class="analyzed"><a href="http://www.latex-project.org/cgi-bin/ltxbugs2html?pr=tools/2601">
-tools/2601 (1997-09-09): previous page mostly blank before long tables.</a>
+tools/2601 (1997-09-09): previous page mostly blank before long tables.</a><br/>
 Bad interaction with page shrink.
 
 
 <li class="analyzed"><a href="http://www.latex-project.org/cgi-bin/ltxbugs2html?pr=tools/2373">
-tools/2373 (1997-01-15): Bug using marks within longtable</a>
+tools/2373 (1997-01-15): Bug using marks within longtable</a><br/>
 Fixed if final \vbox is commented out so last page is unboxed
 
 <li class="good"><a href="http://www.latex-project.org/cgi-bin/ltxbugs2html?pr=tools/1740">
-tools/1740 (1995-07-11): longtable and section combine in ugly break</a>
+tools/1740 (1995-07-11): longtable and section combine in ugly break</a><br/>
 Seems OK in V4 already.
 </ul>
 
 <h2>Stack Exchange</h2>
 <ul>
-<li> longtable in  multicols <a href="http://tex.stackexchange.com/a/46001/1090">
-http://tex.stackexchange.com/a/46001/1090</a>
-<li>variable header material <a href="http://tex.stackexchange.com/a/128430/1090">
-http://tex.stackexchange.com/a/128430/1090</a>
+<li><a href="http://tex.stackexchange.com/a/46001/1090">
+http://tex.stackexchange.com/a/46001/1090</a><br/>
+ longtable in  multicols 
+<li><a href="http://tex.stackexchange.com/a/128430/1090">
+http://tex.stackexchange.com/a/128430/1090</a><br/>
+variable header material 
 </ul>
 
 
