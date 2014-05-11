@@ -1,0 +1,58 @@
+\documentclass{article}
+\usepackage{longtable}
+%\usepackage{hyperref}
+
+
+\begin{document}
+
+\begin{longtable}{p{3cm}|p{3cm}}
+
+    \caption{A long table}\\
+    \hline
+    \textsc{First\footnotemark[11]}&\textsc{Second}\\
+    \hline
+    \endfirsthead
+    \hline
+    \endhead
+    \hline
+    \endfoot
+    \hline
+    \endlastfoot
+
+    \footnotetext[11]{footnote in header}
+
+    Lots\footnote{footnote 1} of lines& like this.\\
+    Lots of lines& like this\footnote{footnote 2}\\
+    \hline
+    Lots of lines& like this.\\
+    ...
+\end{longtable}
+
+And the same table, but now with different alignment of first column:
+
+\begin{longtable}{c|p{3cm}}
+
+    \caption{A long table}\\
+    \hline
+    \textsc{First\footnotemark[12]}&\textsc{Second}\\
+    \hline
+    \endfirsthead
+    \hline
+    \endhead
+    \hline
+    \endfoot
+    \hline
+    \endlastfoot
+
+    \footnotetext[12]{footnote in header}
+
+    Lots\footnote{footnote 3} of lines& like this.\\
+    Lots of lines& like this\footnote{footnote 4}\\
+    \hline
+    Lots of lines& like this.\\
+    ...
+\end{longtable}
+
+
+
+\end{document} 
