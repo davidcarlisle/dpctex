@@ -1284,9 +1284,11 @@
 %    \end{macrocode}
 % If the foot is non empty, reduce the "\vsize" and "\@colroom"
 % accordingly.
+% \changes{v5.01}{2014/05/14}
+%      {global change to \cs{vsize}}
 %    \begin{macrocode}
   \ifvoid\LT@foot\else
-    \advance\vsize-\ht\LT@foot
+    \ifLT@ivcompat\else\global\fi\advance\vsize-\ht\LT@foot
     \global\advance\@colroom-\ht\LT@foot
     \dimen@\pagegoal\advance\dimen@-\ht\LT@foot\pagegoal\dimen@
     \maxdepth\z@
@@ -1368,6 +1370,15 @@
 %    \begin{macrocode}
   \endgraf\penalty -\LT@end@pen
 %    \end{macrocode}
+% \changes{v5.01}{2014/05/14}
+%      {v4 adjustments (tools/3512)}
+%    \begin{macrocode}
+  \ifvoid\LT@foot\else
+    \global\advance\vsize\ht\LT@foot
+    \global\advance\@colroom\ht\LT@foot
+    \dimen@\pagegoal\advance\dimen@\ht\LT@foot\pagegoal\dimen@
+  \fi
+%    \end{macrocode}
 % Now close the group to return to the standard routine.
 %    \begin{macrocode}
   \endgroup
@@ -1378,7 +1389,11 @@
 % document. Any Output Routine Gurus out there?}
 %    \begin{macrocode}
   \global\@mparbottom\z@
-  \pagegoal\vsize
+%    \end{macrocode}
+% \changes{v5.01}{2014/05/14}
+%      {v4 adjustments (tools/3512)}
+%    \begin{macrocode}
+  \ifLT@ivcompat\pagegoal\vsize\fi
   \endgraf\penalty\z@\addvspace\LTpost
 %    \end{macrocode}
 % Footnotes. As done in  the \package{multicol} package.
@@ -1990,11 +2005,17 @@
 % manner.}
 %    \begin{macrocode}
         \dimen@\pagegoal
+%    \end{macrocode}
+% \changes{v5.01}{2014/05/14}
+%      {v4 adjustments (tools/3512)}
+%    \begin{macrocode}
+       \ifLT@ivcompat\else\advance\dimen@\ht\LT@foot\fi
         \advance\dimen@-\ht\LT@lastfoot
         \ifdim\dimen@<\ht\z@
           \setbox\@cclv\vbox{\unvbox\z@\copy\LT@foot\vss}%
           \@makecol
           \@outputpage
+          \ifLT@ivcompat\global\vsize\@colroom\fi
           \setbox\z@\vbox{\box\LT@head}%
 %    \end{macrocode}
 % End of "\ifdim\dimen@<\ht\@cclc".
@@ -2008,14 +2029,19 @@
 % Reset "\@colroom".
 % \changes{v3.14}{1995/05/02}
 %      {Reset \cs{@colroom}, for tools/1584}
+% \changes{v5.01}{2014/05/14}
+%      {v4 adjustments (tools/3512)}
 %    \begin{macrocode}
+      \ifLT@ivcompat
       \global\@colroom\@colht
       \global\vsize\@colht
 %    \end{macrocode}
 % Put the last page of the table on to the main vertical list.
 %    \begin{macrocode}
-      \vbox
-        {\unvbox\z@\box\ifvoid\LT@lastfoot\LT@foot\else\LT@lastfoot\fi}%
+      \vbox\bgroup
+       \fi
+        \unvbox\z@\ifvoid\LT@lastfoot\copy\LT@foot\else\box\LT@lastfoot\fi
+       \ifLT@ivcompat\egroup\fi
 %    \end{macrocode}
 % End of "\ifnum\outputpenalty > -\LT@end@pen".
 %    \begin{macrocode}

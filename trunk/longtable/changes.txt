@@ -1,3 +1,7 @@
+2014-05-13  David Carlisle  <latex-bugs@latex-project.org>
+
+	* longtable.dtx: add patch from tools/3512
+
 2014-05-10  David Carlisle  <latex-bugs@latex-project.org>
 
 	* longtable.dtx: Increase default chunksize to 200
