@@ -17,9 +17,11 @@ body{max-width:65em;margin-right:auto;}
 
 <li class="analyzed"><a href="http://www.latex-project.org/cgi-bin/ltxbugs2html?pr=tools/4189">
 tools/4189 (2012-05-15): Footnotes missing depending on alignment of first column of longtable</a><br/>
+Heading is a box so footnotes wouldn't work, except the p-column footnote lifting saves them in p columns.
 
 <li class="analyzed"><a href="http://www.latex-project.org/cgi-bin/ltxbugs2html?pr=tools/4106">
 tools/4106 (2010-04-29): Wrong vertical spacing after longtable</a><br/>
+Probably same as teools/3180.
 
 <li class="analyzed"><a href="http://www.latex-project.org/cgi-bin/ltxbugs2html?pr=tools/4091">
 tools/4091 (2009-12-11): longtable: page break results in two table headings</a><br/>
@@ -39,7 +41,7 @@ Interaction with array package struts (need to check latest update for m columns
 <li class="analyzed"><a href="http://www.latex-project.org/cgi-bin/ltxbugs2html?pr=tools/3744">
 tools/3744 (2004-11-22): The longtable environment does not respect \abovecaptionskip.</a><br/>
 I think this was by design, the ltcaption package, part of caption bundle adds this
-and lost of other caption formatting features, some of which could possibly be
+and lots of other caption formatting features, some of which could possibly be
 incorprated into v5.
 
 <li class="analyzed"><a href="http://www.latex-project.org/cgi-bin/ltxbugs2html?pr=tools/3619">
@@ -48,7 +50,7 @@ Bad break on initial hline.
 
 <li class="analyzed"><a href="http://www.latex-project.org/cgi-bin/ltxbugs2html?pr=tools/3512">
 tools/3512 (2003-03-09): single-page longtable below float clobbers \pagegoal</a><br/>
-Plausible looking oatch in OR, confirmed to fix some cases on stackexchange.
+Plausible looking patch in pR, confirmed to fix some cases on stackexchange.
 
 <li class="analyzed"><a href="http://www.latex-project.org/cgi-bin/ltxbugs2html?pr=tools/3511">
 tools/3511 (2003-03-09): longtable does not respect maxdepth</a><br/>
