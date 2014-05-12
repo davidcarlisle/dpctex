@@ -1,0 +1,63 @@
+% http://tex.stackexchange.com/questions/48280/longtabu-and-floats-wrong-table-breaks-on-pages-with-floats
+\documentclass[10pt]{article}
+\input{test2e}
+\usepackage[v4]{longtable}
+
+\begin{document}
+\showoutput
+\START
+\setcounter{page}{100000}
+
+    \begin{table}
+        \begin{tabular}{ccc}
+            Row 1 & Row 1 & Row 1 \\
+            Row 2 & Row 2 & Row 2 \\
+            Row 3 & Row 3 & Row 3 \\
+            Row 4 & Row 4 & Row 4 \\
+            Row 5 & Row 5 & Row 5 \\
+            Row 6 & Row 6 & Row 6 \\
+            Row 7 & Row 7 & Row 7 \\
+            Row 8 & Row 8 & Row 8 \\
+            Row 9 & Row 9 & Row 9 \\
+            Row 10 & Row 10 & Row 10 \\
+        \end{tabular}
+    \end{table}
+
+    x\\x\\x\\x\\x\\x\\x\\x\\x\\x\\x\\x\\x\\x\\x\\x\\x\\x
+
+    \begin{longtable}{lc}
+        Test & Test
+    \end{longtable}
+
+   x\\x\\x\\x\\x\\x\\x\\x
+
+
+    {
+        \footnotesize
+        \begin{longtable}{llll}
+            \hline
+            Col 1 & Col 2 & Col 3 & Col 4 \\\hline
+            Lorem ipsum dolor sit & 0.000019 & 0.000000 & 0.000000 \tabularnewline\hline
+            Lorem ipsum dolor sit & 0.000012 & 0.000000 & 0.000000 \tabularnewline\hline
+            Lorem ipsum dolor sit & 0.000173 & 0.000000 & 0.000000 \tabularnewline\hline
+            Lorem ipsum dolor sit & 0.000011 & 0.000000 & 0.000000 \tabularnewline\hline
+            Lorem ipsum dolor sit & 0.012992 & 0.000000 & 0.000000 \tabularnewline\hline
+            Lorem ipsum dolor sit & 0.000031 & 0.000000 & 0.000000 \tabularnewline\hline
+            Lorem ipsum dolor sit & 0.000068 & 0.000000 & 0.000000 \tabularnewline\hline
+            Lorem ipsum dolor sit & 0.000018 & 0.000000 & 0.000000 \tabularnewline\hline
+            Lorem ipsum dolor sit & 0.029689 & 0.000000 & 0.000000 \tabularnewline\hline
+            Lorem ipsum dolor sit & 0.000055 & 0.000000 & 0.000000 \tabularnewline\hline
+            Lorem ipsum dolor sit & 0.000004 & 0.000000 & 0.000000 \tabularnewline\hline
+            Lorem ipsum dolor sit & 28.276892 & 0.405603 & 1.560010 \tabularnewline\hline
+            Lorem ipsum dolor sit & 0.957158 & 0.234002 & 0.702005 \tabularnewline\hline
+            Lorem ipsum dolor sit & 0.000011 & 0.000000 & 0.000000 \tabularnewline\hline
+            Lorem ipsum dolor sit & 0.000002 & 0.000000 & 0.000000 \tabularnewline\hline
+            Lorem ipsum dolor sit & 0.000013 & 0.000000 & 0.000000 \tabularnewline\hline
+            Lorem ipsum dolor sit & 0.000336 & 0.000000 & 0.000000 \tabularnewline\hline
+            Lorem ipsum dolor sit & 0.000004 & 0.000000 & 0.000000 \tabularnewline\hline
+            Lorem ipsum dolor sit & 0.000003 & 0.000000 & 0.000000 \tabularnewline\hline
+            Lorem ipsum dolor sit & 0.000003 & 0.000000 & 0.000000 \tabularnewline\hline
+        \end{longtable}
+    }
+
+\end{document}
