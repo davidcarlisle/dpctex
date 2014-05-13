@@ -316,10 +316,10 @@ Completed box being shipped out [2]
 .\vbox(237.71652+0.0)x345.0, shifted 62.0
 ..\vbox(12.0+0.0)x345.0, glue set 5.16669fil
 ...\glue 0.0 plus 1.0fil
-...\hbox(6.83331+0.0)x345.0, glue set 294.99994fill
-....\OT1/cmr/m/n/10 C
-....\OT1/cmr/m/n/10 a
-....\OT1/cmr/m/n/10 e
+...\hbox(6.83331+0.0)x345.0, glue set 294.16658fill
+....\OT1/cmr/m/n/10 A
+....\OT1/cmr/m/n/10 1
+....\OT1/cmr/m/n/10 0
 ....\penalty 10000
 ....\glue 3.33333 plus 1.66666 minus 1.11111
 ....\OT1/cmr/m/n/10 { (ligature --)
@@ -334,232 +334,230 @@ Completed box being shipped out [2]
 ..\glue(\lineskip) 0.0
 ..\vbox(170.71652+0.0)x345.0, glue set 4.37164fil
 ...\glue(\topskip) 0.0
-...\vbox(140.39996+3.60004)x345.0
-....\glue(\topskip) 0.0
-....\vbox(20.39996+3.60004)x345.0
-.....\hbox(8.39996+3.60004)x345.0, glue set 133.19438fill
-......\glue(\tabskip) 0.0 plus 1.0fill
-......\hbox(8.39996+3.60004)x78.61125
-.......\rule(8.39996+3.60004)x0.0
-.......\glue 6.0
-.......\glue 0.00002
-.......\OT1/cmr/m/n/10 N
-.......\OT1/cmr/m/n/10 o
-.......\OT1/cmr/m/n/10 t
-.......\glue 3.33333 plus 1.66666 minus 1.11111
-.......\OT1/cmr/m/n/10 F
-.......\OT1/cmr/m/n/10 i
-.......\OT1/cmr/m/n/10 r
-.......\OT1/cmr/m/n/10 s
-.......\OT1/cmr/m/n/10 t
-.......\glue 3.33333 plus 1.66666 minus 1.11111
-.......\OT1/cmr/m/n/10 H
-.......\OT1/cmr/m/n/10 e
-.......\OT1/cmr/m/n/10 a
-.......\OT1/cmr/m/n/10 d
-.......\glue 0.0 plus 1.0fil
-.......\glue 6.0
-......\glue(\tabskip) 0.0 plus 1.0fill
-.....\glue(\lineskip) 0.0
-.....\hbox(8.39996+3.60004)x345.0, glue set 133.19438fill
-......\glue(\tabskip) 0.0 plus 1.0fill
-......\hbox(8.39996+3.60004)x78.61125, glue set 66.61125fil
-.......\rule(8.39996+3.60004)x0.0
-.......\glue 6.0
-.......\glue 0.0 plus 1.0fil
-.......\glue 6.0
-......\glue(\tabskip) 0.0 plus 1.0fill
-....\penalty 10000
-....\glue(\lineskip) 0.0
+...\vbox(20.39996+3.60004)x345.0
 ....\hbox(8.39996+3.60004)x345.0, glue set 133.19438fill
 .....\glue(\tabskip) 0.0 plus 1.0fill
-.....\hbox(8.39996+3.60004)x78.61125, glue set 30.22226fil
+.....\hbox(8.39996+3.60004)x78.61125
 ......\rule(8.39996+3.60004)x0.0
 ......\glue 6.0
 ......\glue 0.00002
-......\OT1/cmr/m/n/10 A
-......\OT1/cmr/m/n/10 1
-......\OT1/cmr/m/n/10 0
+......\OT1/cmr/m/n/10 N
+......\OT1/cmr/m/n/10 o
+......\OT1/cmr/m/n/10 t
 ......\glue 3.33333 plus 1.66666 minus 1.11111
-......\OT1/cmr/m/n/10 (
-......\OT1/cmr/m/n/10 )
-......\OT1/cmr/m/n/10 (
-......\OT1/cmr/m/n/10 )
-......\glue 0.0 plus 1.0fil
-......\glue 6.0
-.....\glue(\tabskip) 0.0 plus 1.0fill
-....\mark{{A10}{A10}}
-....\glue(\lineskip) 0.0
-....\hbox(8.39996+3.60004)x345.0, glue set 133.19438fill
-.....\glue(\tabskip) 0.0 plus 1.0fill
-.....\hbox(8.39996+3.60004)x78.61125, glue set 30.22226fil
-......\rule(8.39996+3.60004)x0.0
-......\glue 6.0
-......\glue 0.00002
-......\OT1/cmr/m/n/10 A
-......\OT1/cmr/m/n/10 1
-......\OT1/cmr/m/n/10 1
+......\OT1/cmr/m/n/10 F
+......\OT1/cmr/m/n/10 i
+......\OT1/cmr/m/n/10 r
+......\OT1/cmr/m/n/10 s
+......\OT1/cmr/m/n/10 t
 ......\glue 3.33333 plus 1.66666 minus 1.11111
-......\OT1/cmr/m/n/10 (
-......\OT1/cmr/m/n/10 )
-......\OT1/cmr/m/n/10 (
-......\OT1/cmr/m/n/10 )
-......\glue 0.0 plus 1.0fil
-......\glue 6.0
-.....\glue(\tabskip) 0.0 plus 1.0fill
-....\mark{{A11}{A11}}
-....\glue(\lineskip) 0.0
-....\hbox(8.39996+3.60004)x345.0, glue set 133.19438fill
-.....\glue(\tabskip) 0.0 plus 1.0fill
-.....\hbox(8.39996+3.60004)x78.61125, glue set 30.22226fil
-......\rule(8.39996+3.60004)x0.0
-......\glue 6.0
-......\glue 0.00002
-......\OT1/cmr/m/n/10 A
-......\OT1/cmr/m/n/10 1
-......\OT1/cmr/m/n/10 2
-......\glue 3.33333 plus 1.66666 minus 1.11111
-......\OT1/cmr/m/n/10 (
-......\OT1/cmr/m/n/10 )
-......\OT1/cmr/m/n/10 (
-......\OT1/cmr/m/n/10 )
-......\glue 0.0 plus 1.0fil
-......\glue 6.0
-.....\glue(\tabskip) 0.0 plus 1.0fill
-....\mark{{A12}{A12}}
-....\glue(\lineskip) 0.0
-....\hbox(8.39996+3.60004)x345.0, glue set 133.19438fill
-.....\glue(\tabskip) 0.0 plus 1.0fill
-.....\hbox(8.39996+3.60004)x78.61125, glue set 30.22226fil
-......\rule(8.39996+3.60004)x0.0
-......\glue 6.0
-......\glue 0.00002
-......\OT1/cmr/m/n/10 A
-......\OT1/cmr/m/n/10 1
-......\OT1/cmr/m/n/10 3
-......\glue 3.33333 plus 1.66666 minus 1.11111
-......\OT1/cmr/m/n/10 (
-......\OT1/cmr/m/n/10 )
-......\OT1/cmr/m/n/10 (
-......\OT1/cmr/m/n/10 )
-......\glue 0.0 plus 1.0fil
-......\glue 6.0
-.....\glue(\tabskip) 0.0 plus 1.0fill
-....\mark{{A13}{A13}}
-....\glue(\lineskip) 0.0
-....\hbox(8.39996+3.60004)x345.0, glue set 133.19438fill
-.....\glue(\tabskip) 0.0 plus 1.0fill
-.....\hbox(8.39996+3.60004)x78.61125, glue set 30.22226fil
-......\rule(8.39996+3.60004)x0.0
-......\glue 6.0
-......\glue 0.00002
-......\OT1/cmr/m/n/10 A
-......\OT1/cmr/m/n/10 1
-......\OT1/cmr/m/n/10 4
-......\glue 3.33333 plus 1.66666 minus 1.11111
-......\OT1/cmr/m/n/10 (
-......\OT1/cmr/m/n/10 )
-......\OT1/cmr/m/n/10 (
-......\OT1/cmr/m/n/10 )
-......\glue 0.0 plus 1.0fil
-......\glue 6.0
-.....\glue(\tabskip) 0.0 plus 1.0fill
-....\mark{{A14}{A14}}
-....\glue(\lineskip) 0.0
-....\hbox(8.39996+3.60004)x345.0, glue set 133.19438fill
-.....\glue(\tabskip) 0.0 plus 1.0fill
-.....\hbox(8.39996+3.60004)x78.61125, glue set 30.22226fil
-......\rule(8.39996+3.60004)x0.0
-......\glue 6.0
-......\glue 0.00002
-......\OT1/cmr/m/n/10 A
-......\OT1/cmr/m/n/10 1
-......\OT1/cmr/m/n/10 5
-......\glue 3.33333 plus 1.66666 minus 1.11111
-......\OT1/cmr/m/n/10 (
-......\OT1/cmr/m/n/10 )
-......\OT1/cmr/m/n/10 (
-......\OT1/cmr/m/n/10 )
-......\glue 0.0 plus 1.0fil
-......\glue 6.0
-.....\glue(\tabskip) 0.0 plus 1.0fill
-....\mark{{A15}{A15}}
-....\glue(\lineskip) 0.0
-....\hbox(8.39996+3.60004)x345.0, glue set 133.19438fill
-.....\glue(\tabskip) 0.0 plus 1.0fill
-.....\hbox(8.39996+3.60004)x78.61125, glue set 30.22226fil
-......\rule(8.39996+3.60004)x0.0
-......\glue 6.0
-......\glue 0.00002
-......\OT1/cmr/m/n/10 A
-......\OT1/cmr/m/n/10 1
-......\OT1/cmr/m/n/10 6
-......\glue 3.33333 plus 1.66666 minus 1.11111
-......\OT1/cmr/m/n/10 (
-......\OT1/cmr/m/n/10 )
-......\OT1/cmr/m/n/10 (
-......\OT1/cmr/m/n/10 )
-......\glue 0.0 plus 1.0fil
-......\glue 6.0
-.....\glue(\tabskip) 0.0 plus 1.0fill
-....\mark{{A16}{A16}}
-....\glue(\lineskip) 0.0
-....\hbox(8.39996+3.60004)x345.0, glue set 133.19438fill
-.....\glue(\tabskip) 0.0 plus 1.0fill
-.....\hbox(8.39996+3.60004)x78.61125, glue set 30.22226fil
-......\rule(8.39996+3.60004)x0.0
-......\glue 6.0
-......\glue 0.00002
-......\OT1/cmr/m/n/10 A
-......\OT1/cmr/m/n/10 1
-......\OT1/cmr/m/n/10 7
-......\glue 3.33333 plus 1.66666 minus 1.11111
-......\OT1/cmr/m/n/10 (
-......\OT1/cmr/m/n/10 )
-......\OT1/cmr/m/n/10 (
-......\OT1/cmr/m/n/10 )
-......\glue 0.0 plus 1.0fil
-......\glue 6.0
-.....\glue(\tabskip) 0.0 plus 1.0fill
-....\mark{{A17}{A17}}
-....\glue(\lineskip) 0.0
-....\hbox(8.39996+3.60004)x345.0, glue set 133.19438fill
-.....\glue(\tabskip) 0.0 plus 1.0fill
-.....\hbox(8.39996+3.60004)x78.61125, glue set 30.08336fil
-......\rule(8.39996+3.60004)x0.0
-......\glue 6.0
-......\glue 0.00002
-......\OT1/cmr/m/n/10 B
-......\OT1/cmr/m/n/10 a
-......\OT1/cmr/m/n/10 b
-......\glue 3.33333 plus 1.66666 minus 1.11111
-......\OT1/cmr/m/n/10 (
-......\OT1/cmr/m/n/10 )
-......\OT1/cmr/m/n/10 (
-......\OT1/cmr/m/n/10 )
-......\glue 0.0 plus 1.0fil
-......\glue 6.0
-.....\glue(\tabskip) 0.0 plus 1.0fill
-....\mark{{Bab}{Bab}}
-....\glue(\lineskip) 0.0
-....\hbox(8.39996+3.60004)x345.0, glue set 133.19438fill
-.....\glue(\tabskip) 0.0 plus 1.0fill
-.....\hbox(8.39996+3.60004)x78.61125, glue set 31.05562fil
-......\rule(8.39996+3.60004)x0.0
-......\glue 6.0
-......\glue 0.00002
-......\OT1/cmr/m/n/10 C
-......\OT1/cmr/m/n/10 a
+......\OT1/cmr/m/n/10 H
 ......\OT1/cmr/m/n/10 e
-......\glue 3.33333 plus 1.66666 minus 1.11111
-......\OT1/cmr/m/n/10 (
-......\OT1/cmr/m/n/10 )
-......\OT1/cmr/m/n/10 (
-......\OT1/cmr/m/n/10 )
+......\OT1/cmr/m/n/10 a
+......\OT1/cmr/m/n/10 d
 ......\glue 0.0 plus 1.0fil
 ......\glue 6.0
 .....\glue(\tabskip) 0.0 plus 1.0fill
-....\mark{{Cae}{Cae}}
+....\glue(\lineskip) 0.0
+....\hbox(8.39996+3.60004)x345.0, glue set 133.19438fill
+.....\glue(\tabskip) 0.0 plus 1.0fill
+.....\hbox(8.39996+3.60004)x78.61125, glue set 66.61125fil
+......\rule(8.39996+3.60004)x0.0
+......\glue 6.0
+......\glue 0.0 plus 1.0fil
+......\glue 6.0
+.....\glue(\tabskip) 0.0 plus 1.0fill
+...\penalty 10000
+...\glue(\lineskip) 0.0
+...\hbox(8.39996+3.60004)x345.0, glue set 133.19438fill
+....\glue(\tabskip) 0.0 plus 1.0fill
+....\hbox(8.39996+3.60004)x78.61125, glue set 30.22226fil
+.....\rule(8.39996+3.60004)x0.0
+.....\glue 6.0
+.....\glue 0.00002
+.....\OT1/cmr/m/n/10 A
+.....\OT1/cmr/m/n/10 1
+.....\OT1/cmr/m/n/10 0
+.....\glue 3.33333 plus 1.66666 minus 1.11111
+.....\OT1/cmr/m/n/10 (
+.....\OT1/cmr/m/n/10 )
+.....\OT1/cmr/m/n/10 (
+.....\OT1/cmr/m/n/10 )
+.....\glue 0.0 plus 1.0fil
+.....\glue 6.0
+....\glue(\tabskip) 0.0 plus 1.0fill
+...\mark{{A10}{A10}}
+...\glue(\lineskip) 0.0
+...\hbox(8.39996+3.60004)x345.0, glue set 133.19438fill
+....\glue(\tabskip) 0.0 plus 1.0fill
+....\hbox(8.39996+3.60004)x78.61125, glue set 30.22226fil
+.....\rule(8.39996+3.60004)x0.0
+.....\glue 6.0
+.....\glue 0.00002
+.....\OT1/cmr/m/n/10 A
+.....\OT1/cmr/m/n/10 1
+.....\OT1/cmr/m/n/10 1
+.....\glue 3.33333 plus 1.66666 minus 1.11111
+.....\OT1/cmr/m/n/10 (
+.....\OT1/cmr/m/n/10 )
+.....\OT1/cmr/m/n/10 (
+.....\OT1/cmr/m/n/10 )
+.....\glue 0.0 plus 1.0fil
+.....\glue 6.0
+....\glue(\tabskip) 0.0 plus 1.0fill
+...\mark{{A11}{A11}}
+...\glue(\lineskip) 0.0
+...\hbox(8.39996+3.60004)x345.0, glue set 133.19438fill
+....\glue(\tabskip) 0.0 plus 1.0fill
+....\hbox(8.39996+3.60004)x78.61125, glue set 30.22226fil
+.....\rule(8.39996+3.60004)x0.0
+.....\glue 6.0
+.....\glue 0.00002
+.....\OT1/cmr/m/n/10 A
+.....\OT1/cmr/m/n/10 1
+.....\OT1/cmr/m/n/10 2
+.....\glue 3.33333 plus 1.66666 minus 1.11111
+.....\OT1/cmr/m/n/10 (
+.....\OT1/cmr/m/n/10 )
+.....\OT1/cmr/m/n/10 (
+.....\OT1/cmr/m/n/10 )
+.....\glue 0.0 plus 1.0fil
+.....\glue 6.0
+....\glue(\tabskip) 0.0 plus 1.0fill
+...\mark{{A12}{A12}}
+...\glue(\lineskip) 0.0
+...\hbox(8.39996+3.60004)x345.0, glue set 133.19438fill
+....\glue(\tabskip) 0.0 plus 1.0fill
+....\hbox(8.39996+3.60004)x78.61125, glue set 30.22226fil
+.....\rule(8.39996+3.60004)x0.0
+.....\glue 6.0
+.....\glue 0.00002
+.....\OT1/cmr/m/n/10 A
+.....\OT1/cmr/m/n/10 1
+.....\OT1/cmr/m/n/10 3
+.....\glue 3.33333 plus 1.66666 minus 1.11111
+.....\OT1/cmr/m/n/10 (
+.....\OT1/cmr/m/n/10 )
+.....\OT1/cmr/m/n/10 (
+.....\OT1/cmr/m/n/10 )
+.....\glue 0.0 plus 1.0fil
+.....\glue 6.0
+....\glue(\tabskip) 0.0 plus 1.0fill
+...\mark{{A13}{A13}}
+...\glue(\lineskip) 0.0
+...\hbox(8.39996+3.60004)x345.0, glue set 133.19438fill
+....\glue(\tabskip) 0.0 plus 1.0fill
+....\hbox(8.39996+3.60004)x78.61125, glue set 30.22226fil
+.....\rule(8.39996+3.60004)x0.0
+.....\glue 6.0
+.....\glue 0.00002
+.....\OT1/cmr/m/n/10 A
+.....\OT1/cmr/m/n/10 1
+.....\OT1/cmr/m/n/10 4
+.....\glue 3.33333 plus 1.66666 minus 1.11111
+.....\OT1/cmr/m/n/10 (
+.....\OT1/cmr/m/n/10 )
+.....\OT1/cmr/m/n/10 (
+.....\OT1/cmr/m/n/10 )
+.....\glue 0.0 plus 1.0fil
+.....\glue 6.0
+....\glue(\tabskip) 0.0 plus 1.0fill
+...\mark{{A14}{A14}}
+...\glue(\lineskip) 0.0
+...\hbox(8.39996+3.60004)x345.0, glue set 133.19438fill
+....\glue(\tabskip) 0.0 plus 1.0fill
+....\hbox(8.39996+3.60004)x78.61125, glue set 30.22226fil
+.....\rule(8.39996+3.60004)x0.0
+.....\glue 6.0
+.....\glue 0.00002
+.....\OT1/cmr/m/n/10 A
+.....\OT1/cmr/m/n/10 1
+.....\OT1/cmr/m/n/10 5
+.....\glue 3.33333 plus 1.66666 minus 1.11111
+.....\OT1/cmr/m/n/10 (
+.....\OT1/cmr/m/n/10 )
+.....\OT1/cmr/m/n/10 (
+.....\OT1/cmr/m/n/10 )
+.....\glue 0.0 plus 1.0fil
+.....\glue 6.0
+....\glue(\tabskip) 0.0 plus 1.0fill
+...\mark{{A15}{A15}}
+...\glue(\lineskip) 0.0
+...\hbox(8.39996+3.60004)x345.0, glue set 133.19438fill
+....\glue(\tabskip) 0.0 plus 1.0fill
+....\hbox(8.39996+3.60004)x78.61125, glue set 30.22226fil
+.....\rule(8.39996+3.60004)x0.0
+.....\glue 6.0
+.....\glue 0.00002
+.....\OT1/cmr/m/n/10 A
+.....\OT1/cmr/m/n/10 1
+.....\OT1/cmr/m/n/10 6
+.....\glue 3.33333 plus 1.66666 minus 1.11111
+.....\OT1/cmr/m/n/10 (
+.....\OT1/cmr/m/n/10 )
+.....\OT1/cmr/m/n/10 (
+.....\OT1/cmr/m/n/10 )
+.....\glue 0.0 plus 1.0fil
+.....\glue 6.0
+....\glue(\tabskip) 0.0 plus 1.0fill
+...\mark{{A16}{A16}}
+...\glue(\lineskip) 0.0
+...\hbox(8.39996+3.60004)x345.0, glue set 133.19438fill
+....\glue(\tabskip) 0.0 plus 1.0fill
+....\hbox(8.39996+3.60004)x78.61125, glue set 30.22226fil
+.....\rule(8.39996+3.60004)x0.0
+.....\glue 6.0
+.....\glue 0.00002
+.....\OT1/cmr/m/n/10 A
+.....\OT1/cmr/m/n/10 1
+.....\OT1/cmr/m/n/10 7
+.....\glue 3.33333 plus 1.66666 minus 1.11111
+.....\OT1/cmr/m/n/10 (
+.....\OT1/cmr/m/n/10 )
+.....\OT1/cmr/m/n/10 (
+.....\OT1/cmr/m/n/10 )
+.....\glue 0.0 plus 1.0fil
+.....\glue 6.0
+....\glue(\tabskip) 0.0 plus 1.0fill
+...\mark{{A17}{A17}}
+...\glue(\lineskip) 0.0
+...\hbox(8.39996+3.60004)x345.0, glue set 133.19438fill
+....\glue(\tabskip) 0.0 plus 1.0fill
+....\hbox(8.39996+3.60004)x78.61125, glue set 30.08336fil
+.....\rule(8.39996+3.60004)x0.0
+.....\glue 6.0
+.....\glue 0.00002
+.....\OT1/cmr/m/n/10 B
+.....\OT1/cmr/m/n/10 a
+.....\OT1/cmr/m/n/10 b
+.....\glue 3.33333 plus 1.66666 minus 1.11111
+.....\OT1/cmr/m/n/10 (
+.....\OT1/cmr/m/n/10 )
+.....\OT1/cmr/m/n/10 (
+.....\OT1/cmr/m/n/10 )
+.....\glue 0.0 plus 1.0fil
+.....\glue 6.0
+....\glue(\tabskip) 0.0 plus 1.0fill
+...\mark{{Bab}{Bab}}
+...\glue(\lineskip) 0.0
+...\hbox(8.39996+3.60004)x345.0, glue set 133.19438fill
+....\glue(\tabskip) 0.0 plus 1.0fill
+....\hbox(8.39996+3.60004)x78.61125, glue set 31.05562fil
+.....\rule(8.39996+3.60004)x0.0
+.....\glue 6.0
+.....\glue 0.00002
+.....\OT1/cmr/m/n/10 C
+.....\OT1/cmr/m/n/10 a
+.....\OT1/cmr/m/n/10 e
+.....\glue 3.33333 plus 1.66666 minus 1.11111
+.....\OT1/cmr/m/n/10 (
+.....\OT1/cmr/m/n/10 )
+.....\OT1/cmr/m/n/10 (
+.....\OT1/cmr/m/n/10 )
+.....\glue 0.0 plus 1.0fil
+.....\glue 6.0
+....\glue(\tabskip) 0.0 plus 1.0fill
+...\mark{{Cae}{Cae}}
 ...\penalty 10000
 ...\penalty 0
 ...\glue 12.0 plus 4.0 minus 4.0
