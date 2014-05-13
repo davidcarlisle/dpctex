@@ -4,9 +4,9 @@
 \pagestyle{headings}
 \setcounter{LTchunksize}{2}
 \begin{document}
-\showoutput
+
 \START
-\markright{\global\setbox1\null}
+\markright{\global\setbox1\null}% LT v4 does not stabilize
 
 \begin{longtable}{l}
 foo\\
