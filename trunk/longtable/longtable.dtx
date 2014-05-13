@@ -1373,11 +1373,13 @@
 % \changes{v5.01}{2014/05/14}
 %      {v4 adjustments (tools/3512)}
 %    \begin{macrocode}
+ \ifLT@ivcompat\else
   \ifvoid\LT@foot\else
     \global\advance\vsize\ht\LT@foot
     \global\advance\@colroom\ht\LT@foot
     \dimen@\pagegoal\advance\dimen@\ht\LT@foot\pagegoal\dimen@
   \fi
+ \fi
 %    \end{macrocode}
 % Now close the group to return to the standard routine.
 %    \begin{macrocode}
