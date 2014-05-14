@@ -84,71 +84,69 @@ Completed box being shipped out [2]
 ..\glue 25.0
 ..\glue(\lineskip) 0.0
 ..\vbox(550.0+0.0)x345.0, glue set 500.34653fil
-...\glue(\topskip) 0.0
-...\vbox(34.0+3.60004)x345.0
-....\glue(\topskip) 1.60004
-....\hbox(8.39996+3.60004)x345.0, glue set 147.30548fill
-.....\glue(\tabskip) 0.0 plus 1.0fill
-.....\hbox(8.39996+3.60004)x27.83342
-......\rule(8.39996+3.60004)x0.0
-......\glue 6.0
-......\glue 0.00002
-......\OT1/cmr/m/n/10 x
-......\OT1/cmr/m/n/10 x
-......\OT1/cmr/m/n/10 x
-......\glue 0.0 plus 1.0fil
-......\glue 6.0
-.....\glue(\tabskip) 0.0
-.....\hbox(8.39996+3.60004)x22.55562
-......\glue 6.0
-......\glue 0.00002
-......\OT1/cmr/m/n/10 y
-......\OT1/cmr/m/n/10 y
-......\glue 0.0 plus 1.0fil
-......\glue 6.0
-.....\glue(\tabskip) 0.0 plus 1.0fill
-....\glue(\lineskip) 0.0
-....\hbox(8.39996+3.60004)x345.0, glue set 147.30548fill
-.....\glue(\tabskip) 0.0 plus 1.0fill
-.....\hbox(8.39996+3.60004)x27.83342
-......\rule(8.39996+3.60004)x0.0
-......\glue 6.0
-......\glue 0.00002
-......\OT1/cmr/m/n/10 x
-......\OT1/cmr/m/n/10 x
-......\OT1/cmr/m/n/10 x
-......\glue 0.0 plus 1.0fil
-......\glue 6.0
-.....\glue(\tabskip) 0.0
-.....\hbox(8.39996+3.60004)x22.55562
-......\glue 6.0
-......\glue 0.00002
-......\OT1/cmr/m/n/10 y
-......\OT1/cmr/m/n/10 y
-......\glue 0.0 plus 1.0fil
-......\glue 6.0
-.....\glue(\tabskip) 0.0 plus 1.0fill
-....\glue(\lineskip) 0.0
-....\hbox(8.39996+3.60004)x345.0, glue set 147.30548fill
-.....\glue(\tabskip) 0.0 plus 1.0fill
-.....\hbox(8.39996+3.60004)x27.83342
-......\rule(8.39996+3.60004)x0.0
-......\glue 6.0
-......\glue 0.00002
-......\OT1/cmr/m/n/10 x
-......\OT1/cmr/m/n/10 x
-......\OT1/cmr/m/n/10 x
-......\glue 0.0 plus 1.0fil
-......\glue 6.0
-.....\glue(\tabskip) 0.0
-.....\hbox(8.39996+3.60004)x22.55562
-......\glue 6.0
-......\glue 0.00002
-......\OT1/cmr/m/n/10 y
-......\OT1/cmr/m/n/10 y
-......\glue 0.0 plus 1.0fil
-......\glue 6.0
-.....\glue(\tabskip) 0.0 plus 1.0fill
+...\glue(\topskip) 1.60004
+...\hbox(8.39996+3.60004)x345.0, glue set 147.30548fill
+....\glue(\tabskip) 0.0 plus 1.0fill
+....\hbox(8.39996+3.60004)x27.83342
+.....\rule(8.39996+3.60004)x0.0
+.....\glue 6.0
+.....\glue 0.00002
+.....\OT1/cmr/m/n/10 x
+.....\OT1/cmr/m/n/10 x
+.....\OT1/cmr/m/n/10 x
+.....\glue 0.0 plus 1.0fil
+.....\glue 6.0
+....\glue(\tabskip) 0.0
+....\hbox(8.39996+3.60004)x22.55562
+.....\glue 6.0
+.....\glue 0.00002
+.....\OT1/cmr/m/n/10 y
+.....\OT1/cmr/m/n/10 y
+.....\glue 0.0 plus 1.0fil
+.....\glue 6.0
+....\glue(\tabskip) 0.0 plus 1.0fill
+...\glue(\lineskip) 0.0
+...\hbox(8.39996+3.60004)x345.0, glue set 147.30548fill
+....\glue(\tabskip) 0.0 plus 1.0fill
+....\hbox(8.39996+3.60004)x27.83342
+.....\rule(8.39996+3.60004)x0.0
+.....\glue 6.0
+.....\glue 0.00002
+.....\OT1/cmr/m/n/10 x
+.....\OT1/cmr/m/n/10 x
+.....\OT1/cmr/m/n/10 x
+.....\glue 0.0 plus 1.0fil
+.....\glue 6.0
+....\glue(\tabskip) 0.0
+....\hbox(8.39996+3.60004)x22.55562
+.....\glue 6.0
+.....\glue 0.00002
+.....\OT1/cmr/m/n/10 y
+.....\OT1/cmr/m/n/10 y
+.....\glue 0.0 plus 1.0fil
+.....\glue 6.0
+....\glue(\tabskip) 0.0 plus 1.0fill
+...\glue(\lineskip) 0.0
+...\hbox(8.39996+3.60004)x345.0, glue set 147.30548fill
+....\glue(\tabskip) 0.0 plus 1.0fill
+....\hbox(8.39996+3.60004)x27.83342
+.....\rule(8.39996+3.60004)x0.0
+.....\glue 6.0
+.....\glue 0.00002
+.....\OT1/cmr/m/n/10 x
+.....\OT1/cmr/m/n/10 x
+.....\OT1/cmr/m/n/10 x
+.....\glue 0.0 plus 1.0fil
+.....\glue 6.0
+....\glue(\tabskip) 0.0
+....\hbox(8.39996+3.60004)x22.55562
+.....\glue 6.0
+.....\glue 0.00002
+.....\OT1/cmr/m/n/10 y
+.....\OT1/cmr/m/n/10 y
+.....\glue 0.0 plus 1.0fil
+.....\glue 6.0
+....\glue(\tabskip) 0.0 plus 1.0fill
 ...\penalty 10000
 ...\penalty 0
 ...\glue 12.0 plus 4.0 minus 4.0
