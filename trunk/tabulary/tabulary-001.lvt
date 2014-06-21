@@ -1,0 +1,22 @@
+% http://tex.stackexchange.com/a/185851/1090
+
+\documentclass[a4paper]{article}
+
+\usepackage{colortbl}
+\usepackage{tabulary}
+
+
+\begin{document}
+\begin{tabular}{>{\columncolor{red}}c}
+a
+\\
+\cellcolor{green}42
+\end{tabular}
+
+\begin{tabulary}{\textwidth}{>{\columncolor{red}}C}
+a
+\\
+\cellcolor{green}42
+\end{tabulary}
+
+\end{document}
