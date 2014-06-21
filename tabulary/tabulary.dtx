@@ -13,7 +13,7 @@
 %<package>\ProvidesPackage{tabulary}
 % \fi
 %         \ProvidesFile{tabulary.dtx}
-          [2008/12/01 v0.9 tabulary package (DPC)]
+          [2014/06/11 v0.10 tabulary package (DPC)]
 %
 % \iffalse
 %<*driver>
@@ -35,7 +35,7 @@
 \end{document}
 %</driver>
 % \fi
-% \CheckSum{1339}
+% \CheckSum{1346}
 %
 % \changes{v0.1}{1995/10/08}
 %      {Initial version}
@@ -49,6 +49,8 @@
 %      {Remove multi pass table env and unboxed star form}
 % \changes{v0.8}{2003/09/14}
 %      {Rename S to J and `hide' s (until it works)}
+% \changes{v0.10}{2014/06/21}
+%      {support \cs{cellcolor} see  http://tex.stackexchange.com/a/185851/1090}
 %
 % \section{User Documentation}
 %
@@ -879,6 +881,7 @@ Z \message{^^JTotal:\the\@tempdima^^J}%
     \expandafter\let\expandafter\color\expandafter\relax
     \expandafter\let\expandafter\CT@column@color\expandafter\relax
     \expandafter\let\expandafter\CT@row@color\expandafter\relax
+    \expandafter\let\expandafter\CT@cell@color\expandafter\relax
     \@mkpream{#1}}
 \let\TY@@mkpream\@mkpream
 \def\TY@classz{%
@@ -921,6 +924,7 @@ Z \message{^^JTotal:\the\@tempdima^^J}%
   \CT@setup
   \CT@column@color
   \CT@row@color
+  \CT@cell@color
   \CT@do@color
 \endgroup
         \@tempdima\ht\z@
