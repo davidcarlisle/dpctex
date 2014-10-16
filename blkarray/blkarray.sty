@@ -1,7 +1,7 @@
 %%%     blkarray.sty
 %%%
 %%% Copyright David Carlisle 1992 1999
-%%%           david@dcarlisle.demon.co.uk
+%%%           d.p.carlisle "at" gmail.com
 %%%
 %%% This file may be distributed under the terms of the LPPL.
 %%% See 00readme.txt for details.
@@ -9,6 +9,7 @@
 %%% Version 0.01 - 0.03  November 1992
 %%% Version 0.04         03 December 1992
 %%% Version 0.05         24 March 1999  (email update only)
+%%% Version 0.06         16 March 2014  Update for LaTeX2e
 %%%
 %%%
 %%%
@@ -608,6 +609,10 @@
 % \clearpage
 % \section{The Macros}
 %
+%    \begin{macrocode}
+\ProvidesPackage{blkarray}[2014/10/16 v0.06 Block array (dpc)]\relax
+%    \end{macrocode}
+%
 % \subsection{Some General Control Macros}
 % The macros in this section do not have the "BA" prefix, but rather the
 % "GC" prefix, other style files can repeat these definitions without
@@ -1118,6 +1123,7 @@
   \ifmmode
     \def\BA@bdollar{$}\let\BA@edollar\BA@bdollar
   \else
+    \setbox\z@\hbox{$$}%set up math for NFSS (2014/10/16)
     \def\BA@bdollar{\bgroup}\def\BA@edollar{\egroup}%
     \let\BA@bdollar\bgroup\let\BA@edollar\egroup
   \fi
