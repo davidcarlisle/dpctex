@@ -1,0 +1,4 @@
+echo y | pdflatex blkarray
+echo y | pdflatex blkarray
+cd ..
+zip -r  blkarray.zip blkarray/blkarray.{tex,sty,pdf} blkarray/README
