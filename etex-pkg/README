@@ -1,0 +1,10 @@
+The package provides a straightforward interface to many of the extensions 
+offered by e-TeX; in particular, it modifies LaTeX's register 
+allocation macros to make use of the extended register range.
+
+Note that for LaTeX releases from 2015 onwards, this package
+is not required to use the extended register range.
+
+The etoolbox provides macros that make more sophisticated use of 
+e-TeX's facilities.
+
