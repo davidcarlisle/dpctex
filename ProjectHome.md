@@ -1,0 +1,1 @@
+TeX macros distributed from ctan but moved to a public source control system. All code is LPPL licenced.
