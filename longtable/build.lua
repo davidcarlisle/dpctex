@@ -6,10 +6,6 @@
 bundle = ""
 module = "longtable"
 
--- Install .def files as well as .sty
--- These are also the sources
-installfiles = {"*.sty"}
-sourcefiles  = installfiles
 
 checksuppfiles = 
   {"test2e.tex"}
