@@ -1,0 +1,116 @@
+% \iffalse
+%% Source File: textcase.dtx
+%% Copyright 2015 David Carlisle
+%%
+%% This file may be distributed under the terms of the LPPL.
+%% See README for details.
+%
+%<*dtx>
+          \ProvidesFile{localloc.dtx}
+%</dtx>
+%<package>\NeedsTeXFormat{LaTeX2e}
+%<package>\ProvidesPackage{localloc}
+%<driver> \ProvidesFile{localloc.drv}
+% \fi
+%         \ProvidesFile{localloc.dtx}
+       [2015/05/09 v0.01 local allocation for LaTeX 2015+ (DPC)]
+%
+% \iffalse
+%<*driver>
+\documentclass{ltxdoc}
+\begin{document}
+\DocInput{localloc.dtx}
+\end{document}
+%</driver>
+% \fi
+%
+% \GetFileInfo{localloc.dtx}
+%
+% \title{The \textsf{localloc} Package\thanks{This file
+%        has version number \fileversion, last
+%        revised \filedate.}}
+% \author{David Carlisle}
+% \maketitle
+%
+% \section{Introduction}
+%
+% Prior to the 2015/01/01 \LaTeX\ release, access to extended registers was
+% usually provided by the \textsf{etex} package. From 2015 on the base
+% \LaTeX\ format ``knows'' the register ranges for tex, etex, xetex and
+% luatex, and so for most purposes the \textsf{etex} package is not
+% required.
+%
+% For existing documents `\textsf{etex}` may still be loaded and will work
+% as before, however in general it is best not to load \textsf{etex} as it
+% will over-write the new allocation scheme with its own.
+%
+% Standard allocation macros such as |\newbox| and extended versions of
+% tracing commands are now defined in the format for suitable engines however
+% there were some features of \textsf{etex} not copied into the format,
+% notably the ``local'' allocation macros. A search of CTAN showed that
+% these were almost never used, and their use can often be avoided, however
+% there are pccasions when they may be useful, and this package provided
+% implementations based on the new allocation system in \LaTeX\ 2015/01/01.
+%
+% Within a local group a command such as |\locbox\tmpbox| defines |\tmpbox|
+% to be a box register, but unlike |\newbox| the definition is local, and
+% at the end of the group, |\tmpbox| loses its definition, and the box
+% allocation number is restored.
+% 
+% 
+% \section{Implementation}
+%
+%    \begin{macrocode}
+%<*package>
+%    \end{macrocode}
+% On old \LaTeX, load |etex.sty| and stop.
+%    \begin{macrocode}
+\ifx\e@alloc\@undefined
+\RequirePackage{etex}
+\expandafter\endinput
+\fi
+%    \end{macrocode}
+%
+% If something else defined |\locbox|, stop with a warning.
+%
+%    \begin{macrocode}
+\ifx\locbox\@undefined\else
+\PackageWarning{localloc}{%
+   \string\locbox\space already defined, stopping}
+\expandafter\endinput
+\fi
+%    \end{macrocode}
+%
+% Don't allow |\extrafloats| while a local allocation is in force.
+% It is however OK to use |\extrafloats| with this package and to
+% use floats within a group with a local allocation.
+%
+% For local allocations, reduce the top of the range available for global
+% allocations by one, and locally allocate the register from that top position.
+%    \begin{macrocode}
+\def\localloc@#1#2#3#4#5{%
+  \def\extrafloats##1{%
+    \PackageWarning{localloc}{\string\extrafloats\space ignored}}
+  \e@ch@ck{#1}#2\z@#3%
+  \expandafter\e@alloc@chardef\expandafter#2%
+                         \the\numexpr#2-1\relax
+   \allocationnumber=#2%
+  #3#5#2}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\def\loccount {\localloc@{\count 10}\float@count\countdef\count}
+\def\locdimen {\localloc@{\count 11}\float@count\dimendef\dimen}
+\def\locskip  {\localloc@{\count 12}\float@count\skipdef\skip}
+\def\locmuskip{\localloc@{\count 13}\e@alloc@top\muskipdef\muskip}
+\def\locbox   {\localloc@{\count 14}\float@count\e@alloc@chardef\box}
+\def\loctoks  {\localloc@{\count 15}\e@alloc@top\toksdef\toks}
+\def\locmarks {\localloc@{\count256}\e@alloc@topt\e@alloc@chardef\marks}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+%</package>
+%    \end{macrocode}
+%
+% \Finale
+%
