@@ -1,0 +1,6 @@
+tex localloc.ins
+pdflatex localloc.dtx
+pdflatex localloc.dtx
+cd ..
+rm -rf localloc.zip
+zip localloc.zip localloc/README localloc/localloc.{dtx,ins,pdf}
