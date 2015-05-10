@@ -49,13 +49,16 @@
 % there were some features of \textsf{etex} not copied into the format,
 % notably the ``local'' allocation macros. A search of CTAN showed that
 % these were almost never used, and their use can often be avoided, however
-% there are pccasions when they may be useful, and this package provided
+% there are occasions when they may be usefus. This package provides
 % implementations based on the new allocation system in \LaTeX\ 2015/01/01.
 %
 % Within a local group a command such as |\locbox\tmpbox| defines |\tmpbox|
 % to be a box register, but unlike |\newbox| the definition is local, and
 % at the end of the group, |\tmpbox| loses its definition, and the box
-% allocation number is restored.
+% allocation number is restored. 
+%
+% The package defines: |\loccount|, |\locdimen|, |\locskip|, |\locmuskip|,
+% |\locbox|, |\loctoks| and |\locmarks|. 
 % 
 % 
 % \section{Implementation}
