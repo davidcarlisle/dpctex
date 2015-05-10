@@ -1,13 +1,13 @@
-localloc package
+elocalloc package
 
 Local allocation macros, with names taken from etex.sty
 but with implementation based on the LaTeX 2015 allocation macros.
 
 To produce typeset documentation:
-pdflatex localloc.dtx
+pdflatex elocalloc.dtx
 
-To extract the localloc.sty package:
-tex localloc.ins
+To extract the elocalloc.sty package:
+tex elocalloc.ins
 
 David Carlisle
 LPPL licenced (status: maintained)

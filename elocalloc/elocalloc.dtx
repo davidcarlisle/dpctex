@@ -6,27 +6,27 @@
 %% See README for details.
 %
 %<*dtx>
-          \ProvidesFile{localloc.dtx}
+          \ProvidesFile{elocalloc.dtx}
 %</dtx>
 %<package>\NeedsTeXFormat{LaTeX2e}
-%<package>\ProvidesPackage{localloc}
-%<driver> \ProvidesFile{localloc.drv}
+%<package>\ProvidesPackage{elocalloc}
+%<driver> \ProvidesFile{elocalloc.drv}
 % \fi
-%         \ProvidesFile{localloc.dtx}
+%         \ProvidesFile{elocalloc.dtx}
        [2015/05/09 v0.01 local allocation for LaTeX 2015+ (DPC)]
 %
 % \iffalse
 %<*driver>
 \documentclass{ltxdoc}
 \begin{document}
-\DocInput{localloc.dtx}
+\DocInput{elocalloc.dtx}
 \end{document}
 %</driver>
 % \fi
 %
-% \GetFileInfo{localloc.dtx}
+% \GetFileInfo{elocalloc.dtx}
 %
-% \title{The \textsf{localloc} Package\thanks{This file
+% \title{The \textsf{elocalloc} Package\thanks{This file
 %        has version number \fileversion, last
 %        revised \filedate.}}
 % \author{David Carlisle}
@@ -78,7 +78,7 @@
 %
 %    \begin{macrocode}
 \ifx\locbox\@undefined\else
-\PackageWarning{localloc}{%
+\PackageWarning{elocalloc}{%
    \string\locbox\space already defined, stopping}
 \expandafter\endinput
 \fi
@@ -98,9 +98,9 @@
 % separate values ofr each type, and would make it harder to make
 % |\extrafloats| work, should such an extension ever be needed.
 %    \begin{macrocode}
-\def\localloc@#1#2#3#4#5{%
+\def\eloc@lloc#1#2#3#4#5{%
   \def\extrafloats##1{%
-    \PackageWarning{localloc}{\string\extrafloats\space ignored}}
+    \PackageWarning{elocalloc}{\string\extrafloats\space ignored}}
   \e@ch@ck{#1}#2\z@#3%
   \expandafter\e@alloc@chardef\expandafter#2%
                          \the\numexpr#2-1\relax
@@ -110,13 +110,13 @@
 %
 % The top level local allocation commands.
 %    \begin{macrocode}
-\def\loccount {\localloc@{\count 10}\float@count\countdef\count}
-\def\locdimen {\localloc@{\count 11}\float@count\dimendef\dimen}
-\def\locskip  {\localloc@{\count 12}\float@count\skipdef\skip}
-\def\locmuskip{\localloc@{\count 13}\e@alloc@top\muskipdef\muskip}
-\def\locbox   {\localloc@{\count 14}\float@count\e@alloc@chardef\box}
-\def\loctoks  {\localloc@{\count 15}\e@alloc@top\toksdef\toks}
-\def\locmarks {\localloc@{\count256}\e@alloc@topt\e@alloc@chardef\marks}
+\def\loccount {\eloc@lloc{\count 10}\float@count\countdef\count}
+\def\locdimen {\eloc@lloc{\count 11}\float@count\dimendef\dimen}
+\def\locskip  {\eloc@lloc{\count 12}\float@count\skipdef\skip}
+\def\locmuskip{\eloc@lloc{\count 13}\e@alloc@top\muskipdef\muskip}
+\def\locbox   {\eloc@lloc{\count 14}\float@count\e@alloc@chardef\box}
+\def\loctoks  {\eloc@lloc{\count 15}\e@alloc@top\toksdef\toks}
+\def\locmarks {\eloc@lloc{\count256}\e@alloc@topt\e@alloc@chardef\marks}
 %    \end{macrocode}
 %
 %    \begin{macrocode}

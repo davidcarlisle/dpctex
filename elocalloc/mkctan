@@ -1,0 +1,6 @@
+tex elocalloc.ins
+pdflatex elocalloc.dtx
+pdflatex elocalloc.dtx
+cd ..
+rm -rf elocalloc.zip
+zip elocalloc.zip elocalloc/README elocalloc/elocalloc.{dtx,ins,pdf}
