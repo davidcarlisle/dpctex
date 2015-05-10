@@ -86,7 +86,14 @@
 % use floats within a group with a local allocation.
 %
 % For local allocations, reduce the top of the range available for global
-% allocations by one, and locally allocate the register from that top position.
+% allocations by one, and locally allocate the register from that top
+% position.
+%
+% Note that this means that (unlike the \textsf{etex} package originals)
+% locally allocating one register affects the top of the other registers
+% that share the same top of range, but doing otherwise would mean storing
+% separate values ofr each type, and would make it harder to make
+% |\extrafloats| work, should such an extension ever be needed.
 %    \begin{macrocode}
 \def\localloc@#1#2#3#4#5{%
   \def\extrafloats##1{%
@@ -98,6 +105,7 @@
   #3#5#2}
 %    \end{macrocode}
 %
+% The top level local allocation commands.
 %    \begin{macrocode}
 \def\loccount {\localloc@{\count 10}\float@count\countdef\count}
 \def\locdimen {\localloc@{\count 11}\float@count\dimendef\dimen}
