@@ -1,6 +1,6 @@
 ucharcat package
 
-Lua implementation of \ucharcat, to match xetex's primitive.
+Lua implementation of \Ucharcat, to match xetex's primitive.
 
 
 To extract the ucharcat.sty package:
