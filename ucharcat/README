@@ -1,13 +1,10 @@
-elocalloc package
+ucharcat package
 
-Local allocation macros, with names taken from etex.sty
-but with implementation based on the LaTeX 2015 allocation macros.
+Lua implementation of \ucharcat, to match xetex's primitive.
 
-To produce typeset documentation:
-pdflatex elocalloc.dtx
 
-To extract the elocalloc.sty package:
-tex elocalloc.ins
+To extract the ucharcat.sty package:
+tex ucharcat.ins
 
 David Carlisle
 LPPL licenced (status: maintained)
