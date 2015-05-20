@@ -1,0 +1,6 @@
+tex ucharcat.ins
+lualatex ucharcat.dtx
+lualatex ucharcat.dtx
+cd ..
+rm -rf ucharcat.zip
+zip ucharcat.zip ucharcat/README ucharcat/ucharcat.{dtx,ins,pdf}

@@ -1,0 +1,163 @@
+% \iffalse
+%% Source File: textcase.dtx
+%% Copyright 2015 David Carlisle
+%%
+%% This file may be distributed under the terms of the LPPL.
+%% See README for details.
+%
+%<*dtx>
+          \ProvidesFile{ucharcat.dtx}
+%</dtx>
+%<package>\NeedsTeXFormat{LaTeX2e}
+%<package>\ProvidesPackage{ucharcat}
+%<driver> \ProvidesFile{ucharcat.drv}
+% \fi
+%         \ProvidesFile{ucharcat.dtx}
+       [2015/05/20 v0.01 ucharcat for luaLaTeX  (DPC)]
+%
+% \iffalse
+%<*driver>
+\documentclass{ltxdoc}
+\ifx\directlua\undefined\else
+\usepackage{ucharcat}
+\fi
+\begin{document}
+\DocInput{ucharcat.dtx}
+\end{document}
+%</driver>
+% \fi
+%
+% \GetFileInfo{ucharcat.dtx}
+%
+% \title{The \textsf{ucharcat} Package\thanks{This file
+%        has version number \fileversion, last
+%        revised \filedate.
+% Please report any issues at https://github.com/davidcarlisle/dpctex/issues}}
+% \author{David Carlisle}
+% \maketitle
+%
+% \section{Introduction}
+%
+% The 2015 release of Xe\TeX\ introduced a new command |\Ucharcat|,
+% this is an extension of the |\Uchar| comand that has been available
+% in Xe\TeX\ and lua\TeX\ for some time. It takes a second integer
+% value, that specifies the category code of the token to be
+% produced. This allows character tokens to be constructed \emph{via
+% expansion}, which has many potential uses in producing expandable
+% case changing, numeric counter represntations, etc.
+%
+% |\Uchar 65 12| produces a catcode 12 |A| for example.
+%
+% This package provides a lua implementation of |\Ucharcat| for use
+% with luatex, it silently accepts Xe\TeX\ and does nothing in that
+% case if |\Ucharcat| is defined.
+%
+% The main difference between the lua implementation and the Xe\TeX\
+% primitive is that the lua implementation takes \emph{two} expansions
+% to produce the token.
+%
+%\begin{verbatim}
+% \edef\tmp{\Uchar 65 11 }
+%\end{verbatim}
+% is the same as |\def\tmp{A}| with both
+% systems but
+%
+%\begin{verbatim}
+% \expandafter\def\expandafter\tmp\expandafter{\Uchar 65 11 }
+%\end{verbatim}
+% the same as
+%\begin{verbatim}
+% \def\tmp{A}
+%\end{verbatim}
+% with Xe\TeX, but in lua\TeX\ it is
+% equivalent to
+%\begin{verbatim}
+% \def\tmp{\directlua{UcharcatLua() 65 11 }
+%\end{verbatim}
+%
+% \ifx\Ucharcat\undefined\else
+% \section{Examples}
+%
+% This section will be omitted if this document is not processed with
+% a suitable format.
+%
+% \begin{itemize}
+% \item |\Ucharcat 65 11|
+%
+% \Ucharcat 65 11\ is a capital A.
+% 
+% \item  |\Ucharcat 65 12|
+% \edef\tmpa{\Ucharcat 65 12}
+% \edef\tmpb{\string A}
+% 
+% This is a catcode 12 A: \ifx\tmpa\tmpb yes\else no\fi.
+%
+% \item% |\Ucharcat 65 1| and |\Ucharcat 65 2| 
+%
+% \Ucharcat 65 1  \large\bfseries Bold is grouped \Ucharcat 65 2 
+% by catcode 1 and 2 A.
+% \end{itemize}
+% 
+% \fi
+% \section{Implementation}
+%
+%    \begin{macrocode}
+%<*package>
+%    \end{macrocode}
+% On classic \TeX{} or old Xe\TeX, stop.
+%    \begin{macrocode}
+\ifx\directlua\@undefined
+\ifx\Ucharcat\@undefined
+\ifx\XeTeXinterchartokenstate\@undefined
+\PackageError{ucharcat}
+{\string\Ucharcat\space may only be used with xetex and luatex}
+{skipping package}
+\else
+\PackageError{ucharcat}
+{\string\Ucharcat\space is defined in xetex releases from 2015 only}
+{skipping package}
+\fi
+\fi
+\expandafter\endinput
+\fi
+%    \end{macrocode}
+%
+% If some package has defined an allocator for catcode tables
+% use it, othewise just use one (near) the top of the range (hex 7FFF).
+%
+%    \begin{macrocode}
+\ifx\newcatcodetable\@undefined
+  \chardef\ucharcat@table"7000
+\else
+  \newcatcodetable\ucharcat@table
+\fi
+%    \end{macrocode}
+%
+% Set up catcode table.
+%    \begin{macrocode}
+\luatexinitcatcodetable\ucharcat@table
+%    \end{macrocode}
+% 
+% lua print function
+%    \begin{macrocode}
+\directlua{%
+function UcharcatLua()
+  local mych = newtoken.scan_int() 
+  local mycat = newtoken.scan_int()
+  tex.setcatcode(\the\numexpr\ucharcat@table\relax,mych,mycat)
+  tex.sprint(\the\numexpr\ucharcat@table\relax,unicode.utf8.char(mych))
+end
+}
+%    \end{macrocode}
+%
+% \TeX\ wrapper.
+%    \begin{macrocode}
+\def\Ucharcat{\directlua{UcharcatLua()}}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+%</package>
+%    \end{macrocode}
+%
+% \Finale
+%
