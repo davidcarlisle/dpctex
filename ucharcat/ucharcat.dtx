@@ -101,6 +101,16 @@
 % \fi
 % \section{Implementation}
 %
+% Note that the current implementation uses |\directlua| and a
+% dedicated luatex catcode array. Hans hagen made some useful comments
+% and pointers to alternative implementation using |\lusfunction|
+% in the luatex list thread
+% \texttt{http://tug.org/pipermail/luatex/2015-May/005199.html}
+% For now keeping with the simpler initial approach as there
+% is no built in support for |\luafunction| in the \LaTeX\ format yet.
+% (No allocator macros or hook to save function definition in the
+% format)
+%
 %    \begin{macrocode}
 %<*package>
 %    \end{macrocode}
