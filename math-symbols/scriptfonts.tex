@@ -1,0 +1,114 @@
+\documentclass[a4paper]{article}
+
+% Program: scriptfonts.tex
+% Copyright 2000 Robin Fairbairns
+%
+% This program can redistributed and/or modified under the terms
+% of the LaTeX Project Public License Distributed from CTAN
+% archives as file macros/latex/base/lppl.txt (the file is also
+% available from http://www.latex-project.org); either version 1.2 of
+% the License, or (at your option) any later version.
+
+%% this is a bit of a tricksy document: don't be surprised if it
+%% doesn't behave properly when you compile it, either with latex
+%% (pkgindoc _isn't_ part of the standard distribution) or with
+%% pdflatex (additionally, as originally configured, my pdftex didn't
+%% download the zapf chancery font so that the output printed as an
+%% "ordinary" sort of font, which rather spoiled the effect)
+
+\usepackage{mathrsfs}
+\usepackage{graphics}
+
+\usepackage{pkgindoc} % allow \usepackage commands in body of document
+                      % (may be generated from latex sources)
+
+% fudges to allow us to run eucal.sty (see more detailed comment just
+% before \includegraphics{eucal}
+\DeclareMathAlphabet\EuScript{U}{eus}{m}{n}
+\SetMathAlphabet\EuScript{bold}{U}{eus}{b}{n}
+
+\DeclareRobustCommand\cs[1]{\texttt{\char`\\#1}}
+
+\DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}
+
+%\DeclareFontFamily{OT1}{pzcs}{}
+%\DeclareFontShape{OT1}{pzcs}{m}{it}{<-> s * [0.900] pzcmi7t}{}
+%\DeclareMathAlphabet{\mathpzcs}{OT1}{pzc}{m}{it}
+
+\begin{document}
+\title{Script fonts for mathematical use\\ available to \LaTeX{} users}
+\author{Robin Fairbairns}
+\date{November 2000}
+\maketitle
+
+This short sampler document is mostly taken from an answer provided to
+me for the UK TUG FAQ by Anthony Goreham.
+
+\section{Default script fonts}
+
+The \cs{mathcal} command gives us:
+
+$$\mathcal{ABCDEFGHIJKLMNOPQRSTUVWXYZ}$$
+
+% the .eps files are generated with \Huge set; we measure T in that
+% size for generating \raisebox parameters.
+\newlength\depthT
+\settoheight\depthT{\Huge$\mathcal{T}$}
+
+\noindent\textbf{Caveat:} The AMS Postscript Type~1 versions of the Computer
+Modern fonts (which are used for the Postscript and PDF distributions
+of this document) are based on Knuth's `old' shape for the letter
+``T'': compare the current (Meta\-font) version~---
+\raisebox{-0.4\depthT}{\includegraphics{mathcalTpk}} with the Type
+1 version~--- \raisebox{-0.4\depthT}{\includegraphics{mathcalTt1}}
+
+\section{Euler script fonts}
+
+The package \texttt{eucal} changes the definition of \cs{mathcal} to
+give us:
+
+% because eucal redeclares \mathcal, we can't actually execute the
+% package until after we've done our first example.  however, the
+% package uses nfss commands which are themselves only available in
+% the preamble, so we execute those in the preamble, and dummy them
+% out here
+\renewcommand\DeclareMathAlphabet[5]{\ignorespaces}
+\renewcommand\SetMathAlphabet[6]{\ignorespaces}
+\usepackage{eucal}
+
+$$\mathcal{ABCDEFGHIJKLMNOPQRSTUVWXYZ}$$
+
+\section{Ralph Smith's Formal Script}
+
+The package \texttt{mathrsfs} gives us a new command \cs{mathscr}, and
+with that we get
+
+$$\mathscr{ABCDEFGHIJKLMNOPQRSTUVWXYZ}$$
+
+\section{Using the Adobe Zapf Chancery font}
+
+There's no defined package for this rather pleasing font.  To get the
+font at its default size, one may say (in the document preamble):
+\begin{verbatim}
+\DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}
+\end{verbatim}
+which declares a command \cs{mathpzc} which give us:
+
+$$\mathpzc{ABCDEFGHIJKLMNOPQRSTUVWXYZ}$$
+
+\noindent which (in Anthony Goreham's view) may seem a bit large.  He
+gives a recipe for producing a smaller version, in the FAQ answer.
+
+% this doesn't seem to have the desired effect.  omitted from version 1
+%
+%The sequence
+%\begin{verbatim}
+%\DeclareFontFamily{OT1}{pzc}{}
+%\DeclareFontShape{OT1}{pzc}{m}{it}{<-> s * [0.900] pzcmi7t}{}
+%\DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}
+%\end{verbatim}
+%gives us:
+%
+%$$\mathpzcs{ABCDEFGHIJKLMNOPQRSTUVWXYZ}$$
+
+\end{document}
