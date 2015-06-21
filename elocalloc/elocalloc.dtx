@@ -13,7 +13,7 @@
 %<driver> \ProvidesFile{elocalloc.drv}
 % \fi
 %         \ProvidesFile{elocalloc.dtx}
-       [2015/05/09 v0.01 local allocation for LaTeX 2015+ (DPC)]
+       [2015/06/21 v0.02 local allocation for LaTeX 2015+ (DPC)]
 %
 % \iffalse
 %<*driver>
@@ -96,12 +96,12 @@
 % Note that this means that (unlike the \textsf{etex} package originals)
 % locally allocating one register affects the top of the other registers
 % that share the same top of range, but doing otherwise would mean storing
-% separate values ofr each type, and would make it harder to make
+% separate values for each type, and would make it harder to make
 % |\extrafloats| work, should such an extension ever be needed.
 %    \begin{macrocode}
 \def\eloc@lloc#1#2#3#4#5{%
   \def\extrafloats##1{%
-    \PackageWarning{elocalloc}{\string\extrafloats\space ignored}}
+    \PackageWarning{elocalloc}{\string\extrafloats\space ignored}}%
   \e@ch@ck{#1}#2\z@#3%
   \expandafter\e@alloc@chardef\expandafter#2%
                          \the\numexpr#2-1\relax
