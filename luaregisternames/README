@@ -1,0 +1,17 @@
+luaregisternames package
+
+To extract the luaregisternames.sty package:
+tex luaregisternames.ins
+
+David Carlisle
+LPPL licenced (status: maintained)
+
+Master source:
+https://github.com/davidcarlisle/dpctex/tree/master/luaregisternames
+
+
+Please report any issues at
+
+https://github.com/davidcarlisle/dpctex/issues
+
+
