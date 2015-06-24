@@ -1,5 +1,12 @@
 luaregisternames package
 
+
+Sometimes (notably in the case of lua attributes) it is necessary to
+access a register _by number_ that has been allocated by tex.
+This package provides a function to look up the relevant number
+using luatex's internal tables.
+
+
 To extract the luaregisternames.sty package:
 tex luaregisternames.ins
 
