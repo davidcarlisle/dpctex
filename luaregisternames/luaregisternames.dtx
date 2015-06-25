@@ -52,6 +52,95 @@
 % |false| is returned.
 %
 %
+% \section{Example}
+%
+%\begin{verbatim}
+% \newcommand\test[1]{%
+% \typeout{#1: \expandafter\meaning\csname#1\endcsname^^J
+% \space\space\space\space
+% \directlua{tex.write(registernumber("#1") or "bad input")}%
+% }}
+% 
+% \test{undefinedrubbish}
+% 
+% \test{space}
+% 
+% \test{hbox}
+% 
+% \test{@MM}
+% 
+% \test{@tempdima}
+% \test{@tempdimb}
+% 
+% \test{strutbox}
+%
+% \test{sixt@@n}
+%
+% \attrbutedef\myattr=12
+% \myattr=200
+% \test{myattr}
+%
+%\end{verbatim}
+%
+%\ifx\directlua\undefined\else
+% \newcommand\test[1]{%
+% \typeout{#1: \expandafter\meaning\csname#1\endcsname^^J
+% \space\space\space\space
+% \directlua{tex.write(registernumber("#1") or "bad input")}%
+% }}
+% 
+% \test{undefinedrubbish}
+% 
+% \test{space}
+% 
+% \test{hbox}
+% 
+% \test{@MM}
+% 
+% \test{@tempdima}
+% \test{@tempdimb}
+% 
+% \test{strutbox}
+%
+% \test{sixt@@n}
+%
+% \luatexattributedef\myattr=12
+% \myattr=200
+% \test{myattr}
+%
+%\fi
+%
+% If this document has been processed with lualatex then the above
+% code would have produced the following in the log and terminal
+% output.
+%\begin{verbatim}
+% undefinedrubbish: \relax
+%      bad input 
+% space: macro:-> 
+%      bad input 
+% hbox: \hbox
+%      bad input 
+% @MM: \mathchar"4E20
+%      20000 
+% @tempdima: \dimen14
+%      14 
+% @tempdimb: \dimen15
+%      15 
+% strutbox: \char"B
+%      11 
+% sixt@@n: \char"10
+%      16 
+% myattr: \attribute12
+%      12 
+%\end{verbatim}
+%
+% Notice how undefined commands, or commands unreleated to registers
+% do not produce an error, just return |false| and so print
+% |bad input| here. Note also that commands defined by |\newbox| work and
+% return the number of the box register even though the actual command
+% holding this number is a |\chardef| defined token (there is no
+% |\boxdef|).
+%
 % \section{Implementation}
 %
 % Note that the current implementation uses |\directlua| and a
@@ -98,14 +187,22 @@
 % command tables.
 %    \begin{macrocode}
 luaregisterbasetable={}
-luaregisterbasetable["assign_glue"]=newtoken.create("skip@").mode
-luaregisterbasetable["assign_mu_glue"]=newtoken.create("reserved@b").mode
-luaregisterbasetable["assign_dimen"]=newtoken.create("dimen@").mode
-luaregisterbasetable["assign_toks"]=newtoken.create("toks@").mode
-luaregisterbasetable["assign_int"]=newtoken.create("c@page").mode
-luaregisterbasetable["assign_attr"]=newtoken.create("reserved@a").mode
-luaregisterbasetable["math_given"]=newtoken.create("@m").mode - 1000
-luaregisterbasetable["char_given"]=newtoken.create("@inputcheck").mode
+luaregisterbasetable["assign_glue"]=
+  newtoken.create("skip@").mode
+luaregisterbasetable["assign_mu_glue"]=
+  newtoken.create("reserved@b").mode
+luaregisterbasetable["assign_dimen"]=
+  newtoken.create("dimen@").mode
+luaregisterbasetable["assign_toks"]=
+  newtoken.create("toks@").mode
+luaregisterbasetable["assign_int"]=
+  newtoken.create("c@page").mode
+luaregisterbasetable["assign_attr"]=
+  newtoken.create("reserved@a").mode
+luaregisterbasetable["math_given"]=
+  newtoken.create("@m").mode - 1000
+luaregisterbasetable["char_given"]=
+  newtoken.create("@inputcheck").mode
 %    \end{macrocode}
 %
 % Now a function that determines the command type of a supplies csname
@@ -140,14 +237,22 @@ end
 %
 %    \begin{macrocode}
 luaregisterbasetable={}
-luaregisterbasetable[tex.hashtokens()["skip@"][1]]=tex.hashtokens()["skip@"][2]
-luaregisterbasetable[tex.hashtokens()["reserved@b"][1]]=tex.hashtokens()["reserved@b"][2]
-luaregisterbasetable[tex.hashtokens()["dimen@"][1]]=tex.hashtokens()["dimen@"][2]
-luaregisterbasetable[tex.hashtokens()["toks@"][1]]=tex.hashtokens()["toks@"][2]
-luaregisterbasetable[tex.hashtokens()["c@page"][1]]=tex.hashtokens()["c@page"][2]
-luaregisterbasetable[tex.hashtokens()["reserved@a"][1]]=tex.hashtokens()["reserved@a"][2]
-luaregisterbasetable[tex.hashtokens()["@m"][1]]=tex.hashtokens()["@m"][2] - 1000
-luaregisterbasetable[tex.hashtokens()["@inputcheck"][1]]=tex.hashtokens()["@inputcheck"][2]
+luaregisterbasetable[tex.hashtokens()
+  ["skip@"][1]]=tex.hashtokens()["skip@"][2]
+luaregisterbasetable[tex.hashtokens()
+  ["reserved@b"][1]]=tex.hashtokens()["reserved@b"][2]
+luaregisterbasetable[tex.hashtokens()
+  ["dimen@"][1]]=tex.hashtokens()["dimen@"][2]
+luaregisterbasetable[tex.hashtokens()
+  ["toks@"][1]]=tex.hashtokens()["toks@"][2]
+luaregisterbasetable[tex.hashtokens()
+  ["c@page"][1]]=tex.hashtokens()["c@page"][2]
+luaregisterbasetable[tex.hashtokens()
+  ["reserved@a"][1]]=tex.hashtokens()["reserved@a"][2]
+luaregisterbasetable[tex.hashtokens()
+  ["@m"][1]]=tex.hashtokens()["@m"][2] - 1000
+luaregisterbasetable[tex.hashtokens()
+  ["@inputcheck"][1]]=tex.hashtokens()["@inputcheck"][2]
 %    \end{macrocode}
 % 
 %    \begin{macrocode}
