@@ -1,0 +1,4 @@
+pdflatex maths-symbols.tex
+cd ..
+rm -rf maths-symbols.zip
+zip maths-symbols.zip maths-symbols/README maths-symbols/{scriptfonts,maths-symbols}.{tex,pdf}

@@ -1,0 +1,498 @@
+%%% maths-symbols.tex version 3.4 (was symbols.tex)
+%%%
+%%% List of maths symbols.
+%%%
+%%% Lists all the standard LaTeX symbols.
+%%% Lists the AMS symbols if the AMS package amssymb is available.
+%%% Lists the stmaryrd symbols if the package stmaryrd is available.
+%%%          (stmaryrd tables supplied by Alexander Holt.)
+%%%
+%%%                        David Carlisle
+%%%                        carlisle@cs.man.ac.uk
+%%%                        1994/10/02
+
+% This program can redistributed and/or modified under the terms
+% of the LaTeX Project Public License Distributed from CTAN
+% archives as file macros/latex/base/lppl.txt (the file is also
+% available from http://www.latex-project.org); either version 1.2 of
+% the License, or (at your option) any later version.
+
+\NeedsTeXFormat{LaTeX2e}
+
+\documentclass[a4paper]{article}
+
+\ifx\pdfpagewidth\undefined\else
+        \pdfpagewidth=\paperwidth
+        \pdfpageheight=\paperheight
+\fi
+
+\newif\ifAMS
+\IfFileExists{amssymb.sty}
+  {\AMStrue\usepackage{amssymb}}{}
+\usepackage{latexsym}
+
+\newif\ifST
+\IfFileExists{stmaryrd.sty}
+  {\STtrue\usepackage{stmaryrd}\newcommand\ST{\textsf{stmaryrd}}}
+  {}
+
+\newif\ifEU
+\IfFileExists{euscript.sty}
+  {\EUtrue\usepackage[mathcal]{euscript}}
+  {\let\CMcal\mathcal}
+
+
+% Math-mode symbol & verbatim
+\def\W#1#2{$#1{#2}$ &\ttfamily\string#1\string{#2\string}}
+\def\X#1{$#1$ &\ttfamily\string#1}
+\def\Y#1{$\big#1$ &\ttfamily\string#1}
+\def\Z#1{\ttfamily\string#1}
+
+% A non-floating table environment.
+\makeatletter
+\renewenvironment{table}%
+   {\vskip\intextsep\parskip\z@
+    \vbox\bgroup\centering\def\@captype{table}}%
+   {\egroup\vskip\intextsep}
+\makeatother
+
+% All the tables are \label'ed in case this document ever gets some
+% explanatory text written, however there are no \refs as yet. To save
+% LaTeX-ing the file twice we go:
+\renewcommand{\label}[1]{}
+
+% A4 page setup
+\topmargin -45pt
+\textwidth=532pt
+\oddsidemargin=-40pt \evensidemargin\oddsidemargin
+\textheight 682pt
+
+\begin{document}
+
+\begin{table}
+\begin{tabular}{*8l}
+\X\alpha        &\X\theta       &\X o           &\X\tau         \\
+\X\beta         &\X\vartheta    &\X\pi          &\X\upsilon     \\
+\X\gamma        &\X\iota        &\X\varpi       &\X\phi         \\
+\X\delta        &\X\kappa       &\X\rho         &\X\varphi      \\
+\X\epsilon      &\X\lambda      &\X\varrho      &\X\chi         \\
+\X\varepsilon   &\X\mu          &\X\sigma       &\X\psi         \\
+\X\zeta         &\X\nu          &\X\varsigma    &\X\omega       \\
+\X\eta          &\X\xi                                          \\
+                                                                \\
+\X\Gamma        &\X\Lambda      &\X\Sigma       &\X\Psi         \\
+\X\Delta        &\X\Xi          &\X\Upsilon     &\X\Omega       \\
+\X\Theta        &\X\Pi          &\X\Phi
+\end{tabular}
+\caption{Greek Letters}\label{greek}
+\end{table}
+
+\begin{table}
+\begin{tabular}{*8l}
+\X\pm           &\X\cap         &\X\diamond             &\X\oplus     \\
+\X\mp           &\X\cup         &\X\bigtriangleup       &\X\ominus    \\
+\X\times        &\X\uplus       &\X\bigtriangledown     &\X\otimes    \\
+\X\div          &\X\sqcap       &\X\triangleleft        &\X\oslash    \\
+\X\ast          &\X\sqcup       &\X\triangleright       &\X\odot      \\
+\X\star         &\X\vee         &\X\lhd$^*$             &\X\bigcirc   \\
+\X\circ         &\X\wedge       &\X\rhd$^*$             &\X\dagger    \\
+\X\bullet       &\X\setminus    &\X\unlhd$^*$           &\X\ddagger   \\
+\X\cdot         &\X\wr          &\X\unrhd$^*$           &\X\amalg     \\
+\X+             &\X-
+\end{tabular}
+
+$^*$ Not predefined in \LaTeXe.
+     Use one of the packages  \textsf{latexsym}, \textsf{amsfonts} or
+     \textsf{amssymb}.
+
+\caption{Binary Operation Symbols}\label{bin}
+\end{table}
+
+
+\begin{table}
+\begin{tabular}{*8l}
+\X\leq          &\X\geq         &\X\equiv       &\X\models      \\
+\X\prec         &\X\succ        &\X\sim         &\X\perp        \\
+\X\preceq       &\X\succeq      &\X\simeq       &\X\mid         \\
+\X\ll           &\X\gg          &\X\asymp       &\X\parallel    \\
+\X\subset       &\X\supset      &\X\approx      &\X\bowtie      \\
+\X\subseteq     &\X\supseteq    &\X\cong        &\X\Join$^*$    \\
+\X\sqsubset$^*$ &\X\sqsupset$^*$&\X\neq         &\X\smile       \\
+\X\sqsubseteq   &\X\sqsupseteq  &\X\doteq       &\X\frown       \\
+\X\in           &\X\ni          &\X\propto      &\X=            \\
+\X\vdash        &\X\dashv       &\X<            &\X>            \\
+\X:
+\end{tabular}
+
+$^*$ Not predefined in \LaTeXe.
+     Use one of the packages  \textsf{latexsym}, \textsf{amsfonts} or
+     \textsf{amssymb}.
+
+
+\caption{Relation Symbols}\label{rel}
+\end{table}
+
+\begin{table}
+\begin{tabular}{*{5}{lp{3.2em}}}
+\X,     &\X;    &\X\colon       &\X\ldotp       &\X\cdotp
+\end{tabular}
+\caption{Punctuation Symbols}\label{punct}
+\end{table}
+
+\begin{table}
+\begin{tabular}{*6l}
+\X\leftarrow            &\X\longleftarrow       &\X\uparrow     \\
+\X\Leftarrow            &\X\Longleftarrow       &\X\Uparrow     \\
+\X\rightarrow           &\X\longrightarrow      &\X\downarrow   \\
+\X\Rightarrow           &\X\Longrightarrow      &\X\Downarrow   \\
+\X\leftrightarrow       &\X\longleftrightarrow  &\X\updownarrow \\
+\X\Leftrightarrow       &\X\Longleftrightarrow  &\X\Updownarrow \\
+\X\mapsto               &\X\longmapsto          &\X\nearrow     \\
+\X\hookleftarrow        &\X\hookrightarrow      &\X\searrow     \\
+\X\leftharpoonup        &\X\rightharpoonup      &\X\swarrow     \\
+\X\leftharpoondown      &\X\rightharpoondown    &\X\nwarrow     \\
+\X\rightleftharpoons    &\X\leadsto$^*$
+\end{tabular}
+
+$^*$ Not predefined in \LaTeXe.
+     Use one of the packages  \textsf{latexsym}, \textsf{amsfonts} or
+     \textsf{amssymb}.
+
+\caption{Arrow Symbols}\label{arrow}
+\end{table}
+
+\begin{table}
+\begin{tabular}{*8l}
+\X\ldots        &\X\cdots       &\X\vdots       &\X\ddots       \\
+\X\aleph        &\X\prime       &\X\forall      &\X\infty       \\
+\X\hbar         &\X\emptyset    &\X\exists      &\X\Box$^*$     \\
+\X\imath        &\X\nabla       &\X\neg         &\X\Diamond$^*$ \\
+\X\jmath        &\X\surd        &\X\flat        &\X\triangle    \\
+\X\ell          &\X\top         &\X\natural     &\X\clubsuit    \\
+\X\wp           &\X\bot         &\X\sharp       &\X\diamondsuit \\
+\X\Re           &\X\|           &\X\backslash   &\X\heartsuit   \\
+\X\Im           &\X\angle       &\X\partial     &\X\spadesuit   \\
+\X\mho$^*$      &\X.            &\X|
+\end{tabular}
+
+$^*$ Not predefined in \LaTeXe.
+     Use one of the packages  \textsf{latexsym}, \textsf{amsfonts} or
+     \textsf{amssymb}.
+
+\caption{Miscellaneous Symbols}\label{ord}
+\end{table}
+
+\begin{table}
+\begin{tabular}{*6l}
+\X\sum          &\X\bigcap      &\X\bigodot     \\
+\X\prod         &\X\bigcup      &\X\bigotimes   \\
+\X\coprod       &\X\bigsqcup    &\X\bigoplus    \\
+\X\int          &\X\bigvee      &\X\biguplus    \\
+\X\oint         &\X\bigwedge
+\end{tabular}
+\caption{Variable-sized  Symbols}\label{op}
+\end{table}
+
+
+\begin{table}
+\begin{tabular}{*8l}
+\Z\arccos &\Z\cos  &\Z\csc &\Z\exp &
+           \Z\ker    &\Z\limsup &\Z\min &\Z\sinh \\
+\Z\arcsin &\Z\cosh &\Z\deg &\Z\gcd &
+           \Z\lg     &\Z\ln     &\Z\Pr  &\Z\sup  \\
+\Z\arctan &\Z\cot  &\Z\det &\Z\hom &
+           \Z\lim    &\Z\log    &\Z\sec &\Z\tan  \\
+\Z\arg    &\Z\coth &\Z\dim &\Z\inf &
+           \Z\liminf &\Z\max    &\Z\sin &\Z\tanh
+\end{tabular}
+\caption{Log-like Symbols}\label{log}
+\end{table}
+
+
+\begin{table}
+\begin{tabular}{*8l}
+\X(             &\X)            &\X\uparrow     &\X\Uparrow     \\
+\X[             &\X]            &\X\downarrow   &\X\Downarrow   \\
+\X\{            &\X\}           &\X\updownarrow &\X\Updownarrow \\
+\X\lfloor       &\X\rfloor      &\X\lceil       &\X\rceil       \\
+\X\langle       &\X\rangle      &\X/            &\X\backslash   \\
+\X|             &\X\|
+\end{tabular}
+\caption{Delimiters\label{dels}}
+\end{table}
+
+\begin{table}
+\begin{tabular}{*8l}
+\Y\rmoustache&  \Y\lmoustache&  \Y\rgroup&      \Y\lgroup\\[5pt]
+\Y\arrowvert&   \Y\Arrowvert&   \Y\bracevert
+\end{tabular}
+\caption{Large Delimiters\label{ldels}}
+\end{table}
+
+\begin{table}
+\begin{tabular}{*{10}l}
+\W\hat{a}     &\W\acute{a}  &\W\bar{a}    &\W\dot{a}    &\W\breve{a}\\
+\W\check{a}   &\W\grave{a}  &\W\vec{a}    &\W\ddot{a}   &\W\tilde{a}\\
+\end{tabular}
+\caption{Math mode accents}\label{accent}
+\end{table}
+
+\begin{table}
+\begin{tabular}{*4l}
+\W\widetilde{abc}       &\W\widehat{abc}                        \\
+\W\overleftarrow{abc}   &\W\overrightarrow{abc}                 \\
+\W\overline{abc}        &\W\underline{abc}                      \\
+\W\overbrace{abc}       &\W\underbrace{abc}                     \\[5pt]
+\W\sqrt{abc}            &$\sqrt[n]{abc}$&\verb|\sqrt[n]{abc}|   \\
+$f'$&\verb|f'|          &$\frac{abc}{xyz}$&\verb|\frac{abc}{xyz}|
+\end{tabular}
+\caption{Some other constructions}\label{other}
+\end{table}
+
+\ifAMS
+
+\begin{table}
+\begin{tabular}{*8l}
+\X\ulcorner&\X\urcorner&\X\llcorner&\X\lrcorner
+\end{tabular}
+\caption{AMS Delimiters\label{ams-del}}
+\end{table}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}
+\begin{tabular}{*8l}
+\X\dashrightarrow       &\X\dashleftarrow
+        &\X\leftleftarrows      &\X\leftrightarrows     \\
+\X\Lleftarrow           &\X\twoheadleftarrow
+        &\X\leftarrowtail       &\X\looparrowleft       \\
+\X\leftrightharpoons    &\X\curvearrowleft
+        &\X\circlearrowleft     &\X\Lsh                 \\
+\X\upuparrows           &\X\upharpoonleft
+        &\X\downharpoonleft     &\X\multimap            \\
+\X\leftrightsquigarrow  &\X\rightrightarrows
+        &\X\rightleftarrows     &\X\rightrightarrows    \\
+\X\rightleftarrows      &\X\twoheadrightarrow
+        &\X\rightarrowtail      &\X\looparrowright      \\
+\X\rightleftharpoons    &\X\curvearrowright
+        &\X\circlearrowright    &\X\Rsh                 \\
+\X\downdownarrows       &\X\upharpoonright
+        &\X\downharpoonright    &\X\rightsquigarrow
+\end{tabular}
+
+\caption{AMS Arrows\label{ams-arrows}}
+\end{table}
+
+\begin{table}
+\begin{tabular}{*8l}
+\X\nleftarrow   &\X\nrightarrow &\X\nLeftarrow  &\X\nRightarrow \\
+\X\nleftrightarrow&\X\nLeftrightarrow
+\end{tabular}
+\caption{AMS Negated Arrows\label{ams-narrows}}
+\end{table}
+
+\begin{table}
+\begin{tabular}{*4l}
+\X\digamma      &\X\varkappa
+\end{tabular}
+\caption{AMS Greek\label{ams-greek}}
+\end{table}
+
+\begin{table}
+\begin{tabular}{*6l}
+\X\beth &\X\daleth      &\X\gimel
+\end{tabular}
+\caption{AMS Hebrew\label{ams-hebrew}}
+\end{table}
+
+
+\begin{table}
+\begin{tabular}{*8l}
+\X\hbar         &\X\hslash      &\X\vartriangle &\X\triangledown      \\
+\X\square       &\X\lozenge     &\X\circledS    &\X\angle             \\
+\X\measuredangle&\X\nexists     &\X\mho         &\X\Finv              \\
+\X\Game         &\X\Bbbk        &\X\backprime   &\X\varnothing        \\
+\X\blacktriangle&\X\blacktriangledown&\X\blacksquare&\X\blacklozenge  \\
+\X\bigstar      &\X\sphericalangle      &\X\complement  &\X\eth       \\
+\X\diagup       &\X\diagdown
+\end{tabular}
+
+
+
+\caption{AMS Miscellaneous\label{ams-misc}}
+\end{table}
+%
+
+
+
+
+\begin{table}
+\begin{tabular}{*8l}
+\X\dotplus      &\X\smallsetminus&\X\Cap        &\X\Cup               \\
+\X\barwedge     &\X\veebar      &\X\doublebarwedge&\X\boxminus        \\
+\X\boxtimes     &\X\boxdot      &\X\boxplus     &\X\divideontimes     \\
+\X\ltimes       &\X\rtimes      &\X\leftthreetimes&\X\rightthreetimes \\
+\X\curlywedge   &\X\curlyvee    &\X\circleddash &\X\circledast        \\
+\X\circledcirc  &\X\centerdot   &\X\intercal
+\end{tabular}
+
+\caption{AMS Binary Operators\label{ams-bin}}
+\end{table}
+
+
+
+\begin{table}
+\begin{tabular}{*8l}
+\X\leqq         &\X\leqslant    &\X\eqslantless        &\X\lesssim    \\
+\X\lessapprox   &\X\approxeq    &\X\lessdot            &\X\lll        \\
+\X\lessgtr      &\X\lesseqgtr   &\X\lesseqqgtr         &\X\doteqdot   \\
+\X\risingdotseq &\X\fallingdotseq&\X\backsim           &\X\backsimeq  \\
+\X\subseteqq    &\X\Subset      &\X\sqsubset           &\X\preccurlyeq\\
+\X\curlyeqprec  &\X\precsim     &\X\precapprox     &\X\vartriangleleft\\
+\X\trianglelefteq&\X\vDash      &\X\Vvdash             &\X\smallsmile \\
+\X\smallfrown   &\X\bumpeq      &\X\Bumpeq             &\X\geqq       \\
+\X\geqslant     &\X\eqslantgtr  &\X\gtrsim             &\X\gtrapprox  \\
+\X\gtrdot       &\X\ggg         &\X\gtrless            &\X\gtreqless  \\
+\X\gtreqqless   &\X\eqcirc      &\X\circeq             &\X\triangleq  \\
+\X\thicksim     &\X\thickapprox &\X\supseteqq          &\X\Supset     \\
+\X\sqsupset     &\X\succcurlyeq &\X\curlyeqsucc        &\X\succsim    \\
+\X\succapprox   &\X\vartriangleright&\X\trianglerighteq&\X\Vdash      \\
+\X\shortmid     &\X\shortparallel&\X\between           &\X\pitchfork  \\
+\X\varpropto    &\X\blacktriangleleft&\X\therefore     &\X\backepsilon\\
+\X\blacktriangleright&\X\because
+\end{tabular}
+
+\caption{AMS Binary Relations\label{ams-rel}}
+\end{table}
+%
+\begin{table}
+\begin{tabular}{*8l}
+\X\nless        &\X\nleq        &\X\nleqslant   &\X\nleqq       \\
+\X\lneq         &\X\lneqq       &\X\lvertneqq   &\X\lnsim       \\
+\X\lnapprox     &\X\nprec       &\X\npreceq     &\X\precnsim    \\
+\X\precnapprox  &\X\nsim        &\X\nshortmid   &\X\nmid        \\
+\X\nvdash       &\X\nvDash      &\X\ntriangleleft&\X\ntrianglelefteq\\
+\X\nsubseteq    &\X\subsetneq   &\X\varsubsetneq&\X\subsetneqq  \\
+\X\varsubsetneqq&\X\ngtr        &\X\ngeq        &\X\ngeqslant   \\
+\X\ngeqq        &\X\gneq        &\X\gneqq       &\X\gvertneqq   \\
+\X\gnsim        &\X\gnapprox    &\X\nsucc       &\X\nsucceq     \\
+\X\nsucceq      &\X\succnsim    &\X\succnapprox &\X\ncong       \\
+\X\nshortparallel&\X\nparallel  &\X\nvDash      &\X\nVDash      \\
+\X\ntriangleright&\X\ntrianglerighteq&\X\nsupseteq&\X\nsupseteqq\\
+\X\supsetneq    &\X\varsupsetneq&\X\supsetneqq  &\X\varsupsetneqq
+\end{tabular}
+
+
+\caption{AMS Negated Binary Relations\label{ams-nrel}}
+\end{table}
+%
+
+\fi % end of AMS test
+
+\ifST
+
+\begin{table}
+\begin{tabular}{*8l}
+\X\Lbag         &\X\Rbag        &\X\lbag        &\X\rbag    \\
+\X\llceil       &\X\rrceil      &\X\llfloor     &\X\rrfloor \\
+\X\llbracket    &\X\rrbracket
+\end{tabular}
+\caption{\ST\ Delimiters\label{st-del}}
+\end{table}
+
+\begin{table}
+\begin{tabular}{*8l}
+\X\Longmapsfrom     &\X\Longmapsto    &\X\Mapsfrom    &\X\Mapsto      \\
+\X\nnearrow         &\X\nnwarrow      &\X\ssearrow    &\X\sswarrow    \\
+\X\shortdownarrow   &\X\shortuparrow  &\X\shortleftarrow    
+                                             &\X\shortrightarrow      \\
+\X\longmapsfrom     &\X\mapsfrom      &\X\leftarrowtriangle       
+                                             &\X\rightarrowtriangle   \\
+\X\lightning        &\X\rrparenthesis &\X\leftrightarroweq 
+                                             &\X\leftrightarrowtriangle
+\end{tabular}
+\caption{\ST\ Arrows\label{st-arrows}}
+\end{table}
+
+\begin{table}
+\begin{tabular}{*8l}
+\X\Arrownot   &\X\Mapsfromchar &\X\Mapstochar \\
+\X\arrownot   &\X\mapsfromchar
+\end{tabular}
+\caption{\ST\ Extension Characters\label{st-ext}}
+\end{table}
+
+\begin{table}
+\begin{tabular}{*8l}
+\X\Ydown        &\X\Yleft       &\X\Yright       &\X\Yup              \\
+\X\baro         &\X\bbslash     &\X\binampersand &\X\bindnasrepma     \\
+\X\boxast       &\X\boxbar      &\X\boxbox       &\X\boxbslash        \\
+\X\boxcircle    &\X\boxdot      &\X\boxempty     &\X\boxslash         \\
+\X\curlyveedownarrow &\X\curlyveeuparrow
+                        &\X\curlywedgedownarrow &\X\curlywedgeuparrow \\
+\X\fatbslash    &\X\fatsemi     &\X\fatslash    &\X\interleave        \\
+\X\leftslice    &\X\merge       &\X\minuso      &\X\moo               \\
+\X\nplus        &\X\obar        &\X\oblong      &\X\obslash           \\
+\X\ogreaterthan &\X\olessthan   &\X\ovee        &\X\owedge            \\
+\X\rightslice   &\X\sslash      &\X\talloblong  &\X\varbigcirc        \\
+\X\varcurlyvee  &\X\varcurlywedge&\X\varoast    &\X\varobar           \\
+\X\varobslash   &\X\varocircle  &\X\varodot     &\X\varogreaterthan   \\
+\X\varolessthan &\X\varominus   &\X\varoplus    &\X\varoslash         \\
+\X\varotimes    &\X\varovee     &\X\varowedge   &\X\vartimes
+\end{tabular}
+\caption{\ST\ Binary Operators\label{st-bin}}
+\end{table}
+
+\begin{table}
+\begin{tabular}{*8l}
+\X\bigbox        &\X\bigcurlyvee     &\X\bigcurlywedge \\
+\X\biginterleave &\X\bignplus        &\X\bigparallel   \\
+\X\bigsqcap      &\X\bigtriangledown &\X\bigtriangleup
+\end{tabular}
+\caption{\ST\ Large Binary Operators\label{st-lbin}}
+\end{table}
+
+\begin{table}
+\begin{tabular}{*8l}
+\X\inplus     &\X\niplus       &\X\subsetplus
+                                             &\X\subsetpluseq        \\
+\X\supsetplus &\X\supsetpluseq &\X\trianglelefteqslant
+                                             &\X\trianglerighteqslant
+\end{tabular}
+\caption{\ST\ Binary Relations\label{st-rel}}
+\end{table}
+
+\begin{table}
+\begin{tabular}{*8l}
+\X\ntrianglelefteqslant &\X\ntrianglerighteqslant
+\end{tabular}
+\caption{\ST\ Negated Binary Relations\label{st-nrel}}
+\end{table}
+
+\fi% ST test
+
+
+\begin{table}
+\begin{tabular}{*3l}
+                     &&Required package                     \\
+\hline
+\W\mathrm{ABCdef}     &                                     \\
+\W\mathit{ABCdef}     &                                     \\
+\W\mathnormal{ABCdef} &                                     \\
+$\CMcal{ABC}$
+  &\verb|\mathcal{ABC}|
+                      &                              \ifEU  \\
+$\mathcal{ABC}$
+        &\verb|\mathcal{ABC}|
+        &\textsf{euscript}  with option: \textsf{mathcal}    \\
+        &\verb|\mathscr{ABC}|
+        &\textsf{euscript}  with option: \textsf{mathcr}
+                              \fi\ifx\mathfrak\undefined\else \\
+\W\mathfrak{ABCdef}     &\textsf{eufrak} 
+                              \fi\ifx\mathbb\undefined\else    \\
+\W\mathbb{ABC}           &\textsf{amsfonts} or \textsf{amssymb}
+                              \fi
+\end{tabular}
+\caption{Math Alphabets\label{alphabets}}
+\end{table}
+
+\end{document}
+
