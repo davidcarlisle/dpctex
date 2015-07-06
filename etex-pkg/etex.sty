@@ -19,7 +19,8 @@
 \ProvidesPackage{etex}
 %        [1997/08/12 v0.1 eTeX basic definition package (DPC)]
 %        [1998/03/26 v2.0 eTeX basic definition package (PEB)]
-         [2015/03/02 v2.1 eTeX basic definition package (PEB,DPC)]
+%        [2015/03/02 v2.1 eTeX basic definition package (PEB,DPC)]
+         [2015/07/06 v2.2 eTeX basic definition package (PEB,DPC)]
 
 \DeclareOption{grouptypes}{\catcode`\G=9}
 \DeclareOption{interactionmodes}{\catcode`\I=9}
@@ -94,6 +95,33 @@
     {You are probably using the obsolete e-TeX V 1.%
     }
 \fi
+
+% 2.2
+% Check if the new latex 2015/01/01 allocation is already using
+% extended reisters. If so it is too late to change allocation scheme.
+% Older versions of LaTeX would have given an error when the classic
+% TeX registers were all allocated, but newer formats allocate from
+% the extended range, so usually this package is not needed.
+\@tempswafalse
+\ifnum\count10>\@cclv\@tempswatrue\else
+\ifnum\count11>\@cclv\@tempswatrue\else
+\ifnum\count12>\@cclv\@tempswatrue\else
+\ifnum\count13>\@cclv\@tempswatrue\else
+\ifnum\count14>\@cclv\@tempswatrue\else
+\ifnum\count15>\@cclv\@tempswatrue
+\fi\fi\fi\fi\fi\fi
+
+\if@tempswa
+\PackageWarningNoLine{etex}{%
+Extended allocation already in use.\MessageBreak
+Aborting etex.sty.\MessageBreak
+To force etex package to load, add\MessageBreak
+\string\RequirePackage{etex}\MessageBreak
+at the start of the document}
+\expandafter\endinput\fi
+
+% End of 2.2 addition.
+
 
 \def\eTeX{%
   $\m@th\varepsilon$-\TeX}
