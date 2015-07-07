@@ -1,6 +1,0 @@
-tex luaregisternames.ins
-lualatex luaregisternames.dtx
-lualatex luaregisternames.dtx
-cd ..
-rm -rf luaregisternames.zip
-zip luaregisternames.zip luaregisternames/README luaregisternames/luaregisternames.{dtx,ins,pdf}
