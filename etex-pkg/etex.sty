@@ -20,15 +20,8 @@
 %        [1997/08/12 v0.1 eTeX basic definition package (DPC)]
 %        [1998/03/26 v2.0 eTeX basic definition package (PEB)]
 %        [2015/03/02 v2.1 eTeX basic definition package (PEB,DPC)]
-         [2015/07/06 v2.2 eTeX basic definition package (PEB,DPC)]
-
-\DeclareOption{grouptypes}{\catcode`\G=9}
-\DeclareOption{interactionmodes}{\catcode`\I=9}
-\DeclareOption{nodetypes}{\catcode`\N=9}
-\DeclareOption{iftypes}{\catcode`\C=9}
-\DeclareOption{localalloclog}{\let\et@xwlog\wlog} % the default
-\DeclareOption{localallocnolog}{\let\et@xwlog\@gobble} % be quiet
-\DeclareOption{localallocshow}{\let\et@xwlog\typeout} % debugging
+%        [2015/07/06 v2.2 eTeX basic definition package (PEB,DPC)]
+         [2015/07/08 v2.3 eTeX basic definition package (PEB,DPC)]
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -114,7 +107,7 @@
 \if@tempswa
 \PackageWarningNoLine{etex}{%
 Extended allocation already in use.\MessageBreak
-Aborting etex.sty.\MessageBreak
+etex.sty code will not be used.\MessageBreak
 To force etex package to load, add\MessageBreak
 \string\RequirePackage{etex}\MessageBreak
 at the start of the document}
@@ -122,6 +115,15 @@ at the start of the document}
 
 % End of 2.2 addition.
 
+% 2.3 move option handling after the above error checks.
+\DeclareOption{grouptypes}{\catcode`\G=9}
+\DeclareOption{interactionmodes}{\catcode`\I=9}
+\DeclareOption{nodetypes}{\catcode`\N=9}
+\DeclareOption{iftypes}{\catcode`\C=9}
+\DeclareOption{localalloclog}{\let\et@xwlog\wlog} % the default
+\DeclareOption{localallocnolog}{\let\et@xwlog\@gobble} % be quiet
+\DeclareOption{localallocshow}{\let\et@xwlog\typeout} % debugging
+% End of 2.3 addition.
 
 \def\eTeX{%
   $\m@th\varepsilon$-\TeX}
