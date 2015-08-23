@@ -13,7 +13,7 @@
 %<driver> \ProvidesFile{ucharcat.drv}
 % \fi
 %         \ProvidesFile{ucharcat.dtx}
-       [2015/05/20 v0.01 ucharcat for luaLaTeX  (DPC)]
+       [2015/08/23 v0.02 ucharcat for luaLaTeX  (DPC)]
 %
 % \iffalse
 %<*driver>
@@ -138,15 +138,13 @@
 %    \begin{macrocode}
 \ifx\newcatcodetable\@undefined
   \chardef\ucharcat@table"7000
+  \directlua{tex.enableprimitives("",{"initcatcodetable"})}
+  \initcatcodetable\ucharcat@table
 \else
   \newcatcodetable\ucharcat@table
 \fi
 %    \end{macrocode}
 %
-% Set up catcode table.
-%    \begin{macrocode}
-\luatexinitcatcodetable\ucharcat@table
-%    \end{macrocode}
 % 
 % lua print function
 %    \begin{macrocode}
