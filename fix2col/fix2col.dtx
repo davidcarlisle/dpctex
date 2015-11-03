@@ -12,7 +12,7 @@
 %<driver> \ProvidesFile{fix2col.drv}
 % \fi
 %         \ProvidesFile{fix2col.dtx}
-       [1998/08/17 v0.03 Output Routine fixes for two column mode (DPC,FMi)]
+       [2015/11/13 v0.04 Output Routine fixes for two column mode (DPC,FMi)]
 %
 % \iffalse
 %<*driver>
@@ -24,7 +24,7 @@
 % \fi
 %
 % \GetFileInfo{fix2col.dtx}
-% \CheckSum{579}
+% \CheckSum{583}
 %
 % \changes{v0.01}{1997/11/07}
 %    {Initial version}
@@ -50,6 +50,10 @@
 %  \maketitle
 %
 % \section{Introduction}
+%
+% \textbf{Note:} This package is obsolete, the fixes described here are 
+% incorporated into \LaTeX\ formats from 2015/01/01 onwards.
+%
 % This package makes two independent changes to \LaTeX's two column
 % output routine to fix the following two longstanding `features'.
 %
@@ -183,6 +187,16 @@
 % \section{Implementation}
 %    \begin{macrocode}
 %<*package>
+%    \end{macrocode}
+%
+% \subsection{Do nothing on current releases}
+%
+% \changes{v0.04}{2015/11/03}
+%    {Abort on new formats}
+%    \begin{macrocode}
+\@ifl@t@r\fmtversion{2014/12/31}
+{\PackageWarningNoLine{fix2col}{Obsolete package}\endinput}
+{}
 %    \end{macrocode}
 %
 % \subsection{Preserving Marks}

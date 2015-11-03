@@ -1,7 +1,11 @@
 fix2col.dtx
 fix2col.ins
-   Superceeded by fixltx2e, part of the base LaTeX distribution.
-   Two column fixes.
+   OBSOLETE: do not use in new documents.
+   This package will do nothing in LaTeX formats after 2015/01/01
+   as the fixes that it implements were incorporated into fixltx2e
+   package, which is itself obsolete as since the 2015/01/01 release
+   these fixes are in format.
+
    a) Fix mark handling so \firstmark is taken from the first column
       if that column has marks at all.
       (A copy of Piet van Oostrum's fixmarks package, more or less.)

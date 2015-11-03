@@ -1,0 +1,6 @@
+tex fix2col.ins
+pdflatex fix2col.dtx
+pdflatex fix2col.dtx
+cd ..
+rm -rf fix2col.zip
+zip fix2col.zip fix2col/README fix2col/fix2col.{dtx,ins,pdf}
