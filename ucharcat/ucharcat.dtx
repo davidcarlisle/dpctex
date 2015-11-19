@@ -13,7 +13,7 @@
 %<driver> \ProvidesFile{ucharcat.drv}
 % \fi
 %         \ProvidesFile{ucharcat.dtx}
-       [2015/08/23 v0.02 ucharcat for luaLaTeX  (DPC)]
+       [2015/11/19 v0.03 ucharcat for luaLaTeX  (DPC)]
 %
 % \iffalse
 %<*driver>
@@ -103,13 +103,12 @@
 %
 % Note that the current implementation uses |\directlua| and a
 % dedicated luatex catcode array. Hans hagen made some useful comments
-% and pointers to alternative implementation using |\lusfunction|
+% and pointers to alternative implementation using |\luafunction|
 % in the luatex list thread
 % \texttt{http://tug.org/pipermail/luatex/2015-May/005199.html}
 % For now keeping with the simpler initial approach as there
 % is no built in support for |\luafunction| in the \LaTeX\ format yet.
-% (No allocator macros or hook to save function definition in the
-% format)
+% (No hook to save function definition in the format)
 %
 %    \begin{macrocode}
 %<*package>
@@ -132,8 +131,8 @@
 \fi
 %    \end{macrocode}
 %
-% If some package has defined an allocator for catcode tables
-% use it, othewise just use one (near) the top of the range (hex 7FFF).
+% Current latex formats (from 2015/11/01) define an allocator for catcode tables
+% otherwise just use one (near) the top of the range (hex 7FFF).
 %
 %    \begin{macrocode}
 \ifx\newcatcodetable\@undefined
@@ -149,9 +148,10 @@
 % lua print function
 %    \begin{macrocode}
 \directlua{%
+local nt = newtoken or token
 function UcharcatLua()
-  local mych = newtoken.scan_int() 
-  local mycat = newtoken.scan_int()
+  local mych = nt.scan_int() 
+  local mycat = nt.scan_int()
   tex.setcatcode(\the\numexpr\ucharcat@table\relax,mych,mycat)
   tex.sprint(\the\numexpr\ucharcat@table\relax,unicode.utf8.char(mych))
 end
