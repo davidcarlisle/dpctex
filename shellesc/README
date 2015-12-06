@@ -1,13 +1,25 @@
-elocalloc package
+shellesc package
 
-Local allocation macros, with names taken from etex.sty
-but with implementation based on the LaTeX 2015 allocation macros.
+Shell escape macros
+
+\ShellEscape{some commands}
+  Execute some commands in the shell if that is allowed
+
+\DelayedShellEscape{some commands}
+  Execute some commands in the shell if that is allowed
+  the command will be executed as teh current page is being shipped out
+
+\immediate\write18{some commands}
+  An alias for \ShellEscape
+  (On platforms other than luatex this is the primitive syntax for shell escape)
+
+
 
 To produce typeset documentation:
-pdflatex elocalloc.dtx
+pdflatex shellesc.dtx
 
-To extract the elocalloc.sty package:
-tex elocalloc.ins
+To extract the shellesc.sty package:
+tex shellesc.ins
 
 David Carlisle
 LPPL licenced (status: maintained)
