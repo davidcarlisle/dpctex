@@ -7,7 +7,7 @@ Shell escape macros
 
 \DelayedShellEscape{some commands}
   Execute some commands in the shell if that is allowed
-  the command will be executed as teh current page is being shipped out
+  the command will be executed as the current page is being shipped out
 
 \immediate\write18{some commands}
   An alias for \ShellEscape
