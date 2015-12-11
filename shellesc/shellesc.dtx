@@ -52,7 +52,8 @@
       \ifx\directlua\@undefined
         \z@
       \else
-        \directlua{tex.sprint(os.execute() .. " ")}
+        \directlua{%
+          tex.sprint((status.shell_escape or os.execute()) .. " ")}
       \fi
     \else
       \shellescape
