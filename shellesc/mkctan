@@ -1,6 +1,0 @@
-tex shellesc.ins
-pdflatex shellesc.dtx
-pdflatex shellesc.dtx
-cd ..
-rm -rf shellesc.zip
-zip shellesc.zip shellesc/README shellesc/shellesc.{dtx,ins,pdf}
