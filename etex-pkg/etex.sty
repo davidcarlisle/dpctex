@@ -23,7 +23,8 @@
 %        [2015/07/06 v2.2 eTeX basic definition package (PEB,DPC)]
 %        [2015/07/08 v2.3 eTeX basic definition package (PEB,DPC)]
 %        [2015/09/02 v2.4 eTeX basic definition package (PEB,DPC)]
-         [2016/01/07 v2.5 eTeX basic definition package (PEB,DPC)]
+%        [2016/01/07 v2.5 eTeX basic definition package (PEB,DPC)]
+         [2016/01/11 v2.6 eTeX basic definition package (PEB,DPC)]
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -118,13 +119,20 @@ at the start of the document}
 % as extended allocation is already in use. Helps with
 % compatibility with some packages that use these commands 
 % after loading etex.
-\let \globcount \newcount
-\let \globdimen \newdimen
-\let \globskip  \newskip 
-\let \globmuskip\newmuskip
-\let \globtoks  \newtoks  
-\let \globmarks \newmarks 
-% end of 2.5 change
+% 2.6 avoid error from outer if used with (e)plain
+\expandafter\let\csname globcount\expandafter\endcsname
+                \csname newcount\endcsname
+\expandafter\let\csname globdimen\expandafter\endcsname
+                \csname newdimen\endcsname
+\expandafter\let\csname globskip\expandafter\endcsname
+                \csname newskip\endcsname
+\expandafter\let\csname globmuskip\expandafter\endcsname
+                \csname newmuskip\endcsname
+\expandafter\let\csname globtoks\expandafter\endcsname
+                \csname newtoks\endcsname
+\expandafter\let\csname globmarks\expandafter\endcsname
+                \csname newmarks\endcsname
+% end of 2.5/2.6 change
 
 \expandafter\endinput\fi
 
