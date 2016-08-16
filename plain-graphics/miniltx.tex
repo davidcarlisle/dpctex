@@ -6,12 +6,12 @@
 %%% Original Code
 %%%    Copyright 1993-1996 LaTeX3 Project and original authors
 %%%
-%%%  Under no circumstances should any problems relating to this file
-%%%  be sent to the LaTeX bugs address, or any other LaTeX related
-%%%  support address.
+%%%  Problems relating to this fileshould not be sent to the LaTeX bugs address,
+%%%  or any other LaTeX related support address.
 %%%
-%%% Problems can be sent to me directly at david@dcarlisle.demon.co.uk
-%%% (but I don't promise to fix them).
+%%% Problems should be reported as issues at
+%%% https://github.com/davidcarlisle/dpctex/tree/master/plain-graphics
+%%% 
 %%%
 %%% This file may be distributed under the terms of the LPPL, see
 %%% 00readme.txt for details.
@@ -23,14 +23,19 @@
 % (http://sourceforge.net/projects/asymptote/forums/forum/409349/topic/3405573)
 %  2010/01/07 import was incomplete [KB]
 %  2010/02/03 accept *-form of \ProcessOptions [KB/DL]
+%  2016/08/17 fix catcode @ handling (again), document github address [DC]
 
 \edef\resetatcatcode{\catcode`\noexpand\@\the\catcode`\@\relax}
-\ifx\miniltx\undefined\else\endinput\fi
-\let\miniltx\box
 
 \def\makeatletter{\catcode`\@11\relax}
 \def\makeatother{\catcode`\@12\relax}
 \makeatletter
+
+
+% 2016/08/17 move after \makeatletter
+% so \input graphicx \input color works.
+\ifx\miniltx\undefined\else\endinput\fi
+\let\miniltx\box
 
 \def\@makeother#1{\catcode`#1=12\relax}
 
