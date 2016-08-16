@@ -9,15 +9,15 @@ standard LaTeX distribution.
 These files are *NOT* supported by the LaTeX3 project, and any
 problems with them should *NOT* be reported to the LaTeX bugs system.
 
-Currently problems may be reported to me, david@dcarlisle.demon.co.uk
-although as I only ever use LaTeX for documents, these files have not
-been extensively tested. If some plain TeX user wants to `adopt' them
-and take over their support then they are welcome to it:-)
+Problems should be reported as issues at
+https://github.com/davidcarlisle/dpctex/tree/master/plain-graphics
+
 
 David Carlisle 1995/01/29
                1996/11/13
+	       2016/08/17
 
-Copyright 1995 1996 David Carlisle
+Copyright 1995 1996 2016 David Carlisle
 
    All the files in this directory may be redistributed and/or modified
    under the terms of the LaTeX Project Public License distributed from
