@@ -28,7 +28,7 @@ Copyright 1995 1996 2016 David Carlisle
 
 This directory contains
 
-00readme.txt This file.
+README.txt This file.
 
 exmplpic.tex
       A plain TeX document using LaTeX' `picture mode': a portable
