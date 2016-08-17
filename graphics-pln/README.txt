@@ -10,7 +10,7 @@ These files are *NOT* supported by the LaTeX3 project, and any
 problems with them should *NOT* be reported to the LaTeX bugs system.
 
 Problems should be reported as issues at
-https://github.com/davidcarlisle/dpctex/tree/master/plain-graphics
+https://github.com/davidcarlisle/dpctex/tree/master/graphics-pln
 
 
 David Carlisle 1995/01/29

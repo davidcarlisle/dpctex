@@ -1,0 +1,74 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdftex 2016.8.3)  17 AUG 2016 00:50
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**exmplcol.tex
+(./exmplcol.tex (./color.tex (./miniltx.tex
+\@tempcnta=\count27
+\@tempcntb=\count28
+\@tempdima=\dimen16
+\@tempdimb=\dimen17
+\@tempdimc=\dimen18
+\@tempboxa=\box16
+\@tempskipa=\skip18
+\@tempskipb=\skip19
+\@temptokena=\toks13
+
+Defining generic filename parser.
+
+\leftmarginv=\dimen19
+\leftmarginvi=\dimen20
+\@ovxx=\dimen21
+\@ovyy=\dimen22
+\@ovdx=\dimen23
+\@ovdy=\dimen24
+\@ovro=\dimen25
+\@ovri=\dimen26
+\@xdim=\dimen27
+\@ydim=\dimen28
+\@linelen=\dimen29
+\@dashdim=\dimen30
+\fboxsep=\dimen31
+\fboxrule=\dimen32
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/graphics/color.sty
+color: 2016/07/10 v1.1e Standard LaTeX Color (DPC)
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/graphics-cfg/color.cfg
+color.cfg: 2016/01/02 v1.6 sample color configuration
+)
+color: Driver file: pdftex.def
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/graphics-def/pdftex.def
+pdftex.def: 2016/07/10 v0.06j Graphics/color for pdfTeX
+
+(/usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/infwarerr.sty
+infwarerr: 2016/05/16 v1.4 Providing info/warning/error messages (HO)
+)
+(/usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
+ltxcmds: 2016/05/16 v1.23 LaTeX kernel commands for general use (HO)
+)
+\Gread@gobject=\count29
+
+(/usr/local/texlive/2016/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count30
+\scratchdimen=\dimen33
+\scratchbox=\box17
+\nofMPsegments=\count31
+\nofMParguments=\count32
+\everyMPshowfont=\toks14
+\MPscratchCnt=\count33
+\MPscratchDim=\dimen34
+\MPnumerator=\count34
+\makeMPintoPDFobject=\count35
+\everyMPtoPDFconversion=\toks15
+)))) [1{/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] 
+)</usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb>
+Output written on exmplcol.pdf (1 page, 11913 bytes).
+PDF statistics:
+ 12 PDF objects out of 1000 (max. 8388607)
+ 7 compressed objects within 1 object stream
+ 0 named destinations out of 1000 (max. 500000)
+ 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+

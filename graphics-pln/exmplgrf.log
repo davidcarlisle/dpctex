@@ -1,0 +1,116 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdftex 2016.8.3)  17 AUG 2016 00:51
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**exmplgrf.tex
+(./exmplgrf.tex (./graphicx.tex (./miniltx.tex
+\@tempcnta=\count27
+\@tempcntb=\count28
+\@tempdima=\dimen16
+\@tempdimb=\dimen17
+\@tempdimc=\dimen18
+\@tempboxa=\box16
+\@tempskipa=\skip18
+\@tempskipb=\skip19
+\@temptokena=\toks13
+
+Defining generic filename parser.
+
+\leftmarginv=\dimen19
+\leftmarginvi=\dimen20
+\@ovxx=\dimen21
+\@ovyy=\dimen22
+\@ovdx=\dimen23
+\@ovdy=\dimen24
+\@ovro=\dimen25
+\@ovri=\dimen26
+\@xdim=\dimen27
+\@ydim=\dimen28
+\@linelen=\dimen29
+\@dashdim=\dimen30
+\fboxsep=\dimen31
+\fboxrule=\dimen32
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/graphics/graphicx.sty
+graphicx: 2014/10/28 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/graphics/keyval.sty
+keyval: 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks14
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/graphics/graphics.sty
+graphics: 2016/07/10 v1.0t Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/graphics/trig.sty
+trig: 2016/01/03 v1.10 sin cos tan (DPC)
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+graphics.cfg: 2016/06/04 v1.11 sample graphics configuration
+)
+graphics: Driver file: pdftex.def
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/graphics-def/pdftex.def
+pdftex.def: 2016/07/10 v0.06j Graphics/color for pdfTeX
+
+(/usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/infwarerr.sty
+infwarerr: 2016/05/16 v1.4 Providing info/warning/error messages (HO)
+)
+(/usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
+ltxcmds: 2016/05/16 v1.23 LaTeX kernel commands for general use (HO)
+)
+\Gread@gobject=\count29
+
+(/usr/local/texlive/2016/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count30
+\scratchdimen=\dimen33
+\scratchbox=\box17
+\nofMPsegments=\count31
+\nofMParguments=\count32
+\everyMPshowfont=\toks15
+\MPscratchCnt=\count33
+\MPscratchDim=\dimen34
+\MPnumerator=\count34
+\makeMPintoPDFobject=\count35
+\everyMPtoPDFconversion=\toks16
+)))
+\Gin@req@height=\dimen35
+\Gin@req@width=\dimen36
+))
+! File `a' not found.
+\@latex@error #1#2->\errhelp {#2}\errmessage {#1}
+                                                 
+\Ginclude@graphics ...ns:
+\Gin@extensions 
+\@ehc }
+                                                  \else \@ifundefined {Gin@r...
+
+\Gin@ii ...eys {Gin}{#1}\Gin@esetsize \the \toks@ 
+                                                  \endgroup \fi 
+l.4 \includegraphics{a}
+                       
+? 
+! File `a' not found.
+\@latex@error #1#2->\errhelp {#2}\errmessage {#1}
+                                                 
+\Ginclude@graphics ...ns:
+\Gin@extensions 
+\@ehc }
+                                                  \else \@ifundefined {Gin@r...
+
+\mbox #1->\leavevmode \hbox {#1
+                               }
+\Gin@ii ...eys {Gin}{#1}\Gin@esetsize \the \toks@ 
+                                                  \endgroup \fi 
+l.6 \includegraphics[scale=2]{a}
+                                
+? 
+[1{/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] )</us
+r/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb>
+Output written on exmplgrf.pdf (1 page, 10396 bytes).
+PDF statistics:
+ 12 PDF objects out of 1000 (max. 8388607)
+ 7 compressed objects within 1 object stream
+ 0 named destinations out of 1000 (max. 500000)
+ 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+

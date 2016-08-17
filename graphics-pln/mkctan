@@ -1,0 +1,7 @@
+cd ..
+rm -rf graphics-pln.zip
+zip  graphics-pln.zip  graphics-pln/{autopict.ins,\
+exmplcol.tex,exmplpfg.tex,graphicx.tex,picture.tex,README.txt,\
+color.tex,exmplgrf.tex,exmplpic.tex,miniltx.tex,psfrag.tex}
+
+
