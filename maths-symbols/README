@@ -2,7 +2,7 @@ maths-symbols – Summary of mathematical symbols available in LaTeX
 
 
 
-symbols.tex (David Carlisle)
+maths-symbols.tex (David Carlisle) (formerly symbols.tex)
 A predecessor of the comprehensive symbols list, covering mathematical
 symbols available in standard LaTeX (including the AMS symbols, if
 available at compile time).
