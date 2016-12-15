@@ -1,6 +1,6 @@
 % \iffalse
 %% Source File: textcase.dtx
-%% Copyright 2015 David Carlisle
+%% Copyright 2015-2016 David Carlisle
 %%
 %% This file may be distributed under the terms of the LPPL.
 %% See README for details.
@@ -13,7 +13,7 @@
 %<driver> \ProvidesFile{elocalloc.drv}
 % \fi
 %         \ProvidesFile{elocalloc.dtx}
-       [2015/06/21 v0.02 local allocation for LaTeX 2015+ (DPC)]
+       [2016/12/15 v0.03 local allocation for LaTeX 2015+ (DPC)]
 %
 % \iffalse
 %<*driver>
@@ -117,7 +117,7 @@
 \def\locmuskip{\eloc@lloc{\count 13}\e@alloc@top\muskipdef\muskip}
 \def\locbox   {\eloc@lloc{\count 14}\float@count\e@alloc@chardef\box}
 \def\loctoks  {\eloc@lloc{\count 15}\e@alloc@top\toksdef\toks}
-\def\locmarks {\eloc@lloc{\count256}\e@alloc@topt\e@alloc@chardef\marks}
+\def\locmarks {\eloc@lloc{\count256}\e@alloc@top\e@alloc@chardef\marks}
 %    \end{macrocode}
 %
 %    \begin{macrocode}
