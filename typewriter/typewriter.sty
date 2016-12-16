@@ -1,0 +1,110 @@
+% typewriter.sty
+% David Carlisle 2016
+% Licence: LPPL
+% See http://tex.stackexchange.com/questions/344214/use-latex-to-simulate-old-typewriter-written-texts
+
+
+\ifx\directlua\@undefined
+\endinput\PackageError{typewriter}{LuaLaTeX required for this package}\@ehc\fi
+
+
+
+
+% luaotfload exlicitly loaded for latex formats before 2017/01/01
+\usepackage{luaotfload}
+
+% load cmuntt here not from lua (for everyone except me, it seems)
+\font\cmuntt = cmuntt at 12pt \cmuntt
+\edef\cmunttid{\fontid\cmuntt}
+
+
+\expandafter\let\expandafter\%\csname @percentchar\endcsname
+\directlua {
+ local cbl=luatexbase.callback_descriptions('define_font')
+% print('\string\n======' .. cbl[1] .. '===\string\n')
+original_fontloader=luatexbase.remove_from_callback('define_font',cbl[1])
+luatexbase.add_to_callback('define_font',
+function(name,size,i)
+  if (name=='cmtt10x') then
+% this works in my dev version but for older setups
+% make sure cmuntt.otf has been loaded before we mess
+% up the font loader.
+%  f = original_fontloader('cmuntt.otf',size)
+  f = font.getfont(\cmunttid)
+              f.name = 'cmtt10x'
+              f.type = 'virtual'
+              f.fonts = {{ name = 'cmuntt', size = size}}
+for j,v in pairs(f.characters) do
+  local gr = 0.4*math.random()
+  local gr2 = 0.4*math.random()
+                       v.commands = {
+{'lua','
+  r1 = 0.01*math.random(-10,10)
+pdf.print
+(string.format(" q \%f -\%f \%f \%f 0 0 cm ",
+math.cos(r1), math.sin(r1), math.sin(r1), math.cos(r1)
+))'},
+                           {'special','pdf: ' .. gr2 .. ' g'},
+{'push'},
+{'right', math.random(-20000,20000)},
+{'down', math.random(-20000,20000)},
+                           {'char',j},
+{'pop'},
+{'lua','pdf.print(" Q ")'},
+{'down', math.random(-20000,20000)},
+                           {'special','pdf: ' .. gr .. ' g'},
+                           {'char',j},
+                           {'special','pdf: 0 g'}
+
+                         }
+end
+return f
+else
+return original_fontloader(name,size,i)
+end
+end,
+'define font')
+}
+
+{\count0=0
+\loop
+\global\mathcode\count0=\count0
+\ifnum\count0<256
+\advance\count0 1
+\repeat
+}
+
+
+
+\AtBeginDocument{
+$\relax$
+
+\font\myfont= cmtt10x at 12pt \myfont
+\font\myfonts= cmtt10x at 9pt
+\let\selectfont\relax
+
+\textfont0=\myfont
+\scriptfont0=\myfonts 
+\scriptscriptfont0=\myfonts 
+\textfont1=\myfont
+\textfont2=\myfont
+\textfont3=\myfont
+}
+
+\def\UnicodeMathSymbol#1#2#3#4{\def#2{\char#1\relax}}
+\input{unicode-math-table}
+\def\rightarrow{->}
+\def\Rightarrow{=>}
+% must find a better tt int.
+\def\int{\mathop{\leavevmode\strut\raise.5ex\hbox to 1em{$\scriptstyle\mathchar"352$}}\nolimits}
+\setbox0\hbox{$\int$}\setbox0\hbox{}
+\def\sum{\mathop{\char"03A3\relax}}
+
+\renewcommand\sqrt[2][\relax]{%
+\ifx\relax#1\relax\else{}^{#1}\fi
+^^^^221a\overline{#2}}
+
+\def\overline#1{%
+\vbox{\m@th\ialign{##\crcr
+      \leaders\hbox{\string_}\hfil\crcr\noalign{\kern-\p@\nointerlineskip}
+      $(#1)$\crcr}}}
