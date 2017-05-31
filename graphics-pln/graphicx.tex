@@ -4,6 +4,11 @@
 
 \input miniltx
 
+% ttfamily used in draft mode to show filenames.
+\ifx\ttfamily\@undefined
+ \let\ttfamily\tt
+\fi
+
 \def\Gin@driver{dvips.def}
 \input graphicx.sty
 
