@@ -2,7 +2,7 @@
 %%%
 %%% Parts of LaTeX: Slightly changed/simplified in places.
 %%% Changes 
-%%%    Copyright 1996 David Carlisle
+%%%    Copyright 1996-2017 David Carlisle LaTeX3 Project
 %%% Original Code
 %%%    Copyright 1993-1996 LaTeX3 Project and original authors
 %%%
@@ -24,6 +24,7 @@
 %  2010/01/07 import was incomplete [KB]
 %  2010/02/03 accept *-form of \ProcessOptions [KB/DL]
 %  2016/08/17 fix catcode @ handling (again), document github address [DC]
+%  2017/06/01 assorted updates to cover updated latex drivers
 
 \edef\resetatcatcode{\catcode`\noexpand\@\the\catcode`\@\relax}
 
@@ -79,7 +80,9 @@
     {\@pr@videpackage{#1}}{\@pr@videpackage#1[]}}
 \def\@pr@videpackage#1[#2]{\wlog{#1: #2}}
 \let\ProvidesFile\ProvidesPackage
-\def\PackageInfo#1#2{\wlog{#1: #2}}
+\def\PackageInfo#1#2{{%
+   \newlinechar`\^^J\def\MessageBreak{^^J#1: }%
+   \wlog{#1: #2}}}
 
 \let\DeclareOption\@gobbletwo
 \def\ProcessOptions{\@ifstar\relax\relax}
@@ -302,10 +305,17 @@
 
 \let\ExecuteOptions\@gobble
 
-\def\PackageError#1#2#3{%
-  \errhelp{#3}\errmessage{#1: #2}}
-\def\@latex@error#1#2{%
-  \errhelp{#2}\errmessage{#1}}
+\def\on@line{ on input line \the\inputlineno}
+\ifx\@ehc\@undefined\def\@ehc{}\fi
+
+\def\PackageError#1#2#3{{%
+  \newlinechar`\^^J\def\MessageBreak{^^J\space\space#1: }%
+  \errhelp{#3}\errmessage{#1: #2}}}
+\def\@latex@error#1#2{\bgroup%
+  \newlinechar`\^^J\def\MessageBreak{^^J\space\space#1: }%
+  \edef\reserved@a{\egroup\errhelp{#2}\errmessage{#1}}%
+  \reserved@a}
+
 
 \bgroup\uccode`\!`\%\uppercase{\egroup
 \def\@percentchar{!}}
