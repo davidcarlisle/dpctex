@@ -14,7 +14,7 @@
 \usepackage{luaotfload}
 
 % load cmuntt here not from lua (for everyone except me, it seems)
-\font\cmuntt = cmuntt at 12pt \cmuntt
+\font\cmuntt = file:cmuntt.otf at 12pt \cmuntt
 \edef\cmunttid{\fontid\cmuntt}
 
 
@@ -25,7 +25,7 @@
 original_fontloader=luatexbase.remove_from_callback('define_font',cbl[1])
 luatexbase.add_to_callback('define_font',
 function(name,size,i)
-  if (name=='cmtt10x') then
+  if (name=='cmtt10x' or name=='cmtt10bx') then
 % this works in my dev version but for older setups
 % make sure cmuntt.otf has been loaded before we mess
 % up the font loader.
@@ -33,10 +33,42 @@ function(name,size,i)
   f = font.getfont(\cmunttid)
               f.name = 'cmtt10x'
               f.type = 'virtual'
-              f.fonts = {{ name = 'cmuntt', size = size}}
+              f.fonts = {{ name = 'file:cmuntt', size = size}}
 for j,v in pairs(f.characters) do
-  local gr = 0.4*math.random()
-  local gr2 = 0.4*math.random()
+  local gr = 0.1*math.random()
+  local gr2 = 0.3*math.random()
+if name == 'cmtt10bx' then
+                       v.commands = {
+{'lua','
+  r1 = 0.01*math.random(-10,10)
+pdf.print
+(string.format(" q \%f \%f \%f \%f 0 0 cm ",
+math.cos(r1), - math.sin(r1), math.sin(r1), math.cos(r1)
+))'},
+                           {'special','pdf: ' .. string.format("\%f",gr2) .. ' g'},
+{'push'},
+{'right', math.random(-20000,20000)},
+{'down', math.random(-20000,20000)},
+                           {'char',j},
+{'pop'},
+{'push'},
+{'right', math.random(-20000,20000)},
+{'down', math.random(-20000,20000)},
+                           {'char',j},
+{'pop'},
+{'push'},
+{'right', math.random(-20000,20000)},
+{'down', math.random(-20000,20000)},
+                           {'char',j},
+{'pop'},
+{'lua','pdf.print(" Q ")'},
+{'down', math.random(-20000,20000)},
+                           {'special','pdf: ' .. string.format("\%f",gr) .. ' g'},
+                           {'char',j},
+                           {'special','pdf: 0 g'}
+
+                         }
+else
                        v.commands = {
 {'lua','
   r1 = 0.01*math.random(-10,10)
@@ -58,6 +90,7 @@ math.cos(r1), - math.sin(r1), math.sin(r1), math.cos(r1)
 
                          }
 end
+end
 return f
 else
 return original_fontloader(name,size,i)
@@ -74,21 +107,22 @@ end,
 \repeat
 }
 
-
+\def\boldmath{%
+\textfont0=\mybfont \scriptfont0=\mybfonts \scriptscriptfont0=\mybfonts
+\textfont1=\mybfont \textfont2=\mybfont \textfont3=\mybfont
+}
 
 \AtBeginDocument{
 $\relax$
 
 \font\myfont= cmtt10x at 12pt \myfont
 \font\myfonts= cmtt10x at 9pt
+\font\mybfont= cmtt10bx at 12pt
+\font\mybfonts= cmtt10bx at 9pt
 \let\selectfont\relax
 
-\textfont0=\myfont
-\scriptfont0=\myfonts 
-\scriptscriptfont0=\myfonts 
-\textfont1=\myfont
-\textfont2=\myfont
-\textfont3=\myfont
+\textfont0=\myfont \scriptfont0=\myfonts \scriptscriptfont0=\myfonts
+\textfont1=\myfont \textfont2=\myfont \textfont3=\myfont
 }
 
 
@@ -2681,3 +2715,25 @@ $\relax$
 
 \def\@arrayrule{\@addtopreamble{\hskip -.5\arrayrulewidth
    |\hskip -.5\arrayrulewidth}}
+
+\let\oldhrule\hrule
+\def\hrule{\directlua{
+local h,w,d,hh,ww,dd
+h=token.scan_keyword("height")
+if(h) then
+hh=token.scan_dimen()
+end
+d=token.scan_keyword("depth")
+if(d) then
+dd=token.scan_dimen()
+end
+w=token.scan_keyword("width")
+if(w) then
+ww=token.scan_dimen()
+end
+print('\string\n=====')
+print('h' .. tostring(h) .. (hh or '*'))
+print('d' .. tostring(d) .. (dd or '*'))
+print('w' .. tostring(w) .. (ww or '*'))
+print('=====\string\n')
+}}
