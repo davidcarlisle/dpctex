@@ -1,0 +1,3 @@
+cd ..
+rm -rf xii-lat.zip
+zip  xii-lat.zip  xii-lat/README.txt  xii-lat/xii-lat.tex
