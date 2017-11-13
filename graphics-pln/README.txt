@@ -18,7 +18,7 @@ David Carlisle 1995/01/29
 	       2016/08/17
 	       2017/06/01
 
-Copyright 1995 1996 2016 2017David Carlisle
+Copyright 1995 1996 2016 2017 David Carlisle
 
    All the files in this directory may be redistributed and/or modified
    under the terms of the LaTeX Project Public License distributed from
