@@ -1,0 +1,3 @@
+cd ..
+rm -rf xii.zip
+zip  xii.zip  xii/README.txt  xii/xii.tex
