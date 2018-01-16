@@ -1,0 +1,360 @@
+%%
+%% This is file `autopict.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% ltpictur.dtx  (with options: `def')
+%% 
+%% This is a generated file.
+%% 
+%% Copyright 1993 1994 1995 1996
+%% The LaTeX3 Project and any individual authors listed elsewhere
+%% in this file.
+%% 
+%%  Originally generated from the LaTeX sources by docstrip, but
+%%  the relevant guards are no longer in the sources as the autoload
+%%  variant of LaTeX is no longer supported (or needed).
+
+%%% This file may be distributed under the terms of the LPPL, see
+%%% README.txt for details.
+
+%%% From File: ltpictur.dtx
+\ProvidesFile{autopict.sty}
+                [2001/08/27 v1.1k Picture mode autoload file]
+\long\gdef\picture#1{\pictur@#1}
+\gdef\pictur@(#1){%
+  \@ifnextchar({\@picture(#1)}{\@picture(#1)(0,0)}}
+\gdef\@picture(#1,#2)(#3,#4){%
+  \@picht#2\unitlength
+  \setbox\@picbox\hb@xt@#1\unitlength\bgroup
+    \hskip -#3\unitlength
+    \lower #4\unitlength\hbox\bgroup
+      \ignorespaces}
+\gdef\endpicture{%
+  \egroup\hss\egroup
+    \ht\@picbox\@picht\dp\@picbox\z@
+    \mbox{\box\@picbox}}
+\long\gdef\put(#1,#2)#3{%
+  \@killglue\raise#2\unitlength
+  \hb@xt@\z@{\kern#1\unitlength #3\hss}%
+  \ignorespaces}
+\gdef\multiput(#1,#2)#3{%
+  \@xdim #1\unitlength
+  \@ydim #2\unitlength
+   \@multiput(}
+\long\gdef\@multiput(#1,#2)#3#4{%
+  \@killglue\@multicnt #3\relax
+  \@whilenum \@multicnt >\z@\do
+    {\raise\@ydim\hb@xt@\z@{\kern\@xdim #4\hss}%
+     \advance\@multicnt\m@ne
+     \advance\@xdim#1\unitlength\advance\@ydim#2\unitlength}%
+  \ignorespaces}
+\gdef\@killglue{\unskip\@whiledim \lastskip >\z@\do{\unskip}}
+\gdef\thinlines{\let\@linefnt\tenln \let\@circlefnt\tencirc
+  \@wholewidth\fontdimen8\tenln \@halfwidth .5\@wholewidth}
+\gdef\thicklines{\let\@linefnt\tenlnw \let\@circlefnt\tencircw
+  \@wholewidth\fontdimen8\tenlnw \@halfwidth .5\@wholewidth}
+\gdef\linethickness#1{\@wholewidth #1\relax \@halfwidth .5\@wholewidth}
+\gdef\shortstack{\@ifnextchar[\@shortstack{\@shortstack[c]}}
+\gdef\@shortstack[#1]{%
+  \leavevmode
+  \vbox\bgroup
+    \baselineskip-\p@\lineskip 3\p@
+    \let\mb@l\hss\let\mb@r\hss
+    \expandafter\let\csname mb@#1\endcsname\relax
+    \let\\\@stackcr
+    \@ishortstack}
+\gdef\@ishortstack#1{\ialign{\mb@l {##}\unskip\mb@r\cr #1\crcr}\egroup}
+\gdef\@stackcr{\@ifstar\@ixstackcr\@ixstackcr}
+\gdef\@ixstackcr{\@ifnextchar[\@istackcr{\cr\ignorespaces}}
+\gdef\@istackcr[#1]{\cr\noalign{\vskip #1}\ignorespaces}
+\newif\if@negarg
+\gdef\line(#1,#2)#3{\@xarg #1\relax \@yarg #2\relax
+  \@linelen #3\unitlength
+  \ifdim\@linelen<\z@\@badlinearg\else
+    \ifnum\@xarg =\z@ \@vline
+      \else \ifnum\@yarg =\z@ \@hline \else \@sline\fi
+    \fi
+  \fi}
+\gdef\@sline{%
+  \ifnum\@xarg<\z@ \@negargtrue \@xarg -\@xarg \@yyarg -\@yarg
+  \else \@negargfalse \@yyarg \@yarg \fi
+\ifnum \@yyarg >\z@ \@tempcnta\@yyarg \else \@tempcnta -\@yyarg \fi
+\ifnum\@tempcnta>6 \@badlinearg\@tempcnta\z@ \fi
+\ifnum\@xarg>6 \@badlinearg\@xarg \@ne \fi
+\setbox\@linechar\hbox{\@linefnt\@getlinechar(\@xarg,\@yyarg)}%
+\ifdim\wd\@linechar=\z@
+   \setbox\@linechar\hbox{.}%
+   \@badlinearg
+\fi
+\ifnum \@yarg >\z@ \let\@upordown\raise \@clnht\z@
+   \else\let\@upordown\lower \@clnht \ht\@linechar\fi
+\@clnwd \wd\@linechar
+\if@negarg
+  \hskip -\wd\@linechar \def\reserved@a{\hskip -2\wd\@linechar}%
+\else
+     \let\reserved@a\relax
+\fi
+\@whiledim \@clnwd <\@linelen \do
+  {\@upordown\@clnht\copy\@linechar
+   \reserved@a
+   \advance\@clnht \ht\@linechar
+   \advance\@clnwd \wd\@linechar}%
+\advance\@clnht -\ht\@linechar
+\advance\@clnwd -\wd\@linechar
+\@tempdima\@linelen\advance\@tempdima -\@clnwd
+\@tempdimb\@tempdima\advance\@tempdimb -\wd\@linechar
+\if@negarg \hskip -\@tempdimb \else \hskip \@tempdimb \fi
+\multiply\@tempdima \@m
+\@tempcnta \@tempdima
+\@tempdima \wd\@linechar \divide\@tempcnta \@tempdima
+\@tempdima \ht\@linechar \multiply\@tempdima \@tempcnta
+\divide\@tempdima \@m
+\advance\@clnht \@tempdima
+\ifdim \@linelen <\wd\@linechar
+   \hskip \wd\@linechar
+   \ifdim \@linelen = \z@
+   \else
+     \@picture@warn
+   \fi
+   \else\@upordown\@clnht\copy\@linechar\fi}
+\gdef\@hline{\ifnum \@xarg <\z@ \hskip -\@linelen \fi
+\vrule \@height \@halfwidth \@depth \@halfwidth \@width \@linelen
+\ifnum \@xarg <\z@ \hskip -\@linelen \fi}
+\gdef\@getlinechar(#1,#2){\@tempcnta#1\relax\multiply\@tempcnta 8%
+  \advance\@tempcnta -9\ifnum #2>\z@ \advance\@tempcnta #2\relax\else
+  \advance\@tempcnta -#2\relax\advance\@tempcnta 64 \fi
+  \char\@tempcnta}
+\gdef\vector(#1,#2)#3{\@xarg #1\relax \@yarg #2\relax
+  \@tempcnta \ifnum\@xarg<\z@ -\@xarg\else\@xarg\fi
+  \ifnum\@tempcnta<5\relax
+  \@linelen #3\unitlength
+  \ifdim\@linelen<\z@\@badlinearg\else
+    \ifnum\@xarg =\z@ \@vvector
+      \else \ifnum\@yarg =\z@ \@hvector \else \@svector\fi
+    \fi
+  \fi
+  \else\@badlinearg\fi}
+\gdef\@hvector{\@hline\hb@xt@\z@{\@linefnt
+ \ifnum \@xarg <\z@ \@getlarrow(1,0)\hss\else
+    \hss\@getrarrow(1,0)\fi}}
+\gdef\@vvector{\ifnum \@yarg <\z@ \@downvector \else \@upvector \fi}
+\gdef\@svector{\@sline
+  \@tempcnta\@yarg \ifnum\@tempcnta <\z@ \@tempcnta -\@tempcnta\fi
+  \ifnum\@tempcnta <5%
+    \hskip -\wd\@linechar
+    \@upordown\@clnht \hbox{\@linefnt  \if@negarg
+    \@getlarrow(\@xarg,\@yyarg)\else \@getrarrow(\@xarg,\@yyarg)\fi}%
+  \else\@badlinearg\fi}
+\gdef\@getlarrow(#1,#2){\ifnum #2=\z@ \@tempcnta 27 % '33
+  \else
+  \@tempcnta #1\relax\multiply\@tempcnta \sixt@@n
+  \advance\@tempcnta -9 \@tempcntb #2\relax\multiply\@tempcntb \tw@
+  \ifnum \@tempcntb >\z@ \advance\@tempcnta \@tempcntb
+  \else\advance\@tempcnta -\@tempcntb\advance\@tempcnta 64
+  \fi\fi\char\@tempcnta}
+\gdef\@getrarrow(#1,#2){\@tempcntb #2\relax
+\ifnum\@tempcntb <\z@ \@tempcntb -\@tempcntb\relax\fi
+\ifcase \@tempcntb\relax \@tempcnta 45  % '55
+\or
+\ifnum #1<\thr@@ \@tempcnta #1\relax\multiply\@tempcnta
+24\advance\@tempcnta -6 \else \ifnum #1=\thr@@ \@tempcnta 49
+\else\@tempcnta 58 \fi\fi\or
+\ifnum #1<\thr@@ \@tempcnta=#1\relax\multiply\@tempcnta
+24\advance\@tempcnta -\thr@@ \else \@tempcnta 51 \fi\or
+\@tempcnta #1\relax\multiply\@tempcnta
+\sixt@@n \advance\@tempcnta -\tw@ \else
+\@tempcnta #1\relax\multiply\@tempcnta
+\sixt@@n \advance\@tempcnta 7 \fi\ifnum #2<\z@ \advance\@tempcnta 64 \fi
+\char\@tempcnta}
+\gdef\@vline{\ifnum \@yarg <\z@ \@downline \else \@upline\fi}
+\gdef\@upline{%
+  \hb@xt@\z@{\hskip -\@halfwidth \vrule \@width \@wholewidth
+   \@height \@linelen \@depth \z@\hss}}
+\gdef\@downline{%
+  \hb@xt@\z@{\hskip -\@halfwidth \vrule \@width \@wholewidth
+   \@height \z@ \@depth \@linelen \hss}}
+\gdef\@upvector{\@upline\setbox\@tempboxa\hbox{\@linefnt\char 54}%  % '66
+  \raise \@linelen \hb@xt@\z@{\lower \ht\@tempboxa\box\@tempboxa\hss}}
+\gdef\@downvector{\@downline\lower \@linelen
+      \hb@xt@\z@{\@linefnt\char 63  % '77
+      \hss}}
+\gdef\dashbox#1(#2,#3){\leavevmode\hb@xt@\z@{\baselineskip \z@skip
+\lineskip \z@skip
+\@dashdim #2\unitlength
+\@dashcnt \@dashdim \advance\@dashcnt 200
+\@dashdim #1\unitlength\divide\@dashcnt \@dashdim
+\ifodd\@dashcnt\@dashdim \z@
+\advance\@dashcnt \@ne \divide\@dashcnt \tw@
+\else \divide\@dashdim \tw@ \divide\@dashcnt \tw@
+\advance\@dashcnt \m@ne
+\setbox\@dashbox \hbox{\vrule \@height \@halfwidth \@depth \@halfwidth
+\@width \@dashdim}\put(0,0){\copy\@dashbox}%
+\put(0,#3){\copy\@dashbox}%
+\put(#2,0){\hskip-\@dashdim\copy\@dashbox}%
+\put(#2,#3){\hskip-\@dashdim\box\@dashbox}%
+\multiply\@dashdim \thr@@
+\fi
+\setbox\@dashbox \hbox{\vrule \@height \@halfwidth \@depth \@halfwidth
+\@width #1\unitlength\hskip #1\unitlength}\@tempcnta\z@
+\put(0,0){\hskip\@dashdim \@whilenum \@tempcnta <\@dashcnt
+\do{\copy\@dashbox\advance\@tempcnta \@ne }}\@tempcnta\z@
+\put(0,#3){\hskip\@dashdim \@whilenum \@tempcnta <\@dashcnt
+\do{\copy\@dashbox\advance\@tempcnta \@ne }}%
+\@dashdim #3\unitlength
+\@dashcnt \@dashdim \advance\@dashcnt 200
+\@dashdim #1\unitlength\divide\@dashcnt \@dashdim
+\ifodd\@dashcnt \@dashdim \z@
+\advance\@dashcnt \@ne \divide\@dashcnt \tw@
+\else
+\divide\@dashdim \tw@ \divide\@dashcnt \tw@
+\advance\@dashcnt \m@ne
+\setbox\@dashbox\hbox{\hskip -\@halfwidth
+\vrule \@width \@wholewidth
+\@height \@dashdim}\put(0,0){\copy\@dashbox}%
+\put(#2,0){\copy\@dashbox}%
+\put(0,#3){\lower\@dashdim\copy\@dashbox}%
+\put(#2,#3){\lower\@dashdim\copy\@dashbox}%
+\multiply\@dashdim \thr@@
+\fi
+\setbox\@dashbox\hbox{\vrule \@width \@wholewidth
+\@height #1\unitlength}\@tempcnta\z@
+\put(0,0){\hskip -\@halfwidth \vbox{\@whilenum \@tempcnta <\@dashcnt
+\do{\vskip #1\unitlength\copy\@dashbox\advance\@tempcnta \@ne }%
+\vskip\@dashdim}}\@tempcnta\z@
+\put(#2,0){\hskip -\@halfwidth \vbox{\@whilenum \@tempcnta<\@dashcnt
+\do{\vskip #1\unitlength\copy\@dashbox\advance\@tempcnta \@ne }%
+\vskip\@dashdim}}}\@makepicbox(#2,#3)}
+\newif\if@ovt
+\newif\if@ovb
+\newif\if@ovl
+\newif\if@ovr
+\gdef\@getcirc#1{\@tempdima #1\relax \advance\@tempdima 2\p@
+  \@tempcnta\@tempdima
+  \@tempdima 4\p@ \divide\@tempcnta\@tempdima
+  \ifnum \@tempcnta >10\relax
+      \@picture@warn
+      \@tempcnta 10\relax
+  \fi
+  \ifnum \@tempcnta >\z@ \advance\@tempcnta\m@ne
+    \else \@picture@warn \fi
+  \multiply\@tempcnta 4\relax
+  \setbox \@tempboxa \hbox{\@circlefnt
+  \char \@tempcnta}\@tempdima \wd \@tempboxa}
+\def\@picture@warn{\@latex@warning{%
+     \string\oval, \string\circle, or \string\line\space
+     size unavailable}}
+\gdef\@put#1#2#3{\raise #2\hb@xt@\z@{\hskip #1#3\hss}}
+\gdef\oval(#1,#2){\@ifnextchar[{\@oval(#1,#2)}{\@oval(#1,#2)[]}}
+\gdef\@oval(#1,#2)[#3]{\begingroup\boxmaxdepth \maxdimen
+  \@ovttrue \@ovbtrue \@ovltrue \@ovrtrue
+  \@tfor\reserved@a :=#3\do{\csname @ov\reserved@a false\endcsname}%
+  \@ovxx
+  #1\unitlength \@ovyy #2\unitlength
+  \@tempdimb \ifdim \@ovyy >\@ovxx \@ovxx\else \@ovyy \fi
+  \advance \@tempdimb -2\p@
+  \@getcirc \@tempdimb
+  \@ovro \ht\@tempboxa \@ovri \dp\@tempboxa
+  \@ovdx\@ovxx \advance\@ovdx -\@tempdima \divide\@ovdx \tw@
+  \@ovdy\@ovyy \advance\@ovdy -\@tempdima \divide\@ovdy \tw@
+  \@circlefnt \setbox\@tempboxa
+  \hbox{\if@ovr \@ovvert32\kern -\@tempdima \fi
+  \if@ovl \kern \@ovxx \@ovvert01\kern -\@tempdima \kern -\@ovxx \fi
+  \if@ovt \@ovhorz \kern -\@ovxx \fi
+  \if@ovb \raise \@ovyy \@ovhorz \fi}\advance\@ovdx\@ovro
+  \advance\@ovdy\@ovro \ht\@tempboxa\z@ \dp\@tempboxa\z@
+  \@put{-\@ovdx}{-\@ovdy}{\box\@tempboxa}%
+  \endgroup}
+\gdef\@ovvert#1#2{\vbox to\@ovyy{%
+    \if@ovb \@tempcntb \@tempcnta \advance \@tempcntb #1\relax
+      \kern -\@ovro \hbox{\char \@tempcntb}\nointerlineskip
+    \else \kern \@ovri \kern \@ovdy \fi
+    \leaders\vrule \@width \@wholewidth\vfil \nointerlineskip
+    \if@ovt \@tempcntb \@tempcnta \advance \@tempcntb #2\relax
+      \hbox{\char \@tempcntb}%
+    \else \kern \@ovdy \kern \@ovro \fi}}
+\gdef\@ovhorz{\hb@xt@\@ovxx{\kern \@ovro
+    \if@ovr \else \kern \@ovdx \fi
+    \leaders \hrule \@height \@wholewidth \hfil
+    \if@ovl \else \kern \@ovdx \fi
+    \kern \@ovri}}
+\gdef\circle{\@inmatherr\circle\@ifstar\@dot\@circle}
+\gdef\@circle#1{%
+  \begingroup \boxmaxdepth \maxdimen \@tempdimb #1\unitlength
+   \ifdim \@tempdimb >15.5\p@ \@getcirc\@tempdimb
+      \@ovro\ht\@tempboxa
+     \setbox\@tempboxa\hbox{\@circlefnt
+      \advance\@tempcnta\tw@ \char \@tempcnta
+      \advance\@tempcnta\m@ne \char \@tempcnta \kern -2\@tempdima
+      \advance\@tempcnta\tw@
+      \raise \@tempdima \hbox{\char\@tempcnta}\raise \@tempdima
+        \box\@tempboxa}\ht\@tempboxa\z@ \dp\@tempboxa\z@
+      \@put{-\@ovro}{-\@ovro}{\box\@tempboxa}%
+   \else  \@circ\@tempdimb{96}\fi\endgroup}
+\gdef\@dot#1{\@tempdimb #1\unitlength \@circ\@tempdimb{112}}
+\gdef\@circ#1#2{\@tempdima #1\relax \advance\@tempdima .5\p@
+   \@tempcnta\@tempdima \@tempdima \p@
+   \divide\@tempcnta\@tempdima
+   \ifnum\@tempcnta >15\relax \@tempcnta 15\relax \fi
+   \ifnum \@tempcnta >\z@ \advance\@tempcnta\m@ne\fi
+   \advance\@tempcnta #2\relax
+   \@circlefnt \char\@tempcnta}
+\ifx\qbeziermax\@undefined
+\gdef\qbeziermax{500}
+\fi
+\newcommand\qbezier[2][0]{\bezier{#1}#2}
+\gdef\bezier#1)#2(#3)#4({\@bezier#1)(#3)(}
+\gdef\@bezier#1(#2,#3)(#4,#5)(#6,#7){%
+  \ifnum #1=\z@
+      \@ovxx #4\unitlength
+        \advance\@ovxx -#2\unitlength
+        \ifdim \@ovxx<\z@ \@ovxx -\@ovxx \fi
+      \@ovdx #6\unitlength
+        \advance\@ovdx -#4\unitlength
+        \ifdim \@ovdx<\z@ \@ovdx -\@ovdx \fi
+        \ifdim \@ovxx<\@ovdx \@ovxx \@ovdx \fi
+      \@ovyy #5\unitlength
+        \advance\@ovyy -#3\unitlength
+        \ifdim \@ovyy<\z@ \@ovyy -\@ovyy \fi
+      \@ovdy #7\unitlength
+        \advance\@ovdy -#5\unitlength
+        \ifdim \@ovdy<\z@  \@ovdy -\@ovdy \fi
+        \ifdim \@ovyy<\@ovdy \@ovyy  \@ovdy \fi
+      \@multicnt
+         \ifdim \@ovxx>\@ovyy \@ovxx \else \@ovyy \fi
+      \@ovxx .5\@halfwidth \divide\@multicnt\@ovxx
+      \ifnum \qbeziermax<\@multicnt \@multicnt\qbeziermax\relax \fi
+  \else \@multicnt#1\relax \fi
+  \@tempcnta\@multicnt \advance\@tempcnta\@ne
+  \@ovdx #4\unitlength \advance\@ovdx -#2\unitlength
+      \multiply\@ovdx \tw@
+  \@ovxx #6\unitlength \advance\@ovxx -#2\unitlength
+      \advance\@ovxx -\@ovdx \divide\@ovxx\@multicnt
+  \@ovdy #5\unitlength \advance\@ovdy -#3\unitlength
+       \multiply\@ovdy \tw@
+  \@ovyy #7\unitlength \advance\@ovyy -#3\unitlength
+      \advance\@ovyy -\@ovdy \divide\@ovyy\@multicnt
+  \setbox\@tempboxa\hbox{%
+            \hskip -\@halfwidth
+            \vrule \@height\@halfwidth
+                   \@depth \@halfwidth
+                   \@width \@wholewidth}%
+   \put(#2,#3){%
+     \count@\z@
+     \@whilenum{\count@<\@tempcnta}\do
+        {\@xdim\count@\@ovxx
+           \advance\@xdim\@ovdx
+           \divide\@xdim\@multicnt
+           \multiply\@xdim\count@
+         \@ydim\count@\@ovyy
+            \advance\@ydim\@ovdy
+            \divide\@ydim\@multicnt
+            \multiply\@ydim\count@
+         \raise \@ydim
+            \hb@xt@\z@{\kern\@xdim
+                        \unhcopy\@tempboxa\hss}%
+         \advance\count@\@ne}}}
+\endinput
+%%
+%% End of file `autopict.sty'.

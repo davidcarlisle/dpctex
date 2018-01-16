@@ -17,8 +17,9 @@ David Carlisle 1995/01/29
                1996/11/13
 	       2016/08/17
 	       2017/06/01
+	       2018/01/16
 
-Copyright 1995 1996 2016 2017 David Carlisle
+Copyright 1995 1996 2016 2017 2018 David Carlisle
 
    All the files in this directory may be redistributed and/or modified
    under the terms of the LaTeX Project Public License distributed from
@@ -72,14 +73,14 @@ picture.tex
       from a LaTeX document, or if it is produced automatically from
       a drawing tool such as xfig or texcad.
 
-autopict.ins
-      picture.tex requires the use of the Standard LaTeX file
-      autopict.sty. To generate this, either run the autoload.ins
-      install file in the main LaTeX distribution, which will make
-      autopict.sty along with some other files (not needed here) or
-      alternatively just obtain obtain ltpictur.dtx and docstrip.tex
-      from the LaTeX distribution, and TeX the file autopict.ins that
-      is included in this distribution.
+autopict.sty
+      This is a frozen copy of a file that used to be distributed with
+      LaTeX but is no longer needed in that context, it is basocally
+      the source of LaTeX Picture mode from LaTeX in 2014. The
+      original use for this package was to build a latex format in
+      which some environments such as picture and tabbing were not
+      defined by default, to save space if working with TeX on a
+      machine with 640K memory.
 
 
 graphicx.tex
