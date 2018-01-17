@@ -75,7 +75,7 @@ picture.tex
 
 autopict.sty
       This is a frozen copy of a file that used to be distributed with
-      LaTeX but is no longer needed in that context, it is basocally
+      LaTeX but is no longer needed in that context, it is basically
       the source of LaTeX Picture mode from LaTeX in 2014. The
       original use for this package was to build a latex format in
       which some environments such as picture and tabbing were not
