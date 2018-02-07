@@ -1,11 +1,14 @@
 % typewriter.sty
-% David Carlisle 2016
+% David Carlisle 2016-2018
 % Licence: LPPL
 % See http://tex.stackexchange.com/questions/344214/use-latex-to-simulate-old-typewriter-written-texts
 
 
+\ProvidesPackage{typewriter}[2018-02-07 v1.0 typewriter package]
+
 \ifx\directlua\@undefined
 \endinput\PackageError{typewriter}{LuaLaTeX required for this package}\@ehc\fi
+
 
 
 
@@ -112,14 +115,19 @@ end,
 \textfont1=\mybfont \textfont2=\mybfont \textfont3=\mybfont
 }
 
-\AtBeginDocument{
-$\relax$
+\AtBeginDocument{%
+\sbox0{$\relax$}%
 
 \font\myfont= cmtt10x at 12pt \myfont
 \font\myfonts= cmtt10x at 9pt
 \font\mybfont= cmtt10bx at 12pt
 \font\mybfonts= cmtt10bx at 9pt
+\let\bfseries\mybfont
 \let\selectfont\relax
+\let\large\relax
+\let\LARGE\relax
+\let\small\relax
+\let\footnotesize\relax
 
 \textfont0=\myfont \scriptfont0=\myfonts \scriptscriptfont0=\myfonts
 \textfont1=\myfont \textfont2=\myfont \textfont3=\myfont
@@ -2731,9 +2739,10 @@ w=token.scan_keyword("width")
 if(w) then
 ww=token.scan_dimen()
 end
-print('\string\n=====')
-print('h' .. tostring(h) .. (hh or '*'))
-print('d' .. tostring(d) .. (dd or '*'))
-print('w' .. tostring(w) .. (ww or '*'))
-print('=====\string\n')
+%print('\string\n=====')
+%print('h' .. tostring(h) .. (hh or '*'))
+%print('d' .. tostring(d) .. (dd or '*'))
+%print('w' .. tostring(w) .. (ww or '*'))
+%print('=====\string\n')
+tex.sprint('\string\\par\string\\noindent\string\\leaders\string\\hbox{\string\\string_}\string\\hfill\string\\space')%
 }}
