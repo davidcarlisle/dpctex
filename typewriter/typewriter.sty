@@ -4,7 +4,7 @@
 % See http://tex.stackexchange.com/questions/344214/use-latex-to-simulate-old-typewriter-written-texts
 
 
-\ProvidesPackage{typewriter}[2018-02-07 v1.0 typewriter package]
+\ProvidesPackage{typewriter}[2018-02-10 v1.1 typewriter package]
 
 \ifx\directlua\@undefined
 \endinput\PackageError{typewriter}{LuaLaTeX required for this package}\@ehc\fi
@@ -2726,7 +2726,7 @@ end,
 
 \let\oldhrule\hrule
 \def\hrule{\directlua{
-local h,w,d,hh,ww,dd
+local h,w,d,hh,ww,dd,lw
 h=token.scan_keyword("height")
 if(h) then
 hh=token.scan_dimen()
@@ -2739,10 +2739,51 @@ w=token.scan_keyword("width")
 if(w) then
 ww=token.scan_dimen()
 end
+if(not(h)) then
+h=token.scan_keyword("height")
+if(h) then
+hh=token.scan_dimen()
+end
+end
+if(not(d)) then
+d=token.scan_keyword("depth")
+if(d) then
+dd=token.scan_dimen()
+end
+end
+if(not(w)) then
+w=token.scan_keyword("width")
+if(w) then
+ww=token.scan_dimen()
+end
+end
+if(not(h)) then
+h=token.scan_keyword("height")
+if(h) then
+hh=token.scan_dimen()
+end
+end
+if(not(d)) then
+d=token.scan_keyword("depth")
+if(d) then
+dd=token.scan_dimen()
+end
+end
+if(not(w)) then
+w=token.scan_keyword("width")
+if(w) then
+ww=token.scan_dimen()
+end
+end
 %print('\string\n=====')
 %print('h' .. tostring(h) .. (hh or '*'))
 %print('d' .. tostring(d) .. (dd or '*'))
 %print('w' .. tostring(w) .. (ww or '*'))
 %print('=====\string\n')
-tex.sprint('\string\\par\string\\noindent\string\\leaders\string\\hbox{\string\\string_}\string\\hfill\string\\space')%
+if(ww) then
+lw="\string\\hskip " .. ww .. "sp\string\\hbox{}"
+else
+lw="\string\\hfill\string\\space"
+end
+tex.sprint('\string\\par\string\\noindent\string\\leaders\string\\hbox{\string\\string_}' .. lw)%
 }}
