@@ -9,17 +9,17 @@
 \ifx\directlua\@undefined
 \endinput\PackageError{typewriter}{LuaLaTeX required for this package}\@ehc\fi
 
-\def\ttgreyone{0.6}
-\def\ttgreytwo{0.3}
-\def\ttrotatebold{0.012}
-\def\ttdownbold{20000}
-\def\ttrightbold{35000}
-\def\ttdownshifttwo{20000}
+\providecommand\ttgreyone{0.6}
+\providecommand\ttgreytwo{0.3}
+\providecommand\ttrotatebold{0.012}
+\providecommand\ttdownbold{20000}
+\providecommand\ttrightbold{35000}
+\providecommand\ttdownshifttwo{20000}
 
 
-\def\ttrotatenormal{0.012}
-\def\ttrightnormal{20000}
-\def\ttdownnormal{20000}
+\providecommand\ttrotatenormal{0.012}
+\providecommand\ttrightnormal{20000}
+\providecommand\ttdownnormal{20000}
 
 % luaotfload exlicitly loaded for latex formats before 2017/01/01
 \usepackage{luaotfload}

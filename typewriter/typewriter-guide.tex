@@ -5,7 +5,7 @@
 \begin{document}
 \title{The Typewriter Package for LaTeX}
 \author{David Carlisle \thanks{https://github.com/davidcarlisle/dpctex/}}
-\date{2018-02-07}
+\date{2018-02-10}
 
 \maketitle
 
@@ -19,17 +19,39 @@ http://tex.stackexchange.com/questions/344214/use-latex-to-simulate-old-typewrit
 
 \hrule
 
-Currently there are no options to the package, it just does what it does,
-Possibly later versions might document how to modify the amount of random distortion that is applied.
+Currently there are no options to the package, it just does what it
+does, However there are several parameters that control the offsets
+and grey levels used to generate the varaiantion. Any of the following
+commands may be defined before loading the package, to change the defaults shown below.
 
+\begin{verbatim}
+\providecommand\ttgreyone{0.6}
+\providecommand\ttgreytwo{0.3}
+\providecommand\ttrotatebold{0.012}
+\providecommand\ttdownbold{20000}
+\providecommand\ttrightbold{35000}
+\providecommand\ttdownshifttwo{20000}
+
+\providecommand\ttrotatenormal{0.012}
+\providecommand\ttrightnormal{20000}
+\providecommand\ttdownnormal{20000}
+\end{verbatim}
+
+The grey levells should be between 0 and 1 and control the maximim
+amount grey level.
+
+The rotate values can be any angle, but setting values more than .05 
+makes the text more or less unreadable.
+
+The right and down offsets (which are in the font design units) control the
+maximum horizontal and vertical offsets of the overprinted characters
 
 There is random variability in each letter as you can see by repeating
 a letter repeatededly:
 
 OOOOOOOOOOOOONNNNNNNNNNNNNNEEEEEEEEEE
 
-TTTTTTTTTTTTooooooooooooooooowwwwwwwwwwwwwwwwwwww
-
+TTTTTTTTTTTTwwwwwwwwwwwwwwwwwwwwooooooooooooooooo
 
 
 
