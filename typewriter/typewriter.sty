@@ -11,13 +11,13 @@
 
 \providecommand\ttgreyone{0.6}
 \providecommand\ttgreytwo{0.3}
-\providecommand\ttrotatebold{0.012}
+\providecommand\ttrotatebold{12}
 \providecommand\ttdownbold{20000}
 \providecommand\ttrightbold{35000}
 \providecommand\ttdownshifttwo{20000}
 
 
-\providecommand\ttrotatenormal{0.012}
+\providecommand\ttrotatenormal{8}
 \providecommand\ttrightnormal{20000}
 \providecommand\ttdownnormal{20000}
 
@@ -51,7 +51,7 @@ for j,v in pairs(f.characters) do
 if name == 'cmtt10bx' then
                        v.commands = {
 {'lua','
-  r1 = \ttrotatebold*math.random(-10,10)
+  r1 = math.rad(0.1*\ttrotatebold*math.random(-10,10))
 pdf.print
 (string.format(" q \%f \%f \%f \%f 0 0 cm ",
 math.cos(r1), - math.sin(r1), math.sin(r1), math.cos(r1)
@@ -82,10 +82,10 @@ math.cos(r1), - math.sin(r1), math.sin(r1), math.cos(r1)
 else
                        v.commands = {
 {'lua','
-  r1 = \ttrotatenormal*math.random(-10,10)
+  r1 = math.rad(0.1*\ttrotatenormal*math.random(-10,10))
 pdf.print
 (string.format(" q \%f \%f \%f \%f 0 0 cm ",
-math.cos(r1), - math.sin(r1), math.sin(r1), math.cos(r1)
+math.cos(r1), math.sin(r1), - math.sin(r1), math.cos(r1)
 ))'},
                            {'special','pdf: ' .. gr2 .. ' g'},
 {'push'},
