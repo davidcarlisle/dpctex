@@ -9,9 +9,17 @@
 \ifx\directlua\@undefined
 \endinput\PackageError{typewriter}{LuaLaTeX required for this package}\@ehc\fi
 
+\def\ttgreyone{0.6}
+\def\ttgreytwo{0.3}
+\def\ttrotatebold{0.012}
+\def\ttdownbold{20000}
+\def\ttrightbold{35000}
+\def\ttdownshifttwo{20000}
 
 
-
+\def\ttrotatenormal{0.012}
+\def\ttrightnormal{20000}
+\def\ttdownnormal{20000}
 
 % luaotfload exlicitly loaded for latex formats before 2017/01/01
 \usepackage{luaotfload}
@@ -38,34 +46,34 @@ function(name,size,i)
               f.type = 'virtual'
               f.fonts = {{ name = 'file:cmuntt', size = size}}
 for j,v in pairs(f.characters) do
-  local gr = 0.1*math.random()
-  local gr2 = 0.3*math.random()
+  local gr = \ttgreyone*math.random()
+  local gr2 = \ttgreytwo*math.random()
 if name == 'cmtt10bx' then
                        v.commands = {
 {'lua','
-  r1 = 0.01*math.random(-10,10)
+  r1 = \ttrotatebold*math.random(-10,10)
 pdf.print
 (string.format(" q \%f \%f \%f \%f 0 0 cm ",
 math.cos(r1), - math.sin(r1), math.sin(r1), math.cos(r1)
 ))'},
                            {'special','pdf: ' .. string.format("\%f",gr2) .. ' g'},
 {'push'},
-{'right', math.random(-35000,35000)},
-{'down', math.random(-20000,20000)},
+{'right', math.random(-\ttrightbold,\ttrightbold)},
+{'down', math.random(-\ttdownbold,\ttdownbold)},
                            {'char',j},
 {'pop'},
 {'push'},
-{'right', math.random(-35000,35000)},
-{'down', math.random(-20000,20000)},
+{'right', math.random(-\ttrightbold,\ttrightbold)},
+{'down', math.random(-\ttdownbold,\ttdownbold)},
                            {'char',j},
 {'pop'},
 {'push'},
-{'right', math.random(-35000,35000)},
-{'down', math.random(-20000,20000)},
+{'right', math.random(-\ttrightbold,\ttrightbold)},
+{'down', math.random(-\ttdownbold,\ttdownbold)},
                            {'char',j},
 {'pop'},
 {'lua','pdf.print(" Q ")'},
-{'down', math.random(-20000,20000)},
+{'down', math.random(-\ttdownbold,\ttdownbold)},
                            {'special','pdf: ' .. string.format("\%f",gr) .. ' g'},
                            {'char',j},
                            {'special','pdf: 0 g'}
@@ -74,19 +82,19 @@ math.cos(r1), - math.sin(r1), math.sin(r1), math.cos(r1)
 else
                        v.commands = {
 {'lua','
-  r1 = 0.01*math.random(-10,10)
+  r1 = \ttrotatenormal*math.random(-10,10)
 pdf.print
 (string.format(" q \%f \%f \%f \%f 0 0 cm ",
 math.cos(r1), - math.sin(r1), math.sin(r1), math.cos(r1)
 ))'},
                            {'special','pdf: ' .. gr2 .. ' g'},
 {'push'},
-{'right', math.random(-20000,20000)},
-{'down', math.random(-20000,20000)},
+{'right', math.random(-\ttrightnormal,\ttrightnormal)},
+{'down', math.random(-\ttdownshifttwo,\ttdownshifttwo)},
                            {'char',j},
 {'pop'},
 {'lua','pdf.print(" Q ")'},
-{'down', math.random(-20000,20000)},
+{'down', math.random(-\ttdownnormal,\ttdownnormal)},
                            {'special','pdf: ' .. gr .. ' g'},
                            {'char',j},
                            {'special','pdf: 0 g'}
@@ -535,7 +543,8 @@ end,
 \xUnicodeMathSymbol{"021CF}{\nRightarrow              }{\mathrel}{not implies}%
 \xUnicodeMathSymbol{"021D0}{\Leftarrow                }{\mathrel}{is implied by}%
 \xUnicodeMathSymbol{"021D1}{\Uparrow                  }{\mathrel}{up double arrow}%
-\xUnicodeMathSymbol{"021D2}{\Rightarrow               }{\mathrel}{implies}%
+%\xUnicodeMathSymbol{"021D2}{\Rightarrow               }{\mathrel}{implies}%
+\xxUnicodeMathSymbol{"02192}{\Rightarrow}{=>}
 \xUnicodeMathSymbol{"021D3}{\Downarrow                }{\mathrel}{down double arrow}%
 \xUnicodeMathSymbol{"021D4}{\Leftrightarrow           }{\mathrel}{left and right double arrow}%
 \xUnicodeMathSymbol{"021D5}{\Updownarrow              }{\mathrel}{up and down double arrow}%
@@ -615,7 +624,7 @@ end,
 \xUnicodeMathSymbol{"02228}{\vee                      }{\mathbin}{/vee /lor b: logical or}%
 \xUnicodeMathSymbol{"02229}{\cap                      }{\mathbin}{intersection}%
 \xUnicodeMathSymbol{"0222A}{\cup                      }{\mathbin}{union or logical sum}%
-\xUnicodeMathSymbol{"0222B}{\int                      }{\mathop}{integral operator}%
+%\xUnicodeMathSymbol{"0222B}{\int                      }{\mathop}{integral operator}%
 \xUnicodeMathSymbol{"0222C}{\iint                     }{\mathop}{double integral operator}%
 \xUnicodeMathSymbol{"0222D}{\iiint                    }{\mathop}{triple integral operator}%
 \xUnicodeMathSymbol{"0222E}{\oint                     }{\mathop}{contour integral operator}%
