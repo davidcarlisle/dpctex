@@ -4,7 +4,7 @@
 % See http://tex.stackexchange.com/questions/344214/use-latex-to-simulate-old-typewriter-written-texts
 
 
-\ProvidesPackage{typewriter}[2018-02-10 v1.1 typewriter package]
+\ProvidesPackage{typewriter}[2018-02-16 v1.2 typewriter package]
 
 \ifx\directlua\@undefined
 \endinput\PackageError{typewriter}{LuaLaTeX required for this package}\@ehc\fi
@@ -21,11 +21,14 @@
 \providecommand\ttrightnormal{20000}
 \providecommand\ttdownnormal{20000}
 
+\providecommand\ttbasefont{cmuntt.otf}
+\providecommand\ttfontsize{12pt}
+
 % luaotfload exlicitly loaded for latex formats before 2017/01/01
 \usepackage{luaotfload}
 
 % load cmuntt here not from lua (for everyone except me, it seems)
-\font\cmuntt = file:cmuntt.otf at 12pt \cmuntt
+\font\cmuntt = file:\ttbasefont\space at \ttfontsize\relax \cmuntt
 \edef\cmunttid{\fontid\cmuntt}
 
 
@@ -130,6 +133,35 @@ end,
 \font\myfonts= cmtt10x at 9pt
 \font\mybfont= cmtt10bx at 12pt
 \font\mybfonts= cmtt10bx at 9pt
+
+%if it is a monospace font force monospace space
+\ifdim\fontcharwd\myfont`.=\fontcharwd\myfont`M
+\fontdimen6\myfont=\fontcharwd\myfont`x
+\fontdimen2\myfont=\fontdimen6\myfont
+\fontdimen3\myfont=\z@
+\fontdimen4\myfont=\z@
+\fontdimen7\myfont=\fontdimen6\myfont
+
+\fontdimen6\myfonts=\fontcharwd\myfonts`x
+\fontdimen2\myfonts=\fontdimen6\myfonts
+\fontdimen3\myfonts=\z@
+\fontdimen4\myfonts=\z@
+\fontdimen7\myfonts=\fontdimen6\myfonts
+
+\fontdimen6\mybfont=\fontcharwd\mybfont`x
+\fontdimen2\mybfont=\fontdimen6\mybfont
+\fontdimen3\mybfont=\z@
+\fontdimen4\mybfont=\z@
+\fontdimen7\mybfont=\fontdimen6\mybfont
+
+\fontdimen6\mybfonts=\fontcharwd\mybfonts`x
+\fontdimen2\mybfonts=\fontdimen6\mybfonts
+\fontdimen3\mybfonts=\z@
+\fontdimen4\mybfonts=\z@
+\fontdimen7\mybfonts=\fontdimen6\mybfonts
+
+\fi
+
 \let\bfseries\mybfont
 \let\selectfont\relax
 \let\large\relax
@@ -149,7 +181,7 @@ end,
 
 
 % must find a better tt int.
-\def\int{\mathop{\leavevmode\strut\raise.5ex\hbox to 1em{$\scriptstyle\mathchar"352$}}\nolimits}
+\def\int{\mathop{\leavevmode\strut\raise.5ex\hbox to 1em{$\scriptstyle\mathchar"352$\hss}}\nolimits}
 \setbox0\hbox{$\int$}\setbox0\hbox{}
 \def\sum{\mathop{\char"03A3\relax}}
 
