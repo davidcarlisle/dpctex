@@ -24,16 +24,21 @@ and grey levels used to generate the variation. Any of the following
 commands may be defined before loading the package to change the defaults shown below.
 
 \begin{verbatim}
-\providecommand\ttgreyone{0.6}
-\providecommand\ttgreytwo{0.3}
-\providecommand\ttrotatebold{10}
+\providecommand\ttgreybolda{0.6}
+\providecommand\ttgreyboldb{0.3}
+\providecommand\ttrotatebold{12}
 \providecommand\ttdownbold{20000}
 \providecommand\ttrightbold{35000}
-\providecommand\ttdownshifttwo{20000}
+\providecommand\ttoverprintbolda{1}
+\providecommand\ttoverprintboldb{1}
+\providecommand\ttoverprintboldc{1}
 
-\providecommand\ttrotatenormal{7}
+\providecommand\ttgreynormala{0.3}
+\providecommand\ttgreynormalb{0.5}
+\providecommand\ttrotatenormal{8}
 \providecommand\ttrightnormal{20000}
 \providecommand\ttdownnormal{20000}
+\providecommand\ttoverprintnormal{1}
 
 \providecommand\ttbasefont{cmuntt.otf}
 \providecommand\ttfontsize{12pt}
@@ -47,6 +52,12 @@ values more than 20 makes the text more or less unreadable.
 
 The right and down offsets (which are in the font design units) control the
 maximum horizontal and vertical offsets of the overprinted characters
+
+The flags such ttoverprintnormal control whether multiple characters are printed
+By default bold font has four characters with different offsets, normal has two.
+Setting the flags to 0 stops this over-printing.
+
+\hrule
 
 There is random variability in each letter as you can see by repeating
 a letter repeatededly:

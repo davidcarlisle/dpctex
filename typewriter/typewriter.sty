@@ -9,17 +9,21 @@
 \ifx\directlua\@undefined
 \endinput\PackageError{typewriter}{LuaLaTeX required for this package}\@ehc\fi
 
-\providecommand\ttgreyone{0.6}
-\providecommand\ttgreytwo{0.3}
+\providecommand\ttgreybolda{0.6}
+\providecommand\ttgreyboldb{0.3}
 \providecommand\ttrotatebold{12}
 \providecommand\ttdownbold{20000}
 \providecommand\ttrightbold{35000}
-\providecommand\ttdownshifttwo{20000}
+\providecommand\ttoverprintbolda{1}
+\providecommand\ttoverprintboldb{1}
+\providecommand\ttoverprintboldc{1}
 
-
-\providecommand\ttrotatenormal{8}
+\providecommand\ttgreynormala{0.3}
+\providecommand\ttgreynormalb{0.5}
+\providecommand\ttrotatenormal{10}
 \providecommand\ttrightnormal{20000}
 \providecommand\ttdownnormal{20000}
+\providecommand\ttoverprintnormal{1}
 
 \providecommand\ttbasefont{cmuntt.otf}
 \providecommand\ttfontsize{12pt}
@@ -28,7 +32,8 @@
 \usepackage{luaotfload}
 
 % load cmuntt here not from lua (for everyone except me, it seems)
-\font\cmuntt = file:\ttbasefont\space at \ttfontsize\relax \cmuntt
+% braces allow for spaces in file names.
+\font\cmuntt = {file:\ttbasefont}\space at \ttfontsize\relax \cmuntt
 \edef\cmunttid{\fontid\cmuntt}
 
 
@@ -47,10 +52,12 @@ function(name,size,i)
   f = font.getfont(\cmunttid)
               f.name = 'cmtt10x'
               f.type = 'virtual'
-              f.fonts = {{ name = 'file:cmuntt', size = size}}
+              f.fonts = {{ name = 'file:\ttbasefont', size = size}}
 for j,v in pairs(f.characters) do
-  local gr = \ttgreyone*math.random()
-  local gr2 = \ttgreytwo*math.random()
+  local greynormala = \ttgreynormala*math.random()
+  local greynormalb = \ttgreynormalb*math.random()
+  local greybolda = \ttgreybolda*math.random()
+  local greyboldb = \ttgreyboldb*math.random()
 if name == 'cmtt10bx' then
                        v.commands = {
 {'lua','
@@ -59,28 +66,30 @@ pdf.print
 (string.format(" q \%f \%f \%f \%f 0 0 cm ",
 math.cos(r1), - math.sin(r1), math.sin(r1), math.cos(r1)
 ))'},
-                           {'special','pdf: ' .. string.format("\%f",gr2) .. ' g'},
+                           {'special','pdf: ' .. string.format("\%f",greybolda) .. ' g'},
 {'push'},
 {'right', math.random(-\ttrightbold,\ttrightbold)},
 {'down', math.random(-\ttdownbold,\ttdownbold)},
                            {'char',j},
 {'pop'},
+{'lua','pdf.print(" Q ")'}\ifnum\ttoverprintbolda=1,
 {'push'},
 {'right', math.random(-\ttrightbold,\ttrightbold)},
 {'down', math.random(-\ttdownbold,\ttdownbold)},
                            {'char',j},
-{'pop'},
+{'pop'}\fi\ifnum\ttoverprintboldb=1,
 {'push'},
 {'right', math.random(-\ttrightbold,\ttrightbold)},
 {'down', math.random(-\ttdownbold,\ttdownbold)},
                            {'char',j},
-{'pop'},
-{'lua','pdf.print(" Q ")'},
+{'pop'}\fi\ifnum\ttoverprintboldb=1,
+{'push'},
 {'down', math.random(-\ttdownbold,\ttdownbold)},
-                           {'special','pdf: ' .. string.format("\%f",gr) .. ' g'},
+                           {'special','pdf: ' .. string.format("\%f",greyboldb) .. ' g'},
                            {'char',j},
-                           {'special','pdf: 0 g'}
-
+                           {'special','pdf: 0 g'},
+{'pop'}
+\fi
                          }
 else
                        v.commands = {
@@ -90,18 +99,18 @@ pdf.print
 (string.format(" q \%f \%f \%f \%f 0 0 cm ",
 math.cos(r1), math.sin(r1), - math.sin(r1), math.cos(r1)
 ))'},
-                           {'special','pdf: ' .. gr2 .. ' g'},
+                           {'special','pdf: ' .. greynormala .. ' g'},
 {'push'},
 {'right', math.random(-\ttrightnormal,\ttrightnormal)},
-{'down', math.random(-\ttdownshifttwo,\ttdownshifttwo)},
+{'down', math.random(-\ttdownnormal,\ttdownnormal)},
                            {'char',j},
 {'pop'},
-{'lua','pdf.print(" Q ")'},
+{'lua','pdf.print(" Q ")'}\ifnum\ttoverprintnormal=1,
 {'down', math.random(-\ttdownnormal,\ttdownnormal)},
-                           {'special','pdf: ' .. gr .. ' g'},
+                           {'special','pdf: ' .. greynormalb .. ' g'},
                            {'char',j},
                            {'special','pdf: 0 g'}
-
+\fi
                          }
 end
 end
@@ -160,6 +169,7 @@ end,
 \fontdimen4\mybfonts=\z@
 \fontdimen7\mybfonts=\fontdimen6\mybfonts
 
+\else
 \fi
 
 \let\bfseries\mybfont
