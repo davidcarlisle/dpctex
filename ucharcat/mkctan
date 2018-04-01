@@ -4,3 +4,4 @@ lualatex ucharcat.dtx
 cd ..
 rm -rf ucharcat.zip
 zip ucharcat.zip ucharcat/README ucharcat/ucharcat.{dtx,ins,pdf}
+mv ucharcat.zip ucharcat
