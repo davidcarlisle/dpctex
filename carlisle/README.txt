@@ -43,6 +43,7 @@ slashed.sty
    Commands for the `Feynman slashed character' notation.
 
 ltxtable.tex
+ltxtable.pdf
    This generates and documents the package ltxtable.sty. A merger of
    longtable and tabularx packages from the Standard LaTeX tools
    collection. This produces multipage tables in which the column
@@ -60,7 +61,7 @@ remreset.sty
    command is defined in the format.
 
 
-Packages that were fomally in this collection.
+Packages that were formally in this collection.
 
 
 nopageno.sty
