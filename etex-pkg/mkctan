@@ -1,3 +1,4 @@
 cd ..
 rm -rf etex-pkg.zip
 zip  etex-pkg.zip  etex-pkg/README  etex-pkg/etex.sty
+mv etex-pkg.zip etex-pkg
