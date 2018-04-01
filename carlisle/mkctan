@@ -1,0 +1,6 @@
+cd ..
+rm -rf carlisle.zip
+zip carlisle.zip carlisle/{README.txt,dotlessj.sty,ltxtable.tex,mylatex.ltx,plain.sty,remreset.sty,scalefnt.sty,slashed.sty}
+mv carlisle.zip carlisle
+
+
