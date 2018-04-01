@@ -2,9 +2,9 @@
 % remreset package
 %%%%%%%%%%%%%%%%%%
 
-% Copyright 1997 David carlisle
+% Copyright 1997, 2018 David carlisle
 % This file may be distributed under the terms of the LPPL.
-% See 00readme.txt for details.
+% See README.txt for details.
 
 % 1997/09/28  David Carlisle
 
@@ -15,17 +15,19 @@
 % \@addtoreset{footnote}{chapter}
 % So that the footnote counter is reset each chapter.
 
-% If you wish to bas a new class on book, but without this counter
+% If you wish to base a new class on book, but without this counter
 % being reset, then standard LaTeX gives no simple mechanism to do
 % this.
 
 % This package defines |\@removefromreset| which just undoes the effect
-% of \@addtorest. So for example a class file may be defined by
+% of \@addtoreset. So for example a class file may be defined by
 
 % \LoadClass{book}
 % \@removefromreset{footnote}{chapter}
 
+% 2018: package obsoleted as the command is defined in the LaTeX format.
 
+\@ifundefined{@removefromreset}{%
 \def\@removefromreset#1#2{{%
   \expandafter\let\csname c@#1\endcsname\@removefromreset
   \def\@elt##1{%
@@ -34,6 +36,11 @@
       \noexpand\@elt{##1}%
     \fi}%
   \expandafter\xdef\csname cl@#2\endcsname{%
-    \csname cl@#2\endcsname}}}
+    \csname cl@#2\endcsname}}}%
+}{%
+\PackageWarningNoLine{remreset}
+    {The remreset package is obsolete:\MessageBreak
+     \noexpand\@removefomresset is defined}%
+}
 
 
