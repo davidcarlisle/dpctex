@@ -9,3 +9,4 @@ pdflatex colortbl-DE
 cd ..
 rm -rf colortbl.zip
 zip colortbl.zip colortbl/README.txt colortbl/colortbl.{dtx,ins,pdf} colortbl/colortbl-DE.{tex,pdf}
+mv colortbl.zip colortbl
