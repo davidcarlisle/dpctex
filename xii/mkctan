@@ -2,3 +2,4 @@ cd ..
 rm -rf xii.zip
 touch -d '1998-12-11 10:30:56' xii/xii.tex
 zip  xii.zip  xii/README.txt  xii/xii.tex
+mv xii.xip xii
