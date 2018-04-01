@@ -4,3 +4,4 @@ pdflatex elocalloc.dtx
 cd ..
 rm -rf elocalloc.zip
 zip elocalloc.zip elocalloc/README.txt elocalloc/elocalloc.{dtx,ins,pdf}
+mv elocalloc.zip elocalloc
