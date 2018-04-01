@@ -3,5 +3,4 @@ rm -rf graphics-pln.zip
 zip  graphics-pln.zip  graphics-pln/{autopict.sty,\
 exmplcol.tex,exmplpfg.tex,graphicx.tex,picture.tex,README.txt,\
 color.tex,exmplgrf.tex,exmplpic.tex,miniltx.tex,psfrag.tex}
-
-
+mv graphics-pln.zip graphics-pln
