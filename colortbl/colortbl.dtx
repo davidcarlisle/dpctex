@@ -15,7 +15,7 @@
 %<driver>\ProvidesFile{colortbl.drv}
 % \fi
 %         \ProvidesFile{colortbl.dtx}
-          [2012/06/21 v1.0b Color table columns (DPC)]
+          [2018/05/02 v1.0c Color table columns (DPC)]
 %
 % \iffalse
 %<*driver>
@@ -72,6 +72,7 @@
 % \changes{v0.1i}{1999/03/24}
 %     {LPPL}
 % \changes{v0.1j}{2001/02/13}{\cs{cellcolor} (Donald Arseneau)}
+% \changes{v1.0c}{2018/05/02}{Updates to match new array code}
 %
 % \section{Introduction}
 %
@@ -613,6 +614,11 @@
 %
 %
 % \begin{macro}{\@classz}
+% First define stub for new \textsf{array} package code.
+%    \begin{macrocode}
+\ifx\do@row@strut\@undefined\let\do@row@strut\relax\fi
+%    \end{macrocode}
+%
 % "\@classz" is the main function in the \textsf{array} package handling
 % of primitive column types: It inserts the code for each of the column
 % specifiers, `"clrpmb"'. The other classes deal with the other preamble
@@ -660,19 +666,27 @@
       \hskip\stretch{.5}\kern\z@
       \d@llarbegin
       \insert@column
-      \d@llarend\hskip\stretch{.5}\or
+      \d@llarend\do@row@strut\hskip\stretch{.5}\or
 %    \end{macrocode}
 % "l" and "r" as before, but using fill glue.
 %    \begin{macrocode}
-      \d@llarbegin \insert@column \d@llarend \hfill \or
-      \hfill\kern\z@ \d@llarbegin \insert@column \d@llarend \or
+      \d@llarbegin \insert@column \d@llarend\do@row@strut \hfill \or
+      \hfill\kern\z@ \d@llarbegin \insert@column \d@llarend\do@row@strut \or
 %    \end{macrocode}
-% "m", "p" and "b" as before.
+% "m", "p" and "b" as before, but need to take account of array package update.
 %    \begin{macrocode}
-   $\vcenter
-   \@startpbox{\@nextchar}\insert@column \@endpbox $\or
-   \vtop \@startpbox{\@nextchar}\insert@column \@endpbox \or
-   \vbox \@startpbox{\@nextchar}\insert@column \@endpbox
+      \ifx\ar@align@mcell\@undefined
+        $\vcenter
+         \@startpbox{\@nextchar}\insert@column \@endpbox $
+      \else
+        \setbox\ar@mcellbox\vbox
+          \@startpbox{\@nextchar}\insert@column \@endpbox
+        \ar@align@mcell
+        \do@row@strut
+      \fi
+   \or
+   \vtop \@startpbox{\@nextchar}\insert@column \@endpbox\do@row@strut \or
+   \vbox \@startpbox{\@nextchar}\insert@column \@endpbox\do@row@strut
   \fi
 %    \end{macrocode}
 % Close the box register assignment.
