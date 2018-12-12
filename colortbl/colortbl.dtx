@@ -1,7 +1,7 @@
 % \iffalse
 %%
 %% Source File: `colortbl.dtx'.
-%% Copyright 1996 1998 1999 2012 David Carlisle
+%% Copyright 1996 1998 1999 2012 2018 David Carlisle
 %%
 %% This file may be distributed under the terms of the LPPL.
 %% See readme for details.
@@ -15,7 +15,7 @@
 %<driver>\ProvidesFile{colortbl.drv}
 % \fi
 %         \ProvidesFile{colortbl.dtx}
-          [2018/05/02 v1.0c Color table columns (DPC)]
+          [2018/12/12 v1.0d Color table columns (DPC)]
 %
 % \iffalse
 %<*driver>
@@ -71,6 +71,7 @@
 %     {LPPL}
 % \changes{v0.1j}{2001/02/13}{\cs{cellcolor} (Donald Arseneau)}
 % \changes{v1.0c}{2018/05/02}{Updates to match new array code}
+% \changes{v1.0d}{2018/12/22}{Updates to match even newer array code}
 %
 % \section{Introduction}
 %
@@ -1060,22 +1061,24 @@
 % \end{macro}
 %
 % \begin{macro}{\@mkpream}
+% \begin{macro}{\@mkpreamarray}
 % While expanding the preamble \textsf{array} passes tokens through an
 % "\edef". It doesn't use "\protect"ion as it thinks it has full control
 % at that point. As the redefinition above adds "\color", I need to add
 % that to the list of commands made safe.
 %    \begin{macrocode}
-\expandafter\def\expandafter\@mkpream\expandafter#\expandafter1%
-  \expandafter{%
-    \expandafter\let\expandafter\CT@setup\expandafter\relax
-    \expandafter\let\expandafter\CT@color\expandafter\relax
-    \expandafter\let\expandafter\CT@do@color\expandafter\relax
-    \expandafter\let\expandafter\color\expandafter\relax
-    \expandafter\let\expandafter\CT@column@color\expandafter\relax
-    \expandafter\let\expandafter\CT@row@color\expandafter\relax
-    \expandafter\let\expandafter\CT@cell@color\expandafter\relax
-    \@mkpream{#1}}
+\let\@mkpreamarray\@mkpream
+\def\@mkpream{%
+     \let\CT@setup\relax
+     \let\CT@color\relax
+     \let\CT@do@color\relax
+     \let\color\relax
+     \let\CT@column@color\relax
+     \let\CT@row@color\relax
+     \let\CT@cell@color\relax
+     \@mkpreamarray}
 %    \end{macrocode}
+% \end{macro}
 % \end{macro}
 %
 % \begin{macro}{\CT@do@color}
