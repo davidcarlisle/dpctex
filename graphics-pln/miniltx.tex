@@ -2,7 +2,7 @@
 %%%
 %%% Parts of LaTeX: Slightly changed/simplified in places.
 %%% Changes 
-%%%    Copyright 1996-2017 David Carlisle LaTeX3 Project
+%%%    Copyright 1996-2019 David Carlisle LaTeX3 Project
 %%% Original Code
 %%%    Copyright 1993-1996 LaTeX3 Project and original authors
 %%%
@@ -25,6 +25,7 @@
 %  2010/02/03 accept *-form of \ProcessOptions [KB/DL]
 %  2016/08/17 fix catcode @ handling (again), document github address [DC]
 %  2017/06/01 assorted updates to cover updated latex drivers
+%  2019/07/20 more updates for latex drivers
 
 \edef\resetatcatcode{\catcode`\noexpand\@\the\catcode`\@\relax}
 
@@ -509,3 +510,13 @@
 
 % 1996/11/21
 \def\@warning{\immediate\write16}
+
+% 2019/07/20
+\def\quote@name#1{"\quote@@name#1\@gobble""}
+\def\quote@@name#1"{#1\quote@@name}
+\def\unquote@name#1{\quote@@name#1\@gobble"}
+
+\ifx\set@curr@file\@undefined
+ \def\set@curr@file#1{\xdef\@curr@file{#1}}
+\fi
+
