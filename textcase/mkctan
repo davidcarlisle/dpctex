@@ -1,0 +1,7 @@
+
+tex textcase.ins
+pdflatex textcase.dtx
+pdflatex textcase.dtx
+cd ..
+zip -r textcase.zip textcase/README textcase/textcase.{ins,sty,pdf}
+
