@@ -1,6 +1,6 @@
 % \iffalse
 %% Source File: textcase.dtx
-%% Copyright 1997 1998 David Carlisle
+%% Copyright 1997 1998 2019 David Carlisle
 %%
 %% This file may be distributed under the terms of the LPPL.
 %% See 00readme.txt for details.
@@ -13,7 +13,7 @@
 %<driver> \ProvidesFile{textcase.drv}
 % \fi
 %         \ProvidesFile{textcase.dtx}
-       [2004/10/07 v0.07 Text only upper/lower case changing (DPC)]
+       [2019/09/14 v1.00 Text only upper/lower case changing (DPC)]
 %
 % \iffalse
 %<*driver>
@@ -26,7 +26,6 @@
 % \fi
 %
 % \GetFileInfo{textcase.dtx}
-% \CheckSum{110}
 %
 % \changes{v0.01}{1997/09/28}
 %    {Posted to c.t.t}
@@ -245,6 +244,17 @@
 % code can be simplified, just to look for |$|.
 %    \begin{macrocode}
       \def\({$}\let\)\(%
+%    \end{macrocode}
+%
+% \changes{v1.0}{2019/09/14}
+%    {UTF-8 support for 2019 LaTeX format}
+% Allow UTF-8 characters to expand in the |\protected@edef| so that
+% they become for example  |\IeC{\'{e}}| and uppercase correctly.
+% 
+%    \begin{macrocode}
+      \let\UTF@two@octets@noexpand\@empty
+      \let\UTF@three@octets@noexpand\@empty
+      \let\UTF@four@octets@noexpand\@empty
 %    \end{macrocode}
 %
 % Set up the `non-math' things that also have to be skipped.
