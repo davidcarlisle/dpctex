@@ -4,6 +4,10 @@
 \input miniltx
 
 \def\Gin@driver{dvips.def}
+\let\@color@protected\protected
+\expandafter\@gobble\csname protected\endcsname
+
 \input color.sty
 
+\let\protected\@color@protected
 \resetatcatcode
