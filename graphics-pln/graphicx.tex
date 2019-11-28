@@ -9,9 +9,28 @@
  \let\ttfamily\tt
 \fi
 
-\def\Gin@driver{dvips.def}
-\input graphicx.sty
+\ifx\Gin@driver\@undefined
+  \ifx\directlua\@undefined
+    \ifx\pdfoutput\@undefined
+      \def\Gin@driver{dvips.def}
+    \else
+      \ifnum\pdfoutput=1
+        \def\Gin@driver{pdftex.def}
+      \else
+        \def\Gin@driver{dvips.def}
+      \fi
+    \fi
+  \else
+    \def\Gin@driver{luatex.def}
+  \fi
+\fi
 
+\let\GRAPHICS@detokenize\detokenize
+\ifx\detokenize\@undefined
+  \def\detokenize#1{#1}
+\fi
+\input graphicx.sty
+\let\detokenize\GRAPHICS@detokenize
 
 \resetatcatcode
 

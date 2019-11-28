@@ -88,16 +88,16 @@ graphicx.tex
       \input graphicx
       See the documentation in grfguide.ps in the LaTeX graphics
       distribution.
-      This file sets the driver to be dvips. If you
-      use another driver, edit accordingly.
+      This file sets the driver to be dvips, pdftex or luatex.
+      If you use another driver, define \Gin@driver before inputting the file.
 
 color.tex
       The user interface to the color package.
       \input color
       See the documentation in grfguide.ps in the LaTeX graphics
       distribution. 
-      This file sets the driver to be dvips. If you
-      use another driver, edit accordingly.
+      This file sets the driver to be dvips, pdftex or luatex.
+      If you use another driver, define \Gin@driver before inputting the file.
      
 
 psfrag.tex

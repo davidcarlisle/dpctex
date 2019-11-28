@@ -1,8 +1,8 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdftex 2016.8.3)  17 AUG 2016 00:50
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdftex 2019.11.21)  28 NOV 2019 21:59
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**exmplcol.tex
+**exmplcol
 (./exmplcol.tex (./color.tex (./miniltx.tex
 \@tempcnta=\count27
 \@tempcntb=\count28
@@ -31,41 +31,33 @@ Defining generic filename parser.
 \fboxsep=\dimen31
 \fboxrule=\dimen32
 )
-(/usr/local/texlive/2016/texmf-dist/tex/latex/graphics/color.sty
+(/usr/local/texlive/2019/texmf-dist/tex/latex/graphics/color.sty
 color: 2016/07/10 v1.1e Standard LaTeX Color (DPC)
 
-(/usr/local/texlive/2016/texmf-dist/tex/latex/graphics-cfg/color.cfg
+(/usr/local/texlive/2019/texmf-dist/tex/latex/graphics-cfg/color.cfg
 color.cfg: 2016/01/02 v1.6 sample color configuration
 )
 color: Driver file: pdftex.def
 
-(/usr/local/texlive/2016/texmf-dist/tex/latex/graphics-def/pdftex.def
-pdftex.def: 2016/07/10 v0.06j Graphics/color for pdfTeX
+(/usr/local/texlive/2019/texmf-dist/tex/latex/graphics-def/pdftex.def
+pdftex.def: 2018/01/08 v1.0l Graphics/color driver for pdftex
 
-(/usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/infwarerr.sty
-infwarerr: 2016/05/16 v1.4 Providing info/warning/error messages (HO)
-)
-(/usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
-ltxcmds: 2016/05/16 v1.23 LaTeX kernel commands for general use (HO)
-)
-\Gread@gobject=\count29
-
-(/usr/local/texlive/2016/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+(/usr/local/texlive/2019/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count30
+\scratchcounter=\count29
 \scratchdimen=\dimen33
 \scratchbox=\box17
-\nofMPsegments=\count31
-\nofMParguments=\count32
+\nofMPsegments=\count30
+\nofMParguments=\count31
 \everyMPshowfont=\toks14
-\MPscratchCnt=\count33
+\MPscratchCnt=\count32
 \MPscratchDim=\dimen34
-\MPnumerator=\count34
-\makeMPintoPDFobject=\count35
+\MPnumerator=\count33
+\makeMPintoPDFobject=\count34
 \everyMPtoPDFconversion=\toks15
-)))) [1{/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] 
-)</usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb>
-Output written on exmplcol.pdf (1 page, 11913 bytes).
+)))) [1{/usr/local/texlive/2019/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] 
+)</usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb>
+Output written on exmplcol.pdf (1 page, 11901 bytes).
 PDF statistics:
  12 PDF objects out of 1000 (max. 8388607)
  7 compressed objects within 1 object stream

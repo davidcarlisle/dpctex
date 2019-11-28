@@ -3,7 +3,26 @@
 
 \input miniltx
 
-\def\Gin@driver{dvips.def}
+
+
+\ifx\Gin@driver\@undefined
+  \ifx\directlua\@undefined
+    \ifx\pdfoutput\@undefined
+      \def\Gin@driver{dvips.def}
+    \else
+      \ifnum\pdfoutput=1
+        \def\Gin@driver{pdftex.def}
+      \else
+        \def\Gin@driver{dvips.def}
+      \fi
+    \fi
+  \else
+    \def\Gin@driver{luatex.def}
+  \fi
+\fi
+
+
+
 \let\@color@protected\protected
 \expandafter\@gobble\csname protected\endcsname
 

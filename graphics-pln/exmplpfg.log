@@ -1,21 +1,16 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdftex 2016.8.3)  17 AUG 2016 00:51
-entering extended mode
- restricted \write18 enabled.
- %&-line parsing enabled.
-**exmplpfg.tex
+This is TeX, Version 3.14159265 (TeX Live 2019) (preloaded format=tex 2019.10.21)  28 NOV 2019 22:09
+**exmplpfg
 (./exmplpfg.tex (./psfrag.tex (./miniltx.tex
-\@tempcnta=\count27
-\@tempcntb=\count28
+\@tempcnta=\count26
+\@tempcntb=\count27
 \@tempdima=\dimen16
 \@tempdimb=\dimen17
 \@tempdimc=\dimen18
 \@tempboxa=\box16
 \@tempskipa=\skip18
 \@tempskipb=\skip19
-\@temptokena=\toks13
-
-Defining generic filename parser.
-
+\@temptokena=\toks12
+^^JDefining generic filename parser.^^J
 \leftmarginv=\dimen19
 \leftmarginvi=\dimen20
 \@ovxx=\dimen21
@@ -31,148 +26,47 @@ Defining generic filename parser.
 \fboxsep=\dimen31
 \fboxrule=\dimen32
 )
-(/usr/local/texlive/2016/texmf-dist/tex/latex/psfrag/psfrag.sty
+(/usr/local/texlive/2019/texmf-dist/tex/latex/psfrag/psfrag.sty
 psfrag: 1998/04/11 v3.04 PSfrag (MCG)
  (./graphicx.tex (./miniltx.tex)
-(/usr/local/texlive/2016/texmf-dist/tex/latex/graphics/graphicx.sty
-graphicx: 2014/10/28 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
+(/usr/local/texlive/2019/texmf-dist/tex/latex/graphics/graphicx.sty
+graphicx: 2017/06/01 v1.1a Enhanced LaTeX Graphics (DPC,SPQR)
 
-(/usr/local/texlive/2016/texmf-dist/tex/latex/graphics/keyval.sty
+(/usr/local/texlive/2019/texmf-dist/tex/latex/graphics/keyval.sty
 keyval: 2014/10/28 v1.15 key=value parser (DPC)
-\KV@toks@=\toks14
+\KV@toks@=\toks13
 )
-(/usr/local/texlive/2016/texmf-dist/tex/latex/graphics/graphics.sty
-graphics: 2016/07/10 v1.0t Standard LaTeX Graphics (DPC,SPQR)
+(/usr/local/texlive/2019/texmf-dist/tex/latex/graphics/graphics.sty
+graphics: 2019/11/01 v1.3d Standard LaTeX Graphics (DPC,SPQR)
 
-(/usr/local/texlive/2016/texmf-dist/tex/latex/graphics/trig.sty
+(/usr/local/texlive/2019/texmf-dist/tex/latex/graphics/trig.sty
 trig: 2016/01/03 v1.10 sin cos tan (DPC)
 )
-(/usr/local/texlive/2016/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+(/usr/local/texlive/2019/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
 graphics.cfg: 2016/06/04 v1.11 sample graphics configuration
 )
-graphics: Driver file: pdftex.def
+graphics: Driver file: dvips.def
 
-(/usr/local/texlive/2016/texmf-dist/tex/latex/graphics-def/pdftex.def
-pdftex.def: 2016/07/10 v0.06j Graphics/color for pdfTeX
-
-(/usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/infwarerr.sty
-infwarerr: 2016/05/16 v1.4 Providing info/warning/error messages (HO)
-)
-(/usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
-ltxcmds: 2016/05/16 v1.23 LaTeX kernel commands for general use (HO)
-)
-\Gread@gobject=\count29
-
-(/usr/local/texlive/2016/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
-[Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count30
-\scratchdimen=\dimen33
-\scratchbox=\box17
-\nofMPsegments=\count31
-\nofMParguments=\count32
-\everyMPshowfont=\toks15
-\MPscratchCnt=\count33
-\MPscratchDim=\dimen34
-\MPnumerator=\count34
-\makeMPintoPDFobject=\count35
-\everyMPtoPDFconversion=\toks16
-)))
-\Gin@req@height=\dimen35
-\Gin@req@width=\dimen36
+(/usr/local/texlive/2019/texmf-dist/tex/latex/graphics-def/dvips.def
+dvips.def: 2017/06/20 v3.1d Graphics/color driver for dvips
 ))
-\pfg@pcount=\count36
-\pfg@scount=\count37
+\Gin@req@height=\dimen33
+\Gin@req@width=\dimen34
+))
+\pfg@pcount=\count28
+\pfg@scount=\count29
 \pfg@temp=\write0
 )
-\pfg@dp=\dimen37
-\pfg@wd=\dimen38
-\pfg@dx=\dimen39
-\pfg@dy=\dimen40
+\pfg@dp=\dimen35
+\pfg@wd=\dimen36
+\pfg@dx=\dimen37
+\pfg@dy=\dimen38
 )
-File `example.eps' not found
-! File `example.eps' not found.
-\@latex@error #1#2->\errhelp {#2}\errmessage {#1}
-                                                 
-\Gread@eps ...ex@error {File `#1' not found}\@ehc 
-                                                  \else \Gread@true \let \@t...
-
-\Gin@setfile ...se #1\fi \endcsname {\Gin@base #2}
-                                                  \else \Gin@nosize {#3}\fi ...
-
-\Ginclude@graphics ...sname {\Gin@base \Gin@ext }}
-                                                  \fi \endgroup 
-\Gin@ii ...eys {Gin}{#1}\Gin@esetsize \the \toks@ 
-                                                  \endgroup \fi 
-l.6 ... \includegraphics[width=3.5in]{example.eps}
-                                                  
-? 
-! Cannot determine size of graphic in example.eps (no BoundingBox).
-\@latex@error #1#2->\errhelp {#2}\errmessage {#1}
-                                                 
-\Gread@eps ...raphic in #1 (no BoundingBox)}\@ehc 
-                                                  \gdef \@gtempa {0 0 72 72 ...
-
-\Gin@setfile ...se #1\fi \endcsname {\Gin@base #2}
-                                                  \else \Gin@nosize {#3}\fi ...
-
-\Ginclude@graphics ...sname {\Gin@base \Gin@ext }}
-                                                  \fi \endgroup 
-\Gin@ii ...eys {Gin}{#1}\Gin@esetsize \the \toks@ 
-                                                  \endgroup \fi 
-l.6 ... \includegraphics[width=3.5in]{example.eps}
-                                                  
-? 
 example.eps: Graphic file (type eps)
-! Undefined control sequence.
-\Ginclude@eps ...@hidestart \fi \pfg@Ginclude@eps 
-                                                  {#1}\ifnum \pfg@scount >\z...
 
-\Gin@setfile ...\csname Ginclude@#1\endcsname {#3}
-                                                  }\dp \z@ \z@ \ht \z@ \Gin@...
+<example.eps>
+example.eps: Graphic file (type eps)
+\openout0 = `exmplpfg.pfg'.
 
-\Ginclude@graphics ...sname {\Gin@base \Gin@ext }}
-                                                  \fi \endgroup 
-\Gin@ii ...eys {Gin}{#1}\Gin@esetsize \the \toks@ 
-                                                  \endgroup \fi 
-l.6 ... \includegraphics[width=3.5in]{example.eps}
-                                                  
-? 
-File `example.eps' not found
-! File `example.eps' not found.
-\@latex@error #1#2->\errhelp {#2}\errmessage {#1}
-                                                 
-\Gread@eps ...ex@error {File `#1' not found}\@ehc 
-                                                  \else \Gread@true \let \@t...
-
-\Gin@setfile ...se #1\fi \endcsname {\Gin@base #2}
-                                                  \else \Gin@nosize {#3}\fi ...
-
-\Ginclude@graphics ...sname {\Gin@base \Gin@ext }}
-                                                  \fi \endgroup 
-\Gin@ii ...eys {Gin}{#1}\Gin@esetsize \the \toks@ 
-                                                  \endgroup \fi 
-l.14 ...\includegraphics[width=3.5in]{example.eps}
-                                                  
-? 
-! Cannot determine size of graphic in example.eps (no BoundingBox).
-\@latex@error #1#2->\errhelp {#2}\errmessage {#1}
-                                                 
-\Gread@eps ...raphic in #1 (no BoundingBox)}\@ehc 
-                                                  \gdef \@gtempa {0 0 72 72 ...
-
-\Gin@setfile ...se #1\fi \endcsname {\Gin@base #2}
-                                                  \else \Gin@nosize {#3}\fi ...
-
-\Ginclude@graphics ...sname {\Gin@base \Gin@ext }}
-                                                  \fi \endgroup 
-\Gin@ii ...eys {Gin}{#1}\Gin@esetsize \the \toks@ 
-                                                  \endgroup \fi 
-l.14 ...\includegraphics[width=3.5in]{example.eps}
-                                                  
-? x
-No pages of output.
-PDF statistics:
- 0 PDF objects out of 1000 (max. 8388607)
- 0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
-
+ <psfrag:example.eps> (./exmplpfg.pfg) <example.eps> [1] )
+Output written on exmplpfg.dvi (1 page, 944 bytes).
