@@ -1,7 +1,7 @@
 % \iffalse
 %%
 %% Source File: `colortbl.dtx'.
-%% Copyright 1996 1998 1999 2012 2018 David Carlisle
+%% Copyright 1996 1998 1999 2012 2018 2020 David Carlisle
 %%
 %% This file may be distributed under the terms of the LPPL.
 %% See readme for details.
@@ -15,7 +15,7 @@
 %<driver>\ProvidesFile{colortbl.drv}
 % \fi
 %         \ProvidesFile{colortbl.dtx}
-          [2018/12/12 v1.0d Color table columns (DPC)]
+          [2020/01/04 v1.0e Color table columns (DPC)]
 %
 % \iffalse
 %<*driver>
@@ -72,6 +72,7 @@
 % \changes{v0.1j}{2001/02/13}{\cs{cellcolor} (Donald Arseneau)}
 % \changes{v1.0c}{2018/05/02}{Updates to match new array code}
 % \changes{v1.0d}{2018/12/22}{Updates to match even newer array code}
+% \changes{v1.0e}{2020/01/04}{Updates to match updated hhline}
 %
 % \section{Introduction}
 %
@@ -1279,11 +1280,13 @@
        ##2%
       \global\setbox\@ne\HH@box\doublerulesep\doublerulesep}}%
        \HH@let!}\else
+  \ifx\@tempb\@sptoken\let\next\HH@spacelet\else
   \PackageWarning{hhline}%
       {\meaning\@tempb\space ignored in \noexpand\hhline argument%
        \MessageBreak}%
-  \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi
+  \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi
   \next}
+\lowercase{\def\HH@spacelet} {\futurelet\@tempb \HH@loop}
 %    \end{macrocode}
 %
 %    \begin{macrocode}
