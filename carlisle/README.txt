@@ -13,16 +13,10 @@ each other except by the fact that they have the same author.
 
 David Carlisle https://github.com/davidcarlisle/dpctex
 
-2018-04-01
+2020-10-23
 
 
 Currently the directory contains the following.
-
-mylatex.ltx
-   This file provides a method of making a special format tailored to
-   one document, with all the class and packages, and other preamble
-   material pre-loaded. This can save quite a lot of time on some
-   systems. See the comments in the file.
 
 dotlessj.sty
    If you are using a font set without a dotless j (\j and \jmath) then
@@ -63,6 +57,9 @@ remreset.sty
 
 Packages that were formally in this collection.
 
+
+mylatex.ltx
+   This file has now moved: see macros/latex/contrib/mylatex
 
 nopageno.sty
    This file has now moved: see macros/latex/contrib/nopageno
