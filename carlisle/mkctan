@@ -5,7 +5,7 @@ rm -rf carlisle.zip
 zip carlisle.zip carlisle/{README.txt,\
 dotlessj.sty,\
 ltxtable.tex,ltxtable.pdf,\
-mylatex.ltx,plain.sty,\
+plain.sty,\
 remreset.sty,\
 scalefnt.sty,\
 slashed.sty}
