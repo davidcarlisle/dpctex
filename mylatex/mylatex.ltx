@@ -15,8 +15,14 @@
 %%% Given a LaTeX file `abc.tex', use initex as follows:
 %%%
 %%% initex &latex  mylatex.ltx abc      (Generic TeX)
-%%% initex \&latex mylatex.ltx abc      (unix and other TeX's)
-%%% tex /i &latex  mylatex.ltx abc      (emtex)
+%%%
+%%% You may need to quote the & from your commandline and also
+%%% most modern systems use an --ini option rather than a separate
+%%% initex program so this may need to be
+%%%
+%%% pdftex --ini "&latex" mylatex.ltx abc
+%%%
+%%% To produce a format extending pdflates for example.
 %%%
 %%% If you are on a Mac or using some shell that makes it inconvenient
 %%% to use a command line such as the above examples then you may
@@ -34,7 +40,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%
 %%%
 %%% tex  &mylatex abc          (generic TeX)
-%%% virtex \&mylatex abc       (Unix TeX)
+%%%
+%%% As above you may need to quote the & so for pdflatex
+%%%
+%%%  pdflatex "&mylatex" abc
 %%%
 %%% This will process your document, abc.tex, just as LaTeX does, but
 %%% quicker as the contents of the preamble will be stored in the
