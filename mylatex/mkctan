@@ -1,0 +1,7 @@
+cd ..
+rm -rf mylatex.zip
+zip mylatex.zip mylatex/{README.txt,mylatex.ltx}
+
+mv mylatex.zip mylatex
+
+
