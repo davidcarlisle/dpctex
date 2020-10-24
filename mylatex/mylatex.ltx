@@ -110,6 +110,8 @@
 %%%            mylatex.ltx with OzTeX
 %%%  Modified 1999/01/04 Rowland McDonnell corrected notes on how to 
 %%%            use mylatex.ltx with OzTeX.
+%%%  Modified 2020/10/23 Phelype Oleinik updated to work with new hook code
+%%%            in \begin{document}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \makeatletter
@@ -117,6 +119,13 @@
 % Save the original definitions.
 \let\MYLATEXdocument\document
 \let\MYLATEXopenout\openout
+
+% new for 2020-10-01
+\ifx\@execute@begin@hook\@undefined
+\else
+  \let\MYLATEX@execute@begin@hook\@execute@begin@hook
+  \def\@execute@begin@hook#1{}%
+\fi
 
 % The version of \document to use on the initex run.
 % Just preloads some fonts, puts back \document and \openout,
@@ -137,6 +146,7 @@
     }}% 
   \let\document\MYLATEXdocument
   \let\openout\MYLATEXopenout
+  \let\@execute@begin@hook\MYLATEX@execute@begin@hook
   \makeatother
   \everyjob\expandafter{\the\everyjob
      \begingroup
