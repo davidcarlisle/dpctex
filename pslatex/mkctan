@@ -1,0 +1,7 @@
+cd ..
+rm -rf pslatex.zip
+zip -r pslatex.zip pslatex/{00readme.txt,afm,dvips,fontinst,latex,mkctan,shell,tfm,vf}
+
+mv pslatex.zip pslatex
+
+
