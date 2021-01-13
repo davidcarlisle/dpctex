@@ -2,7 +2,7 @@
 
 pslatex (Times/Helvetica/Courier with LaTeX2e)
 
-  Copyright 1994 1996 David Carlisle
+  Copyright 1994 1996 2021 David Carlisle
 
   All the files in the pslatex distribution may be redistributed
   and/or modified under the terms of the LaTeX Project Public License
@@ -42,6 +42,7 @@ automatically include the pslatex package at \begin{document}.
            1994/02/07
            1996/07/22
            1996/07/24
+	   2021/01/13
 
 Files
 =====

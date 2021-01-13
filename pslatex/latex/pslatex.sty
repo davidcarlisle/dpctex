@@ -1,13 +1,14 @@
 
-\ProvidesPackage{pslatex}[1996/07/24 v1.2 pslatex emulation (DPC)]
+\ProvidesPackage{pslatex}[2021/01/13 v1.3 pslatex emulation (DPC)]
 
-% Copyright 1994 1996 David Carlisle
+% Copyright 1994 1996 2021 David Carlisle
 % This file may be distributed under the terms of the LPPL.
 % See 00readme.txt for details.
 
 % 1994/06/28 v1.0 
 % 1996/07/22 v1.1 update to `8r' encoded base fonts.
 % 1996/07/24 v1.2 New way of resolving \pounds/\$ problem
+% 2021/01/13 v1.3 Replace {mc} font shape by {c} for NFSS update.
 
 %%% pslatex emulation for LaTeX2e
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -221,15 +222,15 @@
    <-> s * [.9] phvro7t
 }{}
 
-\DeclareFontShape{OT1}{phv}{mc}{n}{
+\DeclareFontShape{OT1}{phv}{c}{n}{
    <-> s * [.9] phvrrn7t
 }{}
 
-\DeclareFontShape{OT1}{phv}{mc}{sc}{
+\DeclareFontShape{OT1}{phv}{c}{sc}{
    <-> s * [.9] phvrcn7t
 }{}
 
-\DeclareFontShape{OT1}{phv}{mc}{sl}{
+\DeclareFontShape{OT1}{phv}{c}{sl}{
    <-> s * [.9] phvron7t
 }{}
 
@@ -240,7 +241,7 @@
 \DeclareFontShape{OT1}{phv}{bx}{it}{<->ssub * phv/b/it}{}
 \DeclareFontShape{OT1}{phv}{bc}{it}{<->ssub * phv/bc/sl}{}
 \DeclareFontShape{OT1}{phv}{m}{it}{<->ssub * phv/m/sl}{}
-\DeclareFontShape{OT1}{phv}{mc}{it}{<->ssub * phv/mc/sl}{}
+\DeclareFontShape{OT1}{phv}{c}{it}{<->ssub * phv/mc/sl}{}
 
 
 
@@ -379,15 +380,15 @@
    <-> s * [.9] phvro8t
 }{}
 
-\DeclareFontShape{T1}{phv}{mc}{n}{
+\DeclareFontShape{T1}{phv}{c}{n}{
    <-> s * [.9] phvrrn8t
 }{}
 
-\DeclareFontShape{T1}{phv}{mc}{sc}{
+\DeclareFontShape{T1}{phv}{c}{sc}{
    <-> s * [.9] phvrcn8t
 }{}
 
-\DeclareFontShape{T1}{phv}{mc}{sl}{
+\DeclareFontShape{T1}{phv}{c}{sl}{
    <-> s * [.9] phvron8t
 }{}
 
@@ -398,7 +399,7 @@
 \DeclareFontShape{T1}{phv}{bx}{it}{<->ssub * phv/b/it}{}
 \DeclareFontShape{T1}{phv}{bc}{it}{<->ssub * phv/bc/sl}{}
 \DeclareFontShape{T1}{phv}{m}{it}{<->ssub * phv/m/sl}{}
-\DeclareFontShape{T1}{phv}{mc}{it}{<->ssub * phv/mc/sl}{}
+\DeclareFontShape{T1}{phv}{c}{it}{<->ssub * phv/mc/sl}{}
 
 
 
