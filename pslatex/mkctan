@@ -1,7 +1,7 @@
 #!/bin/bash
 rm -rf pslatex.zip
 cd ..
-zip -r pslatex.zip pslatex/{Readme.txt,afm,dvips,fontinst,latex,mkctan,shell,tfm,vf}
+zip -r pslatex.zip pslatex/{Readme.txt,afm,dvips,fontinst,latex,shell,tfm,vf}
 mv pslatex.zip pslatex
 
 
