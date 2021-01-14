@@ -47,7 +47,7 @@ automatically include the pslatex package at \begin{document}.
 Files
 =====
 
-00readme.txt              This file
+README.txt              This file
 
 dvips/pcrr8rn.map         If you are using dvips, copy the one line from
                           this file to your psfonts.map file.
