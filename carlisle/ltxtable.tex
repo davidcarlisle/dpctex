@@ -1,6 +1,6 @@
 %
 %% User documentation and source for ltxtable package
-%% (C) 1995 David Carlisle
+%% (C) 1995, 2001 David Carlisle
 %
 %% This file may be distributed under the terms of the LPPL.
 %% See 00readme.txt for details.
@@ -11,7 +11,7 @@
 % This will write the ltxtable.sty package file on to your system
 % and produce some rather terse typeset documentation.
 %
-\begin{filecontents}{ltx1.tex}
+\begin{filecontents}[overwrite]{ltx1.tex}
 \begin{longtable}{|cXX|}
 the & head& line\endhead
 the & foot& line\endfoot
@@ -25,9 +25,9 @@ a a  aaaa& b b& c ccccc\\
 \end{longtable}
 \end{filecontents}
 
-\begin{filecontents}{ltxtable.sty}
+\begin{filecontents}[overwrite]{ltxtable.sty}
 %
-%% ltxtable package (C) 1995 David Carlisle
+%% ltxtable package (C) 1995, 2001 David Carlisle
 %%
 %% This file may be distributed under the terms of the LPPL.
 %% See 00readme.txt for details.
@@ -37,7 +37,7 @@ a a  aaaa& b b& c ccccc\\
 %    \begin{macrocode}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{ltxtable}
-                [1995/12/11 v0.2 longtable/tabularx merge (DPC)]
+                [2001/06/12 v0.3 longtable/tabularx merge (DPC)]
 %    \end{macrocode}
 % 
 % May as get these in, going to need them...
@@ -76,8 +76,9 @@ a a  aaaa& b b& c ccccc\\
 %    \begin{macrocode}
 \def\endlongtable{%
   \LT@echunk
-\global\setbox\@ne\hbox{\unhbox\@ne}%
-  \kern\wd\@ne
+% from 2001 longtable uses an allocated box \LT@gbox not \box1
+\global\setbox\LT@gbox\hbox{\unhbox\LT@gbox}%
+  \kern\wd\LT@gbox
   \LT@get@widths%
   \endgroup}%
 %    \end{macrocode}
@@ -168,7 +169,7 @@ a a  aaaa& b b& c ccccc\\
 
 \title{ltxtable: longtable meets tabularx}
 \author{David Carlisle}
-\date{1995/12/11}
+\date{2001/06/12}
 \maketitle
 
 Since \texttt{tabularx} was put on the archives in 1992 or so I have
@@ -228,3 +229,4 @@ Then a longtable
 1995/12/11 v0.2  (Petr Sojka) Typos fixed so the package works!
                  (Initial release *always* read the same table file,
                   ignoring the argument...)
+2001/06/12 v0.3  longtable now uses \LT@gbox not \box\@ne so change here to match.
