@@ -1,6 +1,6 @@
 %
 %% User documentation and source for ltxtable package
-%% (C) 1995, 2001 David Carlisle
+%% (C) 1995, 2021 David Carlisle
 %
 %% This file may be distributed under the terms of the LPPL.
 %% See 00readme.txt for details.
@@ -27,7 +27,7 @@ a a  aaaa& b b& c ccccc\\
 
 \begin{filecontents}[overwrite]{ltxtable.sty}
 %
-%% ltxtable package (C) 1995, 2001 David Carlisle
+%% ltxtable package (C) 1995, 2021 David Carlisle
 %%
 %% This file may be distributed under the terms of the LPPL.
 %% See 00readme.txt for details.
@@ -37,7 +37,7 @@ a a  aaaa& b b& c ccccc\\
 %    \begin{macrocode}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{ltxtable}
-                [2001/06/12 v0.3 longtable/tabularx merge (DPC)]
+                [2021/06/13 v0.4 longtable/tabularx merge (DPC)]
 %    \end{macrocode}
 % 
 % May as get these in, going to need them...
@@ -76,7 +76,7 @@ a a  aaaa& b b& c ccccc\\
 %    \begin{macrocode}
 \def\endlongtable{%
   \LT@echunk
-% from 2001 longtable uses an allocated box \LT@gbox not \box1
+% from 2021 longtable uses an allocated box \LT@gbox not \box1
 \global\setbox\LT@gbox\hbox{\unhbox\LT@gbox}%
   \kern\wd\LT@gbox
   \LT@get@widths%
@@ -169,7 +169,7 @@ a a  aaaa& b b& c ccccc\\
 
 \title{ltxtable: longtable meets tabularx}
 \author{David Carlisle}
-\date{2001/06/12}
+\date{2021/06/12}
 \maketitle
 
 Since \texttt{tabularx} was put on the archives in 1992 or so I have
@@ -230,3 +230,4 @@ Then a longtable
                  (Initial release *always* read the same table file,
                   ignoring the argument...)
 2001/06/12 v0.3  longtable now uses \LT@gbox not \box\@ne so change here to match.
+2021/06/12 v0.4  what year is it....
