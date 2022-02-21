@@ -1,6 +1,6 @@
 % \iffalse
 %% Source File: textcase.dtx
-%% Copyright 1997 1998 2019 David Carlisle
+%% Copyright 1997 1998 2019 2022 David Carlisle
 %%
 %% This file may be distributed under the terms of the LPPL.
 %% See 00readme.txt for details.
@@ -13,7 +13,7 @@
 %<driver> \ProvidesFile{textcase.drv}
 % \fi
 %         \ProvidesFile{textcase.dtx}
-       [2019/09/14 v1.00 Text only upper/lower case changing (DPC)]
+       [2022/02/21 v1.01 Text only upper/lower case changing (DPC)]
 %
 % \iffalse
 %<*driver>
@@ -246,10 +246,13 @@
       \def\({$}\let\)\(%
 %    \end{macrocode}
 %
-% \changes{v1.0}{2019/09/14}
+% \changes{v1.00}{2019/09/14}
 %    {UTF-8 support for 2019 LaTeX format}
 % Allow UTF-8 characters to expand in the |\protected@edef| so that
 % they become for example  |\IeC{\'{e}}| and uppercase correctly.
+% \changes{v1.01}{2022/02/14}
+%    {UTF-8 support for 2022 LaTeX format}
+% Allow UTF-8 characters are e-\TeX\ |\protected| in newer \LaTeX\ formats.
 % 
 %    \begin{macrocode}
       \let\UTF@two@octets@noexpand\@empty
@@ -366,8 +369,13 @@
 % Put it all together. Arrange for \i\ and \j\ to uppercase, and
 % to read the pairs in the ucase list `forwards'.
 %    \begin{macrocode}
+\ifx\@expl@text@uppercase@@n\@undefined
 \DeclareRobustCommand\MakeTextUppercase{%
   \@uclcnotmath{\def\i{I}\def\j{J}}{##1##2}\uppercase}
+\else
+\DeclareRobustCommand\MakeTextUppercase{%
+  \@uclcnotmath{\def\i{I}\def\j{J}}{##1##2}\@expl@text@uppercase@@n}
+\fi
 %    \end{macrocode}
 %
 %    \begin{macrocode}
@@ -381,8 +389,13 @@
 % probably will never be used, but it is easy to implement.
 % Use |\lowercase| and read the pairs in the uppercase list `backwards'.
 %    \begin{macrocode}
+\ifx\@expl@text@lowercase@@n\@undefined
 \DeclareRobustCommand\MakeTextLowercase{%
   \@uclcnotmath{}{##2##1}\lowercase}
+\else
+\DeclareRobustCommand\MakeTextLowercase{%
+  \@uclcnotmath{}{##2##1}\@expl@text@lowercase@@n}
+\fi
 %    \end{macrocode}
 %
 %    \begin{macrocode}
