@@ -13,7 +13,7 @@
 %<driver> \ProvidesFile{textcase.drv}
 % \fi
 %         \ProvidesFile{textcase.dtx}
-       [2022/02/21 v1.01 Text only upper/lower case changing (DPC)]
+       [2022/06/12 v1.02 Text only upper/lower case changing (DPC)]
 %
 % \iffalse
 %<*driver>
@@ -58,6 +58,18 @@
 % \maketitle
 %
 % \section{Introduction}\label{intro}
+%
+% \subsection*{This package is obsolete with the June 2020 \LaTeX\ release.}
+% \begin{sloppypar}
+% With new formats |\MakeUppercase| supports the extensions provided
+% here, with improved support for UTF-8 input. So now the package just defines
+% |\MakeTextUppercase| and |\MakeTextLowercase| as aliases for the
+% standard |\MakeUppercase| and |\MakeLowercase|.
+% \end{sloppypar}
+%
+%
+% \subsection*{Old Introduction}
+% 
 % |\MakeTextUppercase| and |\MakeTextLowercase| are versions of the
 % standard |\MakeUppercase| and |\MakeLowercase| that do not change
 % the case of any math sections in their arguments.
@@ -216,6 +228,18 @@
 %<*package>
 %    \end{macrocode}
 %
+% In current \LaTeX\ just define legacy names.
+%    \begin{macrocode}
+\ifx\@expl@text@uppercase@@n\@undefined\else
+  \DeclareOption{overload}{}
+  \ProcessOptions
+  \PackageInfo{textcase}{Defining Legacy names}
+  \let\MakeTextUppercase\MakeUppercase
+  \let\MakeTextLowercase\MakeLowercase
+  \expandafter\endinput
+\fi
+%    \end{macrocode}
+%
 % \begin{macro}{\@uclcnotmath}
 % This is the main macro of this package. It is basically
 % a copy of |\MakeTextUppercase| and |\MakeTextLowercase|
@@ -251,7 +275,9 @@
 % Allow UTF-8 characters to expand in the |\protected@edef| so that
 % they become for example  |\IeC{\'{e}}| and uppercase correctly.
 % \changes{v1.01}{2022/02/14}
-%    {UTF-8 support for 2022 LaTeX format}
+%    {UTF-8 support for 2022 LaTeX format (unreleased)}
+% \changes{v1.02}{2022/06/12}
+%    {Obsolete this package in newer formats}
 % Allow UTF-8 characters are e-\TeX\ |\protected| in newer \LaTeX\ formats.
 % 
 %    \begin{macrocode}
@@ -369,13 +395,8 @@
 % Put it all together. Arrange for \i\ and \j\ to uppercase, and
 % to read the pairs in the ucase list `forwards'.
 %    \begin{macrocode}
-\ifx\@expl@text@uppercase@@n\@undefined
 \DeclareRobustCommand\MakeTextUppercase{%
   \@uclcnotmath{\def\i{I}\def\j{J}}{##1##2}\uppercase}
-\else
-\DeclareRobustCommand\MakeTextUppercase{%
-  \@uclcnotmath{\def\i{I}\def\j{J}}{##1##2}\@expl@text@uppercase@@n}
-\fi
 %    \end{macrocode}
 %
 %    \begin{macrocode}
@@ -389,13 +410,8 @@
 % probably will never be used, but it is easy to implement.
 % Use |\lowercase| and read the pairs in the uppercase list `backwards'.
 %    \begin{macrocode}
-\ifx\@expl@text@lowercase@@n\@undefined
 \DeclareRobustCommand\MakeTextLowercase{%
   \@uclcnotmath{}{##2##1}\lowercase}
-\else
-\DeclareRobustCommand\MakeTextLowercase{%
-  \@uclcnotmath{}{##2##1}\@expl@text@lowercase@@n}
-\fi
 %    \end{macrocode}
 %
 %    \begin{macrocode}
