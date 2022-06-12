@@ -6,3 +6,7 @@ The textcase package
    Improvements from Donald Arseneau mean that \label, \ref and \cite
    also work within the argument of these commands, without the symbolic
    `key name' being incorrectly uppercased.
+
+   In current LaTeX this package is obsolete. You can use the standard
+   \MakeUppercase and \MakeLowercase, but it defines legacy names
+   \MakeTextUppercase and \MakeTextLowercase.
