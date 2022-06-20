@@ -398,18 +398,17 @@
 % \DescribeMacro{\rowcolors*}
 %   \oarg{commands}\marg{row}\marg{odd-row color}\marg{even-row color}\\
 % One of these commands has to be executed \emph{before} a table starts.
-% \Meta{row} tells the number of the first row which should be colored according to the \Meta{odd-row color} and \Meta{even-row color} scheme.
+% \meta{row} tells the number of the first row which should be colored according to the \meta{odd-row color} and \meta{even-row color} scheme.
 % Each of the color arguments may also be left empty (= no color).
-% In the starred version, \Meta{commands} are ignored in rows with inactive \emph{rowcolors status} (see below), whereas in the non-starred version, \Meta{commands} are applied to every row of the table.
-% Such optional commands may be |\hline| or |\noalign|\marg{stuff}.
+% In the starred version, \meta{commands} are ignored in rows with inactive \emph{rowcolors status} (see below), whereas in the non-starred version, \meta{commands} are applied to every row of the table.
+% Such optional commands may be "\hline" or "\noalign"\marg{stuff}.
 %
 % \DescribeMacro\showrowcolors
 % \DescribeMacro\hiderowcolors
-% The \emph{rowcolors status} is activated (i.e., use coloring scheme) by default and/or |\showrowcolors|, it is inactivated (i.e., ignore coloring scheme) by the command |\hiderowcolors|.
+% The \emph{rowcolors status} is activated (i.e., use coloring scheme) by default and/or "\showrowcolors", it is inactivated (i.e., ignore coloring scheme) by the command "\hiderowcolors".
 % \DescribeMacro\rownum
-% The counter |\rownum| may be used within such a table to access the current row number.
-% An example is given in figure \vref{fig.row}.
-% These commands require the \Option{table} option (which loads the \Package{colortbl} package)
+% The counter "\rownum" may be used within such a table to access the current row number.
+% An example is given in figure \ref{fig.row}.
 %
 % \begin{figure}[htbp]\caption{Alternating row colors in tables: \cmd\rowcolors{} vs.
 % \cmd\rowcolors\texttt*}\label{fig.row}
@@ -1247,9 +1246,9 @@
 % \begin{macro}{\rowcolors*}
 %   \oarg{commands}\marg{row}\marg{odd-row color}\marg{even-row color}\\
 % Defines alternating colors for the next tabular environment.
-% Starting with row \Meta{row}, odd and even rows get their respective colors.
+% Starting with row \meta{row}, odd and even rows get their respective colors.
 % The color arguments may also be left empty (= no color).
-% Optional commands may be |\hline| or |\noalign|\marg{stuff}.
+% Optional commands may be "hline" or "noalign"\marg{stuff}.
 %    \begin{macrocode}
  \def\rowcolors
   {\@ifstar{\@rowcmdfalse\rowc@lors}{\@rowcmdtrue\rowc@lors}}
