@@ -1,0 +1,32 @@
+\input{regression-test}
+\documentclass{book}
+
+\usepackage{colortbl} % load first to suppress xcolor patch
+
+
+\begin{document}
+
+$x$ % clear font loading
+
+\START
+
+\TEST{latex counter no row colors}{
+\begin{tabular}{ll}
+\roman{rownum} & a\\
+\arabic{rownum} & b\\
+\Roman{rownum}\TYPE{III = \Roman{rownum}} & c\\
+\number\rownum & d\\
+\end{tabular}
+}
+
+\TEST{latex counter row colors}{
+\rowcolors{1}{red}{yellow}
+\begin{tabular}{ll}
+\roman{rownum} & a\\
+\arabic{rownum} & b\\
+\Roman{rownum}\TYPE{III = \Roman{rownum}} & c\\
+\number\rownum & d\\
+\end{tabular}
+}
+
+\end{document}

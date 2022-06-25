@@ -1326,10 +1326,19 @@
 % \end{macro}
 %
 % \begin{macro}{\rownum}
-% Reserve a counter register.
+% \begin{macro}{\c@rownum}
+% Reserve a counter register. Also alias as a \LaTeX\ counter
+% (but not via "\newcounter" as should not be in the reset list.)
 %    \begin{macrocode}
- \@ifundefined{rownum}{\newcount\rownum}{}
+ \@ifundefined{rownum}{%
+    \@ifundefined{c@rownum}%
+       {\newcount\rownum\let\c@rownum\rownum}%
+       {\let\rownum\c@rownum}%
+     }%
+    {\let\c@rownum\rownum}
+ \providecommand\theqrownum{\arabic{rownum}}
 %    \end{macrocode}
+% \end{macro}
 % \end{macro}
 %
 %
