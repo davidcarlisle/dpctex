@@ -41,11 +41,11 @@
 % \date{\filedate}
 %
 %  \maketitle
-% 
+%
 %
 % \begin{abstract}
-% This package implements a flexible mechanism for giving coloured 
-% `panels' behind specified columns in a table. 
+% This package implements a flexible mechanism for giving coloured
+% `panels' behind specified columns in a table.
 % This package requires the \textsf{array} and \textsf{color} packages.
 % \end{abstract}
 %
@@ -73,11 +73,12 @@
 % \changes{v1.0c}{2018/05/02}{Updates to match new array code}
 % \changes{v1.0d}{2018/12/22}{Updates to match even newer array code}
 % \changes{v1.0e}{2020/01/04}{Updates to match updated hhline}
+% \changes{v1.0f}{2022/06/20}{moved \cs{rowcolors} code from xcolor}
 %
 % \section{Introduction}
 %
 % This package is for colouring tables (i.e., giving coloured panels
-% behind column entries). In that it has many similarities with 
+% behind column entries). In that it has many similarities with
 % Timothy Van Zandt's \textsf{colortab} package. The internal
 % implementation is quite different though, also \textsf{colortab}
 % works with the table constructs of other formats besides \LaTeX.
@@ -103,7 +104,7 @@
 %
 % \section{ The \cs{columncolor} command}
 %
-% The examples below demonstrate various possibilities of the 
+% The examples below demonstrate various possibilities of the
 % "\columncolor" command introduced by this package. The vertical rules
 % specified by "|" are kept in all the examples, to make the column
 % positioning clearer, although  possibly you would not want coloured
@@ -187,10 +188,10 @@
 %  \end{tabular}}
 % \end{center}
 %
-% 
+%
 % This package should work with most other packages that are
 % compatible with the \textsf{array} package syntax. In particular it
-% works with \textsf{longtable} and \textsf{dcolumn} 
+% works with \textsf{longtable} and \textsf{dcolumn}
 % as the following example shows.
 %\errorcontextlines10
 % \newcolumntype{A}{%^^A
@@ -216,10 +217,10 @@
 %^^A needs a June 96 version of dcolumn, so use -1 here.
 % \newcolumntype{C}{%
 %     >{\columncolor{yellow}[.5\tabcolsep]}%
-%       D{.}{\cdot}{-1}}    
+%       D{.}{\cdot}{-1}}
 % \newcolumntype{I}{%^^A
 %     >{\columncolor[gray]{0.8}[\tabcolsep][.5\tabcolsep]}%^^A
-%                  D{.}{\cdot}{-1}}    
+%                  D{.}{\cdot}{-1}}
 %
 % \setlength\minrowclearance{2pt}
 % Before starting give a little space: "\setlength\minrowclearance{2pt}"
@@ -253,7 +254,7 @@
 %  aaa&Depending on your driver you may get unsightly gaps or lines
 %   where the  `screens' used to produce different shapes interact
 %   badly. You may want to cause adjacent panels of the same colour by
-%  specifying a larger overhang 
+%  specifying a larger overhang
 % or by adding some negative space (in a "\noalign" between rows.&12.4\\
 %  aaa&bbb&45.3\\
 % \end{longtable}
@@ -273,7 +274,7 @@
 %    p{3cm}}
 % \newcolumntype{C}{%
 %     >{\columncolor{yellow}[.5\tabcolsep]}%
-%       D{.}{\cdot}{3.3}}    
+%       D{.}{\cdot}{3.3}}
 % \newcolumntype{E}{%
 %    >{\large\bfseries
 %      \columncolor{cyan}[.5\tabcolsep]}c}
@@ -285,7 +286,7 @@
 % \newcolumntype{H}{>{\columncolor[gray]{0.8}}l}
 % \newcolumntype{I}{%
 %     >{\columncolor[gray]{0.8}[\tabcolsep][.5\tabcolsep]}%
-%                    D{.}{\cdot}{3.3}}    
+%                    D{.}{\cdot}{3.3}}
 %\end{verbatim}
 %
 % \section{Using the `overhang' arguments for \textsf{tabular*}}
@@ -388,18 +389,114 @@
 %  \end{tabular}}
 % \end{center}
 %
+% \section{The \cs{rowcolors} command}
+% The \cs{rowcolors} command and its documentation originate in the \textsf{xcolor} package
+% by Dr. Uwe Kern in the xcolor.
+%
+% \DescribeMacro\rowcolors
+%   \oarg{commands}\marg{row}\marg{odd-row color}\marg{even-row color}\\
+% \DescribeMacro{\rowcolors*}
+%   \oarg{commands}\marg{row}\marg{odd-row color}\marg{even-row color}\\
+% One of these commands has to be executed \emph{before} a table starts.
+% \meta{row} tells the number of the first row which should be colored according to the \meta{odd-row color} and \meta{even-row color} scheme.
+% Each of the color arguments may also be left empty (= no color).
+% In the starred version, \meta{commands} are ignored in rows with inactive \emph{rowcolors status} (see below), whereas in the non-starred version, \meta{commands} are applied to every row of the table.
+% Such optional commands may be "\hline" or "\noalign"\marg{stuff}.
+%
+% \DescribeMacro\showrowcolors
+% \DescribeMacro\hiderowcolors
+% The \emph{rowcolors status} is activated (i.e., use coloring scheme) by default and/or "\showrowcolors", it is inactivated (i.e., ignore coloring scheme) by the command "\hiderowcolors".
+% \DescribeMacro\rownum
+% The counter "\rownum" may be used within such a table to access the current row number.
+% An example is given in figure \ref{fig.row}.
+%
+% \begin{figure}[htbp]\caption{Alternating row colors in tables: \cmd\rowcolors{} vs.
+% \cmd\rowcolors\texttt*}\label{fig.row}
+% \centering
+% \begin{minipage}{\textwidth}
+% \begin{verbatim}
+% \rowcolors[\hline]{3}{green}{yellow} \arrayrulecolor{red}
+% \begin{tabular}{ll}
+% test & row \number\rownum\\
+% test & row \number\rownum\\
+% test & row \number\rownum\\
+% test & row \number\rownum\\
+% \arrayrulecolor{black}
+% test & row \number\rownum\\
+% test & row \number\rownum\\
+% \rowcolor{blue}
+% test & row \number\rownum\\
+% test & row \number\rownum\\
+% \hiderowcolors
+% test & row \number\rownum\\
+% test & row \number\rownum\\
+% \showrowcolors
+% test & row \number\rownum\\
+% test & row \number\rownum\\
+% \multicolumn{1}%
+%  {>{\columncolor{red}}l}{test} & row \number\rownum\\
+% \end{tabular}
+% \end{verbatim}
+% \end{minipage}
+% \hskip-.5\textwidth
+% \rowcolors[\hline]{3}{green}{yellow} \arrayrulecolor{red}
+% \begin{tabular}{ll}
+% test & row \number\rownum\\
+% test & row \number\rownum\\
+% test & row \number\rownum\\
+% test & row \number\rownum\\
+% \arrayrulecolor{black}
+% test & row \number\rownum\\
+% test & row \number\rownum\\
+% \rowcolor{blue!25}
+% test & row \number\rownum\\
+% test & row \number\rownum\\
+% \hiderowcolors
+% test & row \number\rownum\\
+% test & row \number\rownum\\
+% \showrowcolors
+% test & row \number\rownum\\
+% test & row \number\rownum\\
+% \multicolumn{1}%
+%  {>{\columncolor{red!12}}l}{test} & row \number\rownum\\
+% \end{tabular}
+% \qquad
+% \rowcolors*[\hline]{3}{green}{yellow}\arrayrulecolor{red}
+% \begin{tabular}{ll}
+% test & row \number\rownum\\
+% test & row \number\rownum\\
+% test & row \number\rownum\\
+% test & row \number\rownum\\
+% \arrayrulecolor{black}
+% test & row \number\rownum\\
+% test & row \number\rownum\\
+% \rowcolor{blue}
+% test & row \number\rownum\\
+% test & row \number\rownum\\
+% \hiderowcolors
+% test & row \number\rownum\\
+% test & row \number\rownum\\
+% \showrowcolors
+% test & row \number\rownum\\
+% test & row \number\rownum\\
+% \multicolumn{1}%
+%  {>{\columncolor{red}}l}{test} & row \number\rownum\\
+% \end{tabular}
+% \arrayrulecolor{black}
+% \end{figure}
+%
 % \section{The \cs{cellcolor} command}
 %
 % A background colour can be applied to a single cell of a table by
-% beginning it with 
-% "\multicolumn"\nolinebreak[3]"{1}"\nolinebreak[3]"{>{\rowcolor"\ldots, 
-% (or "\columncolor" if no row-colour is in effect) but this has some 
-% deficiencies: 
+% beginning it with
+% "\multicolumn"\nolinebreak[3]"{1}"\nolinebreak[3]"{>{\rowcolor"\ldots,
+% (or "\columncolor" if no row-colour is in effect) but this has some
+% deficiencies:
 % 1)~It prevents data within the cell from triggering the colouration; \
 % 2)~The alignment specification must be copied from the top of the tabular,
 % which is prone to errors, especially for "p{}" columns; \
 % 3)~"\multicolumn{1}" is just silly. \
-% Therefore, there is the \cs{cellcolor} command, which works like 
+% Therefore, there is the \cs{cellcolor} command, which works like
 % \cs{columncolor} and \cs{rowcolor}, but over-rides both of them;
 % \cs{cellcolor} can be placed anywhere in the tabular cell to which
 % it applies.
@@ -409,13 +506,13 @@
 % So you want coloured rules as well?
 %
 % One could do vertical rules without any special commands, just use
-% something like "!{\color{green}\vline}" where you'd 
+% something like "!{\color{green}\vline}" where you'd
 % normally use "|". The space between "||" will normally be left white.
 % If you want to colour that as well, either increase the overhang of
-% the previous column (to 
+% the previous column (to
 % "\tabcolsep" + "\arrayrulewidth" + "\doublerulesep")
 % Or remove the inter rule glue, and replace by a coloured rule of the
-% required thickness. So 
+% required thickness. So
 %\begin{verbatim}
 %!{\color{green}\vline}
 %@{\color{yellow}\vrule width \doublerulesep}
@@ -446,7 +543,7 @@
 % discard space, but the coloured `space' which is used once
 % "\doublerulesep" is in effect is really a third rule of a different
 % colour to the two outer rules, and rules are rather harder to
-% discard.) 
+% discard.)
 %
 % \begin{center}
 % \setlength\arrayrulewidth{2pt}\arrayrulecolor{blue}
@@ -568,7 +665,7 @@
 % "\hline" or the top of a colour panel defined by this style.
 % It is best to increase "\extrarowsep" or "\arraystretch"
 % sufficiently to ensure this doesn't happen, as that will keep the
-% line spacing in the table regular. Sometimes however, you just want 
+% line spacing in the table regular. Sometimes however, you just want
 % to \LaTeX\ to insert a bit of extra space above a large entry.
 % You can set the length "\minrowclearance" to a small value.
 % (The height of a capital letter plus this value should not be
@@ -580,7 +677,7 @@
 % compatibility with \textsf{tabls}, but that is implemented quite
 % differently and probably has different behaviour. So I'll keep a new
 % name for now.
-% 
+%
 % \StopEventually{}
 %
 % \section{The Code}
@@ -954,7 +1051,7 @@
       \else
         \@addtopreamble{{\CT@drsc@\vrule\@width\doublerulesep}}%
       \fi\or
-      \@acol \or   
+      \@acol \or
       \@classvii
       \fi}
 %    \end{macrocode}
@@ -1145,6 +1242,85 @@
 %    \end{macrocode}
 % \end{macro}
 %
+% \begin{macro}{\rowcolors}
+% \begin{macro}{\rowcolors*}
+%   \oarg{commands}\marg{row}\marg{odd-row color}\marg{even-row color}\\
+% Defines alternating colors for the next tabular environment.
+% Starting with row \meta{row}, odd and even rows get their respective colors.
+% The color arguments may also be left empty (= no color).
+% Optional commands may be "hline" or "noalign"\marg{stuff}.
+%    \begin{macrocode}
+ \def\rowcolors
+  {\@ifstar{\@rowcmdfalse\rowc@lors}{\@rowcmdtrue\rowc@lors}}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+ \def\rowc@lors{\@testopt{\rowc@l@rs}{}}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+ \def\rowc@l@rs[#1]#2#3#4%
+  {\global\rownum=\z@
+   \global\@rowcolorstrue
+   \@ifxempty{#3}%
+     {\def\@oddrowcolor{\@norowcolor}}%
+     {\def\@oddrowcolor{\gdef\CT@row@color{\CT@color{#3}}}}%
+   \@ifxempty{#4}%
+     {\def\@evenrowcolor{\@norowcolor}}%
+     {\def\@evenrowcolor{\gdef\CT@row@color{\CT@color{#4}}}}%
+   \if@rowcmd
+     \def\@rowcolors
+      {#1\if@rowcolors
+         \noalign{\relax\ifnum\rownum<#2\@norowcolor\else
+                  \ifodd\rownum\@oddrowcolor\else\@evenrowcolor\fi\fi}%
+       \fi}%
+   \else
+     \def\@rowcolors
+      {\if@rowcolors
+         \ifnum\rownum<#2\noalign{\@norowcolor}\else
+         #1\noalign{\ifodd\rownum\@oddrowcolor\else\@evenrowcolor\fi}\fi
+       \fi}%
+   \fi
+   \CT@everycr{\@rowc@lors\the\everycr}%
+   \ignorespaces}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+ \def\@rowc@lors{\noalign{\global\advance\rownum\@ne}\@rowcolors}
+ \let\@rowcolors\@empty
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}{\showrowcolors}
+% \begin{macro}{\hiderowcolors}
+% Switch coloring mode on/off.
+%    \begin{macrocode}
+ \def\showrowcolors{\noalign{\global\@rowcolorstrue}\@rowcolors}
+ \def\hiderowcolors{\noalign{\global\@rowcolorsfalse\@norowcolor}}
+ \def\@norowcolor{\global\let\CT@row@color\relax}
+ \@norowcolor
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}{\if@rowcolors}
+% \begin{macro}{\if@rowcmd}
+%    \begin{macrocode}
+ \newif\if@rowcolors
+ \newif\if@rowcmd
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}{\rownum}
+% Reserve a counter register.
+%    \begin{macrocode}
+ \@ifundefined{rownum}{\newcount\rownum}{}
+%    \end{macrocode}
+% \end{macro}
+%
+%
 % \begin{macro}{\cellcolor}
 % "\cellcolor" applies the specified colour to just its own tabular cell.
 % It is defined robust, but without using "\DeclareRobustCommand" or
@@ -1162,7 +1338,7 @@
     \global\let\CT@cell@color\relax
 }}
 \global\let\CT@cell@color\relax
-%    \end{macrocode} 
+%    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{\DC@endright}
