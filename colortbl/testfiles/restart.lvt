@@ -1,0 +1,50 @@
+% https://tex.stackexchange.com/a/170654/
+
+\input{regression-test}
+
+\documentclass{article}
+\usepackage[table]{xcolor}
+\usepackage{array}
+
+% LaTeX counter interface for \rownum
+% ---
+\makeatletter
+\@ifundefined{c@rownum}{%
+  \let\c@rownum\rownum
+}{}
+\@ifundefined{therownum}{%
+  \def\therownum{\@arabic\rownum}%
+}{}
+\makeatother
+
+\begin{document}
+
+$x$
+
+\showoutput
+\START
+\rowcolors{1}{yellow}{red}
+\begin{tabular}{>{\the\rownum}ll}
+\hline
+&\\
+&\\
+&\\
+&\setcounter{rownum}{0}\\
+\hline
+\hline
+& restart\\
+&\\
+&\setcounter{rownum}{0}\\
+\hline
+\hline
+& restart\\
+&\setcounter{rownum}{0}\\
+\hline
+\hline
+& restart\\
+&\\
+&\\
+\hline
+\end{tabular}
+
+\end{document}
