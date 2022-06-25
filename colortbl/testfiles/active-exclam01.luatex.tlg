@@ -1,0 +1,27 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: active ! in color mix
+============================================================
+should not error should still be active in text argument
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line ....
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line ....
+> \box...=
+\hbox(7.16+0.11)x19.44499, direction TLT
+.\pdfcolorstack 0 push {0 g 0 G}
+.\TU/lmr/m/n/10 a
+.\TU/lmr/m/n/10 b
+.\penalty 10000
+.\glue 1.665
+.\TU/lmr/m/n/10 !
+.\TU/lmr/m/n/10 c
+.\pdfcolorstack 0 pop
+! OK.
+\@sharp ->\sbox 0{ab!c}\showbox 0 
+                                  \usebox 0
+l. ...}
+============================================================
+[1
+] (active-exclam01.aux)

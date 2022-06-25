@@ -1,0 +1,21 @@
+\input{regression-test}
+\documentclass{book}
+
+\usepackage[french]{babel}
+\usepackage{colortbl} % load first to suppress xcolor patch
+\usepackage{xcolor}   % no table option 
+
+
+\begin{document}
+
+\START
+\TEST{active ! in color mix}{
+\TYPE{should not error should still be active in text argument}
+\begin{tabular}{ll}
+\multicolumn{2}{>{\columncolor{red!50!white}}l}{%
+\sbox0{ab!c}\showbox0 \usebox0} \\
+a & b ab!c
+\end{tabular}
+
+}
+\end{document}
