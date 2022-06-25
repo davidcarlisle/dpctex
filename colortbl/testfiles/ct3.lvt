@@ -1,3 +1,5 @@
+\input{regression-test}
+
 % reported by Frank Mittelbach (possibly a long time ago:-)
 % \multicolumn should not mask \rowcolor
 % fix suggested by Frank
@@ -12,6 +14,10 @@
 \usepackage{colortbl}
 
 \begin{document}
+
+$x$
+
+\START
 
 \begin{tabular}{rrrr}
 \rowcolor{yellow}

@@ -1,3 +1,5 @@
+\input{regression-test}
+
 % Andrew McFarland
 % email 2008/10/26
 
@@ -28,6 +30,10 @@
 \usepackage{colortbl}
 
 \begin{document}
+
+$x$
+
+\START
 
 \begin{center}
 What's happening with ``$\,$ \c{} $\,$'' and rowcolor in \texttt{colortbl}?\\

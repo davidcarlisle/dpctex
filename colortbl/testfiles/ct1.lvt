@@ -1,3 +1,5 @@
+\input{regression-test}
+
 % \multicolumn should be \long and accept \par
 % @egreg 
 % http://tex.stackexchange.com/questions/39976/is-it-possible-to-have-multiple-paragraphs-inside-a-multicolumn-using-xcolor-or/
@@ -6,7 +8,10 @@
 
 \usepackage{colortbl}
 \begin{document}
+$x$
 
+\START
+% should not error
 \begin{tabular}{cc}
 \multicolumn{2}{c}{a
 

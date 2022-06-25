@@ -1,3 +1,5 @@
+\input{regression-test}
+
 % reported by Frank Mittelbach (possibly a long time ago:-)
 % \hhline should use arrayrulewidth rather than doublerulesep
 % for ~
@@ -21,6 +23,10 @@
 \usepackage{colortbl}
 
 \begin{document}
+
+$x$
+
+\START
 
 Space for rule sep:
 
