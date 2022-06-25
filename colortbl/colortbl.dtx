@@ -408,11 +408,8 @@
 % The \emph{rowcolors status} is activated (i.e., use coloring scheme) by default and/or "\showrowcolors", it is inactivated (i.e., ignore coloring scheme) by the command "\hiderowcolors".
 % \DescribeMacro\rownum
 % The counter "\rownum" may be used within such a table to access the current row number.
-% An example is given in figure \ref{fig.row}.
 %
-% \begin{figure}[htbp]\caption{Alternating row colors in tables: \cmd\rowcolors{} vs.
-% \cmd\rowcolors\texttt*}\label{fig.row}
-% \centering
+% \begin{center}
 % \begin{minipage}{\textwidth}
 % \begin{verbatim}
 % \rowcolors[\hline]{3}{green}{yellow} \arrayrulecolor{red}
@@ -448,7 +445,7 @@
 % \arrayrulecolor{black}
 % test & row \number\rownum\\
 % test & row \number\rownum\\
-% \rowcolor{blue!25}
+% \rowcolor{cyan}
 % test & row \number\rownum\\
 % test & row \number\rownum\\
 % \hiderowcolors
@@ -458,7 +455,7 @@
 % test & row \number\rownum\\
 % test & row \number\rownum\\
 % \multicolumn{1}%
-%  {>{\columncolor{red!12}}l}{test} & row \number\rownum\\
+%  {>{\columncolor{magenta}}l}{test} & row \number\rownum\\
 % \end{tabular}
 % \qquad
 % \rowcolors*[\hline]{3}{green}{yellow}\arrayrulecolor{red}
@@ -483,7 +480,7 @@
 %  {>{\columncolor{red}}l}{test} & row \number\rownum\\
 % \end{tabular}
 % \arrayrulecolor{black}
-% \end{figure}
+% \end{center}
 %
 % \section{The \cs{cellcolor} command}
 %
@@ -1239,6 +1236,18 @@
     \@tempdimc\the\@tempdimc
     \relax}%
   \ifnum0=`{\fi}}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\@ifxempty}
+%   \marg{arg}\marg{empty}\marg{non-empty}\\
+% Tests without expanding, whether the argument \marg{arg} is empty and executes the following code accordingly; \marg{arg} must not start with the token "\XC@@".
+% Can also be used within "\edef".
+%    \begin{macrocode}
+\def\@ifxempty#1{\@@ifxempty#1\@@ifxempty\XC@@}
+\def\@@ifxempty#1#2\XC@@
+ {\ifx#1\@@ifxempty
+  \expandafter\@firstoftwo\else\expandafter\@secondoftwo\fi}
 %    \end{macrocode}
 % \end{macro}
 %
