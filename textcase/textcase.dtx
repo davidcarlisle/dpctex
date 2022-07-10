@@ -13,7 +13,7 @@
 %<driver> \ProvidesFile{textcase.drv}
 % \fi
 %         \ProvidesFile{textcase.dtx}
-       [2022/06/12 v1.02 Text only upper/lower case changing (DPC)]
+       [2022/07/10 v1.03 Text only upper/lower case changing (DPC)]
 %
 % \iffalse
 %<*driver>
@@ -230,7 +230,7 @@
 %
 % In current \LaTeX\ just define legacy names.
 %    \begin{macrocode}
-\ifx\@expl@text@uppercase@@n\@undefined\else
+\ifx\AddToNoCaseChangeList\@undefined\else
   \DeclareOption{overload}{}
   \ProcessOptions
   \PackageInfo{textcase}{Defining Legacy names}
@@ -278,6 +278,8 @@
 %    {UTF-8 support for 2022 LaTeX format (unreleased)}
 % \changes{v1.02}{2022/06/12}
 %    {Obsolete this package in newer formats}
+% \changes{v1.02s}{2022/067/10}
+%    {Adjust test for newer formats}
 % Allow UTF-8 characters are e-\TeX\ |\protected| in newer \LaTeX\ formats.
 % 
 %    \begin{macrocode}
