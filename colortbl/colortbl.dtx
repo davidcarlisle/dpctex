@@ -1261,6 +1261,11 @@
 % Starting with row \meta{row}, odd and even rows get their respective colors.
 % The color arguments may also be left empty (= no color).
 % Optional commands may be "hline" or "noalign"\marg{stuff}.
+%
+% In the starred version, \meta{commands} are ignored in rows with
+% inactive rowcolors status (see below), whereas in the non-starred
+% version, \meta{commands⟩} are applied to every row of the
+% table.
 %    \begin{macrocode}
  \def\rowcolors
   {\@ifstar{\@rowcmdfalse\rowc@lors}{\@rowcmdtrue\rowc@lors}}
