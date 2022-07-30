@@ -365,13 +365,15 @@ Einer dieser Befehle muss ausgeführt werden, \emph{bevor} eine Tabelle gestarte
 
 \emph{row} gibt die Nummer der ersten Zeile an, die nach dem Schema \emph{odd-row color} und \emph{even-row color} gefärbt werden soll.
 Jedes der Farbargumente kann auch leer gelassen werden (= keine Farbe).
-In der Version mit Stern werden \emph{Befehle} in Zeilen mit inaktivem \emph{rowcolors status} (siehe unten) ignoriert, während in der Version ohne Stern \emph{Befehle} auf jede Zeile der Tabelle angewendet werden.
+In der Version mit Stern werden Befehle \emph{commands} in Zeilen mit inaktivem \emph{rowcolors status} (siehe unten) ignoriert, während in der Version ohne Stern \emph{Befehle} auf jede Zeile der Tabelle angewendet werden.
 Solche optionalen Befehle können \verb"\hline" oder \verb"\noalign"\{\emph{stuff}\} sein.
 
 \textbf{\slash showrowcolors, \slash hiderowcolors}
 
 
-Der \emph{rowcolors status} ist standardmäßig aktiviert (d.h. Farbschema verwenden) und/oder \verb"\showrowcolors", er wird durch den Befehl \verb"\hiderowcolors" deaktiviert (d.h. Farbschema ignorieren).
+Der \emph{rowcolors status} ist standardmäßig aktiviert (d.h. das Farbschema wird verwendet),
+er wird durch den Befehl \verb"\hiderowcolors" deaktiviert (d.h. das Farbschema wird ignoriert) und kann
+mit \verb"\showrowcolors" wieder aktiviert werden.
 
 \textbf{\slash rownum}
 
