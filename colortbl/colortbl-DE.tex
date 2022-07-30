@@ -6,6 +6,7 @@
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{1ex plus 0.2ex minus 0.1ex}
 
+
 \usepackage{dcolumn,longtable,hhline,colortbl}
 \usepackage[table]{xcolor}
 \setlongtables% 
@@ -14,7 +15,7 @@
 \def\slash#1{\textbackslash#1}
 
  \title{The \textsf{colortbl} package\footnote{1.\,"Ubersetzungsversion,
- letzte "Anderung 15.\,3. 2009}}
+ letzte "Anderung 30.\,7. 2022}}
 
  \author{{\huge David Carlisle}\\ (\"Ubersetzung: Anne-Katrin Leich \& Christine
  R"omer)}
@@ -348,6 +349,109 @@ sodass die voreingestellten Farben der betreffenden Zeile und Spalte aufgehoben 
   drei & vier
   \end{tabular}}
  \end{center}
+
+
+\section{Der \slash \textsf{rowcolors} Befehl}
+Der \slash \textsf{rowcolors}-Befehl und seine Dokumentation stammen aus dem \textsf{xcolor}-Paket
+von Dr. Uwe Kern.
+
+\textbf{\slash rowcolors}\\\relax
+  [commands]\{row\}\{odd-row color\}\{even-row color\}
+
+\textbf{\slash rowcolors*}\\\relax
+  [commands]\{row\}\{odd-row color\}\{even-row color\}
+
+Einer dieser Befehle muss ausgeführt werden, \emph{bevor} eine Tabelle gestartet wird.
+
+\emph{row} gibt die Nummer der ersten Zeile an, die nach dem Schema \emph{odd-row color} und \emph{even-row color} gefärbt werden soll.
+Jedes der Farbargumente kann auch leer gelassen werden (= keine Farbe).
+In der Version mit Stern werden \emph{Befehle} in Zeilen mit inaktivem \emph{rowcolors status} (siehe unten) ignoriert, während in der Version ohne Stern \emph{Befehle} auf jede Zeile der Tabelle angewendet werden.
+Solche optionalen Befehle können \verb"\hline" oder \verb"\noalign"\{\emph{stuff}\} sein.
+
+\textbf{\slash showrowcolors, \slash hiderowcolors}
+
+
+Der \emph{rowcolors status} ist standardmäßig aktiviert (d.h. Farbschema verwenden) und/oder \verb"\showrowcolors", er wird durch den Befehl \verb"\hiderowcolors" deaktiviert (d.h. Farbschema ignorieren).
+
+\textbf{\slash rownum}
+
+Der Zähler \verb"\rownum" (oder \LaTeX\ Zähler \verb"rownum"
+kann innerhalb einer solchen Tabelle verwendet werden, um auf die aktuelle Zeilennummer zuzugreifen.
+
+Derzeit wird der \verb"rownum"-Zähler nur in Tabellen mit \verb"\rowcolors" inkrementiert.
+
+\begin{center}
+\begin{minipage}{\textwidth}
+\begin{verbatim}
+\rowcolors[\hline]{3}{green}{yellow} \arrayrulecolor{red}
+\begin{tabular}{ll}
+test & row \therownum\\
+test & row \therownum\\
+test & row \therownum\\
+test & row \therownum\\
+\arrayrulecolor{black}
+test & row \therownum\\
+test & row \therownum\\
+\rowcolor{blue}
+test & row \therownum\\
+test & row \therownum\\
+\hiderowcolors
+test & row \therownum\\
+test & row \therownum\\
+\showrowcolors
+test & row \therownum\\
+test & row \therownum\\
+\multicolumn{1}%
+ {>{\columncolor{red}}l}{test} & row \therownum\\
+\end{tabular}
+\end{verbatim}
+\end{minipage}
+\hskip-.5\textwidth
+\rowcolors[\hline]{3}{green}{yellow} \arrayrulecolor{red}
+\begin{tabular}{ll}
+test & row \therownum\\
+test & row \therownum\\
+test & row \therownum\\
+test & row \therownum\\
+\arrayrulecolor{black}
+test & row \therownum\\
+test & row \therownum\\
+\rowcolor{cyan}
+test & row \therownum\\
+test & row \therownum\\
+\hiderowcolors
+test & row \therownum\\
+test & row \therownum\\
+\showrowcolors
+test & row \therownum\\
+test & row \therownum\\
+\multicolumn{1}%
+ {>{\columncolor{magenta}}l}{test} & row \therownum\\
+\end{tabular}
+\qquad
+\rowcolors*[\hline]{3}{green}{yellow}\arrayrulecolor{red}
+\begin{tabular}{ll}
+test & row \therownum\\
+test & row \therownum\\
+test & row \therownum\\
+test & row \therownum\\
+\arrayrulecolor{black}
+test & row \therownum\\
+test & row \therownum\\
+\rowcolor{blue}
+test & row \therownum\\
+test & row \therownum\\
+\hiderowcolors
+test & row \therownum\\
+test & row \therownum\\
+\showrowcolors
+test & row \therownum\\
+test & row \therownum\\
+\multicolumn{1}%
+ {>{\columncolor{red}}l}{test} & row \therownum\\
+\end{tabular}
+\arrayrulecolor{black}
+\end{center}
 
  \section{Der \slash \textsf{cellcolor} Befehl}
 
