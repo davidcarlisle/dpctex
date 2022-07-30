@@ -1,0 +1,469 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+Completed box being shipped out [1]
+\vbox(633.0+0.0)x407.0, direction TLT
+.\hbox(0.0+0.0)x0.0, direction TLT
+..\kern-72.26999
+..\vbox(0.0+0.0)x0.0, glue set 72.26999fil, direction TLT
+...\kern-72.26999
+...\hbox(0.0+0.0)x0.0, direction TLT
+....\glue 0.0 plus 1.0fil minus 1.0fil
+...\glue 0.0 plus 1.0fil minus 1.0fil
+.\glue 16.0
+.\vbox(617.0+0.0)x345.0, shifted 62.0, direction TLT
+..\vbox(12.0+0.0)x345.0, glue set 12.0fil, direction TLT
+...\glue 0.0 plus 1.0fil
+...\hbox(0.0+0.0)x345.0, direction TLT
+....\pdfcolorstack 0 push {0 g 0 G}
+....\hbox(0.0+0.0)x345.0, direction TLT
+....\pdfcolorstack 0 pop
+..\glue 25.0
+..\glue(\lineskip) 0.0
+..\vbox(550.0+0.0)x345.0, glue set 390.7583fil, direction TLT
+...\write-{}
+...\pdfcolorstack 0 push {0 g 0 G}
+...\glue(\topskip) 5.69446
+...\hbox(4.30554+0.0)x345.0, glue set 324.28473fil, direction TLT
+....\localpar
+.....\localinterlinepenalty=0
+.....\localbrokenpenalty=0
+.....\localleftbox=null
+.....\localrightbox=null
+....\hbox(0.0+0.0)x15.0, direction TLT
+....\mathon
+....\OML/cmm/m/it/10 x
+....\mathoff
+....\penalty 10000
+....\glue(\parfillskip) 0.0 plus 1.0fil
+....\glue(\rightskip) 0.0
+...\glue(\parskip) 0.0 plus 1.0
+...\glue(\parskip) 0.0
+...\glue(\lineskip) 1.0
+...\hbox(79.09998+74.09998)x345.0, glue set 272.0fil, direction TLT
+....\localpar
+.....\localinterlinepenalty=0
+.....\localbrokenpenalty=0
+.....\localleftbox=null
+.....\localrightbox=null
+....\hbox(0.0+0.0)x15.0, direction TLT
+....\hbox(79.09998+74.09998)x58.0, direction TLT
+.....\mathon
+.....\vbox(79.09998+74.09998)x58.0, direction TLT
+......\rule(0.4+0.0)x58.0
+......\hbox(8.39996+3.60004)x58.0, direction TLT
+.......\glue(\tabskip) 0.0
+.......\hbox(8.39996+3.60004)x17.0, direction TLT
+........\rule(8.39996+3.60004)x0.0
+........\glue 6.0
+........\pdfcolorstack 0 push {0 0 1 0 k 0 0 1 0 K}
+........\kern-6.0
+........\leaders 17.0 plus 1.0fill
+.........\rule(*+*)x0.4
+........\kern-6.0
+........\glue -5.0 plus -1.0fill
+........\pdfcolorstack 0 pop
+........\rule(6.66+*)x0.0
+........\TU/lmr/m/n/10 1
+........\glue 0.0 plus 1.0fill
+........\glue 6.0
+.......\glue(\tabskip) 0.0
+.......\hbox(8.39996+3.60004)x41.0, glue set 29.0fill, direction TLT
+........\glue 6.0
+........\pdfcolorstack 0 push {0 0 1 0 k 0 0 1 0 K}
+........\kern-6.0
+........\leaders 12.0 plus 1.0fill
+.........\rule(*+*)x0.4
+........\kern-6.0
+........\glue 0.0 plus -1.0fill
+........\pdfcolorstack 0 pop
+........\rule(0.0+*)x0.0
+........\glue 0.0 plus 1.0fill
+........\glue 6.0
+.......\glue(\tabskip) 0.0
+......\glue(\lineskip) 0.0
+......\hbox(8.39996+3.60004)x58.0, direction TLT
+.......\glue(\tabskip) 0.0
+.......\hbox(8.39996+3.60004)x17.0, direction TLT
+........\rule(8.39996+3.60004)x0.0
+........\glue 6.0
+........\pdfcolorstack 0 push {1 0 0 rg 1 0 0 RG}
+........\kern-6.0
+........\leaders 17.0 plus 1.0fill
+.........\rule(*+*)x0.4
+........\kern-6.0
+........\glue -5.0 plus -1.0fill
+........\pdfcolorstack 0 pop
+........\rule(6.66+*)x0.0
+........\TU/lmr/m/n/10 2
+........\glue 0.0 plus 1.0fill
+........\glue 6.0
+.......\glue(\tabskip) 0.0
+.......\hbox(8.39996+3.60004)x41.0, glue set 29.0fill, direction TLT
+........\glue 6.0
+........\pdfcolorstack 0 push {1 0 0 rg 1 0 0 RG}
+........\kern-6.0
+........\leaders 12.0 plus 1.0fill
+.........\rule(*+*)x0.4
+........\kern-6.0
+........\glue 0.0 plus -1.0fill
+........\pdfcolorstack 0 pop
+........\rule(0.0+*)x0.0
+........\glue 0.0 plus 1.0fill
+........\glue 6.0
+.......\glue(\tabskip) 0.0
+......\glue(\lineskip) 0.0
+......\hbox(8.39996+3.60004)x58.0, direction TLT
+.......\glue(\tabskip) 0.0
+.......\hbox(8.39996+3.60004)x17.0, direction TLT
+........\rule(8.39996+3.60004)x0.0
+........\glue 6.0
+........\pdfcolorstack 0 push {0 0 1 0 k 0 0 1 0 K}
+........\kern-6.0
+........\leaders 17.0 plus 1.0fill
+.........\rule(*+*)x0.4
+........\kern-6.0
+........\glue -5.0 plus -1.0fill
+........\pdfcolorstack 0 pop
+........\rule(6.66+*)x0.0
+........\TU/lmr/m/n/10 3
+........\glue 0.0 plus 1.0fill
+........\glue 6.0
+.......\glue(\tabskip) 0.0
+.......\hbox(8.39996+3.60004)x41.0, glue set 29.0fill, direction TLT
+........\glue 6.0
+........\pdfcolorstack 0 push {0 0 1 0 k 0 0 1 0 K}
+........\kern-6.0
+........\leaders 12.0 plus 1.0fill
+.........\rule(*+*)x0.4
+........\kern-6.0
+........\glue 0.0 plus -1.0fill
+........\pdfcolorstack 0 pop
+........\rule(0.0+*)x0.0
+........\glue 0.0 plus 1.0fill
+........\glue 6.0
+.......\glue(\tabskip) 0.0
+......\glue(\lineskip) 0.0
+......\hbox(8.39996+3.60004)x58.0, direction TLT
+.......\glue(\tabskip) 0.0
+.......\hbox(8.39996+3.60004)x17.0, direction TLT
+........\rule(8.39996+3.60004)x0.0
+........\glue 6.0
+........\pdfcolorstack 0 push {1 0 0 rg 1 0 0 RG}
+........\kern-6.0
+........\leaders 17.0 plus 1.0fill
+.........\rule(*+*)x0.4
+........\kern-6.0
+........\glue -5.0 plus -1.0fill
+........\pdfcolorstack 0 pop
+........\rule(6.77+*)x0.0
+........\TU/lmr/m/n/10 4
+........\glue 0.0 plus 1.0fill
+........\glue 6.0
+.......\glue(\tabskip) 0.0
+.......\hbox(8.39996+3.60004)x41.0, glue set 29.0fill, direction TLT
+........\glue 6.0
+........\pdfcolorstack 0 push {1 0 0 rg 1 0 0 RG}
+........\kern-6.0
+........\leaders 12.0 plus 1.0fill
+.........\rule(*+*)x0.4
+........\kern-6.0
+........\glue 0.0 plus -1.0fill
+........\pdfcolorstack 0 pop
+........\rule(0.0+*)x0.0
+........\glue 0.0 plus 1.0fill
+........\glue 6.0
+.......\glue(\tabskip) 0.0
+......\rule(0.4+0.0)x58.0
+......\glue 2.0
+......\rule(0.4+0.0)x58.0
+......\hbox(8.39996+3.60004)x58.0, direction TLT
+.......\glue(\tabskip) 0.0
+.......\hbox(8.39996+3.60004)x17.0, direction TLT
+........\rule(8.39996+3.60004)x0.0
+........\glue 6.0
+........\pdfcolorstack 0 push {0 0 1 0 k 0 0 1 0 K}
+........\kern-6.0
+........\leaders 17.0 plus 1.0fill
+.........\rule(*+*)x0.4
+........\kern-6.0
+........\glue -5.0 plus -1.0fill
+........\pdfcolorstack 0 pop
+........\rule(6.66+*)x0.0
+........\TU/lmr/m/n/10 1
+........\glue 0.0 plus 1.0fill
+........\glue 6.0
+.......\glue(\tabskip) 0.0
+.......\hbox(8.39996+3.60004)x41.0, direction TLT
+........\glue 6.0
+........\pdfcolorstack 0 push {0 0 1 0 k 0 0 1 0 K}
+........\kern-6.0
+........\leaders 41.0 plus 1.0fill
+.........\rule(*+*)x0.4
+........\kern-6.0
+........\glue -29.0 plus -1.0fill
+........\pdfcolorstack 0 pop
+........\rule(6.15+*)x0.0
+........\TU/lmr/m/n/10 r
+........\TU/lmr/m/n/10 e
+........\TU/lmr/m/n/10 s
+........\TU/lmr/m/n/10 t
+........\TU/lmr/m/n/10 a
+........\TU/lmr/m/n/10 r
+........\TU/lmr/m/n/10 t
+........\glue 0.0 plus 1.0fill
+........\glue 6.0
+.......\glue(\tabskip) 0.0
+......\glue(\lineskip) 0.0
+......\hbox(8.39996+3.60004)x58.0, direction TLT
+.......\glue(\tabskip) 0.0
+.......\hbox(8.39996+3.60004)x17.0, direction TLT
+........\rule(8.39996+3.60004)x0.0
+........\glue 6.0
+........\pdfcolorstack 0 push {1 0 0 rg 1 0 0 RG}
+........\kern-6.0
+........\leaders 17.0 plus 1.0fill
+.........\rule(*+*)x0.4
+........\kern-6.0
+........\glue -5.0 plus -1.0fill
+........\pdfcolorstack 0 pop
+........\rule(6.66+*)x0.0
+........\TU/lmr/m/n/10 2
+........\glue 0.0 plus 1.0fill
+........\glue 6.0
+.......\glue(\tabskip) 0.0
+.......\hbox(8.39996+3.60004)x41.0, glue set 29.0fill, direction TLT
+........\glue 6.0
+........\pdfcolorstack 0 push {1 0 0 rg 1 0 0 RG}
+........\kern-6.0
+........\leaders 12.0 plus 1.0fill
+.........\rule(*+*)x0.4
+........\kern-6.0
+........\glue 0.0 plus -1.0fill
+........\pdfcolorstack 0 pop
+........\rule(0.0+*)x0.0
+........\glue 0.0 plus 1.0fill
+........\glue 6.0
+.......\glue(\tabskip) 0.0
+......\glue(\lineskip) 0.0
+......\hbox(8.39996+3.60004)x58.0, direction TLT
+.......\glue(\tabskip) 0.0
+.......\hbox(8.39996+3.60004)x17.0, direction TLT
+........\rule(8.39996+3.60004)x0.0
+........\glue 6.0
+........\pdfcolorstack 0 push {0 0 1 0 k 0 0 1 0 K}
+........\kern-6.0
+........\leaders 17.0 plus 1.0fill
+.........\rule(*+*)x0.4
+........\kern-6.0
+........\glue -5.0 plus -1.0fill
+........\pdfcolorstack 0 pop
+........\rule(6.66+*)x0.0
+........\TU/lmr/m/n/10 3
+........\glue 0.0 plus 1.0fill
+........\glue 6.0
+.......\glue(\tabskip) 0.0
+.......\hbox(8.39996+3.60004)x41.0, glue set 29.0fill, direction TLT
+........\glue 6.0
+........\pdfcolorstack 0 push {0 0 1 0 k 0 0 1 0 K}
+........\kern-6.0
+........\leaders 12.0 plus 1.0fill
+.........\rule(*+*)x0.4
+........\kern-6.0
+........\glue 0.0 plus -1.0fill
+........\pdfcolorstack 0 pop
+........\rule(0.0+*)x0.0
+........\glue 0.0 plus 1.0fill
+........\glue 6.0
+.......\glue(\tabskip) 0.0
+......\rule(0.4+0.0)x58.0
+......\glue 2.0
+......\rule(0.4+0.0)x58.0
+......\hbox(8.39996+3.60004)x58.0, direction TLT
+.......\glue(\tabskip) 0.0
+.......\hbox(8.39996+3.60004)x17.0, direction TLT
+........\rule(8.39996+3.60004)x0.0
+........\glue 6.0
+........\pdfcolorstack 0 push {0 0 1 0 k 0 0 1 0 K}
+........\kern-6.0
+........\leaders 17.0 plus 1.0fill
+.........\rule(*+*)x0.4
+........\kern-6.0
+........\glue -5.0 plus -1.0fill
+........\pdfcolorstack 0 pop
+........\rule(6.66+*)x0.0
+........\TU/lmr/m/n/10 1
+........\glue 0.0 plus 1.0fill
+........\glue 6.0
+.......\glue(\tabskip) 0.0
+.......\hbox(8.39996+3.60004)x41.0, direction TLT
+........\glue 6.0
+........\pdfcolorstack 0 push {0 0 1 0 k 0 0 1 0 K}
+........\kern-6.0
+........\leaders 41.0 plus 1.0fill
+.........\rule(*+*)x0.4
+........\kern-6.0
+........\glue -29.0 plus -1.0fill
+........\pdfcolorstack 0 pop
+........\rule(6.15+*)x0.0
+........\TU/lmr/m/n/10 r
+........\TU/lmr/m/n/10 e
+........\TU/lmr/m/n/10 s
+........\TU/lmr/m/n/10 t
+........\TU/lmr/m/n/10 a
+........\TU/lmr/m/n/10 r
+........\TU/lmr/m/n/10 t
+........\glue 0.0 plus 1.0fill
+........\glue 6.0
+.......\glue(\tabskip) 0.0
+......\glue(\lineskip) 0.0
+......\hbox(8.39996+3.60004)x58.0, direction TLT
+.......\glue(\tabskip) 0.0
+.......\hbox(8.39996+3.60004)x17.0, direction TLT
+........\rule(8.39996+3.60004)x0.0
+........\glue 6.0
+........\pdfcolorstack 0 push {1 0 0 rg 1 0 0 RG}
+........\kern-6.0
+........\leaders 17.0 plus 1.0fill
+.........\rule(*+*)x0.4
+........\kern-6.0
+........\glue -5.0 plus -1.0fill
+........\pdfcolorstack 0 pop
+........\rule(6.66+*)x0.0
+........\TU/lmr/m/n/10 2
+........\glue 0.0 plus 1.0fill
+........\glue 6.0
+.......\glue(\tabskip) 0.0
+.......\hbox(8.39996+3.60004)x41.0, glue set 29.0fill, direction TLT
+........\glue 6.0
+........\pdfcolorstack 0 push {1 0 0 rg 1 0 0 RG}
+........\kern-6.0
+........\leaders 12.0 plus 1.0fill
+.........\rule(*+*)x0.4
+........\kern-6.0
+........\glue 0.0 plus -1.0fill
+........\pdfcolorstack 0 pop
+........\rule(0.0+*)x0.0
+........\glue 0.0 plus 1.0fill
+........\glue 6.0
+.......\glue(\tabskip) 0.0
+......\rule(0.4+0.0)x58.0
+......\glue 2.0
+......\rule(0.4+0.0)x58.0
+......\hbox(8.39996+3.60004)x58.0, direction TLT
+.......\glue(\tabskip) 0.0
+.......\hbox(8.39996+3.60004)x17.0, direction TLT
+........\rule(8.39996+3.60004)x0.0
+........\glue 6.0
+........\pdfcolorstack 0 push {0 0 1 0 k 0 0 1 0 K}
+........\kern-6.0
+........\leaders 17.0 plus 1.0fill
+.........\rule(*+*)x0.4
+........\kern-6.0
+........\glue -5.0 plus -1.0fill
+........\pdfcolorstack 0 pop
+........\rule(6.66+*)x0.0
+........\TU/lmr/m/n/10 1
+........\glue 0.0 plus 1.0fill
+........\glue 6.0
+.......\glue(\tabskip) 0.0
+.......\hbox(8.39996+3.60004)x41.0, direction TLT
+........\glue 6.0
+........\pdfcolorstack 0 push {0 0 1 0 k 0 0 1 0 K}
+........\kern-6.0
+........\leaders 41.0 plus 1.0fill
+.........\rule(*+*)x0.4
+........\kern-6.0
+........\glue -29.0 plus -1.0fill
+........\pdfcolorstack 0 pop
+........\rule(6.15+*)x0.0
+........\TU/lmr/m/n/10 r
+........\TU/lmr/m/n/10 e
+........\TU/lmr/m/n/10 s
+........\TU/lmr/m/n/10 t
+........\TU/lmr/m/n/10 a
+........\TU/lmr/m/n/10 r
+........\TU/lmr/m/n/10 t
+........\glue 0.0 plus 1.0fill
+........\glue 6.0
+.......\glue(\tabskip) 0.0
+......\glue(\lineskip) 0.0
+......\hbox(8.39996+3.60004)x58.0, direction TLT
+.......\glue(\tabskip) 0.0
+.......\hbox(8.39996+3.60004)x17.0, direction TLT
+........\rule(8.39996+3.60004)x0.0
+........\glue 6.0
+........\pdfcolorstack 0 push {1 0 0 rg 1 0 0 RG}
+........\kern-6.0
+........\leaders 17.0 plus 1.0fill
+.........\rule(*+*)x0.4
+........\kern-6.0
+........\glue -5.0 plus -1.0fill
+........\pdfcolorstack 0 pop
+........\rule(6.66+*)x0.0
+........\TU/lmr/m/n/10 2
+........\glue 0.0 plus 1.0fill
+........\glue 6.0
+.......\glue(\tabskip) 0.0
+.......\hbox(8.39996+3.60004)x41.0, glue set 29.0fill, direction TLT
+........\glue 6.0
+........\pdfcolorstack 0 push {1 0 0 rg 1 0 0 RG}
+........\kern-6.0
+........\leaders 12.0 plus 1.0fill
+.........\rule(*+*)x0.4
+........\kern-6.0
+........\glue 0.0 plus -1.0fill
+........\pdfcolorstack 0 pop
+........\rule(0.0+*)x0.0
+........\glue 0.0 plus 1.0fill
+........\glue 6.0
+.......\glue(\tabskip) 0.0
+......\glue(\lineskip) 0.0
+......\hbox(8.39996+3.60004)x58.0, direction TLT
+.......\glue(\tabskip) 0.0
+.......\hbox(8.39996+3.60004)x17.0, direction TLT
+........\rule(8.39996+3.60004)x0.0
+........\glue 6.0
+........\pdfcolorstack 0 push {0 0 1 0 k 0 0 1 0 K}
+........\kern-6.0
+........\leaders 17.0 plus 1.0fill
+.........\rule(*+*)x0.4
+........\kern-6.0
+........\glue -5.0 plus -1.0fill
+........\pdfcolorstack 0 pop
+........\rule(6.66+*)x0.0
+........\TU/lmr/m/n/10 3
+........\glue 0.0 plus 1.0fill
+........\glue 6.0
+.......\glue(\tabskip) 0.0
+.......\hbox(8.39996+3.60004)x41.0, glue set 29.0fill, direction TLT
+........\glue 6.0
+........\pdfcolorstack 0 push {0 0 1 0 k 0 0 1 0 K}
+........\kern-6.0
+........\leaders 12.0 plus 1.0fill
+.........\rule(*+*)x0.4
+........\kern-6.0
+........\glue 0.0 plus -1.0fill
+........\pdfcolorstack 0 pop
+........\rule(0.0+*)x0.0
+........\glue 0.0 plus 1.0fill
+........\glue 6.0
+.......\glue(\tabskip) 0.0
+......\rule(0.4+0.0)x58.0
+.....\mathoff
+....\penalty 10000
+....\glue(\parfillskip) 0.0 plus 1.0fil
+....\glue(\rightskip) 0.0
+...\glue -5.0
+...\glue 0.0 plus 1.0fil
+...\glue 0.0
+...\glue 0.0 plus 0.0001fil
+..\glue(\baselineskip) 23.34
+..\hbox(6.66+0.0)x345.0, direction TLT
+...\pdfcolorstack 0 push {0 g 0 G}
+...\hbox(6.66+0.0)x345.0, glue set 170.0fil, direction TLT
+....\glue 0.0 plus 1.0fil
+....\TU/lmr/m/n/10 1
+....\glue 0.0 plus 1.0fil
+...\pdfcolorstack 0 pop
+.\kern0.0
+(restart.aux)
