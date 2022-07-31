@@ -5,3 +5,7 @@ The colortbl package:
    Process colortbl.dtx to get the documentation (this requires
    longtable hhline and dcolumn from the standard `tools'
    distribution.)
+
+David Carlisle
+Licence: LPPL 1.3
+https://github.com/davidcarlisle/dpctex/tree/main/colortbl
