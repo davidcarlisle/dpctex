@@ -1,6 +1,6 @@
 % \iffalse
 %% Source File: textcase.dtx
-%% Copyright 1997 1998 2019 2022 David Carlisle
+%% Copyright 1997 1998 2019 2022 2023 David Carlisle
 %%
 %% This file may be distributed under the terms of the LPPL.
 %% See 00readme.txt for details.
@@ -13,7 +13,7 @@
 %<driver> \ProvidesFile{textcase.drv}
 % \fi
 %         \ProvidesFile{textcase.dtx}
-       [2022/07/10 v1.03 Text only upper/lower case changing (DPC)]
+       [2023/07/27 v1.04 Text only upper/lower case changing (DPC)]
 %
 % \iffalse
 %<*driver>
@@ -61,10 +61,13 @@
 %
 % \subsection*{This package is obsolete with the June 2022 \LaTeX\ release.}
 % \begin{sloppypar}
-% With new formats |\MakeUppercase| supports the extensions provided
-% here, with improved support for UTF-8 input. So now the package just defines
-% |\MakeTextUppercase| and |\MakeTextLowercase| as aliases for the
-% standard |\MakeUppercase| and |\MakeLowercase|.
+%   With new formats |\MakeUppercase| supports the extensions provided
+%   here, with improved support for UTF-8 input. So now the package
+%   just defines |\MakeTextUppercase| and |\MakeTextLowercase| as
+%   aliases for the standard |\MakeUppercase| and
+%   |\MakeLowercase|\footnote{Since v1.04, not quite alises, one
+%   grouping level is dropped for compatibility, required by
+%   \textsf{amsart}.}.
 % \end{sloppypar}
 %
 %
@@ -234,15 +237,45 @@
   \DeclareOption{overload}{}
   \ProcessOptions
   \PackageInfo{textcase}{Defining Legacy names}
-  \let\MakeTextUppercase\MakeUppercase
-  \let\MakeTextLowercase\MakeLowercase
+%    \end{macrocode}
+% \changes{v1.04}{2023/07/27}
+%    {define without outer group}
+%    \begin{macrocode}
+\ExplSyntaxOn
+\cs_set_protected:Npn \reserved@a #1
+ {
+  \cs_generate_variant:cn { text_ \str_lowercase:n {#1} case:nn } { V }
+  \ExpandArgs { cnx } \NewExpandableDocumentCommand
+    { MakeText#1case }
+    { O{} +m }
+    { \exp_not:c { MakeText#1case \c_space_tl \c_space_tl \c_space_tl }
+                           [####1] {####2} }
+  }
+\reserved@a { Upper }
+\reserved@a { Lower }
+\cs_new_protected:cpn {
+   MakeTextLowercase \c_space_tl \c_space_tl \c_space_tl } [#1] #2
+  {%{
+    \let \OE \oe
+    \@@text@case@aux { lower } {#1} {#2}
+  }%}
+\cs_new_protected:cpn {
+   MakeTextUppercase \c_space_tl \c_space_tl \c_space_tl } [#1] #2
+  {%{
+    \let \oe \OE
+    \@@text@case@aux { upper } {#1} {#2}
+  }%}
+\ExplSyntaxOff
+%    \end{macrocode}
+%
+%    \begin{macrocode}
   \expandafter\endinput
 \fi
 %    \end{macrocode}
 %
 % \begin{macro}{\@uclcnotmath}
 % This is the main macro of this package. It is basically
-% a copy of |\MakeTextUppercase| and |\MakeTextLowercase|
+% a copy of |\MakeUppercase| and |\MakeLowercase|
 % from the \LaTeX\ kernel, modified slightly so that they
 % can share code (that modification could be done to the
 % standard versions as well) and then further changed to
