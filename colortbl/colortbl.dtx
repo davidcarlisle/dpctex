@@ -769,8 +769,10 @@
 %    \end{macrocode}
 % "l" and "r" as before, but using fill glue.
 %    \begin{macrocode}
-      \d@llarbegin \insert@column \d@llarend\do@row@strut \hfill \or
-      \hfill\kern\z@ \d@llarbegin \insert@column \d@llarend\do@row@strut \or
+      \d@llarbegin \insert@column \d@llarend\do@row@strut \hfill
+   \or
+      \hfill\kern\z@ \d@llarbegin \insert@column \d@llarend\do@row@strut
+   \or
 %    \end{macrocode}
 % "m", "p" and "b" as before, but need to take account of array package update.
 %    \begin{macrocode}
@@ -784,8 +786,9 @@
         \do@row@strut
       \fi
    \or
-   \vtop \@startpbox{\@nextchar}\insert@column \@endpbox\do@row@strut \or
-   \vbox \@startpbox{\@nextchar}\insert@column \@endpbox\do@row@strut
+     \vtop \@startpbox{\@nextchar}\insert@column \@endpbox\do@row@strut
+   \or
+     \vbox \@startpbox{\@nextchar}\insert@column \@endpbox\do@row@strut
   \fi
 %    \end{macrocode}
 % Close the box register assignment.
