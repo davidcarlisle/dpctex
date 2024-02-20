@@ -8,4 +8,4 @@ The colortbl package:
 
 David Carlisle
 Licence: LPPL 1.3
-https://github.com/davidcarlisle/dpctex/tree/main/colortbl
+https://github.com/davidcarlisle/dpctex/issues
