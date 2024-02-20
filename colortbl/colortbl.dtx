@@ -1,7 +1,7 @@
 % \iffalse
 %%
 %% Source File: `colortbl.dtx'.
-%% Copyright 1996 1998 1999 2012 2018 2020 2022 David Carlisle
+%% Copyright 1996 1998 1999 2012 2018 2020 2022 2024 David Carlisle
 %%
 %% This file may be distributed under the terms of the LPPL.
 %% See readme for details.
@@ -15,7 +15,7 @@
 %<driver>\ProvidesFile{colortbl.drv}
 % \fi
 %         \ProvidesFile{colortbl.dtx}
-          [2022/06/20 v1.0f Color table columns (DPC)]
+          [2024/02/20 v1.06 Color table columns (DPC)]
 %
 % \iffalse
 %<*driver>
@@ -37,7 +37,9 @@
 % \title{The \textsf{colortbl} package\thanks{This file
 %         has version number \fileversion, last
 %         revised \filedate.}}
-% \author{David Carlisle}
+%         \author{David Carlisle%\thanks
+%         {Report issues to
+%         \texttt{https://github.com/davidcarlisle/dpctex/issues}}}
 % \date{\filedate}
 %
 %  \maketitle
@@ -1022,24 +1024,24 @@
 % \begin{macro}{\multicolumn}
 % "\multicolumn"
 % \changes{v1.0a}{2012/02/13}{make \cs{multicolumn} long (see test ct1)}
+% \changes{v1.0g}{2024/02/20}{Add to existing definition to for dpctex 47}
+% Patch "\multicolumn" to restore color settings. Done this way to work wth
+% different versions depending on the age of the \textsf{array} package.
 %    \begin{macrocode}
-\long\def\multicolumn#1#2#3{%
-   \multispan{#1}\begingroup
-   \def\@addamp{\if@firstamp \@firstampfalse \else
-                \@preamerr 5\fi}%
-   \@mkpream{#2}\@addtopreamble\@empty
-   \endgroup
-   \def\@sharp{#3}%
-   \let\CT@cell@color\relax
+\def\@tempa#1\@arstrut#2\relax{
+  \long\def\multicolumn##1##2##3{%
+    #1%
 %    \end{macrocode}
 % \changes{v1.0a}{2012/02/13}{don't reset \cs{CT@row@color} (see test ct3)}
 %   \let\CT@row@color\relax
 %    \begin{macrocode}
+   \let\CT@cell@color\relax
    \let\CT@column@color\relax
    \let\CT@do@color\relax
-   \@arstrut \@preamble
-   \null
-   \ignorespaces}
+   \@arstrut
+   #2}}
+\expandafter\@tempa\multicolumn{#1}{#2}{#3}\relax
+\let\@temp\relax
 %    \end{macrocode}
 % \end{macro}
 %
