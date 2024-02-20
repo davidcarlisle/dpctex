@@ -46,7 +46,7 @@
 %
 %
 % \begin{abstract}
-% This package implements a flexible mechanism for giving coloured
+% This package implements a flexible mechanism for giving colored
 % `panels' behind specified columns in a table.
 % This package requires the \textsf{array} and \textsf{color} packages.
 % \end{abstract}
@@ -79,7 +79,7 @@
 %
 % \section{Introduction}
 %
-% This package is for colouring tables (i.e., giving coloured panels
+% This package is for coloring tables (i.e., giving colored panels
 % behind column entries). In that it has many similarities with
 % Timothy Van Zandt's \textsf{colortab} package. The internal
 % implementation is quite different though, also \textsf{colortab}
@@ -109,17 +109,17 @@
 % The examples below demonstrate various possibilities of the
 % "\columncolor" command introduced by this package. The vertical rules
 % specified by "|" are kept in all the examples, to make the column
-% positioning clearer, although  possibly you would not want coloured
+% positioning clearer, although  possibly you would not want colored
 % panels \emph{and} vertical rules in practice.
 %
 % The package supplies a "\columncolor" command, that should (only) be
-% used in the argument of a ">" column specifier, to add a coloured
+% used in the argument of a ">" column specifier, to add a colored
 % panel behind the specified column. It can be used in the main
 % `preamble' argument of \textsf{array} or \textsf{tabular}, and also in
 % "\multicolumn" specifiers.
 %
 % The basic format is:\\
-% "\columncolor"\oarg{color model}\marg{colour}
+% "\columncolor"\oarg{color model}\marg{color}
 %                          \oarg{left overhang}\oarg{right overhang}
 %
 % The first argument (or first two if the optional argument is used)
@@ -250,19 +250,19 @@
 % \multicolumn{1}{H}{(wrong)}&
 % \multicolumn{1}{I}{100.6}\\
 %  aaa&bbb&1.345\\
-%  Note that the coloured rules in all columns stretch to accomodate
+%  Note that the colored rules in all columns stretch to accomodate
 % large entries in one column. &bbb&1.345\\
 %  aaa&bbb&100\\
 %  aaa&Depending on your driver you may get unsightly gaps or lines
 %   where the  `screens' used to produce different shapes interact
-%   badly. You may want to cause adjacent panels of the same colour by
+%   badly. You may want to cause adjacent panels of the same color by
 %  specifying a larger overhang
 % or by adding some negative space (in a "\noalign" between rows.&12.4\\
 %  aaa&bbb&45.3\\
 % \end{longtable}
 %
 % This
-% example shows rather poor taste but is quite colourful!
+% example shows rather poor taste but is quite colorful!
 % Inspect the source file, "colortbl.dtx", to see the full code for
 % the example, but it uses the following column types.
 %\begin{verbatim}
@@ -297,7 +297,7 @@
 % \textsf{tabular*}?
 %
 % Here the problem is rather harder. Although \TeX's "\leader" mechanism
-% which is used by this package to insert the `stretchy' coloured panels
+% which is used by this package to insert the `stretchy' colored panels
 % is rather like \emph{glue}, the "\tabskip" glue that is inserted
 % between columns of \textsf{tabular*} (and \textsf{longtable} for that
 % matter) has to be `real glue' and not `leaders'.
@@ -353,7 +353,7 @@
 %
 % \section{The \cs{rowcolor} command}
 %
-% As demonstrated above, one may change the colour of specified rows
+% As demonstrated above, one may change the color of specified rows
 % of a table by the use of "\multicolumn" commands in each entry of
 % the row. However if your table is to be marked principally by
 % \emph{rows}, you may find this rather inconvenient. For this reason
@@ -368,9 +368,9 @@
 %
 % If a table entry is in the scope of a "\columncolor" specified in the
 % table preamble, and also a "\rowcolor" at the start of the current
-% row, the colour specified by "\rowcolor" will take effect. A
+% row, the color specified by "\rowcolor" will take effect. A
 % "\multicolumn" command may contain ">{\rowcolor"\ldots\ which will
-% override the default colours for both the current row and column.
+% override the default colors for both the current row and column.
 % \begin{center}
 %\begin{minipage}{.75\textwidth}
 %\begin{verbatim}
@@ -489,12 +489,12 @@
 %
 % \section{The \cs{cellcolor} command}
 %
-% A background colour can be applied to a single cell of a table by
+% A background color can be applied to a single cell of a table by
 % beginning it with
 % "\multicolumn"\nolinebreak[3]"{1}"\nolinebreak[3]"{>{\rowcolor"\ldots,
-% (or "\columncolor" if no row-colour is in effect) but this has some
+% (or "\columncolor" if no row-color is in effect) but this has some
 % deficiencies:
-% 1)~It prevents data within the cell from triggering the colouration; \
+% 1)~It prevents data within the cell from triggering the coloration; \
 % 2)~The alignment specification must be copied from the top of the tabular,
 % which is prone to errors, especially for "p{}" columns; \
 % 3)~"\multicolumn{1}" is just silly. \
@@ -503,26 +503,26 @@
 % \cs{cellcolor} can be placed anywhere in the tabular cell to which
 % it applies.
 %
-% \section{Colouring rules.}
+% \section{Coloring rules.}
 %
-% So you want coloured rules as well?
+% So you want colored rules as well?
 %
 % One could do vertical rules without any special commands, just use
 % something like "!{\color{green}\vline}" where you'd
 % normally use "|". The space between "||" will normally be left white.
-% If you want to colour that as well, either increase the overhang of
+% If you want to color that as well, either increase the overhang of
 % the previous column (to
 % "\tabcolsep" + "\arrayrulewidth" + "\doublerulesep")
-% Or remove the inter rule glue, and replace by a coloured rule of the
+% Or remove the inter rule glue, and replace by a colored rule of the
 % required thickness. So
 %\begin{verbatim}
 %!{\color{green}\vline}
 %@{\color{yellow}\vrule width \doublerulesep}
 %!{\color{green}\vline}
 %\end{verbatim}
-% Should give the same spacing as "||" but more colour.
+% Should give the same spacing as "||" but more color.
 %
-% However colouring "\hline" and "\cline" is a bit more tricky, so
+% However coloring "\hline" and "\cline" is a bit more tricky, so
 % extra commands are provided (which then apply to vertical rules as
 % well).
 %
@@ -533,18 +533,18 @@
 % the start of a row, or in a ">" specification in a table preamble.
 % You should note however that if given mid-table it only affects
 % rules that are specified after this point, any vertical rules
-% specified in the preamble will keep their original colours.
+% specified in the preamble will keep their original colors.
 %
 % \section{\cs{doublerulesepcolor}}
-% Having coloured your rules, you'll probably want something other
+% Having colored your rules, you'll probably want something other
 % than white to go in the gaps made by "||" or "\hline\hline".
 % "\doublerulesepcolor" works just the same way as "\arrayrulecolor".
 % The main thing to note that if this command is used, then
 % \textsf{longtable}  will not `discard' the space between
 % "\hline\hline"  at a page break. (\TeX\ has a built-in ability to
-% discard space, but the coloured `space' which is used once
+% discard space, but the colored `space' which is used once
 % "\doublerulesep" is in effect is really a third rule of a different
-% colour to the two outer rules, and rules are rather harder to
+% color to the two outer rules, and rules are rather harder to
 % discard.)
 %
 % \begin{center}
@@ -653,9 +653,9 @@
 %\end{verbatim}
 %
 % \section{Less fun with \cs{cline}}
-% Lines produced by "\cline"  are coloured if you use
+% Lines produced by "\cline"  are colored if you use
 % "\arrayrulecolor" but you may not notice as they are covered up by
-% any colour pannels in the following row. This is a `feature' of
+% any color pannels in the following row. This is a `feature' of
 % "\cline". If using this package you would probably better using the
 % "-"  rule type in a "\hhline" argument, rather than "\cline".
 %
@@ -664,7 +664,7 @@
 %  As this package has to box and measure every entry to figure out
 % how wide to make the rules, I thought I may as well add the
 % following feature. `Large' entries in tables may touch a preceding
-% "\hline" or the top of a colour panel defined by this style.
+% "\hline" or the top of a color panel defined by this style.
 % It is best to increase "\extrarowsep" or "\arraystretch"
 % sufficiently to ensure this doesn't happen, as that will keep the
 % line spacing in the table regular. Sometimes however, you just want
@@ -727,10 +727,10 @@
    \@tempcnta \count@
    \prepnext@tok
 %    \end{macrocode}
-% At this point the colour specification for the background panel will
+% At this point the color specification for the background panel will
 % be in the code for the `">"' specification of this column. This is
 % saved in "\toks\@temptokena" but \textsf{array} will insert it too
-% late (well it would work for "c", but not for "p") so fish the colour
+% late (well it would work for "c", but not for "p") so fish the color
 % stuff out of that token register by hand, and then insert it around
 % the entry.
 %
@@ -746,7 +746,7 @@
 %    \begin{macrocode}
 \expandafter\CT@extract\the\toks\@tempcnta\columncolor!\@nil
 %    \end{macrocode}
-% Save the entry into a box (using a double group for colour safety as
+% Save the entry into a box (using a double group for color safety as
 % usual).
 %    \begin{macrocode}
    \@addtopreamble{%
@@ -798,7 +798,7 @@
 %    \begin{macrocode}
 \begingroup
 %    \end{macrocode}
-% Initalise colour command and overhands.
+% Initalise color command and overhands.
 %    \begin{macrocode}
   \CT@setup
 %    \end{macrocode}
@@ -817,15 +817,15 @@
   \CT@cell@color
 %    \end{macrocode}
 % This is "\relax" unless one of the three previous commands has requested
-% a colour, in which case it will be "\CT@@do@color" which will insert
-% "\leaders" of appropriate colour.
+% a color, in which case it will be "\CT@@do@color" which will insert
+% "\leaders" of appropriate color.
 %    \begin{macrocode}
   \CT@do@color
 \endgroup
 %    \end{macrocode}
-% Nothing to do with colour this bit, since we are boxing and measuring
+% Nothing to do with color this bit, since we are boxing and measuring
 % the entry anyway may as well check the height, so that large entries
-% don't bump into horizontal rules (or the top of the colour panels).
+% don't bump into horizontal rules (or the top of the color panels).
 %    \begin{macrocode}
         \@tempdima\ht\z@
         \advance\@tempdima\minrowclearance
@@ -838,7 +838,7 @@
 % fill glue, then the leaders will not reach the full width of the
 % entry. In the case of "\multicolumn" entries it is actually possible
 % for this box to contribute \emph{shrink} glue, in which case the
-% coloured panel for that entry will be too wide. Tough luck.
+% colored panel for that entry will be too wide. Tough luck.
 %    \begin{macrocode}
         \unhbox\z@}%
 %    \end{macrocode}
@@ -849,7 +849,7 @@
 % \end{macro}
 %
 % \begin{macro}{\CT@setup}
-% Initialise the overhang lengths and the colour command.
+% Initialise the overhang lengths and the color command.
 %    \begin{macrocode}
 \def\CT@setup{%
   \@tempdimb\col@sep
@@ -861,9 +861,9 @@
 % \end{macro}
 %
 % \begin{macro}{\CT@@do@color}
-% The main point of the package: Add the colour panels.
+% The main point of the package: Add the color panels.
 %
-% Add a leader of the specified colour, with natural width the
+% Add a leader of the specified color, with natural width the
 % width of the entry plus the specified overhangs and 1fill stretch.
 % Surround by negative kerns so total natural width is not affected by
 % overhang.
@@ -876,7 +876,7 @@
         \kern-\@tempdimb
         \leaders\vrule
 %    \end{macrocode}
-% For quick debugging with xdvi (which can't do colours). Limit the size
+% For quick debugging with xdvi (which can't do colors). Limit the size
 % of the rule, so I can see the text as well.
 %    \begin{macrocode}
 ^^A                     \@height\p@\@depth\p@
@@ -921,10 +921,10 @@
 % \end{macro}
 %
 % \begin{macro}{\CT@extractb}
-% Define "\CT@column@color" to add the right colour, and save the
+% Define "\CT@column@color" to add the right color, and save the
 % overhang lengths. Finally reconstitute the saved `">"' tokens,
-% without the colour specification.
-% First grab the colour spec, with optional arg.
+% without the color specification.
+% First grab the color spec, with optional arg.
 %    \begin{macrocode}
 \def\CT@extractb#1#2]#3{%
   \def\CT@column@color{%
@@ -964,7 +964,7 @@
 %
 %
 % \begin{macro}{\CT@everycr}
-% Steal "\everypar" to initialise row colours
+% Steal "\everypar" to initialise row colors
 %    \begin{macrocode}
 \let\CT@everycr\everycr
 \newtoks\everycr
@@ -1047,7 +1047,7 @@
 %
 %
 % \begin{macro}{\@classvi}
-% Coloured rules and rule separations.
+% Colored rules and rule separations.
 %    \begin{macrocode}
 \def\@classvi{\ifcase \@lastchclass
       \@acol \or
@@ -1138,8 +1138,8 @@
 % \end{macro}
 %
 % \begin{macro}{\cline}
-% "\cline" doesn't really work, as it comes behind the coloured panels,
-% but at least make it the right colour (the bits you can see, anyway).
+% "\cline" doesn't really work, as it comes behind the colored panels,
+% but at least make it the right color (the bits you can see, anyway).
 %    \begin{macrocode}
 \def\@cline#1-#2\@nil{%
   \omit
@@ -1353,7 +1353,7 @@
 %
 %
 % \begin{macro}{\cellcolor}
-% "\cellcolor" applies the specified colour to just its own tabular cell.
+% "\cellcolor" applies the specified color to just its own tabular cell.
 % It is defined robust, but without using "\DeclareRobustCommand" or
 % "\newcommand{}[][]" because those forms are not used elsewhere, and
 % would not work in \emph{very} old \LaTeX.
@@ -1473,7 +1473,7 @@
 % \changes{v0.1f}{1996/10/10}
 %     {Remove backspacing for t and b in \cs{hhline}}
 % Stop the backspacing for "t" and "b", it messes up the underlying
-% colour.
+% color.
 %    \begin{macrocode}
   \ifx\@tempb t\HH@add{%
     \def\HH@height{\dimen\thr@@}%
