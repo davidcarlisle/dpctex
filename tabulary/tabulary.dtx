@@ -350,11 +350,12 @@ Z        \string\tymax: \the\tymax^^J}%
 %  \begin{macro}{\TY@mkpream}
 %    TY version.
 %    \begin{macrocode}
+\ExplSyntaxOn
 \def\TY@mkpream{%
     \def\@addamp{%
       \if@firstamp \@firstampfalse \else
       \global\advance\TY@count\@ne
-      \edef\@preamble{\@preamble &}\fi
+      \edef\@preamble{\@preamble & \noexpand\tbl_update_cell_data:}\fi
       \TY@width\xdef{0pt}}%
 %    \end{macrocode}
 %
@@ -374,7 +375,7 @@ Z        \string\tymax: \the\tymax^^J}%
 %
 %    \begin{macrocode}
     \def\@classv{\save@decl
-      \expandafter\NC@ecs\@nextchar\extracolsep{}\extracolsep\@@@
+      \expandafter\NC@ecs\@nextchar\extracolsep{}\extracolsep\@@__tbl
       \sbox\z@{\d@llarbegin\@nextchar\d@llarend}%
       \TY@subwidth{\wd\z@}%
       \@addtopreamble{\d@llarbegin\the@toks\the\count@\relax\d@llarend}%
@@ -387,6 +388,7 @@ Z        \string\tymax: \the\tymax^^J}%
 %
 %    \begin{macrocode}
   \TY@@mkpream}
+\ExplSyntaxOff
 %    \end{macrocode}
 %  \end{macro}
 %
