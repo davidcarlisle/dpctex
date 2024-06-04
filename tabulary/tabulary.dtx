@@ -761,7 +761,10 @@ Z \message{^^JTotal:\the\@tempdima^^J}%
       \kern\z@
        \d@llarbegin \insert@column \d@llarend \hfil \or
       \hfil\kern\z@ \d@llarbegin \insert@column \d@llarend \or
-      $\vcenter\@startpbox{\@nextchar}\insert@column \@endpbox $\or
+    \setbox\ar@mcellbox\vbox
+    \@startpbox{\@nextchar}\insert@pcolumn \@endpbox
+    \ar@align@mcell
+    \do@row@strut\or
       \vtop \@startpbox{\@nextchar}\insert@pcolumn \@endpbox \or
       \vbox \@startpbox{\@nextchar}\insert@pcolumn \@endpbox \or
       \d@llarbegin \insert@column \d@llarend \or% dubious "s" case
@@ -915,7 +918,10 @@ Z \message{^^JTotal:\the\@tempdima^^J}%
       \kern\z@%<<<<<<<<<<<<<<<<<<<<<<<<<<<
        \d@llarbegin \insert@column \d@llarend \hfill \or
       \hfill\kern\z@ \d@llarbegin \insert@column \d@llarend \or
-      $\vcenter\@startpbox{\@nextchar}\insert@column \@endpbox $\or
+    \setbox\ar@mcellbox\vbox
+    \@startpbox{\@nextchar}\insert@pcolumn \@endpbox
+    \ar@align@mcell
+    \do@row@strut
       \vtop \@startpbox{\@nextchar}\insert@pcolumn \@endpbox \or
       \vbox \@startpbox{\@nextchar}\insert@pcolumn \@endpbox \or
       \d@llarbegin \insert@pcolumn \d@llarend \or% dubious s case
