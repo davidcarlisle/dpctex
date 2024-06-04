@@ -1,12 +1,16 @@
 % http://tex.stackexchange.com/a/185851/1090
 
 \documentclass[a4paper]{article}
+\input{regression-test}
 
 \usepackage{colortbl}
 \usepackage{tabulary}
 
 
 \begin{document}
+\START
+% should not error
+
 \begin{tabular}{>{\columncolor{red}}c}
 a
 \\

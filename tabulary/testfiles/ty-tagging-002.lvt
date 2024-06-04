@@ -1,18 +1,24 @@
+
+% https://tug.org/pipermail/tex-live/2024-June/050619.html
+
 \documentclass{article}
+\input{regression-test}
 %\RequirePackage{array}[=2023-11-01]
 \usepackage{tabulary}
 \errorcontextlines=1000
 \begin{document}
+\START
+% should not error
 
 \begin{tabulary}{6cm}{|l|L|L|}
-  aaaa & bbbbb bbbbb & cccc ctabccc cccc cccc \\
+  aaaa & bb bb & cccc ctabccc cccc cccc \\
 \end{tabulary}
 
 
 \bigskip
 
-\begin{tabulary}{6cm}{|l|L|L|}
-  aaaa & bbbbb bbbbb & cccc ctabccc cccc cccc  cccc ctabccc cccc cccc
+\begin{tabulary}{9cm}{|l|L|L|}
+  aaaa & bb bb & cccc ctabccc cccc cccc  cccc ctabccc cccc cccc
                         cccc ctabccc cccc cccc  cccc ctabccc cccc cccc \\
 \end{tabulary}
 

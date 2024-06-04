@@ -1,7 +1,7 @@
 % \iffalse
 %%
 %% File `tabulary.dtx'.
-%% Copyright (C) 1995 1996 2003 2008 David Carlisle
+%% Copyright (C) 1995 1996 2003 2008 2024 David Carlisle
 %% This file may be distributed under the terms of the LPPL.
 %% See 00readme.txt for details.
 %%
@@ -13,7 +13,7 @@
 %<package>\ProvidesPackage{tabulary}
 % \fi
 %         \ProvidesFile{tabulary.dtx}
-          [2014/06/11 v0.10 tabulary package (DPC)]
+          [2024/06/04 v0.11 tabulary package (DPC)]
 %
 % \iffalse
 %<*driver>
@@ -35,7 +35,6 @@
 \end{document}
 %</driver>
 % \fi
-% \CheckSum{1346}
 %
 % \changes{v0.1}{1995/10/08}
 %      {Initial version}
@@ -51,6 +50,8 @@
 %      {Rename S to J and `hide' s (until it works)}
 % \changes{v0.10}{2014/06/21}
 %      {support \cs{cellcolor} see  http://tex.stackexchange.com/a/185851/1090}
+% \changes{v0.11}{2024/06/04}
+%      {Update to match latest array package}
 %
 % \section{User Documentation}
 %
@@ -478,6 +479,7 @@ Z        \string\tymax: \the\tymax^^J}%
 % row is hidden by an hline or something.
 %    \begin{macrocode}
 \def\endtabulary{%
+  \SuspendTagging {tabulary}%
   \gdef\@halignto{}%
   \expandafter\TY@tab\the\toks@
   \crcr\omit
@@ -489,6 +491,7 @@ Z        \string\tymax: \the\tymax^^J}%
     \repeat}\TY@save@row
   \endarray\global\setbox1=\lastbox\setbox0=\vbox{\unvbox1
     \unskip\global\setbox1=\lastbox}\egroup
+  \ResumeTagging {tabulary}%
 %    \end{macrocode}
 % Check that |\tymin| is not too large.
 %    \begin{macrocode}
@@ -999,9 +1002,41 @@ Z \message{^^JTotal:\the\@tempdima^^J}%
 %    \end{macrocode}
 %  \end{macro}
 %
+% \begin{macro}{\tbl_crcr:n}
+%  Patch to ensure |\tbl_crcr:n| ends with |\crcr|.
+% (Will be fixed in later \LaTeX\ releases.
+%    \begin{macrocode}
+%<package>
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\ExplSyntaxOn
+\cs_set:Npn \@tempa #1 {
+     \int_compare:nNnT \g__tbl_col_int > 0
+         {
+           \tbl_count_missing_cells:n {#1}
+           \cr
+         }
+       }
+\ifx\@tempa\tbl_crcr:n
+\cs_set:Npn \tbl_crcr:n #1 {
+     \int_compare:nNnT \g__tbl_col_int > 0
+         {
+           \tbl_count_missing_cells:n {#1}
+           \cr
+         }
+     \crcr
+   }
+\fi   
+\let\@tempa\@undefined
+\ExplSyntaxOff
+%    \end{macrocode}
+%
 %    \begin{macrocode}
 %</package>
 %    \end{macrocode}
+% \end{macro}
+% 
 % \PrintIndex
 % \Finale
 %
