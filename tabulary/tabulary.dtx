@@ -801,7 +801,7 @@ Z \message{^^JTotal:\the\@tempdima^^J}%
 \def\TY@box@v#1{%
       \vtop \@startpbox{\csname TY@F\the\TY@count\endcsname}%
               #1\arraybackslash\tyformat
-                              \insert@column\@endpbox}
+                              \insert@pcolumn\@endpbox}
 %    \end{macrocode}
 %  \end{macro}
 %
@@ -916,9 +916,9 @@ Z \message{^^JTotal:\the\@tempdima^^J}%
        \d@llarbegin \insert@column \d@llarend \hfill \or
       \hfill\kern\z@ \d@llarbegin \insert@column \d@llarend \or
       $\vcenter\@startpbox{\@nextchar}\insert@column \@endpbox $\or
-      \vtop \@startpbox{\@nextchar}\insert@column \@endpbox \or
-      \vbox \@startpbox{\@nextchar}\insert@column \@endpbox \or
-      \d@llarbegin \insert@column \d@llarend \or% dubious s case
+      \vtop \@startpbox{\@nextchar}\insert@pcolumn \@endpbox \or
+      \vbox \@startpbox{\@nextchar}\insert@pcolumn \@endpbox \or
+      \d@llarbegin \insert@pcolumn \d@llarend \or% dubious s case
       \TY@box\centering\or
       \TY@box\raggedright\or
       \TY@box\raggedleft\or
