@@ -1,0 +1,40 @@
+\DocumentMetadata{
+ testphase={
+     phase-III
+    ,math,table,title
+     },
+ pdfversion=2.0,
+ pdfstandard=ua-2,
+ pdfstandard=a-4f,
+ uncompress
+}
+\documentclass{article}
+\input{regression-test}
+
+\usepackage{tabulary}
+
+\begin{document}
+
+% should not error
+
+\hbadness10000
+\hfuzz10pt
+\newdimen\hfuzz
+
+\START
+
+\noindent
+\begin{tabulary}{\linewidth}{c|p{1cm}@{ (an @ expr.) }p{4cm}}
+ 1&the rain in spain falls mainly on the plain&
+ the rain in spain falls mainly on the plain
+ the rain in spain falls mainly on the plain\\
+ a&b&c\\
+ a a&b b&
+ \begin{itemize}
+ \item aaa
+ \item bbb
+ \end{itemize}
+\end{tabulary}
+
+\typeout{END-TEST-LOG}
+\end{document}

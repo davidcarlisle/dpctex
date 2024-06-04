@@ -6,3 +6,4 @@ packtdszip  = false
 
 
 
+checkruns=3
