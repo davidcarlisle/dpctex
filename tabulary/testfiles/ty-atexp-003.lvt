@@ -1,0 +1,18 @@
+\documentclass{article}
+\input{regression-test}
+
+\usepackage{tabulary}
+
+\begin{document}
+\START
+% should not error
+
+\begin{tabulary}{\linewidth}{C|C@{ (an @ expr.) }C}
+ 1&the rain in spain falls mainly on the plain&
+ the rain in spain falls mainly on the plain
+ the rain in spain falls mainly on the plain\\
+ a&b&c\\
+ a a&b b&c c
+\end{tabulary}
+
+\end{document}
