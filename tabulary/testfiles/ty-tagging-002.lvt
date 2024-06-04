@@ -1,0 +1,19 @@
+\documentclass{article}
+%\RequirePackage{array}[=2023-11-01]
+\usepackage{tabulary}
+\errorcontextlines=1000
+\begin{document}
+
+\begin{tabulary}{6cm}{|l|L|L|}
+  aaaa & bbbbb bbbbb & cccc ctabccc cccc cccc \\
+\end{tabulary}
+
+
+\bigskip
+
+\begin{tabulary}{6cm}{|l|L|L|}
+  aaaa & bbbbb bbbbb & cccc ctabccc cccc cccc  cccc ctabccc cccc cccc
+                        cccc ctabccc cccc cccc  cccc ctabccc cccc cccc \\
+\end{tabulary}
+
+\end{document}
