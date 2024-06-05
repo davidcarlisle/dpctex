@@ -56,6 +56,8 @@
 %      {Restore LaTeX counters after trial typesetting gh/12}
 % \changes{v0.11}{2024/06/04}
 %      {Handle p and b columns like m gh/38}
+% \changes{v0.11}{2024/06/04}
+%      {use \cs{hskip}1sp to match array 2.3i from 1996}
 %
 % \section{User Documentation}
 %
@@ -775,17 +777,19 @@ Z \message{^^JTotal:\the\@tempdima^^J}%
   \fi
   \@addtopreamble{%
     \ifcase\@chnum
-      \hfil \d@llarbegin\insert@column\d@llarend \hfil \or
-      \kern\z@
-       \d@llarbegin \insert@column \d@llarend \hfil \or
-      \hfil\kern\z@ \d@llarbegin \insert@column \d@llarend \or
+      \hfil\hskip1sp%
+      \d@llarbegin\insert@column\d@llarend\do@row@strut\hfil \or
+      \hskip1sp%
+       \d@llarbegin \insert@column \d@llarend\do@row@strut\hfil \or
+       \hfil\hskip1sp%
+       \d@llarbegin \insert@column \d@llarend\do@row@strut \or
     \setbox\ar@mcellbox\vbox
     \@startpbox{\@nextchar}\insert@pcolumn \@endpbox
     \ar@align@mcell
     \do@row@strut\or
       \vtop \@startpbox{\@nextchar}\insert@pcolumn \@endpbox \or
       \vbox \@startpbox{\@nextchar}\insert@pcolumn \@endpbox \or
-      \d@llarbegin \insert@column \d@llarend \or% dubious "s" case
+      \d@llarbegin \insert@column \d@llarend \do@row@strut \or% dubious "s" case
       \TY@box\centering\or
       \TY@box\raggedright\or
       \TY@box\raggedleft\or
@@ -803,14 +807,16 @@ Z \message{^^JTotal:\the\@tempdima^^J}%
 %    \begin{macrocode}
 \def\TY@box#1{%
   \ifx\centering#1%
-      \hfil \d@llarbegin\insert@column\d@llarend \hfil \else
+    \hfil\hskip1sp%
+    \d@llarbegin\insert@column\d@llarend\do@row@strut \hfil \else
   \ifx\raggedright#1%
-        \kern\z@%<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-      \d@llarbegin \insert@column \d@llarend \hfil \else
+      \hskip1sp%
+      \d@llarbegin \insert@column \d@llarend\do@row@strut \hfil \else
   \ifx\raggedleft#1%
-      \hfil\kern\z@ \d@llarbegin \insert@column \d@llarend \else
+    \hfil\hskip1sp%
+    \kern\z@ \d@llarbegin \insert@column \d@llarend\do@row@strut \else
   \ifx\relax#1%
-       \d@llarbegin \insert@column \d@llarend
+       \d@llarbegin \insert@column \d@llarend\do@row@strut
   \fi  \fi  \fi  \fi}
 %    \end{macrocode}
 % \end{macro}
