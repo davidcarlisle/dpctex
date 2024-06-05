@@ -54,6 +54,8 @@
 %      {Update to match latest array package}
 % \changes{v0.11}{2024/06/04}
 %      {Restore LaTeX counters after trial typesetting gh/12}
+% \changes{v0.11}{2024/06/04}
+%      {Handle p and b columns like m gh/38}
 %
 % \section{User Documentation}
 %
@@ -765,7 +767,7 @@ Z \message{^^JTotal:\the\@tempdima^^J}%
   \let\raggedleft\indent
   \let\arraybackslash\relax
   \prepnext@tok
-  \ifnum\@chnum<4 
+  \ifnum\@chnum<6
     \global\expandafter\let\csname TY@F\the\TY@count\endcsname\z@
   \fi
   \ifnum\@chnum=6
@@ -920,7 +922,7 @@ Z \message{^^JTotal:\the\@tempdima^^J}%
   \let\arraybackslash\relax
   \prepnext@tok
 \expandafter\CT@extract\the\toks\@tempcnta\columncolor!\@nil
-  \ifnum\@chnum<4
+  \ifnum\@chnum<6
     \global\expandafter\let\csname TY@F\the\TY@count\endcsname\z@
   \fi
   \ifnum\@chnum=6

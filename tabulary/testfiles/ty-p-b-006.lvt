@@ -1,0 +1,29 @@
+\documentclass{article}
+
+% test for issue #38 handle p and b columns like m
+
+\input{regression-test}
+\usepackage{tabulary}
+\def\x{one two three four five six seven eight nine ten }
+\def\xy{Red \x. Green \x\x. Blue\x. }
+\def\xyz{\xy\xy}
+\begin{document}
+
+
+\sbox0{\begin{tabulary}{\textwidth}{p{5cm}LL}
+\xyz&\xyz&\xyz\\
+1&2&3  
+\end{tabulary}}
+
+\noindent\usebox{0}
+
+\sbox2{\begin{tabulary}{\textwidth}{m{5cm}LL}
+\xyz&\xyz&\xyz\\
+1&2&3  
+\end{tabulary}}
+
+\noindent\usebox{2}
+
+\typeout{TEST: \the\wd0=\the\wd2}
+
+\end{document}
