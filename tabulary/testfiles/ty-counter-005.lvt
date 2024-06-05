@@ -1,6 +1,6 @@
 \documentclass{article}
 
-test for issue #12 counters should reset, like tabularx
+% test for issue #12 counters should reset, like tabularx
 
 \input{regression-test}
 
