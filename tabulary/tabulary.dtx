@@ -52,6 +52,8 @@
 %      {support \cs{cellcolor} see  http://tex.stackexchange.com/a/185851/1090}
 % \changes{v0.11}{2024/06/04}
 %      {Update to match latest array package}
+% \changes{v0.11}{2024/06/04}
+%      {Restore LaTeX counters after trial typesetting gh/12}
 %
 % \section{User Documentation}
 %
@@ -483,6 +485,15 @@ Z        \string\tymax: \the\tymax^^J}%
 \def\endtabulary{%
   \SuspendTagging {tabulary}%
   \gdef\@halignto{}%
+%    \end{macrocode}
+%
+% Save values of counters, to reset after the trial
+%    \begin{macrocode}
+  \def\@elt##1{\global\value{##1}\the\value{##1}\relax}%
+  \edef\TY@ckpt{\cl@@ckpt}%
+%    \end{macrocode}
+%
+%    \begin{macrocode}
   \expandafter\TY@tab\the\toks@
   \crcr\omit
   {\xdef\TY@save@row{}%
@@ -566,6 +577,11 @@ Z        \message{> tymin}%
 % widths.
 %    \begin{macrocode}
     \let\TY@box\TY@box@v
+%    \end{macrocode}
+%
+% Restore counter values.
+%    \begin{macrocode}
+    \TY@ckpt
 %    \end{macrocode}
 %
 % Run a second tabular, and for the star form, unbox it.
