@@ -1,0 +1,22 @@
+
+% shhould load tabulary-v010.sty and array-2023-11-01.st
+% and not give the missing \cr error from the newer array package
+
+\documentclass{article}
+
+\input{regression-test}
+
+\START
+
+\usepackage{tabulary}[=2023-01-01]
+
+\OMIT
+\begin{document}
+\TIMO
+
+\begin{tabulary}{5cm}{LL}
+  a a a a &b b b b b\\
+  111 & 222
+\end{tabulary}
+
+\END

@@ -2,6 +2,8 @@
 
 module = "tabulary"
 
+sourcefiles  = {"tabulary.dtx", "tabulary.ins", "tabulary-v010.sty"}
+
 packtdszip  = false
 
 
