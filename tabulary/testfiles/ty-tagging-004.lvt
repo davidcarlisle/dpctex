@@ -10,31 +10,29 @@
 }
 \documentclass{article}
 \input{regression-test}
-
+\errorstopmode
 \usepackage{tabulary}
 
 \begin{document}
 
 % should not error
 
-\hbadness10000
-\hfuzz10pt
-\newdimen\hfuzz
 
 \START
 
+
 \noindent
-\begin{tabulary}{\linewidth}{c|p{1cm}@{ (an @ expr.) }p{4cm}}
+\begin{tabulary}{\linewidth}{c|L@{ (an @ expr.) }L}
  1&the rain in spain falls mainly on the plain&
  the rain in spain falls mainly on the plain
  the rain in spain falls mainly on the plain\\
  a&b&c\\
  a a&b b&
- \begin{itemize}
+ X\parbox{2cm}{\begin{itemize}
  \item aaa
  \item bbb
- \end{itemize}
+ \end{itemize}}X
 \end{tabulary}
 
-\typeout{END-TEST-LOG}
+
 \end{document}
