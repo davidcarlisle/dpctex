@@ -1,5 +1,5 @@
 
-% shhould load tabulary-v010.sty and array-2023-11-01.st
+% This should load tabulary-v010.sty and array-2023-11-01.sty
 % and not give the missing \cr error from the newer array package
 
 \documentclass{article}
