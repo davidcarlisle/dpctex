@@ -1,0 +1,23 @@
+\DocumentMetadata{
+  lang        = en,
+  pdfversion  = 2.0,
+  pdfstandard = ua-2,
+  testphase   = {phase-III, table}
+}
+
+\documentclass[10pt]{article}
+
+\input{regression-test}
+
+\usepackage{colortbl}
+
+\begin{document}
+
+\START
+
+\begin{tabular}{ p{0.3\textwidth} p{0.3\textwidth} }
+\hline Row 1 & 105 \\
+\end{tabular}
+
+\END
+
