@@ -1505,13 +1505,21 @@
 %
 %
 % longtable support.
+% \changes{v1.0i}{2024/06/07}{tagging code adjusments for longtable hline}
 %    \begin{macrocode}
 \ExplSyntaxOn
+%    \end{macrocode}
+%
+% Stub tag support if tagging has not been enabled.
+%    \begin{macrocode}
+\cs_if_exist:NF\tag_mc_begin:n{
+  \cs_new:Npn\tag_mc_begin:n#1{}
+  \cs_new:Npn\tag_mc_end:{}
+}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
 \AtBeginDocument{
-  \cs_if_exist:NF\tag_mc_begin:n{
-    \cs_new:Npn\tag_mc_begin:n#1{}
-    \cs_new:Npn\tag_mc_end:{}
-    }
     \def\LT@@hline{%
       \ifx\LT@next\hline
         \global\let\LT@next\@gobble
