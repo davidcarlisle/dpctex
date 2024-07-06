@@ -1,0 +1,16 @@
+\documentclass[10pt]{article}
+
+\input{regression-test}
+
+\usepackage{longtable}
+\usepackage{colortbl}
+
+\begin{document}
+
+\START
+
+\begin{longtable}{ p{0.3\textwidth} p{0.3\textwidth} }
+\hline Row 1 & 105 \\
+\end{longtable}
+
+\end{document}

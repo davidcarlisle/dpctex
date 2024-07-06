@@ -15,7 +15,7 @@
 %<driver>\ProvidesFile{colortbl.drv}
 % \fi
 %         \ProvidesFile{colortbl.dtx}
-          [2024/05/26 v1.0h Color table columns (DPC)]
+          [2024/07/26 v1.0i Color table columns (DPC)]
 %
 % \iffalse
 %<*driver>
@@ -1506,8 +1506,8 @@
 %
 % longtable support.
 %    \begin{macrocode}
+\ExplSyntaxOn
 \AtBeginDocument{
-  \ifx\longtable\@undefined\else
     \def\LT@@hline{%
       \ifx\LT@next\hline
         \global\let\LT@next\@gobble
@@ -1517,7 +1517,10 @@
         \else
           \gdef\CT@LT@sep{%
             \multispan\LT@cols{%
-              \CT@drsc@\leaders\hrule\@height\doublerulesep\hfill}\cr}%
+              \tag_mc_begin:n{artifact}
+              \CT@drsc@\leaders\hrule\@height\doublerulesep\hfill
+              \tag_mc_end: \int_gdecr:N \g__tbl_row_int 
+            }\cr}%
         \fi
       \else
         \global\let\LT@next\empty
@@ -1526,13 +1529,20 @@
       \fi
       \ifnum0=`{\fi}%
       \multispan\LT@cols
-       {\CT@arc@\leaders\hrule\@height\arrayrulewidth\hfill}\cr
+       {\tag_mc_begin:n{artifact}
+        \CT@arc@\leaders\hrule\@height\arrayrulewidth\hfill
+        \tag_mc_end: \int_gdecr:N \g__tbl_row_int 
+       }\cr
       \CT@LT@sep
       \multispan\LT@cols
-       {\CT@arc@\leaders\hrule\@height\arrayrulewidth\hfill}\cr
+       {\tag_mc_begin:n{artifact}
+        \CT@arc@\leaders\hrule\@height\arrayrulewidth\hfill
+        \tag_mc_end: \int_gdecr:N \g__tbl_row_int 
+       }\cr
       \noalign{\penalty\@M}%
       \LT@next}
-    \fi}
+    }
+\ExplSyntaxOff
 %    \end{macrocode}
 %
 %
