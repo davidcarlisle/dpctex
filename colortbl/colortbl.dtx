@@ -1508,6 +1508,10 @@
 %    \begin{macrocode}
 \ExplSyntaxOn
 \AtBeginDocument{
+  \cs_if_exist:NF\tag_mc_begin:n{
+    \cs_new:Npn\tag_mc_begin:n#1{}
+    \cs_new:Npn\tag_mc_end:{}
+    }
     \def\LT@@hline{%
       \ifx\LT@next\hline
         \global\let\LT@next\@gobble
