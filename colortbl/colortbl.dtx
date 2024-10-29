@@ -15,7 +15,7 @@
 %<driver>\ProvidesFile{colortbl.drv}
 % \fi
 %         \ProvidesFile{colortbl.dtx}
-          [2024/07/08 v1.0j Color table columns (DPC)]
+          [2024/10/29 v1.0k Color table columns (DPC)]
 %
 % \iffalse
 %<*driver>
@@ -775,20 +775,21 @@
    \or
 %    \end{macrocode}
 % "m", "p" and "b" as before, but need to take account of array package update.
+% \changes{v1.0k}{2024/10/29}{use \cs{insert@pcolumn} for tagging support} 
 %    \begin{macrocode}
       \ifx\ar@align@mcell\@undefined
         $\vcenter
-         \@startpbox{\@nextchar}\insert@column \@endpbox $
+         \@startpbox{\@nextchar}\insert@pcolumn \@endpbox $
       \else
         \setbox\ar@mcellbox\vbox
-          \@startpbox{\@nextchar}\insert@column \@endpbox
+          \@startpbox{\@nextchar}\insert@pcolumn \@endpbox
         \ar@align@mcell
         \do@row@strut
       \fi
    \or
-     \vtop \@startpbox{\@nextchar}\insert@column \@endpbox\do@row@strut
+     \vtop \@startpbox{\@nextchar}\insert@pcolumn \@endpbox\do@row@strut
    \or
-     \vbox \@startpbox{\@nextchar}\insert@column \@endpbox\do@row@strut
+     \vbox \@startpbox{\@nextchar}\insert@pcolumn \@endpbox\do@row@strut
   \fi
 %    \end{macrocode}
 % Close the box register assignment.
