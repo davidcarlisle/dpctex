@@ -3,124 +3,12 @@
 % Licence: LPPL
 % See http://tex.stackexchange.com/questions/344214/use-latex-to-simulate-old-typewriter-written-texts
 
-
 \ProvidesPackage{typewriter}[2018-02-16 v1.2 typewriter package]
 
 \ifx\directlua\@undefined
 \endinput\PackageError{typewriter}{LuaLaTeX required for this package}\@ehc\fi
 
-\providecommand\ttgreybolda{0.6}
-\providecommand\ttgreyboldb{0.3}
-\providecommand\ttrotatebold{12}
-\providecommand\ttdownbold{20000}
-\providecommand\ttrightbold{35000}
-\providecommand\ttoverprintbolda{1}
-\providecommand\ttoverprintboldb{1}
-\providecommand\ttoverprintboldc{1}
-
-\providecommand\ttgreynormala{0.3}
-\providecommand\ttgreynormalb{0.5}
-\providecommand\ttrotatenormal{10}
-\providecommand\ttrightnormal{20000}
-\providecommand\ttdownnormal{20000}
-\providecommand\ttoverprintnormal{1}
-
-\providecommand\ttbasefont{cmuntt.otf}
-\providecommand\ttfontsize{12pt}
-
-% luaotfload exlicitly loaded for latex formats before 2017/01/01
-\usepackage{luaotfload}
-
-% load cmuntt here not from lua (for everyone except me, it seems)
-% braces allow for spaces in file names.
-\font\cmuntt = {file:\ttbasefont}\space at \ttfontsize\relax \cmuntt
-\edef\cmunttid{\fontid\cmuntt}
-
-
-\expandafter\let\expandafter\%\csname @percentchar\endcsname
-\directlua {
- local cbl=luatexbase.callback_descriptions('define_font')
-% print('\string\n======' .. cbl[1] .. '===\string\n')
-original_fontloader=luatexbase.remove_from_callback('define_font',cbl[1])
-luatexbase.add_to_callback('define_font',
-function(name,size,i)
-  if (name=='cmtt10x' or name=='cmtt10bx') then
-% this works in my dev version but for older setups
-% make sure cmuntt.otf has been loaded before we mess
-% up the font loader.
-%  f = original_fontloader('cmuntt.otf',size)
-  f = font.getfont(\cmunttid)
-              f.name = 'cmtt10x'
-              f.type = 'virtual'
-              f.fonts = {{ name = 'file:\ttbasefont', size = size}}
-for j,v in pairs(f.characters) do
-  local greynormala = \ttgreynormala*math.random()
-  local greynormalb = \ttgreynormalb*math.random()
-  local greybolda = \ttgreybolda*math.random()
-  local greyboldb = \ttgreyboldb*math.random()
-if name == 'cmtt10bx' then
-                       v.commands = {
-{'lua','
-  r1 = math.rad(0.1*\ttrotatebold*math.random(-10,10))
-pdf.print
-(string.format(" q \%f \%f \%f \%f 0 0 cm ",
-math.cos(r1), - math.sin(r1), math.sin(r1), math.cos(r1)
-))'},
-                           {'special','pdf: ' .. string.format("\%f",greybolda) .. ' g'},
-{'push'},
-{'right', math.random(-\ttrightbold,\ttrightbold)},
-{'down', math.random(-\ttdownbold,\ttdownbold)},
-                           {'char',j},
-{'pop'},
-{'lua','pdf.print(" Q ")'}\ifnum\ttoverprintbolda=1,
-{'push'},
-{'right', math.random(-\ttrightbold,\ttrightbold)},
-{'down', math.random(-\ttdownbold,\ttdownbold)},
-                           {'char',j},
-{'pop'}\fi\ifnum\ttoverprintboldb=1,
-{'push'},
-{'right', math.random(-\ttrightbold,\ttrightbold)},
-{'down', math.random(-\ttdownbold,\ttdownbold)},
-                           {'char',j},
-{'pop'}\fi\ifnum\ttoverprintboldb=1,
-{'push'},
-{'down', math.random(-\ttdownbold,\ttdownbold)},
-                           {'special','pdf: ' .. string.format("\%f",greyboldb) .. ' g'},
-                           {'char',j},
-                           {'special','pdf: 0 g'},
-{'pop'}
-\fi
-                         }
-else
-                       v.commands = {
-{'lua','
-  r1 = math.rad(0.1*\ttrotatenormal*math.random(-10,10))
-pdf.print
-(string.format(" q \%f \%f \%f \%f 0 0 cm ",
-math.cos(r1), math.sin(r1), - math.sin(r1), math.cos(r1)
-))'},
-                           {'special','pdf: ' .. greynormala .. ' g'},
-{'push'},
-{'right', math.random(-\ttrightnormal,\ttrightnormal)},
-{'down', math.random(-\ttdownnormal,\ttdownnormal)},
-                           {'char',j},
-{'pop'},
-{'lua','pdf.print(" Q ")'}\ifnum\ttoverprintnormal=1,
-{'down', math.random(-\ttdownnormal,\ttdownnormal)},
-                           {'special','pdf: ' .. greynormalb .. ' g'},
-                           {'char',j},
-                           {'special','pdf: 0 g'}
-\fi
-                         }
-end
-end
-return f
-else
-return original_fontloader(name,size,i)
-end
-end,
-'define font')
-}
+\directlua{require('typewriter.lua')}
 
 {\count0=0
 \loop
@@ -138,10 +26,7 @@ end,
 \AtBeginDocument{%
 \sbox0{$\relax$}%
 
-\font\myfont= cmtt10x at 12pt \myfont
-\font\myfonts= cmtt10x at 9pt
-\font\mybfont= cmtt10bx at 12pt
-\font\mybfonts= cmtt10bx at 9pt
+\myfont
 
 %if it is a monospace font force monospace space
 \ifdim\fontcharwd\myfont`.=\fontcharwd\myfont`M
