@@ -78,14 +78,6 @@
 \emergencystretch\textwidth
 
 
-
-
-
-% must find a better tt int.
-\def\int{\mathop{\leavevmode\strut\raise.5ex\hbox to 1em{$\scriptstyle\mathchar"352$\hss}}\nolimits}
-\setbox0\hbox{$\int$}\setbox0\hbox{}
-\def\sum{\mathop{\char"03A3\relax}}
-
 \renewcommand\sqrt[2][\relax]{%
 \ifx\relax#1\relax\else{}^{#1}\fi
 ^^^^221a\overline{#2}}
@@ -531,7 +523,11 @@
 \xUnicodeMathSymbol{"0220E}{\QED                      }{\mathord}{end of proof}%
 \xUnicodeMathSymbol{"0220F}{\prod                     }{\mathop}{product operator}%
 \xUnicodeMathSymbol{"02210}{\coprod                   }{\mathop}{coproduct operator}%
-\xUnicodeMathSymbol{"02211}{\sum                      }{\mathop}{summation operator}%
+\iffontchar\textfont0 "2211
+  \xUnicodeMathSymbol{"02211}{\sum                      }{\mathop}{summation operator}%
+\else
+  \def\sum{\mathop{\char"03A3\relax}}%
+\fi
 \xUnicodeMathSymbol{"02212}{\minus                    }{\mathbin}{minus sign}%
 \xUnicodeMathSymbol{"02213}{\mp                       }{\mathbin}{minus-or-plus sign}%
 \xUnicodeMathSymbol{"02214}{\dotplus                  }{\mathbin}{plus sign, dot above}%
@@ -557,7 +553,13 @@
 \xUnicodeMathSymbol{"02228}{\vee                      }{\mathbin}{/vee /lor b: logical or}%
 \xUnicodeMathSymbol{"02229}{\cap                      }{\mathbin}{intersection}%
 \xUnicodeMathSymbol{"0222A}{\cup                      }{\mathbin}{union or logical sum}%
-%\xUnicodeMathSymbol{"0222B}{\int                      }{\mathop}{integral operator}%
+\iffontchar\textfont0 "222B
+  \xUnicodeMathSymbol{"0222B}{\int                      }{\mathop}{integral operator}%
+\else
+  % must find a better tt int.
+  \def\int{\mathop{\leavevmode\strut\raise.5ex\hbox to 1em{$\scriptstyle\mathchar"352$\hss}}\nolimits}%
+  \setbox0\hbox{$\int$}\setbox0\hbox{}%
+\fi
 \xUnicodeMathSymbol{"0222C}{\iint                     }{\mathop}{double integral operator}%
 \xUnicodeMathSymbol{"0222D}{\iiint                    }{\mathop}{triple integral operator}%
 \xUnicodeMathSymbol{"0222E}{\oint                     }{\mathop}{contour integral operator}%

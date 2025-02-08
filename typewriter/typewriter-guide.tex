@@ -1,6 +1,16 @@
 \documentclass{article}
 \usepackage{amsmath}
+\providecommand\ttbasefont{QTAntiquePost.otf}
+\providecommand\ttmathfont{cmuntt.otf}
+
+\providecommand\ttoverprintnormal{0}
+\providecommand\ttoverprintbolda{1}
+\providecommand\ttoverprintboldb{0}
+\providecommand\ttoverprintboldc{0}
+\providecommand\ttgreynormala{0.5}
+
 \usepackage{typewriter}
+
 \raggedright
 \begin{document}
 \title{The Typewriter Package for LaTeX}
@@ -10,7 +20,7 @@
 \maketitle
 
 \section{Introduction}
-The typewriter Package uses the OpenType Computer Modern Unicode
+The typewriter package uses (by default) the OpenType Computer Modern Unicode
 Typewriter font, together with a LuaTeX virtual font setup that
 introduces random variability in grey level and angle of each
 character. It was originally an answer to a question on stackexchange,
@@ -41,6 +51,7 @@ commands may be defined before loading the package to change the defaults shown 
 \providecommand\ttoverprintnormal{1}
 
 \providecommand\ttbasefont{cmuntt.otf}
+\providecommand\ttmathfont{\ttbasefont}
 \providecommand\ttfontsize{12pt}
 \end{verbatim}
 
@@ -56,6 +67,12 @@ maximum horizontal and vertical offsets of the overprinted characters
 The flags such ttoverprintnormal control whether multiple characters are printed
 By default bold font has four characters with different offsets, normal has two.
 Setting the flags to 0 stops this over-printing.
+
+By default the same font is used for text and math, but you may set
+ttbasefont to the filename for the base font, and
+ttmathfont to a different font, this may be useful if the main font
+does not have math characters.
+
 
 \hrule
 
@@ -75,7 +92,7 @@ one two three
 
 \textbf{one two three}
 
-[some greek text θ]
+[some greek text $θ$]
 
 a  rule: \rule{3cm}{1pt}
 
