@@ -11,7 +11,7 @@ local getfont = font.getfont
 local nextid = font.nextid
 local setfont = font.setfont
 local random, rad = math.random, math.rad
-local cos, sin = math.cos, math.sin
+local cos, sin, floor = math.cos, math.sin, math.floor
 local pdfprint = pdf.print
 local format = string.format
 local insert = table.insert
@@ -34,6 +34,7 @@ local ttdownnormal      = tonumber(getmacro("ttdownnormal")      or 20000)
 local ttoverprintnormal = tonumber(getmacro("ttoverprintnormal") or 1)
 
 local ttbasefont        = getmacro("ttbasefont") or "cmuntt.otf"
+local ttmathfont        = getmacro("ttmathfont") or ttbasefont
 local ttfontsize        = getmacro("ttfontsize") and sp(getmacro("ttfontsize")) or sp("12pt")
 
 -- load the data of the base font. If the id is not passed to luaotfload.define_font
@@ -42,7 +43,7 @@ local ttfontsize        = getmacro("ttfontsize") and sp(getmacro("ttfontsize")) 
 
 local base_id = define_font("file:" .. ttbasefont, ttfontsize)
 
--- define \cmuntt as a font selction macro for the
+-- define \cmuntt as a font selection macro for the
 -- base font, and set the base font as the current 
 -- active font
 
@@ -141,8 +142,8 @@ local function define_tt_font(name, csname, size, bold)
     definefont(csname, id)
 end
 
-define_tt_font("cmtt10x", "myfont", sp('12pt'), false)
-define_tt_font("cmtt10x", "myfonts", sp('9pt'), false)
-define_tt_font("cmtt10bx", "mybfont", sp('12pt'), true)
-define_tt_font("cmtt10bx", "mybfonts", sp('9pt'), true)
+define_tt_font("cmtt10x", "myfont", ttfontsize, false)
+define_tt_font("cmtt10x", "myfonts", floor(0.75*ttfontsize), false)
+define_tt_font("cmtt10bx", "mybfont", ttfontsize, true)
+define_tt_font("cmtt10bx", "mybfonts", floor(0.75*ttfontsize), true)
 
