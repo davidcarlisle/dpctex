@@ -75,7 +75,7 @@ local function define_normal_tt_font(characters)
         }
             
         if ttoverprintnormal == 1 then
-            insert(cmd, {'down', random(ttdownnormal, ttdownnormal)})
+            insert(cmd, {'down', random(-ttdownnormal, ttdownnormal)})
             insert(cmd, {'pdf', ' ' .. greynormalb .. ' g'})
             insert(cmd, {'char',j})
             insert(cmd, {'pdf', ' 0 g'})
