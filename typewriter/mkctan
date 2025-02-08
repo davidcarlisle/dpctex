@@ -2,6 +2,7 @@ lualatex typewriter-guide
 cd ..
 rm -f typewriter.zip
 zip  typewriter.zip typewriter/typewriter.sty \
+                    typewriter/typewriter.lua \
                     typewriter/typewriter-guide.{pdf,tex} \
 		    typewriter/README.md
 mv typewriter.zip typewriter

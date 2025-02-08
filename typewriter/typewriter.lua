@@ -1,3 +1,7 @@
+-- Lua code for LaTeX typewriter.sty
+-- 2025-02-08
+--
+
 -- Use local functions
 local getmacro = token.get_macro
 local sp = tex.sp
