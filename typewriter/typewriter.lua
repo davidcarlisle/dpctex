@@ -13,21 +13,21 @@ local format = string.format
 local insert = table.insert
 
 -- set the options
-local ttgreybolda       = tonumber(getmacro("ttgreybolda"))       or 0.6
-local ttgreyboldb       = tonumber(getmacro("ttgreyboldb"))       or 0.3
-local ttrotatebold      = tonumber(getmacro("ttrotatebold"))      or 12
-local ttdownbold        = tonumber(getmacro("ttdownbold"))        or 20000
-local ttrightbold       = tonumber(getmacro("ttrightbold"))       or 35000
-local ttoverprintbolda  = tonumber(getmacro("ttoverprintbolda"))  or 1
-local ttoverprintboldb  = tonumber(getmacro("ttoverprintboldb"))  or 1
-local ttoverprintboldc  = tonumber(getmacro("ttoverprintboldc"))  or 1
+local ttgreybolda       = tonumber(getmacro("ttgreybolda")       or 0.6)
+local ttgreyboldb       = tonumber(getmacro("ttgreyboldb")       or 0.3)
+local ttrotatebold      = tonumber(getmacro("ttrotatebold")      or 12)
+local ttdownbold        = tonumber(getmacro("ttdownbold")        or 20000)
+local ttrightbold       = tonumber(getmacro("ttrightbold")       or 35000)
+local ttoverprintbolda  = tonumber(getmacro("ttoverprintbolda")  or 1)
+local ttoverprintboldb  = tonumber(getmacro("ttoverprintboldb")  or 1)
+local ttoverprintboldc  = tonumber(getmacro("ttoverprintboldc")  or 1)
 
-local ttgreynormala     = tonumber(getmacro("ttgreynormala"))     or 0.3
-local ttgreynormalb     = tonumber(getmacro("ttgreynormalb"))     or 0.5
-local ttrotatenormal    = tonumber(getmacro("ttrotatenormal"))    or 10
-local ttrightnormal     = tonumber(getmacro("ttrightnormal"))     or 20000
-local ttdownnormal      = tonumber(getmacro("ttdownnormal"))      or 20000
-local ttoverprintnormal = tonumber(getmacro("ttoverprintnormal")) or 1
+local ttgreynormala     = tonumber(getmacro("ttgreynormala")     or 0.3)
+local ttgreynormalb     = tonumber(getmacro("ttgreynormalb")     or 0.5)
+local ttrotatenormal    = tonumber(getmacro("ttrotatenormal")    or 10)
+local ttrightnormal     = tonumber(getmacro("ttrightnormal")     or 20000)
+local ttdownnormal      = tonumber(getmacro("ttdownnormal")      or 20000)
+local ttoverprintnormal = tonumber(getmacro("ttoverprintnormal") or 1)
 
 local ttbasefont        = getmacro("ttgreybolda") or "cmuntt.otf"
 local ttfontsize        = getmacro("ttgreybolda") and sp(getmacro("ttgreybolda")) or sp("12pt")
