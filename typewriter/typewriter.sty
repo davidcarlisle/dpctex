@@ -19,8 +19,8 @@
 }
 
 \def\boldmath{%
-\textfont0=\mybfont \scriptfont0=\mybfonts \scriptscriptfont0=\mybfonts
-\textfont1=\mybfont \textfont2=\mybfont \textfont3=\mybfont
+\textfont0=\mymbfont \scriptfont0=\mymbfonts \scriptscriptfont0=\mymbfonts
+\textfont1=\mymbfont \textfont2=\mymbfont \textfont3=\mymbfont
 }
 
 \AtBeginDocument{%
@@ -36,23 +36,29 @@
 \fontdimen4\myfont=\z@
 \fontdimen7\myfont=\fontdimen6\myfont
 
-\fontdimen6\myfonts=\fontcharwd\myfonts`x
-\fontdimen2\myfonts=\fontdimen6\myfonts
-\fontdimen3\myfonts=\z@
-\fontdimen4\myfonts=\z@
-\fontdimen7\myfonts=\fontdimen6\myfonts
+\fontdimen6\mymfont=\fontcharwd\mymfont`x
+\fontdimen2\mymfont=\fontdimen6\mymfont
+\fontdimen3\mymfont=\z@
+\fontdimen4\mymfont=\z@
+\fontdimen7\mymfont=\fontdimen6\mymfont
 
-\fontdimen6\mybfont=\fontcharwd\mybfont`x
-\fontdimen2\mybfont=\fontdimen6\mybfont
-\fontdimen3\mybfont=\z@
-\fontdimen4\mybfont=\z@
-\fontdimen7\mybfont=\fontdimen6\mybfont
+\fontdimen6\mymfonts=\fontcharwd\mymfonts`x
+\fontdimen2\mymfonts=\fontdimen6\mymfonts
+\fontdimen3\mymfonts=\z@
+\fontdimen4\mymfonts=\z@
+\fontdimen7\mymfonts=\fontdimen6\mymfonts
 
-\fontdimen6\mybfonts=\fontcharwd\mybfonts`x
-\fontdimen2\mybfonts=\fontdimen6\mybfonts
-\fontdimen3\mybfonts=\z@
-\fontdimen4\mybfonts=\z@
-\fontdimen7\mybfonts=\fontdimen6\mybfonts
+\fontdimen6\mymbfont=\fontcharwd\mymbfont`x
+\fontdimen2\mymbfont=\fontdimen6\mymbfont
+\fontdimen3\mymbfont=\z@
+\fontdimen4\mymbfont=\z@
+\fontdimen7\mymbfont=\fontdimen6\mymbfont
+
+\fontdimen6\mymbfonts=\fontcharwd\mymbfonts`x
+\fontdimen2\mymbfonts=\fontdimen6\mymbfonts
+\fontdimen3\mymbfonts=\z@
+\fontdimen4\mymbfonts=\z@
+\fontdimen7\mymbfonts=\fontdimen6\mymbfonts
 
 \else
 \fi
@@ -64,8 +70,8 @@
 \let\small\relax
 \let\footnotesize\relax
 
-\textfont0=\myfont \scriptfont0=\myfonts \scriptscriptfont0=\myfonts
-\textfont1=\myfont \textfont2=\myfont \textfont3=\myfont
+\textfont0=\mymfont \scriptfont0=\mymfonts \scriptscriptfont0=\mymfonts
+\textfont1=\mymfont \textfont2=\mymfont \textfont3=\mymfont
 }
 
 

@@ -42,6 +42,12 @@ local ttfontsize        = getmacro("ttfontsize") and sp(getmacro("ttfontsize")) 
 -- the font data is returned.
 
 local base_id = define_font("file:" .. ttbasefont, ttfontsize)
+local base_math_id
+if ttbasefont == ttmathfont then
+  base_math_id = base_id
+else
+  base_math_id = define_font("file:" .. ttmathfont, ttfontsize)
+end
 
 -- define \cmuntt as a font selection macro for the
 -- base font, and set the base font as the current 
@@ -127,11 +133,11 @@ end
 
 -- Now the main function
 
-local function define_tt_font(name, csname, size, bold)
-    local f = getfont(base_id)
+local function define_tt_font(baseid, basename, name, csname, size, bold)
+    local f = getfont(baseid)
     f.name = name
     f.type = 'virtual'
-    f.fonts = {{ name = "file:"..ttbasefont, size = size}}
+    f.fonts = {{ name = "file:"..basename, size = size}}
     if bold then
         define_bold_tt_font(f.characters)
     else
@@ -142,8 +148,10 @@ local function define_tt_font(name, csname, size, bold)
     definefont(csname, id)
 end
 
-define_tt_font("cmtt10x", "myfont", ttfontsize, false)
-define_tt_font("cmtt10x", "myfonts", floor(0.75*ttfontsize), false)
-define_tt_font("cmtt10bx", "mybfont", ttfontsize, true)
-define_tt_font("cmtt10bx", "mybfonts", floor(0.75*ttfontsize), true)
+define_tt_font(base_id, ttbasefont, "cmtt10x", "myfont", ttfontsize, false)
+define_tt_font(base_math_id, ttmathfont, "cmtt10mx", "mymfont", ttfontsize, false)
+define_tt_font(base_math_id, ttmathfont, "cmtt10mx", "mymfonts", floor(0.75*ttfontsize), false)
+define_tt_font(base_id, ttbasefont, "cmtt10bx", "mybfont", ttfontsize, true)
+define_tt_font(base_math_id, ttmathfont, "cmtt10mbx", "mymbfont", ttfontsize, true)
+define_tt_font(base_math_id, ttmathfont, "cmtt10mbx", "mymbfonts", floor(0.75*ttfontsize), true)
 
