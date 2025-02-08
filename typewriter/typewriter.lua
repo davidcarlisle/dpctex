@@ -33,8 +33,8 @@ local ttrightnormal     = tonumber(getmacro("ttrightnormal")     or 20000)
 local ttdownnormal      = tonumber(getmacro("ttdownnormal")      or 20000)
 local ttoverprintnormal = tonumber(getmacro("ttoverprintnormal") or 1)
 
-local ttbasefont        = getmacro("ttgreybolda") or "cmuntt.otf"
-local ttfontsize        = getmacro("ttgreybolda") and sp(getmacro("ttgreybolda")) or sp("12pt")
+local ttbasefont        = getmacro("ttbasefont") or "cmuntt.otf"
+local ttfontsize        = getmacro("ttfontsize") and sp(getmacro("ttfontsize")) or sp("12pt")
 
 -- load the data of the base font. If the id is not passed to luaotfload.define_font
 -- as the third argument, the new id is the return value, otherwise
