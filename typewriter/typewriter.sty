@@ -2669,7 +2669,7 @@
    |\hskip -.5\arrayrulewidth}}
 
 \let\oldhrule\hrule
-\def\hrule{\directlua{
+\protected\def\hrule{\directlua{
 local h,w,d,lw
 local keyword = token.scan_keyword
 local scandimen = token.scan_dimen
