@@ -2670,64 +2670,24 @@
 
 \let\oldhrule\hrule
 \def\hrule{\directlua{
-local h,w,d,hh,ww,dd,lw
-h=token.scan_keyword("height")
-if(h) then
-hh=token.scan_dimen()
+local h,w,d,lw
+local keyword = token.scan_keyword
+local scandimen = token.scan_dimen
+while true do
+   if not h and keyword("height")    then
+       h = scandimen()
+   elseif not d and keyword("depth") then
+       d = scandimen()
+   elseif not w and keyword("width")   then
+       w = scandimen()
+   else
+       break
+   end
 end
-d=token.scan_keyword("depth")
-if(d) then
-dd=token.scan_dimen()
-end
-w=token.scan_keyword("width")
-if(w) then
-ww=token.scan_dimen()
-end
-if(not(h)) then
-h=token.scan_keyword("height")
-if(h) then
-hh=token.scan_dimen()
-end
-end
-if(not(d)) then
-d=token.scan_keyword("depth")
-if(d) then
-dd=token.scan_dimen()
-end
-end
-if(not(w)) then
-w=token.scan_keyword("width")
-if(w) then
-ww=token.scan_dimen()
-end
-end
-if(not(h)) then
-h=token.scan_keyword("height")
-if(h) then
-hh=token.scan_dimen()
-end
-end
-if(not(d)) then
-d=token.scan_keyword("depth")
-if(d) then
-dd=token.scan_dimen()
-end
-end
-if(not(w)) then
-w=token.scan_keyword("width")
-if(w) then
-ww=token.scan_dimen()
-end
-end
-%print('\string\n=====')
-%print('h' .. tostring(h) .. (hh or '*'))
-%print('d' .. tostring(d) .. (dd or '*'))
-%print('w' .. tostring(w) .. (ww or '*'))
-%print('=====\string\n')
-if(ww) then
-lw="\string\\hskip " .. ww .. "sp\string\\hbox{}"
+if w then
+    lw = "\string\\hskip " .. w .. "sp\string\\hbox{}"
 else
-lw="\string\\hfill\string\\space"
+    lw = "\string\\hfill\string\\space"
 end
 tex.sprint('\string\\par\string\\noindent\string\\leaders\string\\hbox{\string\\string_}' .. lw)%
 }}
