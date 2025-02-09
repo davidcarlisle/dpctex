@@ -2674,11 +2674,11 @@ local h,w,d,lw
 local keyword = token.scan_keyword
 local scandimen = token.scan_dimen
 while true do
-   if not h and keyword("height")    then
+   if keyword("height")    then
        h = scandimen()
-   elseif not d and keyword("depth") then
+   elseif keyword("depth") then
        d = scandimen()
-   elseif not w and keyword("width") then
+   elseif keyword("width") then
        w = scandimen()
    else
        break
