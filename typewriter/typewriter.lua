@@ -155,3 +155,25 @@ define_tt_font(base_id, ttbasefont, "cmtt10bx", "mybfont", ttfontsize, true)
 define_tt_font(base_math_id, ttmathfont, "cmtt10mbx", "mymbfont", ttfontsize, true)
 define_tt_font(base_math_id, ttmathfont, "cmtt10mbx", "mymbfonts", floor(0.75*ttfontsize), true)
 
+local patch_enabled = false
+local fonts_patched = { }
+luatexbase.add_to_callback("luaotfload.patch_font", function(data)
+    local fontname = data.fontname
+    if not (patch_enabled or fonts_patched[data.fontname]) then
+        return true
+    end
+    if not fonts_patched[fontname] then
+        fonts_patched[fontname] = true
+    end
+    define_normal_tt_font(data.characters)
+end, "patch tt fonts")
+
+local function_table = lua.get_functions_table()
+local luafnalloc = luatexbase.new_luafunction('patchttfonts')
+token.set_lua('patchttfonts', luafnalloc)
+function_table[luafnalloc] = function() patch_enabled = true end
+
+local luafnalloc = luatexbase.new_luafunction('dontpatchttfonts')
+token.set_lua('dontpatchttfonts', luafnalloc)
+function_table[luafnalloc] = function() patch_enabled = false end
+
