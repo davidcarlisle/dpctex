@@ -2689,5 +2689,6 @@ if w then
 else
     lw = "\string\\hfill\string\\space"
 end
-tex.sprint('\string\\par\string\\noindent\string\\leaders\string\\hbox{\string\\string_}' .. lw)%
+tex.sprint(\number\catcodetable@latex,
+           '\string\\par\string\\noindent\string\\leaders\string\\hbox{\string\\string_}' .. lw)%
 }}
