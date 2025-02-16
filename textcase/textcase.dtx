@@ -244,8 +244,7 @@
 \ExplSyntaxOn
 \cs_set_protected:Npn \reserved@a #1
  {
-  \cs_generate_variant:cn { text_ \str_lowercase:n {#1} case:nn } { V }%old
-  \cs_generate_variant:cn { text_ \str_lowercase:n {#1}     :nn } { V }%new
+  \cs_generate_variant:cn { text_ \str_lowercase:n {#1} case:nn } { V }
   \ExpandArgs { cnx } \NewExpandableDocumentCommand
     { MakeText#1case }
     { O{} +m }
