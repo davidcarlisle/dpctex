@@ -1,6 +1,6 @@
 % \iffalse
 %% Source File: textcase.dtx
-%% Copyright 1997 1998 2019 2022 2023 David Carlisle
+%% Copyright 1997 1998 2019 2022 2023 2025 David Carlisle
 %%
 %% This file may be distributed under the terms of the LPPL.
 %% See 00readme.txt for details.
@@ -13,7 +13,7 @@
 %<driver> \ProvidesFile{textcase.drv}
 % \fi
 %         \ProvidesFile{textcase.dtx}
-       [2023/07/27 v1.04 Text only upper/lower case changing (DPC)]
+       [2025/02/16 v1.05 Text only upper/lower case changing (DPC)]
 %
 % \iffalse
 %<*driver>
@@ -244,7 +244,8 @@
 \ExplSyntaxOn
 \cs_set_protected:Npn \reserved@a #1
  {
-  \cs_generate_variant:cn { text_ \str_lowercase:n {#1} case:nn } { V }
+  \cs_generate_variant:cn { text_ \str_lowercase:n {#1} case:nn } { V }%old
+  \cs_generate_variant:cn { text_ \str_lowercase:n {#1}     :nn } { V }%new
   \ExpandArgs { cnx } \NewExpandableDocumentCommand
     { MakeText#1case }
     { O{} +m }
@@ -253,17 +254,25 @@
   }
 \reserved@a { Upper }
 \reserved@a { Lower }
+%    \end{macrocode}
+% Internal change to \verb|\@@text@case@aux| requires modifed arguments in new formats
+% \changes{v1.05}{2025/02/16}
+%    {changed internal in new formats}
+%    \begin{macrocode}
+\IfFormatAtLeastTF{2024-11-12}{\def\textcase@case{case}}{\def\textcase@case{}}
+%    \end{macrocode}
+%    \begin{macrocode}
 \cs_new_protected:cpn {
    MakeTextLowercase \c_space_tl \c_space_tl \c_space_tl } [#1] #2
   {%{
     \let \OE \oe
-    \@@text@case@aux { lower } {#1} {#2}
+    \@@text@case@aux { lower \textcase@case } {#1} {#2}
   }%}
 \cs_new_protected:cpn {
    MakeTextUppercase \c_space_tl \c_space_tl \c_space_tl } [#1] #2
   {%{
     \let \oe \OE
-    \@@text@case@aux { upper } {#1} {#2}
+    \@@text@case@aux { upper \textcase@case } {#1} {#2}
   }%}
 \ExplSyntaxOff
 %    \end{macrocode}
