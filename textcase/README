@@ -1,4 +1,5 @@
 The textcase package
+VERSION
 
    \MakeTextUppercase and \MakeTextLowercase are similar to the standard
    \MakeUppercase and \MakeLowercase, but they do not change the case of
@@ -10,3 +11,7 @@ The textcase package
    In current LaTeX this package is obsolete. You can use the standard
    \MakeUppercase and \MakeLowercase, but it defines legacy names
    \MakeTextUppercase and \MakeTextLowercase.
+
+Licence: LPPL https://www.latex-project.org/lppl.txt
+
+
