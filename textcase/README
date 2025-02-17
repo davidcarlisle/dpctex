@@ -12,6 +12,9 @@ VERSION
    \MakeUppercase and \MakeLowercase, but it defines legacy names
    \MakeTextUppercase and \MakeTextLowercase.
 
+David Carlisle
+Issue tracker: https://github.com/davidcarlisle/dpctex/issues
+
 Licence: LPPL https://www.latex-project.org/lppl.txt
 
 
