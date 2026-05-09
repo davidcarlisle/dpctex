@@ -25,6 +25,8 @@
   {colortbl}
 \usepackage{dcolumn,longtable,hhline}
 \setlongtables% in case an old copy of longtable is being used.
+\NewCommandCopy\csorig\cs
+\RenewDocumentCommand\cs{m}{\csorig{\detokenize{#1}}}
 \begin{document}
 \DeleteShortVerb{\|}
 \MakeShortVerb{\"}
@@ -1448,7 +1450,8 @@
 %\changes{v1.0l}{2026-05-01}{Decrease row count, for tagging-project issue 66}
 %    \begin{macrocode}
 \def\HH@loop{%
-  \ifx\@tempb`\def\next##1{\the\toks@\CT@tbl@gdecr@row@count\cr}\else\let\next\HH@let
+  \ifx\@tempb`\def\next##1{%
+      \the\toks@\CT@tbl@gdecr@row@count\cr}\else\let\next\HH@let
   \ifx\@tempb|\if@tempswa
           \ifx\CT@drsc@\relax
            \HH@add{\hskip\doublerulesep}%
