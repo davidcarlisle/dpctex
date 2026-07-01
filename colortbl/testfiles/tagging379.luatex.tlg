@@ -1,20 +1,5 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
-Package tagpdf Warning: Parent-Child ':Table' --> 'MC (realcontent)'.
-(tagpdf)                Relation is not allowed! on line ...
-(tagpdf)                struct 15, /Table 
-Package tagpdf Warning: Parent-Child ':TD' --> ':TD'.
-(tagpdf)                Relation is not allowed! on line ...
-(tagpdf)                struct 14, TD --> struct 19, TD
-Package tagpdf Warning: Parent-Child ':TD' --> ':TD'.
-(tagpdf)                Relation is not allowed! on line ...
-(tagpdf)                struct 14, TD --> struct 20, TD
-Package tagpdf Warning: Parent-Child ':TR' --> ':TR'.
-(tagpdf)                Relation is not allowed! on line ...
-(tagpdf)                struct 13, TR --> struct 21, TR
-Package tagpdf Warning: Parent-Child ':Table' --> ':P'.
-(tagpdf)                Relation is not allowed! on line ...
-(tagpdf)                struct 8, Table --> struct 25, text
 ============================================================
 TEST 1: Show PDF Tags
 ============================================================
@@ -81,40 +66,40 @@ TEST 1: Show PDF Tags
          </TD>
         </TR>
        </Table>
-       <TD
-          id="ID.019"
-         >
-       </TD>
-       <TD
-          id="ID.020"
-         >
-       </TD>
       </TD>
-      <TR
-         id="ID.021"
+      <TD
+         id="ID.019"
         >
-       <TD
-          id="ID.022"
-         >
-        <?MarkedContent page="1" ?>a
-       </TD>
-       <TD
-          id="ID.023"
-         >
-        <?MarkedContent page="1" ?>b
-       </TD>
-       <TD
-          id="ID.024"
-         >
-       </TD>
-      </TR>
+      </TD>
+      <TD
+         id="ID.020"
+        >
+      </TD>
      </TR>
-     <text
-        id="ID.025"
-        rolemaps-to="P"
+     <TR
+        id="ID.021"
        >
-     </text>
+      <TD
+         id="ID.022"
+        >
+       <?MarkedContent page="1" ?>a
+      </TD>
+      <TD
+         id="ID.023"
+        >
+       <?MarkedContent page="1" ?>b
+      </TD>
+      <TD
+         id="ID.024"
+        >
+      </TD>
+     </TR>
     </Table>
+    <text
+       id="ID.025"
+       rolemaps-to="P"
+      >
+    </text>
    </text-unit>
   </Document>
  </StructTreeRoot>
@@ -159,7 +144,6 @@ Completed box being shipped out [1]
 .....\localrightbox=null
 ....\hbox(0.0+0.0)x15.0, direction TLT
 ....\hbox(20.55002+15.55002)x80.56, direction TLT
-.....\mathon
 .....\vbox(20.55002+15.55002)x80.56, direction TLT
 ......\hbox(8.39996+3.60004)x80.56, direction TLT
 .......\glue(\tabskip) 0.0
@@ -205,7 +189,6 @@ Completed box being shipped out [1]
 ........\glue 6.0
 ........\rule(8.5+*)x0.0
 ........\hbox(8.5+3.5)x34.56, direction TLT
-.........\mathon
 .........\vbox(8.5+3.5)x34.56, direction TLT
 ..........\hbox(8.39996+3.60004)x34.56, direction TLT
 ...........\glue(\tabskip) 0.0
@@ -234,9 +217,6 @@ Completed box being shipped out [1]
 ............\glue 0.0 plus 0.5fill
 ............\glue 6.0
 ...........\glue(\tabskip) 0.0
-.........\pdfliteral page <lua data reference ...>
-.........\pdfliteral page <lua data reference ...>
-.........\mathoff
 ........\glue 0.0 plus 1.0fill
 ........\glue 6.0
 .......\glue(\tabskip) 0.0
@@ -244,6 +224,8 @@ Completed box being shipped out [1]
 ......\hbox(8.39996+3.60004)x80.56, direction TLT
 .......\glue(\tabskip) 0.0
 .......\hbox(8.39996+3.60004)x46.56, glue set 29.56fill, direction TLT
+........\pdfliteral page <lua data reference ...>
+........\pdfliteral page <lua data reference ...>
 ........\rule(8.39996+3.60004)x0.0
 ........\glue 6.0
 ........\rule(4.48+*)x0.0
@@ -272,7 +254,6 @@ Completed box being shipped out [1]
 ........\glue 0.0 plus 1.0fill
 ........\glue 6.0
 .......\glue(\tabskip) 0.0
-.....\mathoff
 ....\penalty 10000
 ....\glue(\parfillskip) 0.0 plus 1.0fil
 ....\glue(\rightskip) 0.0
@@ -300,10 +281,6 @@ Completed box being shipped out [1]
 .\kern633.0
 .\pdfliteral page <lua data reference ...>
 <<latex-list-css.html>><<latex-align-css.html>> (tagging379.aux)
-Package tagpdf Warning: There are still open structures on the stack!
-(tagpdf)                The stack contains {Document}{Document},{Root}{StructTreeRoot}.
-(tagpdf)                The structures are automatically closed,
-(tagpdf)                but their nesting can be wrong.
 Package tagpdf Info: Finalizing the tagging structure:
 (tagpdf)             Writing out ~25 structure objects
 (tagpdf)             with ~16 'MC' leaf nodes.

@@ -53,8 +53,6 @@ Completed box being shipped out [1]
 ...\special{pdf:minorversion 0}
 ...\special{pdf:majorversion 1}
 ...\special{pdf:minorversion 7}
-...\special{pdf:majorversion 1}
-...\special{pdf:minorversion 7}
 ...\special{pdf:put @pdf.obj1<</opacity1 <</ca 1/CA 1>>>>}
 ...\special{pdf:trailerid[ <00112233445566778899aabbccddeeff> <00112233445566778899aabbccddeeff> ]}
 ...\write-{}
@@ -65,7 +63,6 @@ Completed box being shipped out [1]
 ....\hbox(0.0+0.0)x15.0
 ....\special{pdf:code EMC}
 ....\hbox(17.69998+12.69998)x62.0
-.....\mathon
 .....\vbox(17.69998+12.69998)x62.0
 ......\hbox(8.39996+22.0)x62.0
 .......\glue(\tabskip) 0.0
@@ -87,10 +84,11 @@ Completed box being shipped out [1]
 ............\glue 0.0 plus 1.0fil minus 1.0fil
 ............\hbox(3.75+0.0)x7.78
 .............\write1{\new@label@record{mcid-2}{{tagabspage}{\__property_code_tagabspage: }{tagmcabs}{2}{tagmcid}{\__property_code_tagmcid: }}}
-.............\special shipout{pdf:code /Lbl <</MCID \flag_height:n {__tag/mcid}\flag_raise:n {__tag/mcid} >> BDC}
-.............\marks4{b-,2,13,Lbl,,,}
-.............\marks4{b+,2,13,Lbl,,,}
+.............\special shipout{pdf:code /itemlabel <</MCID \flag_height:n {__tag/mcid}\flag_raise:n {__tag/mcid} >> BDC}
+.............\marks4{b-,2,13,itemlabel,,,}
+.............\marks4{b+,2,13,itemlabel,,,}
 .............\hbox(0.0+0.0)x0.0
+.............\penalty 10000
 .............\TU/lmr/m/n/10 •
 .............\special{pdf:code EMC}
 .............\marks4{e-,2,13,}
@@ -123,7 +121,6 @@ Completed box being shipped out [1]
 ........\glue 0.0 plus 1.0fil
 ........\glue 6.0
 .......\glue(\tabskip) 0.0
-.....\mathoff
 ....\write1{\new@label@record{mcid-4}{{tagabspage}{\__property_code_tagabspage: }{tagmcabs}{4}{tagmcid}{\__property_code_tagmcid: }}}
 ....\special shipout{pdf:code /text <</MCID \flag_height:n {__tag/mcid}\flag_raise:n {__tag/mcid} >> BDC}
 ....\special{pdf:code EMC}
@@ -372,9 +369,9 @@ Completed box being shipped out [1]
 ..\special{pdf:obj @pdf.obj16 <<  /Type /StructElem /S /TD /P @pdf.obj15 /K @pdf.obj17 /ID (ID.009) >>}
 ..\special{pdf:obj @pdf.obj17 <<  /Type /StructElem /S /Div /P @pdf.obj16 /K @pdf.obj18 /ID (ID.010) >>}
 ..\special{pdf:obj @pdf.obj18 <<  /Type /StructElem /C /itemize /S /itemize /P @pdf.obj17 /K @pdf.obj19 /ID (ID.011) >>}
-..\special{pdf:obj @pdf.obj19 <<  /Type /StructElem /S /LI /P @pdf.obj18 /K [@pdf.obj20 @pdf.obj21] /ID (ID.012) >>}
-..\special{pdf:obj @pdf.obj20 <<  /Type /StructElem /S /Lbl /P @pdf.obj19 /K <</Type /MCR /Pg @page1/MCID 1>> /ID (ID.013) >>}
-..\special{pdf:obj @pdf.obj21 <<  /Type /StructElem /S /LBody /P @pdf.obj19 /K @pdf.obj22 /ID (ID.014) >>}
+..\special{pdf:obj @pdf.obj19 <<  /Type /StructElem /S /item /P @pdf.obj18 /K [@pdf.obj20 @pdf.obj21] /ID (ID.012) >>}
+..\special{pdf:obj @pdf.obj20 <<  /Type /StructElem /S /itemlabel /P @pdf.obj19 /K <</Type /MCR /Pg @page1/MCID 1>> /ID (ID.013) >>}
+..\special{pdf:obj @pdf.obj21 <<  /Type /StructElem /S /itembody /P @pdf.obj19 /K @pdf.obj22 /ID (ID.014) >>}
 ..\special{pdf:obj @pdf.obj22 <<  /Type /StructElem /S /Div /P @pdf.obj21 /K @pdf.obj23 /ID (ID.015) >>}
 ..\special{pdf:obj @pdf.obj23 <<  /Type /StructElem /C /justify /S /text /P @pdf.obj22 /K <</Type /MCR /Pg @page1/MCID 2>> /ID (ID.016) >>}
 ..\special{pdf:obj @pdf.obj24 <<  /Type /StructElem /S /text /P @pdf.obj12 /K <</Type /MCR /Pg @page1/MCID 3>> /ID (ID.017) >>}

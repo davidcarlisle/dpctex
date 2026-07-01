@@ -1,20 +1,5 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
-Package tagpdf Warning: Parent-Child ':Table' --> 'MC (realcontent)'.
-(tagpdf)                Relation is not allowed! on line ...
-(tagpdf)                struct 14, /Table 
-Package tagpdf Warning: Parent-Child ':TD' --> ':TD'.
-(tagpdf)                Relation is not allowed! on line ...
-(tagpdf)                struct 13, TD --> struct 18, TD
-Package tagpdf Warning: Parent-Child ':TD' --> ':TD'.
-(tagpdf)                Relation is not allowed! on line ...
-(tagpdf)                struct 13, TD --> struct 19, TD
-Package tagpdf Warning: Parent-Child ':TR' --> ':TR'.
-(tagpdf)                Relation is not allowed! on line ...
-(tagpdf)                struct 12, TR --> struct 20, TR
-Package tagpdf Warning: Parent-Child ':Table' --> ':P'.
-(tagpdf)                Relation is not allowed! on line ...
-(tagpdf)                struct 7, Table --> struct 24, text
 ============================================================
 TEST 1: Show PDF Tags
 ============================================================
@@ -82,46 +67,46 @@ TEST 1: Show PDF Tags
           <?MarkedContent page="1" ?>b
          </TD>
         </TR>
-        <?MarkedContent page="1" ?>
        </Table>
-       <TD
-          id="ID.018"
-         >
-        <?MarkedContent page="1" ?>
-       </TD>
-       <TD
-          id="ID.019"
-         >
-        <?MarkedContent page="1" ?>
-       </TD>
+       <?MarkedContent page="1" ?>
       </TD>
-      <TR
-         id="ID.020"
+      <TD
+         id="ID.018"
         >
-       <TD
-          id="ID.021"
-         >
-        <?MarkedContent page="1" ?>a
-       </TD>
-       <TD
-          id="ID.022"
-         >
-        <?MarkedContent page="1" ?>b
-       </TD>
-       <TD
-          id="ID.023"
-         >
-        <?MarkedContent page="1" ?>
-       </TD>
-      </TR>
+       <?MarkedContent page="1" ?>
+      </TD>
+      <TD
+         id="ID.019"
+        >
+       <?MarkedContent page="1" ?>
+      </TD>
      </TR>
-     <text
-        id="ID.024"
-        rolemaps-to="P"
+     <TR
+        id="ID.020"
        >
-      <?MarkedContent page="1" ?>
-     </text>
+      <TD
+         id="ID.021"
+        >
+       <?MarkedContent page="1" ?>a
+      </TD>
+      <TD
+         id="ID.022"
+        >
+       <?MarkedContent page="1" ?>b
+      </TD>
+      <TD
+         id="ID.023"
+        >
+       <?MarkedContent page="1" ?>
+      </TD>
+     </TR>
     </Table>
+    <text
+       id="ID.024"
+       rolemaps-to="P"
+      >
+     <?MarkedContent page="1" ?>
+    </text>
    </text-unit>
   </Document>
  </StructTreeRoot>
@@ -152,8 +137,8 @@ Completed box being shipped out [1]
 ....\hbox(0.0+0.0)x345.0
 ....\pdfcolorstack 0 pop
 ...\pdfliteral page{EMC}
-...\marks4{e-,15,5,}
-...\marks4{e+,15,5,}
+...\marks4{e-,15,2,}
+...\marks4{e+,15,2,}
 ...\pdfrunninglinkon
 ..\glue 25.0
 ..\glue(\lineskip) 0.0
@@ -167,7 +152,6 @@ Completed box being shipped out [1]
 ....\hbox(0.0+0.0)x15.0
 ....\pdfliteral page{EMC}
 ....\hbox(20.55002+15.55002)x80.55054
-.....\mathon
 .....\vbox(20.55002+15.55002)x80.55054
 ......\hbox(8.39996+3.60004)x80.55054
 .......\glue(\tabskip) 0.0
@@ -225,7 +209,6 @@ Completed box being shipped out [1]
 ........\pdfliteral shipout page{/TD <</MCID \flag_height:n {__tag/mcid}\flag_raise:n {__tag/mcid} >> BDC}
 ........\pdfliteral page{EMC}
 ........\hbox(8.5+3.5)x34.55298
-.........\mathon
 .........\vbox(8.5+3.5)x34.55298
 ..........\hbox(8.39996+3.60004)x34.55298
 ...........\glue(\tabskip) 0.0
@@ -262,7 +245,6 @@ Completed box being shipped out [1]
 ..........\marks4{b+,7,17,TD,,,}
 ..........\marks4{e-,7,17,}
 ..........\marks4{e+,7,17,}
-.........\mathoff
 ........\write1{\new@label@record{mcid-8}{{tagabspage}{\__property_code_tagabspage: }{tagmcabs}{8}{tagmcid}{\__property_code_tagmcid: }}}
 ........\pdfliteral shipout page{/TD <</MCID \flag_height:n {__tag/mcid}\flag_raise:n {__tag/mcid} >> BDC}
 ........\pdfliteral page{EMC}
@@ -273,10 +255,10 @@ Completed box being shipped out [1]
 ......\marks4{b+,5,13,TD,,,}
 ......\marks4{e-,5,13,}
 ......\marks4{e+,5,13,}
-......\marks4{b-,8,14,TD,,,}
-......\marks4{b+,8,14,TD,,,}
-......\marks4{e-,8,14,}
-......\marks4{e+,8,14,}
+......\marks4{b-,8,13,TD,,,}
+......\marks4{b+,8,13,TD,,,}
+......\marks4{e-,8,13,}
+......\marks4{e+,8,13,}
 ......\write1{\new@label@record{mcid-9}{{tagabspage}{\__property_code_tagabspage: }{tagmcabs}{9}{tagmcid}{\__property_code_tagmcid: }}}
 ......\pdfliteral shipout page{/TD <</MCID \flag_height:n {__tag/mcid}\flag_raise:n {__tag/mcid} >> BDC}
 ......\marks4{b-,9,18,TD,,,}
@@ -336,7 +318,6 @@ Completed box being shipped out [1]
 ......\marks4{b+,13,23,TD,,,}
 ......\marks4{e-,13,23,}
 ......\marks4{e+,13,23,}
-.....\mathoff
 ....\write1{\new@label@record{mcid-14}{{tagabspage}{\__property_code_tagabspage: }{tagmcabs}{14}{tagmcid}{\__property_code_tagmcid: }}}
 ....\pdfliteral shipout page{/text <</MCID \flag_height:n {__tag/mcid}\flag_raise:n {__tag/mcid} >> BDC}
 ....\pdfliteral page{EMC}
@@ -370,8 +351,8 @@ Completed box being shipped out [1]
 ....\glue 0.0 plus 1.0fil
 ...\pdfcolorstack 0 pop
 ..\pdfliteral page{EMC}
-..\marks4{e-,16,5,}
-..\marks4{e+,16,5,}
+..\marks4{e-,16,2,}
+..\marks4{e+,16,2,}
 ..\pdfrunninglinkon
 .\kern 0.0
 .\kern 0.0
@@ -379,10 +360,6 @@ Completed box being shipped out [1]
 .\hbox(0.0+0.0)x0.0
 .\kern 633.0
 <<latex-list-css.html>><<latex-align-css.html>> (tagging379.aux)
-Package tagpdf Warning: There are still open structures on the stack!
-(tagpdf)                The stack contains {Document}{Document},{Root}{StructTreeRoot}.
-(tagpdf)                The structures are automatically closed,
-(tagpdf)                but their nesting can be wrong.
 Package tagpdf Info: Finalizing the tagging structure:
 (tagpdf)             Writing out ~24 structure objects
 (tagpdf)             with ~16 'MC' leaf nodes.
