@@ -15,7 +15,7 @@
 %<driver>\ProvidesFile{colortbl.drv}
 % \fi
 %         \ProvidesFile{colortbl.dtx}
-          [2026/05/01 v1.0l Color table columns (DPC)]
+          [2026/07/01 v1.0m Color table columns (DPC)]
 %
 % \iffalse
 %<*driver>
@@ -975,14 +975,13 @@
 %    \begin{macrocode}
 \let\CT@everycr\everycr
 \IfPackageAtLeastTF{array}{2026/02/24}
- {
-  \typeout{new hooks used!!} 
-  \AddToHook{tbl/row/end}{\global\let\CT@row@color\relax}
-  \AddToHook{tbl/row/init}{\@rowc@lors}
+ {%
+  \AddToHook{tbl/row/end}{\global\let\CT@row@color\relax}%
+  \AddToHook{tbl/row/init}{\@rowc@lors}%
  }
  {
   \newtoks\everycr
-  \CT@everycr{\noalign{\global\let\CT@row@color\relax}\the\everycr}
+  \CT@everycr{\noalign{\global\let\CT@row@color\relax}\the\everycr}%
  }
 %    \end{macrocode}
 % \end{macro}
